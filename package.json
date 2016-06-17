@@ -4,20 +4,25 @@
   "description": "Home cooked food delivered/pickup for busy people",
   "main": "index.js",
   "scripts": {
-    "test": "echo \"Error: no test specified\" && exit 1"
+    "test": "echo \"Error: no test specified\" && exit 1",
+    "start": "webpack-dev-server"
   },
   "repository": {
     "type": "git",
-    "url": "git+https://github.com/afung95014/MadeWithLove.git"
+    "url": "git+https://github.com/DarkChartreuse/MadeWithLove.git"
   },
   "keywords": [],
-  "author": "",
+  "author": "Dark Chartreuse",
   "license": "ISC",
   "bugs": {
-    "url": "https://github.com/afung95014/MadeWithLove/issues"
+    "url": "https://github.com/DarkChartreuse/MadeWithLove/issues"
   },
-  "homepage": "https://github.com/afung95014/MadeWithLove#readme",
+  "homepage": "https://github.com/DarkChartreuse/MadeWithLove#readme",
   "dependencies": {
+    "body-parser": "^1.15.1",
+    "express": "^4.13.4",
+    "pg": "^5.1.0",
+    "pg-promise": "^4.6.4",
     "react": "^15.1.0",
     "react-dom": "^15.1.0"
   },
