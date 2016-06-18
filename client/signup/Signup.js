@@ -71,51 +71,59 @@ export default class Signup extends React.Component {
 
   render() {
     return (
-      <div id="signup">
-        <input type="text"
+      <div id="signup" className="input-group">
+        <input type="text" 
+          className="form-control"
           name="email"
           placeholder="email"
           value = {this.state.email}
           onChange ={(event) => this.setState({email: event.target.value})}/>
         <input type="password"
+          className="form-control"
           name="password"
           placeholder="password"
           value = {this.state.password}
           onChange ={(event) => this.setState({password: event.target.value})}/>
         <input type="password"
+          className="form-control"
           name="passwordConfirm"
           placeholder="confirm password"
           value = {this.state.passwordConfirm}
           onChange ={(event) => this.setState({passwordConfirm: event.target.value})}/>          
-        
         <p>Additional Information</p>
         <input type="text"
+          className="form-control"
           name="firstname"
           placeholder="first name"
           value = {this.state.firstName}
           onChange ={(event) => this.setState({firstName: event.target.value})}/>
         <input type="text"
+          className="form-control"
           name="lastname"
           placeholder="last name"
           value = {this.state.lastName}
           onChange ={(event) => this.setState({lastName: event.target.value})}/>
         <input type="text"
+          className="form-control"
           name="phone"
           placeholder="phone number"
           value = {this.state.phone}
           onChange ={(event) => this.setState({phone: event.target.value})}/>
           <br />
           <input type="text"
+            className="form-control"
             name="street"
             placeholder="street"
             value = {this.state.street}
             onChange ={(event) => this.setState({street: event.target.value})}/>
           <input type="text"
+            className="form-control"
             name="state"
             placeholder="state"
             value = {this.state.state}
             onChange ={(event) => this.setState({state: event.target.value})}/>          
           <input type="text"
+            className="form-control"
             name="zipcode"
             placeholder="zipcode"
             value = {this.state.zipcode}
@@ -131,7 +139,7 @@ export default class Signup extends React.Component {
               onChange ={(event) => this.setState({chef: event.target.value})}
             />
           </p>          
-        <button className="submit-button" onClick={this._handleSubmit.bind(this)}>Submit</button>
+        <button className="submit-button btn-primary" onClick={this._handleSubmit.bind(this)}>Submit</button>
          <span className="signup-link" onClick={()=>this.props.fn()} activeClassName="active"> Already have an account? <b>sign in</b></span>
       </div>
     );
