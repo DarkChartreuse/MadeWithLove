@@ -3,9 +3,9 @@ Home cooked food delivered/pickup for busy people
 
 ## Team
 
-  - __Product Owner__: teamMember
-  - __Scrum Master__: teamMember
-  - __Development Team Members__: teamMember, teamMember
+  - __Product Owner__: Dan Sajjad
+  - __Scrum Master__: Shinji Furuya
+  - __Development Team Members__: Andrew Fung, Alex Wong
 
 ## Table of Contents
 
