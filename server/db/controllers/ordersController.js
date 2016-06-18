@@ -2,42 +2,40 @@ var db = require('../db.js');
 
 module.exports = {
   addOrder: function(req, res) {
-    var queryString = `INSERT INTO orders(
-      id_user,
-      id_chef,
-      email,
-      phone,
-      password,
-      address,
-      chef,
-      num_orders,
-      avg_rating)
-      values($1, $2, $3, $4, $5, $6, $7, $8, $9)
+    var getUserId = `SELECT id FROM users WHERE email = '${req.body.email}'`;
+    var getChefId = `SELECT id FROM users WHERE email = '${req.body.email}'`;
+    var queryString = `
+      INSERT INTO orders (
+        id_user,
+        id_chef,
+        food,
+        address,
+        date
+      ) values ($1, $2, $3, $4, $5)
     `;
     var queryValues = [
-      req.body.id_user,
-      req.body.id_chef,
-      req.body.email,
-      req.body.phone,
-      req.body.password,
+      getUserId,
+      getChefId,
+      req.body.food,
       req.body.address,
-      req.body.chef,
-      req.body.num_orders,
-      req.body.avg_rating
+      req.body.date
     ];
     db.query(queryString, queryValues)
-      .then(function(results) {
+      .then(function(order) {
+        console.log('Added order successfully: ', order);
         res.status(200).end();
       })
       .catch(function(err) {
         console.error(err);
       });
   },
+
   deleteOrder: function(req, res) {
 
   },
+
   getOrders: function(req, res) {
-    db.query('SELECT * FROM users')
+    db.query('SELECT * FROM orders')
       .then(function(results) {
         res.json(results);
       })

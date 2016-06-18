@@ -19,7 +19,17 @@ Home cooked food delivered/pickup for busy people
 
 ## Usage
 
-> Some usage instructions
+> Initial Database Setup
+
+- If you don't have Postgres.app, point to http://postgresapp.com/, download,
+and install the app
+- Open Postgres.app from your Applications folder
+- Click on the Postgres elephant icon on the menu bar and select 'Open psql'
+to start the Postgres instance (a psql terminal window should open up)
+- In the window, create the database table by typing:
+```sh
+CREATE DATABASE mwl_db;
+```
 
 ## Requirements
 
