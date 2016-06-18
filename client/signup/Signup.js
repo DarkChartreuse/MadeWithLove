@@ -1,5 +1,6 @@
 import React from 'react';
 import  { Link, browserHistory } from 'react-router';
+import  axios from 'axios';
 
 export default class Signup extends React.Component {
   constructor(props) {
@@ -43,13 +44,28 @@ export default class Signup extends React.Component {
           firstName: this.state.firstName,
           lastName: this.state.lastName,
           password: this.state.password,
-          email: this.state.email
+          email: this.state.email,
+          phone: this.state.phone,
+          street: this.state.street,
+          state: this.state.state,
+          zipcode: this.state.zipcode,
+          chef: this.state.chef
         };
+
         console.log('sending to server');
-        auth.signup(data, (resDB)=>{
-          console.log('++++++++++signed up', resDB);
-          location.reload();
-        });
+
+        axios.post('/api/users', data)
+          .then(function (response) {
+            console.log(response);
+          })
+          .catch(function (error) {
+            console.log(error);
+          });
+
+        // auth.signup(data, (resDB)=>{
+        //   console.log('++++++++++signed up', resDB);
+        //   location.reload();
+        // });
       }
   }
 
