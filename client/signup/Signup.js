@@ -109,38 +109,38 @@ export default class Signup extends React.Component {
           placeholder="phone number"
           value = {this.state.phone}
           onChange ={(event) => this.setState({phone: event.target.value})}/>
-          <br />
-          <input type="text"
-            className="form-control"
-            name="street"
-            placeholder="street"
-            value = {this.state.street}
-            onChange ={(event) => this.setState({street: event.target.value})}/>
-          <input type="text"
-            className="form-control"
-            name="state"
-            placeholder="state"
-            value = {this.state.state}
-            onChange ={(event) => this.setState({state: event.target.value})}/>          
-          <input type="text"
-            className="form-control"
-            name="zipcode"
-            placeholder="zipcode"
-            value = {this.state.zipcode}
-            onChange ={(event) => this.setState({zipcode: event.target.value})}/>          
+        <br />
+        <input type="text"
+          className="form-control"
+          name="street"
+          placeholder="street"
+          value = {this.state.street}
+          onChange ={(event) => this.setState({street: event.target.value})}/>
+        <input type="text"
+          className="form-control"
+          name="state"
+          placeholder="state"
+          value = {this.state.state}
+          onChange ={(event) => this.setState({state: event.target.value})}/>          
+        <input type="text"
+          className="form-control"
+          name="zipcode"
+          placeholder="zipcode"
+          value = {this.state.zipcode}
+          onChange ={(event) => this.setState({zipcode: event.target.value})}/>          
 
-          <p>
-            Are you a chef?
-            {' '}
-            <input 
-              type='checkbox' 
-              checked={this.state.chef}
-              ref="isAChef"
-              onChange ={(event) => this.setState({chef: event.target.value})}
-            />
-          </p>          
+        <p>
+          Are you a chef?
+          {' '}
+          <input 
+            type='checkbox' 
+            checked={this.state.chef}
+            ref="isAChef"
+            onChange ={(event) => this.setState({chef: event.target.value})}
+          />
+        </p>          
         <button className="submit-button btn-primary" onClick={this._handleSubmit.bind(this)}>Submit</button>
-         <span className="signup-link" onClick={()=>this.props.fn()} activeClassName="active"> Already have an account? <b>sign in</b></span>
+        <span className="signup-link" onClick={()=>this.props.fn()} activeClassName="active"> Already have an account? <b>sign in</b></span>
       </div>
     );
   }
