@@ -9,14 +9,16 @@ module.exports = {
         id_user,
         id_chef,
         food,
+        price,
         address,
         date
-      ) values ($1, $2, $3, $4, $5)
+      ) values ($1, $2, $3, $4, $5, $6)
     `;
     var queryValues = [
       getUserId,
       getChefId,
       req.body.food,
+      req.body.price,
       req.body.address,
       req.body.date
     ];

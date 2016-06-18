@@ -1,25 +1,22 @@
+var sequelize = require('../db.js');
 var Sequelize = require('sequelize');
 
-var User = Sequelize.define('users',
+var User = sequelize.define('users',
   {
-    id: {
-      type: Sequelize.STRING,
-      primaryKey: true,
-    },
     firstName: {
-      type: Sequelize.STRING(25),
+      type: Sequelize.STRING,
       field: 'first_name',
     },
     lastName: {
-      type: Sequelize.STRING(25),
+      type: Sequelize.STRING,
       field: 'last_name',
     },
     email: {
-      type: Sequelize.STRING(50),
+      type: Sequelize.STRING,
       field: 'email',
     },
     phone: {
-      type: Sequelize.STRING(15),
+      type: Sequelize.STRING,
       field: 'phone',
     },
     password: {
@@ -27,11 +24,11 @@ var User = Sequelize.define('users',
       field: 'password',
     },
     address: {
-      type: Sequelize.STRING(50),
+      type: Sequelize.STRING,
       field: 'address',
     },
     zip: {
-      type: Sequelize.STRING(5),
+      type: Sequelize.STRING,
       field: 'zip',
     },
     chef: {
@@ -46,15 +43,19 @@ var User = Sequelize.define('users',
       type: Sequelize.FLOAT,
       field: 'avg_rating',
     },
+    createdAt: {
+      type: Sequelize.DATE,
+      field: 'created_at',
+    },
+    updatedAt: {
+      type: Sequelize.DATE,
+      field: 'updated_at',
+    },
   },
-  { freezeTableName: true } // Model tableName will be the same as the model name)
+  {
+    timestamps: true,
+    freezeTableName: true,
+  } // Model tableName will be the same as the model name)
 );
 
 module.exports = User;
-// User.sync({force: true}).then(function () {
-//   // Table created
-//   return User.create({
-//     firstName: 'John',
-//     lastName: 'Hancock'
-//   });
-// });
