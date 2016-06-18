@@ -25,10 +25,12 @@
     "express": "^4.13.4",
     "http-server": "^0.8.5",
     "pg": "^5.1.0",
+    "pg-hstore": "^2.3.2",
     "pg-promise": "^4.6.4",
     "react": "^15.1.0",
     "react-dom": "^15.1.0",
-    "react-router": "^2.0.0"
+    "react-router": "^2.0.0",
+    "sequelize": "^3.23.3"
   },
   "devDependencies": {
     "babel-core": "^6.9.1",
