@@ -4,6 +4,13 @@ import  { Link, browserHistory } from 'react-router';
 export default class Signup extends React.Component {
   constructor(props) {
     super(props);
+    this.state = {
+      firstName: '',
+      lastName: '', 
+      email: '',
+      password: '',
+      passwordConfirm: ''
+    }    
   }
 
   render() {
