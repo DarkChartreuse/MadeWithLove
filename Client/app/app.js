@@ -1,13 +1,13 @@
 import React from 'react';
-import {Link} from 'react-router'
+import { Link } from 'react-router';
 
 export default class App extends React.Component {
 	render() {
 		return (
 			<div>
         <div className="jumbotron">
-          <h1>Made With Love</h1>
-          <p>Home made meals delivered</p>
+          <h1>Made with Love</h1>
+          <p>Home cooked meal delivered to your doorstep</p>
           <p><a class="btn btn-primary btn-lg" href="#" role="button">Learn more</a></p>
         </div>
           <ul role="nav" className="nav nav-tabs">
