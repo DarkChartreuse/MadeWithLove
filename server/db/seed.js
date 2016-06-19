@@ -21,7 +21,9 @@ var initUsersString = `
     zip         VARCHAR(5) NOT NULL,
     chef        BOOLEAN,
     num_orders  INT,
-    avg_rating  REAL
+    avg_rating  REAL,
+    created_at  TIMESTAMP,
+    updated_at  TIMESTAMP
   )`;
 
 var initOrdersString = `
@@ -30,8 +32,10 @@ var initOrdersString = `
     id_user     INT NOT NULL,
     id_chef     INT NOT NULL,
     food        TEXT NOT NULL,
+    price       MONEY NOT NULL,
     address     TEXT NOT NULL,
-    time        TIMESTAMP NOT NULL
+    created_at  TIMESTAMP,
+    updated_at  TIMESTAMP
   )`;
 
 // initialize tables for 'users' and 'orders'
@@ -40,8 +44,8 @@ client.query(initOrdersString);
 
 var usersEntry = `INSERT INTO users(
   first_name, last_name, email, phone, password,
-  address, zip, chef, num_orders, avg_rating)
-  values($1, $2, $3, $4, $5, $6, $7, $8, $9, $10)
+  address, zip, chef)
+  values($1, $2, $3, $4, $5, $6, $7, $8)
 `;
 
 for (var i = 0; i < seedUsers.length; i++) {
@@ -54,8 +58,8 @@ for (var i = 0; i < seedUsers.length; i++) {
 }
 
 var ordersEntry = `INSERT INTO orders(
-  id_user, id_chef, food, address, time)
-  values($1, $2, $3, $4, $5)
+  id_user, id_chef, food, price, address, time)
+  values($1, $2, $3, $4, $5, $6)
 `;
 
 for (var i = 0; i < seedOrders.length; i++) {

@@ -1,13 +1,18 @@
-// create Postgres instance with pg-promise
-var pgp = require('pg-promise')();
-
-var connection = {
-  host: 'localhost',
-  port: 5432,
+var Sequelize = require('sequelize');
+var opts = {
   database: 'mwl_db',
-  user: 'postgres'
+  username: 'postgres',
+  password: '',
 };
-// create Postgres database object
-var db = pgp(connection);
 
-module.exports = db;
+var sequelize = new Sequelize(opts.database, opts.username, opts.password, {
+  host: 'localhost',
+  dialect: 'postgres',
+  pool: {
+    max: 5,
+    min: 0,
+    idle: 10000,
+  },
+});
+
+module.exports = sequelize;

@@ -8,8 +8,6 @@ module.exports = [
     address: '123 Redwood St, City, CA',
     zip: '30207',
     chef: true,
-    num_orders: 5,
-    avg_rating: 10.0
   },
   {
     first_name: 'Alex',
@@ -20,8 +18,6 @@ module.exports = [
     address: '456 Oak St, Somecity, NV',
     zip: '63298',
     chef: false,
-    num_orders: 2,
-    avg_rating: 50.0
   },
   {
     first_name: 'Andrew',
@@ -32,8 +28,6 @@ module.exports = [
     address: '789 Sycamore St, Anothercity, MN',
     zip: '15153',
     chef: true,
-    num_orders: 1,
-    avg_rating: 90.0
   },
   {
     first_name: 'Shinji',
@@ -44,7 +38,5 @@ module.exports = [
     address: '123 Pine St, Smalltown, NY',
     zip: '92451',
     chef: false,
-    num_orders: 4,
-    avg_rating: 0.0
   },
 ];
