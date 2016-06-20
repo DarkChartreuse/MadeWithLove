@@ -20,7 +20,7 @@ app.use(bodyParser.json());
 // // TODO: change static paths
 // app.use(express.static(path.join(__dirname, '../')));
 app.get('/', (req, res) => {
-  res.sendFile(path.join(__dirname, '../index.html'));
+  res.sendFile(path.join(__dirname, '../client/index.html'));
 });
 
 require('./routes.js')(app, express);
