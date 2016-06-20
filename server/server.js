@@ -1,21 +1,32 @@
-var path = require('path');
-var express = require('express');
-var bodyParser = require('body-parser');
-var webpack = require('webpack');
-var webpackDevMiddleware = require('webpack-dev-middleware');
-var webpackHotMiddleware = require('webpack-hot-middleware');
-var config = require('../webpack.config');
+const path = require('path');
+const express = require('express');
+const bodyParser = require('body-parser');
+const webpack = require('webpack');
+const webpackDevMiddleware = require('webpack-dev-middleware');
+const webpackHotMiddleware = require('webpack-hot-middleware');
+const config = require('../webpack.config');
+const passport = require('passport');
+const flash = require('connect-flash');
+const session = require('express-session');
 
-var app = express();
 
-var port = process.env.PORT || 3000;
+const app = express();
 
-var compiler = webpack(config);
+const port = process.env.PORT || 3000;
+
+const compiler = webpack(config);
 app.use(webpackDevMiddleware(compiler, { noInfo: true, publicPath: config.output.publicPath }));
 app.use(webpackHotMiddleware(compiler));
 
 app.use(bodyParser.urlencoded({ extended: false }));
 app.use(bodyParser.json());
+
+app.use(session({ secret: 'onionsarerare' }));
+app.use(passport.initialize());
+app.use(passport.session());
+app.use(flash());
+
+// require('./passport')(passport); // pass passport for configuration
 
 // // TODO: change static paths
 // app.use(express.static(path.join(__dirname, '../')));
@@ -25,6 +36,6 @@ app.get('/', (req, res) => {
 
 require('./routes.js')(app, express);
 
-app.listen(port, function() {
+app.listen(port, () => {
   console.log('Server now connected to port ', port);
 });
