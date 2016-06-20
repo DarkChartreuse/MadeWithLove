@@ -1,41 +1,51 @@
 import React from 'react';
+import  axios from 'axios';
 
 export default class Signin extends React.Component {
   constructor(props) {
     super(props);
     this.state = {
 
+
     }
   }
 
-  _handleEmail() {
-    console.log('handle email')
+  _handleEmail(e) {
+    this.setState({email: e.target.value});
+    console.log(this.state);
   }
-  _handlePassword() {
-    console.log('handle password')    
+  _handlePassword(e) {
+    this.setState({password: e.target.value});
+    console.log(this.state);  
   }
-  _handleSubmit() {
-    console.log('I was clicked to sign in')
+  
+  _handleSubmit(e) {
+    //add validation method later
+    var obj = {
+      email: this.state.email,
+      password: this.state.password
+    };
+    //post obj to server
+    axios.post('/api/auth/sign-in', obj)
+      .then(function (response) {
+        if(response.status === 200) {
+          next();
+        } else if (response.status === 400) {
+          console.log('user is not in database');
+        }
+      })
+      .catch((error) => {
+          console.log(error);
+      });
   }
 
   render() {
     return (
-      <div className="input-group">
-        <input type="text"
-               className="form-control"  
-               name="email"
-               placeholder="email"
-               onChange={this._handleEmail.bind(this)}
-               value={this.state.email} />
-        <input type="password"
-               className="form-control"  
-               name="password"
-               placeholder="password"
-               onChange={this._handlePassword.bind(this)}
-               value={this.state.password} /><br/>
-        <button className="submit-button btn-primary" onClick={this._handleSubmit.bind(this)}>Submit</button>
-        <span className="signup-link" onClick={()=>this.props.fn()} activeClassName="active"> Not a user? <b>sign up</b></span>
-      </div>
+      <form onSubmit={this._handleSubmit.bind(this)} className='input-group'>
+        <input type='text' placeholder='email' onChange={this._handleEmail.bind(this)} />
+        <input type='text' placeholder='password' onChange={this._handlePassword.bind(this)}/>
+        <button type='submit' value='Post'>Submit</button>
+      </form>
     );
   }
 }
