@@ -10,7 +10,7 @@ module.exports = {
   },
   context: path.join(__dirname, 'client'),
   devtool: 'inline-sourcemap',
-  entry: '../index.js',
+  entry: '../client/index.js',
   output: {
     path: path.join(__dirname, 'dist'),
     filename: 'bundle.js',
