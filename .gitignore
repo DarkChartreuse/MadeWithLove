@@ -23,6 +23,13 @@ coverage
 build/
 dist/
 
+# temp
+server/db/controllers/_temp/
+server/db/models/_temp/
+server/db/migrations/
+server/db/config.json
+.sequelizerc
+
 node_modules/
 bower_components/
 .DS_Store

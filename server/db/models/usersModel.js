@@ -38,18 +38,12 @@ var User = sequelize.define('users',
     numOrders: {
       type: Sequelize.INTEGER,
       field: 'num_orders',
+      defaultValue: 0,
     },
     avgRating: {
       type: Sequelize.FLOAT,
       field: 'avg_rating',
-    },
-    createdAt: {
-      type: Sequelize.DATE,
-      field: 'created_at',
-    },
-    updatedAt: {
-      type: Sequelize.DATE,
-      field: 'updated_at',
+      defaultValue: 0,
     },
   },
   {
