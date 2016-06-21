@@ -13,6 +13,7 @@ export default class Signup extends React.Component {
       passwordConfirm: '',
       phone: '',
       street: '',
+      city: '',
       state: '',
       zipcode: '',
       chef: false
@@ -47,6 +48,7 @@ export default class Signup extends React.Component {
           email: this.state.email,
           phone: this.state.phone,
           street: this.state.street,
+          city: this.state.city,
           state: this.state.state,
           zipcode: this.state.zipcode,
           chef: this.state.chef
@@ -115,7 +117,13 @@ export default class Signup extends React.Component {
           name="street"
           placeholder="street"
           value = {this.state.street}
-          onChange ={(event) => this.setState({street: event.target.value})}/>
+          onChange ={(event) => this.setState({street: event.target.value})}/>        
+          <input type="text"
+          className="form-control"
+          name="city"
+          placeholder="city"
+          value = {this.state.city}
+          onChange ={(event) => this.setState({city: event.target.value})}/>
         <input type="text"
           className="form-control"
           name="state"
