@@ -1,4 +1,5 @@
 import React from 'react';
+import  axios from 'axios';
 //FilterableCuisineTable
   //SearchBar  
   //CuisineTable
@@ -71,7 +72,8 @@ class SearchBar extends React.Component {
   render() {
     return (
       <form>             
-        <input 
+        <input
+          className="form-control" 
           type="text" 
           placeholder="Search by cuisine name"
           value={this.props.filterText}
@@ -81,6 +83,7 @@ class SearchBar extends React.Component {
         <p>
           <input 
             type="checkbox" 
+            class="checkbox"
             value={this.props.inStockOnly}
             ref="inStockOnlyInput" 
             onChange={this._handleChange.bind(this)}
@@ -112,12 +115,13 @@ class CuisineTable extends React.Component {
     });
 
     return (
-      <table>
-        <thead>
+      <table className="table table-striped panel panel-primary">
+        <thead className="panel-heading">
           <tr>
-            <th>Name</th>
-            <th>Chef</th>
-            <th>Price</th>
+            <th scope="row" >Name</th>
+            <th scope="row" >Chef</th>
+            <th scope="row" >Price</th>
+            <th scope="row" ></th>
           </tr>
         </thead>
         <tbody>{rows}</tbody>
@@ -135,10 +139,17 @@ class CuisineRow extends React.Component {
       </span>;
     return(
       <tr>
-        <td>{name}</td>
-        <td>{this.props.cuisine.chef}</td>
-        <td>{this.props.cuisine.price}</td>
-        <td><OrderButton /></td>
+        <td width="50%">{name}</td>
+        <td width="50%">{this.props.cuisine.chef}</td>
+        <td width="50%">{this.props.cuisine.price}</td>
+        <td>
+          <OrderButton 
+            chef={this.props.cuisine.chef}
+            price={this.props.cuisine.price}
+            item={this.props.cuisine.name}
+            isInStock={this.props.cuisine.stocked}
+          />
+        </td>  
       </tr>
     ); 
   }
@@ -147,15 +158,44 @@ class CuisineRow extends React.Component {
 class CuisineCategoryRow extends React.Component {
   render() {
     return (
-      <tr><th colSpan="2">{this.props.category}</th></tr>
+      <tr><th colSpan="4" className="bg-success">{this.props.category.toUpperCase()}</th></tr>
     );
   }
 }
 
 class OrderButton extends React.Component {
+  
+
+  _handleSubmit() {
+    
+    let data = {
+      chef: this.props.chef,
+      price: this.props.price,
+      item: this.props.item  
+    }
+
+    console.log(data);
+
+    axios.post('/api/orders', data)
+      .then(function (response) {
+        console.log(response);
+      })
+      .catch(function (error) {
+        console.log(error);
+      });    
+  }
+
   render() {
-    return (
-      <button className="submit-button btn-primary" onClick={console.log('ordered')}>Order</button>
-    );
+    let btn = "";
+     if(this.props.isInStock) {
+        btn = (
+             <button className="submit-button btn-primary btn-xs active" onClick={this._handleSubmit.bind(this)}>Order</button>
+        );
+      } else {
+        btn = (
+             <button className="submit-button btn-primary btn-xs disabled" onClick={this._handleSubmit.bind(this)}>Order</button>
+        );
+      } 
+    return btn;
   }
 }
