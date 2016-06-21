@@ -35,12 +35,21 @@ class FilterableCuisineTable extends React.Component {
       inStockOnly: false
     };
   }
+
+  _handleUserInput(filterText, inStockOnly) {
+    this.setState({
+      filterText:filterText,
+      inStockOnly:inStockOnly
+    });
+  } 
+
   render() {
     return (            
       <div>
         <SearchBar 
           filterText={this.state.filterText}
           inStockOnly={this.state.inStockOnly}
+          onUserInput={this._handleUserInput.bind(this)}
         />
         <CuisineTable 
           cuisines={this.props.cuisines}
@@ -53,6 +62,12 @@ class FilterableCuisineTable extends React.Component {
 }
 
 class SearchBar extends React.Component {
+  _handleChange() {
+    let filterTextVal = this.refs.filterTextInput.value;
+    let inStockCheckBoxVal = this.refs.inStockOnlyInput.value;
+    this.props.onUserInput(filterTextVal , inStockCheckBoxVal);
+  }
+
   render() {
     return (
       <form>             
@@ -60,9 +75,16 @@ class SearchBar extends React.Component {
           type="text" 
           placeholder="Search by cuisine name"
           value={this.props.filterText}
+          ref="filterTextInput"
+          onChange={this._handleChange.bind(this)}
         />
         <p>
-          <input type="checkbox" value={this.props.inStockOnly} />
+          <input 
+            type="checkbox" 
+            value={this.props.inStockOnly}
+            ref="inStockOnlyInput" 
+            onChange={this._handleChange.bind(this)}
+          />
           {' '}
           Only show items in stock         
         </p>
@@ -77,8 +99,7 @@ class CuisineTable extends React.Component {
     var rows = [];
     var lastCategory = null;
     this.props.cuisines.forEach((cuisine) => {
-      if(cuisine.name.indexOf(this.props.filterText) === -1 ||
-        (!cuisine.stocked && this.props.inStockOnly)) { return; }   
+      if(cuisine.name.toLowerCase().indexOf(this.props.filterText.toLowerCase()) === -1 || (!cuisine.stocked && this.props.inStockOnly)) { return; }   
       if(cuisine.category !== lastCategory) {
         rows.push(
           <CuisineCategoryRow 
