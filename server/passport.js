@@ -1,6 +1,7 @@
 var passport = require('passport');
 var LocalStrategy = require('passport-local').Strategy;
 var User = require('./db/models/usersModel');
+var bcrypt = require('bcrypt');
 
 module.exports = function(passport) {
 
@@ -17,13 +18,14 @@ module.exports = function(passport) {
     .then(
       function(user) {
         console.log('what is the user', user);
+        console.log('userpassword', user.password);
         if (!user) {
           return done(null, false, { message: 'Incorrect username.' });
-        }
-        if (user.password !== password) {
+        } 
+        if (!bcrypt.compareSync(password, user.password)) {
           return done(null, false, { message: 'Incorrect password.' });
         }
-        console.log('successful landing', user);
+        console.log('successful landing');
         return done(null, user);
       })
     }

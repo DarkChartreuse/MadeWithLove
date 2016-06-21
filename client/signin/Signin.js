@@ -28,11 +28,6 @@ export default class Signin extends React.Component {
       .then(function (response) {
         console.log(response);
         window.location = response.data;
-        // if(response.status === 200) {
-        //   console.log(response);
-        // } else if (response.status === 400) {
-        //   console.log('user is not in database');
-        // }
       })
       .catch((error) => {
           console.log(error);
