@@ -2,18 +2,16 @@ var User = require('../models/usersModel.js');
 
 module.exports = {
   createUser: function(req, res) {
-    console.log('USER>>>>>>', req.body);
-
     User.create({
       firstName: req.body.firstName,
       lastName: req.body.lastName,
       email: req.body.email,
       phone: req.body.phone,
       password: req.body.password,
-      address: req.body.address,
-      zip: req.body.zip,
+      address: `${req.body.street}, ${req.body.city}, ${req.body.state}`,
+      zip: req.body.zipcode,
       chef: req.body.chef,
-    }) // , defaults: { chef: false }})
+    })
     .then(function(user, created) {
       console.log(user.get({
         plain: true
