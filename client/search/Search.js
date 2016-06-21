@@ -1,10 +1,13 @@
 import React from 'react';
 //FilterableCuisineTable
-  //SearchBar
+  //SearchBar  
   //CuisineTable
     //CuisineCategoryRow
     //CuisineRow
 
+ //our state is: value of checkbox, & user input in search box
+ //components that render something based on that state: CuisineTable 
+ //common owner: FilterableCuisineTable
 module.exports = class Search extends React.Component {
 
   constructor(props) {
@@ -25,11 +28,25 @@ module.exports = class Search extends React.Component {
 }
 
 class FilterableCuisineTable extends React.Component {
+  constructor(props) {
+    super(props);
+    this.state = {
+      filterText: '', 
+      inStockOnly: false
+    };
+  }
   render() {
     return (            
       <div>
-        <SearchBar />
-        <CuisineTable cuisines={this.props.cuisines}/>
+        <SearchBar 
+          filterText={this.state.filterText}
+          inStockOnly={this.state.inStockOnly}
+        />
+        <CuisineTable 
+          cuisines={this.props.cuisines}
+          filterText={this.state.filterText}
+          inStockOnly={this.state.inStockOnly}
+        />
       </div>
     );
   }
@@ -39,9 +56,13 @@ class SearchBar extends React.Component {
   render() {
     return (
       <form>             
-        <input type="text" placeholder="Search by cuisine name"/>
+        <input 
+          type="text" 
+          placeholder="Search by cuisine name"
+          value={this.props.filterText}
+        />
         <p>
-          <input type="checkbox" />
+          <input type="checkbox" value={this.props.inStockOnly} />
           {' '}
           Only show items in stock         
         </p>
@@ -56,6 +77,8 @@ class CuisineTable extends React.Component {
     var rows = [];
     var lastCategory = null;
     this.props.cuisines.forEach((cuisine) => {
+      if(cuisine.name.indexOf(this.props.filterText) === -1 ||
+        (!cuisine.stocked && this.props.inStockOnly)) { return; }   
       if(cuisine.category !== lastCategory) {
         rows.push(
           <CuisineCategoryRow 
