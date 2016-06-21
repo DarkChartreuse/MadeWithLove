@@ -13,41 +13,15 @@ module.exports = {
 
   signIn: (req, res, next) => {
     passport.authenticate('local', (err, user, info) => {
-      if (err || !user) {
+      console.log('the user', user);
+      console.log('the info', info);
+    if (err || !user) {
+        console.log('am')
         res.status(401).send(info);
       } else {
-        attemptSignIn(req, res, user);
+        console.log('success')
+        res.status(200).json(user);
       }
     })(req, res, next);
   },
-
-  verify: (req, res) => {
-    if (req.user) {
-      res.status(200).json(req.user);
-    } else {
-      res.status(401).json({ message: 'not logged in' });
-    }
-  },
-
-  checkAuthorized: (req, res) => {
-    if (req.user) {
-      res.status(200).json({ loggedIn: true });
-    } else {
-      res.status(401).json({ loggedIn: false });
-    }
-  },
-
-  checkAuthServer: (req, res, next) => {
-    if (req.user) {
-      next();
-    } else {
-      res.status(401).json({ message: 'not logged in' });
-    }
-  },
-
-  signOut: (req, res) => {
-    req.logout();
-    res.redirect('/');
-  },
-
 };

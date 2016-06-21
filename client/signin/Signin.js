@@ -5,8 +5,8 @@ export default class Signin extends React.Component {
   constructor(props) {
     super(props);
     this.state = {
-
-
+      email: '',
+      password: '',
     }
   }
 
@@ -23,7 +23,6 @@ export default class Signin extends React.Component {
       email: this.state.email,
       password: this.state.password
     };
-    console.log(this.state);
     //post obj to server
     axios.post('/api/auth/sign-in', obj)
       .then(function (response) {

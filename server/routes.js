@@ -14,7 +14,7 @@ module.exports = function(app, express) {
   app.delete('/api/orders/:id', Order.deleteOrder);
 
   app.post('/api/auth/sign-in', Auth.signIn);
-  app.get('/api/auth/sign-out', Auth.signOut);
-  app.get('/api/auth/verify', Auth.verify);
-  app.get('/api/auth/check-authorized', Auth.checkAuthorized);
+  // app.get('/api/auth/sign-out', Auth.signOut);
+  // app.get('/api/auth/verify', Auth.verify);
+  // app.get('/api/auth/check-authorized', Auth.checkAuthorized);
 };
