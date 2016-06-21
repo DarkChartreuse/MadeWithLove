@@ -23,7 +23,7 @@ module.exports = function(passport) {
         if (user.password !== password) {
           return done(null, false, { message: 'Incorrect password.' });
         }
-        console.log('zzzz', user);
+        console.log('successful landing', user);
         return done(null, user);
       })
     }
@@ -42,7 +42,6 @@ module.exports = function(passport) {
       if (user == null) {
         done(new Error('Wrong user id.'))
       }
-      
       done(null, user)
     })
   });

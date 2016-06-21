@@ -26,11 +26,13 @@ export default class Signin extends React.Component {
     //post obj to server
     axios.post('/api/auth/sign-in', obj)
       .then(function (response) {
-        if(response.status === 200) {
-          next();
-        } else if (response.status === 400) {
-          console.log('user is not in database');
-        }
+        console.log(response);
+        window.location = response.data;
+        // if(response.status === 200) {
+        //   console.log(response);
+        // } else if (response.status === 400) {
+        //   console.log('user is not in database');
+        // }
       })
       .catch((error) => {
           console.log(error);

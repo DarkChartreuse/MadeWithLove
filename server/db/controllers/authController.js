@@ -13,14 +13,11 @@ module.exports = {
 
   signIn: (req, res, next) => {
     passport.authenticate('local', (err, user, info) => {
-      console.log('the user', user);
-      console.log('the info', info);
     if (err || !user) {
-        console.log('am')
         res.status(401).send(info);
       } else {
-        console.log('success')
-        res.status(200).json(user);
+        console.log('signIn page')
+        res.redirect('/');
       }
     })(req, res, next);
   },
