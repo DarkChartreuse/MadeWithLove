@@ -5,21 +5,24 @@ const app = require('../server/server.js');
 const Order = require('../server/db/controllers/ordersController.js');
 const User = require('../server/db/controllers/usersController.js');
 
-describe ('', function() {
+describe('', function() {
 
   beforeEach(function(done) {
+    // test Sequelize database
+    // app
+    //   .authenticate()
+    //   .then(function(err) {
+    //     console.log('Connection has been established successfully.');
+    //   })
+    //   .catch(function (err) {
+    //     console.log('Unable to connect to the database:', err);
+    //   })
+    //   .finally(function() {
+    //     done();
+    //   });
 
-    /* test Sequelize database
-    sequelize
-      .authenticate()
-      .then(function(err) {
-        console.log('Connection has been established successfully.');
-      })
-      .catch(function (err) {
-        console.log('Unable to connect to the database:', err);
-      });
-    */
 
+    /*
     // Log out currently signed in user
     request(app)
       .get('/logout')
@@ -32,22 +35,37 @@ describe ('', function() {
 
         done();
       });
+      */
+    done();
   });
 
-  describe('Link creation: ', function() {
+  describe('User creation: ', function() {
 
-    it('Only shortens valid urls, returning a 404 - Not found for invalid urls', function(done) {
+    it('Creates a user in the database', function(done) {
       request(app)
-        .post('/links')
+        .post('/api/users')
         .send({
-          'url': 'definitely not a valid url'})
-        .expect(404)
+          firstName: 'Sunny',
+          lastName: 'Gonnabathula',
+          email: 'sunny@sunny.com',
+          phone: '(516)327-4494',
+          password: 'sunnygonnabathula',
+          address: '676 Atlantic Avenue, Floral Park, NY',
+          zip: '11001',
+          chef: true,
+        })
+        .expect(200)
+        // .expect(function(res) {
+        //   console.log(res);
+        //   // expect(res.body.code).to.be.ok;
+        //   // expect(res.body.email).to.equal('sunny@sunny.com');
+        // })
         .end(done);
     });
 
-    describe('Shortening links:', function() {
+    xdescribe('Shortening links:', function() {
 
-      it('Responds with the short code', function(done) {
+      xit('Responds with the short code', function(done) {
         request(app)
           .post('/links')
           .send({
@@ -60,7 +78,7 @@ describe ('', function() {
           .end(done);
       });
 
-      it('New links create a database entry', function(done) {
+      xit('New links create a database entry', function(done) {
         request(app)
           .post('/links')
           .send({
@@ -73,10 +91,12 @@ describe ('', function() {
                 expect(link.url).to.equal('http://www.roflzoo.com/');
               });
           })
-          .end(done);
+          .end(function() {
+            done();
+          });
       });
 
-      it('Fetches the link url title', function(done) {
+      xit('Fetches the link url title', function(done) {
         request(app)
           .post('/links')
           .send({
@@ -94,7 +114,7 @@ describe ('', function() {
 
     }); // 'Shortening Links'
 
-    describe('With previously saved urls: ', function() {
+    xdescribe('With previously saved urls: ', function() {
 
       beforeEach(function(done) {
         link = new Link({
@@ -109,27 +129,27 @@ describe ('', function() {
         });
       });
 
-      it('Returns the same shortened code if attempted to add the same URL twice', function(done) {
-        let firstCode = link.code;
+      xit('Returns the same shortened code if attempted to add the same URL twice', function(done) {
+        var firstCode = link.code;
         request(app)
           .post('/links')
           .send({
             'url': 'http://www.roflzoo.com/'})
           .expect(200)
           .expect(function(res) {
-            let secondCode = res.body.code;
+            var secondCode = res.body.code;
             expect(secondCode).to.equal(firstCode);
           })
           .end(done);
       });
 
-      it('Shortcode redirects to correct url', function(done) {
-        let sha = link.code;
+      xit('Shortcode redirects to correct url', function(done) {
+        var sha = link.code;
         request(app)
           .get('/' + sha)
           .expect(302)
           .expect(function(res) {
-            let redirect = res.headers.location;
+            var redirect = res.headers.location;
             expect(redirect).to.equal('http://www.roflzoo.com/');
           })
           .end(done);
@@ -139,11 +159,11 @@ describe ('', function() {
 
   }); // 'Link creation'
 
-  describe('Priviledged Access:', function() {
+  xdescribe('Priviledged Access:', function() {
 
     // /*  Authentication  */
     // // TODO: xit out authentication
-    it('Redirects to login page if a user tries to access the main page and is not signed in', function(done) {
+    xit('Redirects to login page if a user tries to access the main page and is not signed in', function(done) {
       request(app)
         .get('/')
         .expect(302)
@@ -153,7 +173,7 @@ describe ('', function() {
         .end(done);
     });
 
-    it('Redirects to login page if a user tries to create a link and is not signed in', function(done) {
+    xit('Redirects to login page if a user tries to create a link and is not signed in', function(done) {
       request(app)
         .get('/create')
         .expect(302)
@@ -163,7 +183,7 @@ describe ('', function() {
         .end(done);
     });
 
-    it('Redirects to login page if a user tries to see all of the links and is not signed in', function(done) {
+    xit('Redirects to login page if a user tries to see all of the links and is not signed in', function(done) {
       request(app)
         .get('/links')
         .expect(302)
@@ -175,9 +195,9 @@ describe ('', function() {
 
   }); // 'Privileged Access'
 
-  describe('Account Creation:', function() {
+  xdescribe('Account Creation:', function() {
 
-    it('Signup creates a new user', function(done) {
+    xit('Signup creates a new user', function(done) {
       request(app)
         .post('/signup')
         .send({
@@ -193,7 +213,7 @@ describe ('', function() {
         .end(done);
     });
 
-    it('Successful signup logs in a new user', function(done) {
+    xit('Successful signup logs in a new user', function(done) {
       request(app)
         .post('/signup')
         .send({
@@ -211,7 +231,7 @@ describe ('', function() {
 
   }); // 'Account Creation'
 
-  describe('Account Login:', function() {
+  xdescribe('Account Login:', function() {
 
     beforeEach(function(done) {
       new User({
@@ -222,7 +242,7 @@ describe ('', function() {
       });
     });
 
-    it('Logs in existing users', function(done) {
+    xit('Logs in existing users', function(done) {
       request(app)
         .post('/login')
         .send({
@@ -235,7 +255,7 @@ describe ('', function() {
         .end(done);
     });
 
-    it('Users that do not exist are kept on login page', function(done) {
+    xit('Users that do not exist are kept on login page', function(done) {
       request(app)
         .post('/login')
         .send({

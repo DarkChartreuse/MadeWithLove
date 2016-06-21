@@ -4,7 +4,7 @@
   "description": "Home cooked food delivered/pickup for busy people",
   "main": "webpack.config.js",
   "scripts": {
-    "test": "echo \"Error: no test specified\" && exit 1",
+    "test": "mocha test/serverSpec.js",
     "start": "nodemon server/server.js",
     "watch": "webpack --watch --progress",
     "seed": "node server/db/seed.js"
@@ -23,8 +23,10 @@
   "dependencies": {
     "axios": "^0.12.0",
     "body-parser": "^1.15.1",
+    "chai": "^3.5.0",
     "express": "^4.13.4",
     "http-server": "^0.8.5",
+    "mocha": "^2.5.3",
     "pg": "^5.1.0",
     "pg-hstore": "^2.3.2",
     "react": "^15.1.0",
@@ -32,7 +34,8 @@
     "react-dom": "^15.1.0",
     "react-router": "^2.0.0",
     "sequelize": "^3.23.3",
-    "sequelize-cli": "^2.1.0"
+    "sequelize-cli": "^2.1.0",
+    "supertest": "^1.2.0"
   },
   "devDependencies": {
     "babel-core": "^6.9.1",

@@ -27,6 +27,7 @@ dist/
 server/db/controllers/_temp/
 server/db/models/_temp/
 server/db/migrations/
+server/db/seeders/
 server/db/config.json
 .sequelizerc
 
