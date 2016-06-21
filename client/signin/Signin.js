@@ -12,19 +12,18 @@ export default class Signin extends React.Component {
 
   _handleEmail(e) {
     this.setState({email: e.target.value});
-    console.log(this.state);
   }
   _handlePassword(e) {
     this.setState({password: e.target.value});
-    console.log(this.state);  
   }
   
   _handleSubmit(e) {
-    //add validation method later
+    e.preventDefault();
     var obj = {
       email: this.state.email,
       password: this.state.password
     };
+    console.log(this.state);
     //post obj to server
     axios.post('/api/auth/sign-in', obj)
       .then(function (response) {
@@ -43,7 +42,7 @@ export default class Signin extends React.Component {
     return (
       <form onSubmit={this._handleSubmit.bind(this)} className='input-group'>
         <input type='text' placeholder='email' onChange={this._handleEmail.bind(this)} />
-        <input type='text' placeholder='password' onChange={this._handlePassword.bind(this)}/>
+        <input type='password' placeholder='password' onChange={this._handlePassword.bind(this)}/>
         <button type='submit' value='Post'>Submit</button>
       </form>
     );

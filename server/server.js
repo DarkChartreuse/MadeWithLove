@@ -8,12 +8,10 @@ const config = require('../webpack.config');
 const passport = require('passport');
 const flash = require('connect-flash');
 const session = require('express-session');
-
+require('./passport')(passport);
 
 const app = express();
-
 const port = process.env.PORT || 3000;
-
 const compiler = webpack(config);
 app.use(webpackDevMiddleware(compiler, { noInfo: true, publicPath: config.output.publicPath }));
 app.use(webpackHotMiddleware(compiler));
@@ -26,7 +24,7 @@ app.use(passport.initialize());
 app.use(passport.session());
 app.use(flash());
 
-// require('./passport')(passport); // pass passport for configuration
+ // pass passport for configuration
 
 // // TODO: change static paths
 // app.use(express.static(path.join(__dirname, '../')));
