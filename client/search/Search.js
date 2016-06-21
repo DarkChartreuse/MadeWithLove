@@ -115,4 +115,3 @@ class OrderButton extends React.Component {
     );
   }
 }
-
