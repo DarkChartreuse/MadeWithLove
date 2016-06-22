@@ -19,6 +19,10 @@ const Order = sequelize.define('orders',
       type: Sequelize.STRING,
       field: 'cuisine',
     },
+    description: {
+      type: Sequelize.STRING,
+      field: 'description',
+    },
     quantity: {
       type: Sequelize.INTEGER,
       field: 'quantity',
@@ -34,10 +38,6 @@ const Order = sequelize.define('orders',
     orderDate: {
       type: Sequelize.DATE,
       field: 'order_date',
-    },
-    rating: {
-      type: Sequelize.INTEGER,
-      field: 'rating',
     },
     review: {
       type: Sequelize.TEXT,

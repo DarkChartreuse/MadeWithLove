@@ -48,10 +48,12 @@ describe('', function() {
           firstName: 'Sunny',
           lastName: 'Gonnabathula',
           email: 'sunny@sunny.com',
+          description: 'Serving up some sick algorithms sucka!!!!',
           phone: '(516)327-4494',
           password: 'sunnygonnabathula',
           address: '676 Atlantic Avenue, Floral Park, NY',
           zip: '11001',
+          profile: 'https://avatars2.githubusercontent.com/u/2055636?v=3&s=460',
           chef: true,
         })
         .expect(200)
