@@ -1,13 +1,16 @@
 var User = require('../models/usersModel.js');
+var bcrypt = require('bcrypt');
 
 module.exports = {
   createUser: function(req, res) {
+    var salt = bcrypt.genSaltSync(10)
+    var hashedPassword = bcrypt.hashSync(req.body.password, salt)
     User.create({
       firstName: req.body.firstName,
       lastName: req.body.lastName,
       email: req.body.email,
       phone: req.body.phone,
-      password: req.body.password,
+      password: hashedPassword,
       address: `${req.body.street}, ${req.body.city}, ${req.body.state}`,
       zip: req.body.zipcode,
       chef: req.body.chef,
