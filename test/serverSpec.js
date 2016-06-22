@@ -1,6 +1,7 @@
 const request = require('supertest');
 const expect = require('chai').expect;
 const app = require('../server/server.js');
+const db = require('../server/db/db.js');
 
 const Order = require('../server/db/controllers/ordersController.js');
 const User = require('../server/db/controllers/usersController.js');
@@ -8,35 +9,23 @@ const User = require('../server/db/controllers/usersController.js');
 describe('', function() {
 
   beforeEach(function(done) {
-    // test Sequelize database
-    // app
-    //   .authenticate()
-    //   .then(function(err) {
-    //     console.log('Connection has been established successfully.');
-    //   })
-    //   .catch(function (err) {
-    //     console.log('Unable to connect to the database:', err);
-    //   })
-    //   .finally(function() {
+    //
+    db.sync()
+
+    // // Log out currently signed in user
+    // request(app)
+    //   .get('/logout')
+    //   .end(function(err, res) {
+    //
+    //     // Delete objects from db so they can be created later for the test
+    //     Link.remove({url: 'http://www.roflzoo.com/'}).exec();
+    //     User.remove({username: 'Savannah'}).exec();
+    //     User.remove({username: 'Phillip'}).exec();
+    //
     //     done();
     //   });
 
-
-    /*
-    // Log out currently signed in user
-    request(app)
-      .get('/logout')
-      .end(function(err, res) {
-
-        // Delete objects from db so they can be created later for the test
-        Link.remove({url: 'http://www.roflzoo.com/'}).exec();
-        User.remove({username: 'Savannah'}).exec();
-        User.remove({username: 'Phillip'}).exec();
-
-        done();
-      });
-      */
-    done();
+    // done();
   });
 
   describe('User creation: ', function() {
@@ -48,7 +37,7 @@ describe('', function() {
           firstName: 'Sunny',
           lastName: 'Gonnabathula',
           email: 'sunny@sunny.com',
-          description: 'Serving up some sick algorithms sucka!!!!',
+          description: 'Serving up some sick algorithms!!!!',
           phone: '(516)327-4494',
           password: 'sunnygonnabathula',
           address: '676 Atlantic Avenue, Floral Park, NY',
@@ -57,11 +46,11 @@ describe('', function() {
           chef: true,
         })
         .expect(200)
-        // .expect(function(res) {
-        //   console.log(res);
-        //   // expect(res.body.code).to.be.ok;
-        //   // expect(res.body.email).to.equal('sunny@sunny.com');
-        // })
+        .expect(function(res) {
+          console.log('>>>>>>>>>>> res: ', res.body);
+          // expect(res.statusCode).to.be.ok;
+          expect(res.body.email).to.equal('sunny@sunny.com');
+        })
         .end(done);
     });
 

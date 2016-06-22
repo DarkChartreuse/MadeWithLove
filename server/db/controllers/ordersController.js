@@ -3,21 +3,21 @@ const User = require('../models/usersModel.js');
 
 module.exports = {
   createOrder: (req, res) => {
-    User.findOne({ where: { email: req.query.email } })
+    User.findOne({ where: { email: req.body.email } })
     .then(result => {
       Order.create({
         chefId: result.id,
-        food: req.query.food,
-        cuisine: req.query.cuisine,
-        description: req.query.cuisine,
-        quantity: req.query.quantity,
-        price: req.query.price,
-        address: req.query.address,
+        food: req.body.food,
+        cuisine: req.body.cuisine,
+        description: req.body.cuisine,
+        quantity: req.body.quantity,
+        price: req.body.price,
+        address: req.body.address,
       });
     })
     .catch(err => { console.error('Error adding order: ', err); })
     .finally(() => {
-      console.log('Chef has now added an order: ', req.query.food);
+      console.log('Chef has now added an order: ', req.body.food);
       res.end();
     });
   },
@@ -30,7 +30,7 @@ module.exports = {
     })
     .catch(err => { console.error('Error deleting order', err); })
     .finally(() => {
-      console.log('Chef has deleted the order: ', req.query.food);
+      console.log('Chef has deleted the order: ', req.body.food);
       res.end();
     });
   },

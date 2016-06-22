@@ -17,10 +17,10 @@ module.exports = {
       profile: '', // TODO: point to uploaded image link
       chef: req.body.chef,
     })
-    .then((user, created) => {
-      console.log(user.get({ plain: true }));
-      console.log(created);
-      res.status(200).end();
+    .then(user => {
+      // console.log(user.get({ plain: true }));
+      // console.log(created);
+      res.json(user);
     })
     .catch(err => { console.error(err); });
   },
