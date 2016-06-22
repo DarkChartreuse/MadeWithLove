@@ -1,5 +1,6 @@
 var User = require('./db/controllers/usersController.js');
 var Order = require('./db/controllers/ordersController.js');
+var Controller = require('./db/controllers/controller.js');
 var passport = require('passport');
 
 module.exports = function(app, express) {
@@ -20,6 +21,8 @@ module.exports = function(app, express) {
   app.get('/api/orders', Order.getAllOrders);
   app.get('/api/orders/:id', Order.getOrder);
   app.delete('/api/orders/:id', Order.deleteOrder);
+
+  app.get('/api/meal/:id', Controller.getMealView);
 
   app.post('/api/auth/sign-in', passport.authenticate('local'), (req, res)=>{
     res.send('/');

@@ -1,6 +1,6 @@
 import React from 'react';
 import {Link} from 'react-router'
-import Search from '../search/Search'
+import Basicsearch from '../search/Basicsearch'
 
 export default class App extends React.Component {
 	render() {
@@ -9,12 +9,12 @@ export default class App extends React.Component {
       <div>
       <nav className="#ffb74d orange lighten-2">
           <ul>
-            <li style={{display: 'inline', marginRight:'10px'}}><Link to="/signup" activeClassName="active">Sign-up</Link></li>          
-            <li style={{display: 'inline', marginRight:'10px'}}><Link to="/signin" activeClassName="active">Sign-in</Link></li>
+            <li style={{display: 'inline', marginRight:'10px'}}><Link to="/signup" >Sign-up</Link></li>          
+            <li style={{display: 'inline', marginRight:'10px'}}><Link to="/signin" >Sign-in</Link></li>
           </ul>
       </nav>
-      <Search/>
       {this.props.children}
+      <Basicsearch/>
       </div>
 		)
 	}

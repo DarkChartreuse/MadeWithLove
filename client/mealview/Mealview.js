@@ -8,6 +8,26 @@ const dummyReviews = [
   {'username': 'Dan', 'comment': 'Minus a star for the chef not looking like my mother', 'rating': 4},
 ];
 
+class Orderbox extends React.Component {
+  _updateQuantity(e) {
+    this.setState({quantity: e.target.value});
+  }
+
+  render() {
+    return (
+      <div>Orderbox
+        <div>date: {this.props.date}</div>
+        <div>time block: {this.props.timeBlock}</div>
+        <div>price: {this.props.price} x <input onChange={this._updateQuantity.bind(this)} placeholder='1'></input></div>
+        <div>quantity: {this.props.quantity}</div>
+        <div>delivery charge: {this.props.deliveryCharge}</div>
+        <div>checkout total: {this.props.checkoutTotal}</div>
+      </div>
+
+    )
+  }
+}
+
 export default class Mealview extends React.Component {
   constructor(props) {
     super(props);
@@ -17,31 +37,30 @@ export default class Mealview extends React.Component {
     	chefDescription: 'I like to take long walks on the beach, play with my dogs, and I enjoy being around people who make me laugh haha',
     	reviews: dummyReviews,
     	rating: 3,
-    	//checkout data
-    	timeBlock: '',
-    	date: '',
-    	price: '',
-    	checkoutTotal: '',
-    	deliveryCharge: '',
-    	quantity: ''
+      date: 'June 22, 2016',
+      timeBlock: '1:00PM - 2:00PM',
+      price: 20,
+      quantity: 1,
+      deliveryCharge: 15,
+      checkoutTotal: 35
     }
   }
 
   componentDidMount() {
   	//make query to server for meal and chef info of this.props.orderId
-  	axios.post('/api/orders/:' + this.props.orderId)
-  	  .then(function (response) {
-  	    this.setState({
-  	      image: response.image,
-  	      chefName: response.chef,
-  	      chefDescription: response.description,
-  	      reviews: response.reviews,
-  	      rating: response.rating,
-  	    })
-  	  })
-  	  .catch((error) => {
-  	      console.log(error);
-  	  });
+  	axios.post('/api/meal/' + 2);
+  	  // .then(function (response) {
+  	  //   this.setState({
+  	  //     image: response.image,
+  	  //     chefName: response.chef,
+  	  //     chefDescription: response.description,
+  	  //     reviews: response.reviews,
+  	  //     rating: response.rating,
+  	  //   })
+  	  // })
+  	  // .catch((error) => {
+  	  //     console.log(error);
+  	  // });
   }
 
   render() {
@@ -56,7 +75,7 @@ export default class Mealview extends React.Component {
   	  });
 
     return (
-      <div className='container'>
+      <div>
         <div><img style={{width:'200px'}} src={this.state.image} /></div>
         <p>{this.state.chefName}</p>
         <p>{this.state.chefDescription}</p>
@@ -65,6 +84,14 @@ export default class Mealview extends React.Component {
           <div>Reviews</div>
           {displayReviews}
         </div>
+        <Orderbox 
+        date={this.state.date}
+        timeBlock={this.state.timeBlock}
+        price={this.state.price}
+        quantity={this.state.quantity}
+        deliveryCharge={this.state.deliveryCharge}
+        checkoutTotal={this.state.checkoutTotal}
+        />
       </div>
     );
   }

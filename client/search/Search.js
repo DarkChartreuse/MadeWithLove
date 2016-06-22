@@ -1,5 +1,6 @@
 import React from 'react';
 import  axios from 'axios';
+import { Link } from 'react-router'
 
 //FilterableCuisineTable
   //SearchBar  
@@ -164,7 +165,7 @@ class CuisineRow extends React.Component {
       </span>;
     return(
       <tr>
-        <td width="50%">{name}</td>
+        <td width="50%"><Link to="/mealview" >{name}</Link></td>
         <td width="50%">{this.props.cuisine.chef}</td>
         <td width="50%">{this.props.cuisine.price}</td>
         <td>

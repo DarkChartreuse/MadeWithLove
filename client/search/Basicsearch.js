@@ -2,13 +2,12 @@ import React from 'react';
 import  axios from 'axios';
 import { Link } from 'react-router';
 
-
-export default class Search extends React.Component {
+export default class Basicsearch extends React.Component {
 
   constructor(props) {
     super(props);
     this.state = {
-    	cuisine: ''
+      cuisine: ''
     }
   }
   
@@ -18,9 +17,9 @@ export default class Search extends React.Component {
   }
 
   _handleSubmit(e) {
-  	var obj = {
-  		cuisine: this.state.cuisine,
-  	}
+    var obj = {
+      cuisine: this.state.cuisine,
+    }
     //passes along the search parameters to next view
   }
 
@@ -35,7 +34,7 @@ export default class Search extends React.Component {
             </div>
             <div className="row center">
               <input placeholder='type here' onChange={this._handleCuisine.bind(this)} ></input>
-              <a id="download-button" onClick={this._handleSubmit.bind(this)} className="btn-large waves-effect waves-light #ffb74d orange lighten-2"><Link to="/mealview" >Search</Link></a>
+              <a id="download-button" onClick={this._handleSubmit.bind(this)} className="btn-large waves-effect waves-light #ffb74d orange lighten-2"><Link to="/search" >Search</Link></a>
             </div>
           </div>
         </div>
