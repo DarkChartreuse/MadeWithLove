@@ -3,3 +3,9 @@ node_js:
   - '0.8'
   - '0.10'
   - '6.2.1'
+env:
+  global:
+    - NODE_ENV=travisci
+    - BUILD_DIR=`pwd`/MWLBuild
+before_script:
+  - npm install
