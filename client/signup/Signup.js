@@ -39,7 +39,13 @@ export default class Signup extends React.Component {
 
     console.log('getting ready to send to server:', this.state);
     // if everything passes, then do the ajax request
-      if (this.state.firstName !== '' && this.state.lastName !== ''){
+      if(this.state.password !== this.state.passwordConfirm) {
+        console.log('passwords dont match');
+      }
+       else if (this.state.firstName === '' || this.state.lastName === '') {
+        console.log('please input your name');
+      }
+      else {
         console.log('setting up data:');
         var data = {
           firstName: this.state.firstName,
@@ -54,20 +60,15 @@ export default class Signup extends React.Component {
           chef: this.state.chef
         };
 
-        console.log('sending to server');
+        console.log('sending to server...', data);
 
-        axios.post('/api/users', data)
+        axios.post('/api/users/:id', data)
           .then(function (response) {
             console.log(response);
           })
           .catch(function (error) {
             console.log(error);
           });
-
-        // auth.signup(data, (resDB)=>{
-        //   console.log('++++++++++signed up', resDB);
-        //   location.reload();
-        // });
       }
   }
 
@@ -96,13 +97,13 @@ export default class Signup extends React.Component {
         <input type="text"
           className="form-control"
           name="firstname"
-          placeholder="first name"
+          placeholder="first name (required)"
           value = {this.state.firstName}
           onChange ={(event) => this.setState({firstName: event.target.value})}/>
         <input type="text"
           className="form-control"
           name="lastname"
-          placeholder="last name"
+          placeholder="last name (required)"
           value = {this.state.lastName}
           onChange ={(event) => this.setState({lastName: event.target.value})}/>
         <input type="text"
@@ -139,12 +140,11 @@ export default class Signup extends React.Component {
 
         <p>
           Are you a chef?
-          {' '}
           <input 
             type='checkbox' 
             checked={this.state.chef}
             ref="isAChef"
-            onChange ={(event) => this.setState({chef: event.target.value})}
+            onChange ={(event) => this.setState({chef: !this.state.chef})}
           />
         </p>          
         <button className="submit-button btn-primary" onClick={this._handleSubmit.bind(this)}>Submit</button>
