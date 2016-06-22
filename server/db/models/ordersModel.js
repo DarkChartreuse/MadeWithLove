@@ -1,7 +1,7 @@
-var sequelize = require('../db.js');
-var Sequelize = require('sequelize');
+const sequelize = require('../db.js');
+const Sequelize = require('sequelize');
 
-var Order = sequelize.define('orders',
+const Order = sequelize.define('orders',
   {
     userId: {
       type: Sequelize.INTEGER,
@@ -14,6 +14,14 @@ var Order = sequelize.define('orders',
     food: {
       type: Sequelize.STRING,
       field: 'food',
+    },
+    cuisine: {
+      type: Sequelize.STRING,
+      field: 'cuisine',
+    },
+    description: {
+      type: Sequelize.STRING,
+      field: 'description',
     },
     quantity: {
       type: Sequelize.INTEGER,
@@ -30,10 +38,6 @@ var Order = sequelize.define('orders',
     orderDate: {
       type: Sequelize.DATE,
       field: 'order_date',
-    },
-    rating: {
-      type: Sequelize.INTEGER,
-      field: 'rating',
     },
     review: {
       type: Sequelize.TEXT,

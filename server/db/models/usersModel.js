@@ -1,7 +1,7 @@
-var sequelize = require('../db.js');
-var Sequelize = require('sequelize');
+const sequelize = require('../db.js');
+const Sequelize = require('sequelize');
 
-var User = sequelize.define('users',
+const User = sequelize.define('users',
   {
     firstName: {
       type: Sequelize.STRING,
@@ -14,6 +14,10 @@ var User = sequelize.define('users',
     email: {
       type: Sequelize.STRING,
       field: 'email',
+    },
+    description: {
+      type: Sequelize.STRING,
+      field: 'description',
     },
     phone: {
       type: Sequelize.STRING,
@@ -30,6 +34,10 @@ var User = sequelize.define('users',
     zip: {
       type: Sequelize.STRING,
       field: 'zip',
+    },
+    profile: {
+      type: Sequelize.STRING,
+      field: 'profile',
     },
     chef: {
       type: Sequelize.BOOLEAN,

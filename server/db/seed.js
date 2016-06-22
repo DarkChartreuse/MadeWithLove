@@ -1,22 +1,22 @@
-var db = require('./db.js');
-var User = require('./models/usersModel.js');
-var Order = require('./models/ordersModel.js');
-var usersSeed = require('./seedData/usersSeed.js');
-var ordersSeed = require('./seedData/ordersSeed.js');
+const db = require('./db.js');
+const User = require('./models/usersModel.js');
+const Order = require('./models/ordersModel.js');
+const usersSeed = require('./seedData/usersSeed.js');
+const ordersSeed = require('./seedData/ordersSeed.js');
 
 db.sync({ force: true })
-  .then(function() {
-    User.bulkCreate(usersSeed);
-  })
-  .then(function() {
-    Order.bulkCreate(ordersSeed);
-  })
-  .then(function() {
+  .then(() => {
     console.log('Connection has been established successfully.');
   })
-  .catch(function (err) {
-    console.log('Unable to connect to the database:', err);
+  .then(() => {
+    User.bulkCreate(usersSeed)
+    .then(() => {
+      Order.bulkCreate(ordersSeed)
+      .then(() => {
+        console.log('Seeding almost complete...');
+      });
+    });
   })
-  .finally(function() {
-    console.log('Seeding complete.');
+  .catch(err => {
+    console.log('Unable to connect to the database:', err);
   });

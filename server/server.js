@@ -37,3 +37,5 @@ require('./routes.js')(app, express);
 app.listen(port, () => {
   console.log('Server now connected to port ', port);
 });
+
+module.exports = app;

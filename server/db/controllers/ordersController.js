@@ -2,69 +2,52 @@ const Order = require('../models/ordersModel.js');
 const User = require('../models/usersModel.js');
 
 module.exports = {
-  createOrder: function(req, res) {
-    User.findOne({
-      where: {
-        email: req.query.email,
-      }
-    })
-    .then(function(result) {
+  createOrder: (req, res) => {
+    User.findOne({ where: { email: req.body.email } })
+    .then(result => {
       Order.create({
         chefId: result.id,
-        food: req.query.food,
-        quantity: req.query.quantity,
-        price: req.query.price,
-        address: req.query.address,
+        food: req.body.food,
+        cuisine: req.body.cuisine,
+        description: req.body.cuisine,
+        quantity: req.body.quantity,
+        price: req.body.price,
+        address: req.body.address,
       });
     })
-    .catch(function(err) {
-      console.error('Error adding order: ', err);
-    })
-    .finally(function() {
-      console.log('Chef has now added an order: ', req.query.food);
+    .catch(err => { console.error('Error adding order: ', err); })
+    .finally(() => {
+      console.log('Chef has now added an order: ', req.body.food);
       res.end();
     });
   },
 
-  deleteOrder: function(req, res) {
-    Order.findOne({
-      where: {
-        id: req.params.id,
-      }
-    })
-    .then(function(orderToDelete) {
+  deleteOrder: (req, res) => {
+    Order.findOne({ where: { id: req.params.id } })
+    .then((orderToDelete) => {
       console.log('Deleting order: ', orderToDelete.dataValues);
       orderToDelete.destroy();
     })
-    .catch(function(err) {
-      console.error('Error deleting order');
-    })
-    .finally(function() {
+    .catch(err => { console.error('Error deleting order', err); })
+    .finally(() => {
+      console.log('Chef has deleted the order: ', req.body.food);
       res.end();
     });
   },
 
-  getOrder: function(req, res) {
-    Order.findOne({
-      where: {
-        id: req.params.id,
-      }
-    })
-    .then(function(order) {
+  getOrder: (req, res) => {
+    Order.findOne({ where: { id: req.params.id } })
+    .then(order => {
       res.json(order.dataValues);
     })
-    .catch(function(err) {
-      console.error(err);
-    });
+    .catch(err => { console.error('Error fetching order', err); });
   },
 
-  getAllOrders: function(req, res) {
+  getAllOrders: (req, res) => {
     Order.findAll()
-    .then(function(orders) {
+    .then(orders => {
       res.json(orders);
     })
-    .catch(function(err) {
-      console.error(err);
-    });
-  }
+    .catch(err => { console.error('Error fetching orders', err); });
+  },
 };
