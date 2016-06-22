@@ -15,6 +15,10 @@ var Order = sequelize.define('orders',
       type: Sequelize.STRING,
       field: 'food',
     },
+    cuisine: {
+      type: Sequelize.STRING,
+      field: 'cuisine',
+    },
     quantity: {
       type: Sequelize.INTEGER,
       field: 'quantity',

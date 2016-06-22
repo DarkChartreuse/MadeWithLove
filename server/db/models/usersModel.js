@@ -31,6 +31,10 @@ var User = sequelize.define('users',
       type: Sequelize.STRING,
       field: 'zip',
     },
+    profile: {
+      type: Sequelize.STRING,
+      field: 'profile',
+    },
     chef: {
       type: Sequelize.BOOLEAN,
       field: 'chef',
