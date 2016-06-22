@@ -1,7 +1,7 @@
-var sequelize = require('../db.js');
-var Sequelize = require('sequelize');
+const sequelize = require('../db.js');
+const Sequelize = require('sequelize');
 
-var Order = sequelize.define('orders',
+const Order = sequelize.define('orders',
   {
     userId: {
       type: Sequelize.INTEGER,
