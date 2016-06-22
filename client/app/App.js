@@ -1,23 +1,21 @@
 import React from 'react';
 import {Link} from 'react-router'
+import Search from '../search/Search'
 
 export default class App extends React.Component {
 	render() {
     let img = 'https://goo.gl/GAtbcS';
 		return (
-			<div>
-        <div className="jumbotron" style={{backgroundImage: 'url(' + img + ')'}}>
-          <h1>Made With Love</h1>
-          <p>Home made meals delivered</p>
-          <p><a class="btn btn-primary btn-lg" href="#" role="button">Learn more</a></p>
-        </div>
-          <ul role="nav" className="nav nav-tabs">
+      <div>
+      <nav className="#ffb74d orange lighten-2">
+          <ul>
             <li style={{display: 'inline', marginRight:'10px'}}><Link to="/signup" activeClassName="active">Sign-up</Link></li>          
             <li style={{display: 'inline', marginRight:'10px'}}><Link to="/signin" activeClassName="active">Sign-in</Link></li>
-            <li style={{display: 'inline', marginRight:'10px'}}><Link to="/search" activeClassName="active">Search Meals</Link></li>
           </ul>
-          {this.props.children}
-			</div>
+      </nav>
+      <Search/>
+      {this.props.children}
+      </div>
 		)
 	}
 };

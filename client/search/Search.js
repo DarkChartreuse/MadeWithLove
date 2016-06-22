@@ -1,5 +1,6 @@
 import React from 'react';
 import  axios from 'axios';
+
 //FilterableCuisineTable
   //SearchBar  
   //CuisineTable
@@ -13,6 +14,30 @@ module.exports = class Search extends React.Component {
 
   constructor(props) {
     super(props);
+    this.state = {
+    	cuisine: ''
+    }
+  }
+  
+  _handleCuisine(e) {
+    this.setState({cuisine: e.target.value});
+    console.log(this.state);
+  }
+
+  _handleSubmit(e) {
+  	var obj = {
+  		cuisine: this.state.cuisine,
+  	}
+
+  	axios.post('/api/auth/sign-in', obj)
+  	  .then( (response) => {
+  	  	//pass the request to the server
+  	  	//redirect to next view with the search results
+  	  })
+  	  .catch((error) => {
+  	      console.log(error);
+  	  });
+
   }
 
   render() {
