@@ -39,6 +39,10 @@ const Order = sequelize.define('orders',
       type: Sequelize.DATE,
       field: 'order_date',
     },
+    rating: {
+      type: Sequelize.FLOAT,
+      field: 'rating',
+    },
     review: {
       type: Sequelize.TEXT,
       field: 'review',
