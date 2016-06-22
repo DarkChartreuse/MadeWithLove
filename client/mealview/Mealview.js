@@ -1,5 +1,5 @@
 import React from 'react';
-
+import  axios from 'axios';
 
 const dummyReviews = [
   {'username': 'Andrew', 'comment': 'This was okay. Needed more chicken and pasta.', 'rating': 4},
@@ -27,18 +27,30 @@ export default class Mealview extends React.Component {
     }
   }
 
-  didComponentMount(){
-  	//make query to db for meal info of this.props.mealId
-  	'/api/orders/:id'
+  componentDidMount() {
+  	//make query to server for meal and chef info of this.props.orderId
+  	axios.post('/api/orders/:' + this.props.orderId)
+  	  .then(function (response) {
+  	    this.setState({
+  	      image: response.image,
+  	      chefName: response.chef,
+  	      chefDescription: response.description,
+  	      reviews: response.reviews,
+  	      rating: response.rating,
+  	    })
+  	  })
+  	  .catch((error) => {
+  	      console.log(error);
+  	  });
   }
 
   render() {
   	var displayReviews = this.state.reviews.map( function(review){
   		return (
   			<ul>
-  			<li>{review.username}</li>
-  			<li>{review.comment}</li>
-  			<li>{review.rating}</li>
+  			  <li>{review.username}</li>
+  			  <li>{review.comment}</li>
+  			  <li>{review.rating}</li>
   			</ul>
   			);
   	  });
