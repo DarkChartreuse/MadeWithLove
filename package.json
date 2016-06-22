@@ -22,7 +22,7 @@
   "homepage": "https://github.com/DarkChartreuse/MadeWithLove#readme",
   "dependencies": {
     "axios": "^0.12.0",
-
+    "bcrypt": "*",
     "body-parser": "^1.15.1",
     "chai": "^3.5.0",
     "connect-flash": "^0.1.1",
