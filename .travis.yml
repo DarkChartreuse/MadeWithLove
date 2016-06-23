@@ -13,3 +13,5 @@ services:
  - postgresql
 env:
  - TRAVIS=travis CXX=g++-4.8
+before_script:
+ - psql -c 'create database mwl_db;' -U postgres
