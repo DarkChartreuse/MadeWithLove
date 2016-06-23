@@ -8,9 +8,9 @@ const User = require('../server/db/controllers/usersController.js');
 
 describe('', function() {
 
-  beforeEach(function(done) {
+  // beforeEach(function(done) {
     //
-    db.sync()
+    // db.sync()
 
     // // Log out currently signed in user
     // request(app)
@@ -25,8 +25,8 @@ describe('', function() {
     //     done();
     //   });
 
-    // done();
-  });
+  //   done();
+  // });
 
   describe('User creation: ', function() {
 
