@@ -46,10 +46,10 @@ describe('', function() {
           chef: true,
         })
         .expect(200)
-        .expect(function(res) {
-          console.log('>>>>>>>>>>> res: ', res.body);
-          // expect(res.statusCode).to.be.ok;
-          expect(res.body.email).to.equal('sunny@sunny.com');
+        .expect(function(results) {
+          console.log('>>>>>>>>>>> results: ', results.body);
+          // expect(results.statusCode).to.be.ok;
+          expect(results.body.email).to.equal('sunny@sunny.com');
         })
         .end(done);
     });

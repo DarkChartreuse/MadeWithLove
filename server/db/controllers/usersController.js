@@ -18,8 +18,6 @@ module.exports = {
       chef: req.body.chef,
     })
     .then(user => {
-      // console.log(user.get({ plain: true }));
-      // console.log(created);
       res.json(user);
     })
     .catch(err => { console.error(err); });
