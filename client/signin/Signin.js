@@ -1,5 +1,6 @@
 import React from 'react';
-import  axios from 'axios';
+import { browserHistory } from 'react-router';
+import axios from 'axios';
 
 export default class Signin extends React.Component {
   constructor(props) {
@@ -8,6 +9,7 @@ export default class Signin extends React.Component {
       email: '',
       password: '',
     }
+    this.handleError = this.handleError.bind(this);
   }
 
   _handleEmail(e) {
@@ -16,6 +18,11 @@ export default class Signin extends React.Component {
   _handlePassword(e) {
     this.setState({password: e.target.value});
   }
+
+  handleError(err) {
+    console.log(err);
+    Materialize.toast(`${err.data.message}`, 4000);
+  }
   
   _handleSubmit(e) {
     e.preventDefault();
@@ -23,15 +30,16 @@ export default class Signin extends React.Component {
       email: this.state.email,
       password: this.state.password
     };
+
+
     //post obj to server
     axios.post('/api/auth/sign-in', obj)
       .then(function (response) {
-        console.log(response);
-        window.location = response.data;
+        console.log('the response of user',response);
+        browserHistory.push('/');
       })
-      .catch((error) => {
-          console.log(error);
-      });
+      .catch(this.handleError)
+
   }
 
   render() {

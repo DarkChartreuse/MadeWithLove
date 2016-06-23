@@ -6,6 +6,7 @@ const webpackDevMiddleware = require('webpack-dev-middleware');
 const webpackHotMiddleware = require('webpack-hot-middleware');
 const config = require('../webpack.config');
 const passport = require('passport');
+const cookieParser = require('cookie-parser');
 const flash = require('connect-flash');
 const session = require('express-session');
 require('./passport')(passport);
@@ -19,7 +20,8 @@ app.use(webpackHotMiddleware(compiler));
 app.use(bodyParser.urlencoded({ extended: true }));
 app.use(bodyParser.json());
 
-app.use(session({ secret: 'onionsarerare' }));
+app.use(cookieParser())
+app.use(session({ secret: 'onionsarerare', resave: false, saveUninitialized: false }));
 app.use(passport.initialize());
 app.use(passport.session());
 app.use(flash());

@@ -9,33 +9,30 @@ module.exports = function(passport) {
     usernameField: 'email',
     passwordField: 'password'
   }, function(email, password, done) {
-    console.log('the email', email)
-    console.log('the password', password);
       User.findOne({ where: {
         email: email,
       }
     })
     .then(
       function(user) {
-        console.log('what is the user', user);
-        console.log('userpassword', user.password);
         if (!user) {
           return done(null, false, { message: 'Incorrect username.' });
         } 
         if (!bcrypt.compareSync(password, user.password)) {
           return done(null, false, { message: 'Incorrect password.' });
         }
-        console.log('successful landing');
-        return done(null, user);
+        return done(null, {id: user.id, name: user.firstName, email: user.email});
       })
     }
   ));
 
   passport.serializeUser(function(user, done) {
-    done(null, user.id)
+    console.log("serialize");
+    done(null, user.id);
   });
 
   passport.deserializeUser(function(id, done) {
+
     User.findOne({
       where: {
         'id': id

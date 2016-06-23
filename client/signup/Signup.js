@@ -17,7 +17,12 @@ export default class Signup extends React.Component {
       state: '',
       zipcode: '',
       chef: false
-    }    
+    }
+    this.handleError = this.handleError.bind(this)
+  }
+
+  handleError(err) {
+    Materialize.toast(`Failed to create account: ${err.data.message}`, 4000);
   }
 
   _handleSubmit() {
@@ -62,13 +67,11 @@ export default class Signup extends React.Component {
 
         console.log('sending to server...', data);
 
-        axios.post('/api/users/:id', data)
+        axios.post('/api/users/', data)
           .then(function (response) {
             console.log(response);
           })
-          .catch(function (error) {
-            console.log(error);
-          });
+          .catch(this.handleError);
       }
   }
 

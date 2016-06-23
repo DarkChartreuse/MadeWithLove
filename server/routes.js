@@ -5,12 +5,26 @@ var passport = require('passport');
 
 module.exports = function(app, express) {
 
-  var isAuthenticated = function (req, res, next) {
-    if (req.isAuthenticated())
-      return next()
-    req.flash('error', 'You have to be logged in to access the page.')
-    res.redirect('/')
-  }
+  const attemptSignIn = (req, res, user) => {
+    req.login(user, err => {
+      if (err) {
+        res.status(401).send(err);
+      } else {
+        res.json(user);
+      }
+    });
+  };
+
+  const signIn = (req, res, next) => {
+    passport.authenticate('local', (err, user, info) => {
+      if (err || !user) {
+        res.status(401).send(info);
+      } else {
+        attemptSignIn(req, res, user);
+      }
+    })(req, res, next);
+  };
+
 
   app.post('/api/users', User.createUser);
   app.get('/api/users', User.getAllUsers);
@@ -24,9 +38,18 @@ module.exports = function(app, express) {
 
   app.get('/api/meal/:id', Controller.getMealView);
 
-  app.post('/api/auth/sign-in', passport.authenticate('local'), (req, res)=>{
-    res.send('/');
-  });
+  app.post('/api/auth/sign-in', signIn);
+
+  //   passport.authenticate('local'), (req, res)=>{
+  //   if (err || !req.user) {
+  //     res.status(401).send(err);
+  //   } 
+  //   res.json(req.user);
+  // });
+  app.get('/logout', function(req, res) {
+      req.logout()
+      res.redirect('/')
+    })
   // app.get('/api/auth/sign-out', Auth.signOut);
   // app.get('/api/auth/verify', Auth.verify);
   // app.get('/api/auth/check-authorized', Auth.checkAuthorized);
@@ -34,6 +57,6 @@ module.exports = function(app, express) {
     if (req.isAuthenticated()) {
       return next();
     }
-    return res.redirect('/signup');
+    return res.redirect('/signin');
   }
 };
