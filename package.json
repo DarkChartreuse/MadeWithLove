@@ -4,7 +4,7 @@
   "description": "Home cooked food delivered/pickup for busy people",
   "main": "webpack.config.js",
   "scripts": {
-    "test": "mocha test/serverSpec.js --timeout 5000",
+    "test": "npm run seed && mocha test/serverSpec.js --timeout 10000",
     "start": "nodemon server/server.js",
     "watch": "webpack --watch --progress",
     "seed": "node server/db/seed.js"

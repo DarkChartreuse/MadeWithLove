@@ -8,9 +8,9 @@ const User = require('../server/db/controllers/usersController.js');
 
 describe('', function() {
 
-  beforeEach(function(done) {
+  // beforeEach(function(done) {
     //
-    db.sync()
+    // db.sync()
 
     // // Log out currently signed in user
     // request(app)
@@ -25,8 +25,8 @@ describe('', function() {
     //     done();
     //   });
 
-    // done();
-  });
+  //   done();
+  // });
 
   describe('User creation: ', function() {
 
@@ -46,10 +46,10 @@ describe('', function() {
           chef: true,
         })
         .expect(200)
-        .expect(function(res) {
-          console.log('>>>>>>>>>>> res: ', res.body);
-          // expect(res.statusCode).to.be.ok;
-          expect(res.body.email).to.equal('sunny@sunny.com');
+        .expect(function(results) {
+          console.log('>>>>>>>>>>> results: ', results.body);
+          // expect(results.statusCode).to.be.ok;
+          expect(results.body.email).to.equal('sunny@sunny.com');
         })
         .end(done);
     });
