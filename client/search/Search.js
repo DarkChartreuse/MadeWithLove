@@ -1,6 +1,8 @@
 import React from 'react';
 import  axios from 'axios';
 import { Link } from 'react-router'
+import { connect } from 'react-redux'
+import { fetchOrders } from '../actions'
 
 //FilterableCuisineTable
   //SearchBar  
@@ -11,7 +13,7 @@ import { Link } from 'react-router'
  //our state is: value of checkbox, & user input in search box
  //components that render something based on that state: CuisineTable 
  //common owner: FilterableCuisineTable
-module.exports = class Search extends React.Component {
+export default class Search extends React.Component {
 
   constructor(props) {
     super(props);
@@ -19,7 +21,11 @@ module.exports = class Search extends React.Component {
     	cuisine: ''
     }
   }
-  
+
+  componentDidMount() {
+    this.props.fetchOrders();
+  }
+
   _handleCuisine(e) {
     this.setState({cuisine: e.target.value});
     console.log(this.state);
@@ -57,27 +63,23 @@ module.exports = class Search extends React.Component {
 class FilterableCuisineTable extends React.Component {
   constructor(props) {
     super(props);
-    this.state = {
-      filterText: '', 
-      inStockOnly: false
-    };
+    // this.state = {
+    //   filterText: '', 
+    //   inStockOnly: false
+    // };
   }
 
-  _handleUserInput(filterText, inStockOnly) {
-    this.setState({
-      filterText:filterText,
-      inStockOnly:inStockOnly
-    });
-  } 
+  // _handleUserInput(filterText, inStockOnly) {
+  //   this.setState({
+  //     filterText:filterText,
+  //     inStockOnly:inStockOnly
+  //   });
+  // } 
 
   render() {
     return (            
       <div>
-        <SearchBar 
-          filterText={this.state.filterText}
-          inStockOnly={this.state.inStockOnly}
-          onUserInput={this._handleUserInput.bind(this)}
-        />
+        <SearchBar />
         <CuisineTable 
           orders={this.props.orders}
           filterText={this.state.filterText}
@@ -89,11 +91,11 @@ class FilterableCuisineTable extends React.Component {
 }
 
 class SearchBar extends React.Component {
-  _handleChange() {
-    let filterTextVal = this.refs.filterTextInput.value;
-    let inStockCheckBoxVal = this.refs.inStockOnlyInput.value;
-    this.props.onUserInput(filterTextVal , inStockCheckBoxVal);
-  }
+  // _handleChange() {
+  //   let filterTextVal = this.refs.filterTextInput.value;
+  //   let inStockCheckBoxVal = this.refs.inStockOnlyInput.value;
+  //   this.props.onUserInput(filterTextVal , inStockCheckBoxVal);
+  // }
 
   render() {
     return (
@@ -102,17 +104,12 @@ class SearchBar extends React.Component {
           className="form-control" 
           type="text" 
           placeholder="Search by cuisine name"
-          value={this.props.filterText}
           ref="filterTextInput"
-          onChange={this._handleChange.bind(this)}
         />
         <p>
           <input 
             type="checkbox" 
             class="checkbox"
-            value={this.props.inStockOnly}
-            ref="inStockOnlyInput" 
-            onChange={this._handleChange.bind(this)}
           />
           {' '}
           Only show items in stock         
@@ -184,7 +181,7 @@ class CuisineRow extends React.Component {
 class CuisineCategoryRow extends React.Component {
   render() {
     return (
-      <tr><th colSpan="4" className="bg-success">{this.props.category.toUpperCase()}</th></tr>
+      <tr><th colSpan="4" className="bg-success">{this.state.order.name.toUpperCase()}</th></tr>
     );
   }
 }
@@ -198,30 +195,5 @@ class OrderButton extends React.Component {
       chef: this.props.chefId,
       price: this.props.price,
       item: this.props.item  
-    }
 
-    console.log(data);
 
-    axios.post('/api/orders', data)
-      .then(function (response) {
-        console.log(response);
-      })
-      .catch(function (error) {
-        console.log(error);
-      });    
-  }
-
-  render() {
-    let btn = "";
-     if(this.props.isInStock) {
-        btn = (
-             <button className="submit-button btn-primary btn-xs active" onClick={this._handleSubmit.bind(this)}>Order</button>
-        );
-      } else {
-        btn = (
-             <button className="submit-button btn-primary btn-xs disabled" onClick={this._handleSubmit.bind(this)}>Order</button>
-        );
-      } 
-    return btn;
-  }
-}

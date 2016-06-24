@@ -49,19 +49,6 @@ export default class Mealview extends React.Component {
 
   componentDidMount() {
     this.props.fetchOrders();
-  	//make query to server for meal and chef info of this.props.orderId
-  	  // .then(function (response) {
-  	  //   this.setState({
-  	  //     image: response.image,
-  	  //     chefName: response.chef,
-  	  //     chefDescription: response.description,
-  	  //     reviews: response.reviews,
-  	  //     rating: response.rating,
-  	  //   })
-  	  // })
-  	  // .catch((error) => {
-  	  //     console.log(error);
-  	  // });
   }
 
   render() {
@@ -98,20 +85,3 @@ export default class Mealview extends React.Component {
   }
 
 }
-
-const mapDispatchToProps = (dispatch) => {
-  return {
-    fetchOrders: () => dispatch(fetchOrders())
-  }
-}
-
-function mapStatetoProps(state) {
-  return {
-    isFetching: false,
-    result: [],
-    error: null
-  };
-}
-
-export default connect(mapStatetoProps, mapDispatchToProps)(Mealview);
-
