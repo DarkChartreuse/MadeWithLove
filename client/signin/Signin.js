@@ -11,6 +11,8 @@ export default class Signin extends React.Component {
     };
     this.handleError = this.handleError.bind(this);
     this.handleEmail = this.handleEmail.bind(this);
+    this.handlePassword = this.handlePassword.bind(this);
+    this.handleSubmit = this.handleSubmit.bind(this)
   }
 
   handleEmail(e) {
@@ -23,7 +25,7 @@ export default class Signin extends React.Component {
     Materialize.toast(`${err.data.message}`, 4000);
   }
   
-  _handleSubmit(e) {
+  handleSubmit(e) {
     e.preventDefault();
     var obj = {
       email: this.state.email,
@@ -43,9 +45,9 @@ export default class Signin extends React.Component {
 
   render() {
     return (
-      <form onSubmit={this._handleSubmit.bind(this)} className='input-group'>
-        <input type='text' placeholder='email' onChange={this._handleEmail.bind(this)} />
-        <input type='password' placeholder='password' onChange={this._handlePassword.bind(this)}/>
+      <form onSubmit={this.handleSubmit} className='input-group'>
+        <input type='text' placeholder='email' onChange={this.handleEmail} />
+        <input type='password' placeholder='password' onChange={this.handlePassword}/>
         <button type='submit' value='Post'>Submit</button>
       </form>
     );
