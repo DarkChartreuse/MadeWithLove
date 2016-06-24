@@ -44,7 +44,7 @@ module.exports = (app) => {
     res.redirect('/');
   });
 
-  let isLoggedIn = (req, res, next) => {
+  const isLoggedIn = (req, res, next) => {
     if (req.isAuthenticated()) {
       return next();
     }
