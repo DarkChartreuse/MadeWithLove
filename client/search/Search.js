@@ -45,7 +45,7 @@ export default class Search extends React.Component {
     return (
       <div>
       { orders.isFetching && <h2>Loading...</h2>}
-      { !orders.isFetching && <div>hello?..<FilterableCuisineTable orders={orders} /></div> }
+      { !orders.isFetching && <FilterableCuisineTable orders={orders} /> }
       </div>
     )
   }
