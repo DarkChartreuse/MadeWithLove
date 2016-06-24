@@ -30,7 +30,7 @@ module.exports = (app) => {
   app.get('/api/users/:id', User.getUser);
   app.delete('/api/users/:id', User.deleteUser);
 
-  app.post('/api/orders', Order.createOrder);
+  app.post('/api/createOrder', Order.createOrder);
   app.get('/api/orders', Order.getAllOrders);
   app.get('/api/orders/:id', Order.getOrder);
   app.delete('/api/orders/:id', Order.deleteOrder);
