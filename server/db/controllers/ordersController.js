@@ -49,6 +49,7 @@ module.exports = {
   },
 
   getAllOrders: (req, res) => {
+    console.log('Im getting pinged!');
     Order.findAll()
     .then(orders => {
       res.json(orders);

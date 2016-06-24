@@ -27,6 +27,7 @@ const defaultState = {
 const logger = createLogger();
 // add 2nd argument for preloaded state
 const store = createStore(rootReducer, defaultState, applyMiddleware(thunk, logger));
+
 const history = syncHistoryWithStore(browserHistory, store);
 
 render((
