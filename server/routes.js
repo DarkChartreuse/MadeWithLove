@@ -1,10 +1,9 @@
-var User = require('./db/controllers/usersController.js');
-var Order = require('./db/controllers/ordersController.js');
-var Controller = require('./db/controllers/controller.js');
-var passport = require('passport');
+const User = require('./db/controllers/usersController.js');
+const Order = require('./db/controllers/ordersController.js');
+const Controller = require('./db/controllers/controller.js');
+const passport = require('passport');
 
-module.exports = function(app, express) {
-
+module.exports = (app) => {
   const attemptSignIn = (req, res, user) => {
     req.login(user, err => {
       if (err) {
@@ -40,23 +39,15 @@ module.exports = function(app, express) {
 
   app.post('/api/auth/sign-in', signIn);
 
-  //   passport.authenticate('local'), (req, res)=>{
-  //   if (err || !req.user) {
-  //     res.status(401).send(err);
-  //   } 
-  //   res.json(req.user);
-  // });
-  app.get('/logout', function(req, res) {
-      req.logout()
-      res.redirect('/')
-    })
-  // app.get('/api/auth/sign-out', Auth.signOut);
-  // app.get('/api/auth/verify', Auth.verify);
-  // app.get('/api/auth/check-authorized', Auth.checkAuthorized);
-  var isLoggedIn = function(req, res, next) {
+  app.get('/logout', (req, res) => {
+    req.logout();
+    res.redirect('/');
+  });
+
+  let isLoggedIn = (req, res, next) => {
     if (req.isAuthenticated()) {
       return next();
     }
     return res.redirect('/signin');
-  }
+  };
 };

@@ -7,7 +7,7 @@ import { connect, Provider } from 'react-redux';
 
 
 import { createStore, applyMiddleware } from 'redux';
-import { syncHistoryWithStore, routerReducer } from 'react-router-redux';
+import { syncHistoryWithStore } from 'react-router-redux';
 import createLogger from 'redux-logger';
 import thunk from 'redux-thunk';
 import rootReducer from './reducers/index';
@@ -21,7 +21,7 @@ import Basicsearch from './search/Basicsearch';
 import Mealview from './mealview/Mealview';
 
 const defaultState = {
-  quantity: 0
+  quantity: 0,
 };
 
 const logger = createLogger();
@@ -32,12 +32,12 @@ const history = syncHistoryWithStore(browserHistory, store);
 render((
   <Provider store={store}>
     <Router history={history}>
-      <Route path='/' component={App}>
-      <IndexRoute component={Basicsearch} />
-        <Route path='/signup' component={Signup} />
-        <Route path='/signin' component={Signin} />
-        <Route path='/mealview' component={Mealview} />
-        <Route path='/search' component={Search} />
+      <Route path="/" component={App}>
+        <IndexRoute component={Basicsearch} />
+        <Route path="/signup" component={Signup} />
+        <Route path="/signin" component={Signin} />
+        <Route path="/mealview" component={Mealview} />
+        <Route path="/search" component={Search} />
       </Route>
     </Router>
   </Provider>

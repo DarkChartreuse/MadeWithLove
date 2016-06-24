@@ -12,8 +12,7 @@ module.exports = {
       }
       const salt = bcrypt.genSaltSync(10);
       const hashedPassword = bcrypt.hashSync(req.body.password, salt);
-      return 
-      User.create({
+      return User.create({
         firstName: req.body.firstName,
         lastName: req.body.lastName,
         email: req.body.email,
@@ -31,7 +30,7 @@ module.exports = {
       .catch(err => { console.error(err); });
       });
     },
-    
+
   deleteUser: (req, res) => {
     User.findOne({ where: { id: req.params.id } })
     .then(userToDelete => {
