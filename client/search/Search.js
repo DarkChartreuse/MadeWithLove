@@ -63,18 +63,18 @@ export default class Search extends React.Component {
 class FilterableCuisineTable extends React.Component {
   constructor(props) {
     super(props);
-    // this.state = {
-    //   filterText: '', 
-    //   inStockOnly: false
-    // };
+    this.state = {
+      filterText: '', 
+      inStockOnly: false
+    };
   }
 
-  // _handleUserInput(filterText, inStockOnly) {
-  //   this.setState({
-  //     filterText:filterText,
-  //     inStockOnly:inStockOnly
-  //   });
-  // } 
+  _handleUserInput(filterText, inStockOnly) {
+    this.setState({
+      filterText:filterText,
+      inStockOnly:inStockOnly
+    });
+  } 
 
   render() {
     return (            
@@ -181,7 +181,7 @@ class CuisineRow extends React.Component {
 class CuisineCategoryRow extends React.Component {
   render() {
     return (
-      <tr><th colSpan="4" className="bg-success">{this.state.order.name.toUpperCase()}</th></tr>
+      <tr><th colSpan="4" className="bg-success">{this.props.category.toUpperCase()}</th></tr>
     );
   }
 }
@@ -194,6 +194,49 @@ class OrderButton extends React.Component {
     let data = {
       chef: this.props.chefId,
       price: this.props.price,
-      item: this.props.item  
+      item: this.props.item
+    }
 
 
+    console.log(data);
+
+    axios.post('/api/orders', data)
+      .then(function (response) {
+        console.log(response);
+      })
+      .catch(function (error) {
+        console.log(error);
+      });    
+  }
+
+  render() {
+    let btn = "";
+     if(this.props.isInStock) {
+        btn = (
+             <button className="submit-button btn-primary btn-xs active" onClick={this._handleSubmit.bind(this)}>Order</button>
+        );
+      } else {
+        btn = (
+             <button className="submit-button btn-primary btn-xs disabled" onClick={this._handleSubmit.bind(this)}>Order</button>
+        );
+      } 
+    return btn;
+  }
+}  
+
+
+const mapDispatchToProps = (dispatch) => {
+  return {
+    fetchOrders: () => dispatch(fetchOrders())
+  }
+}
+
+function mapStatetoProps(state) {
+  return {
+    isFetching: false,
+    result: [],
+    error: null
+  };
+}
+
+export default connect(mapStatetoProps, mapDispatchToProps)(Search);
