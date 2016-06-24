@@ -20,13 +20,13 @@ import Signin from './signin/Signin';
 import Basicsearch from './search/Basicsearch';
 import Mealview from './mealview/Mealview';
 
-const defaultState = {
-  quantity: 0,
-};
+// const defaultState = {
+//   quantity: 0,
+// };
 
 const logger = createLogger();
 // add 2nd argument for preloaded state
-const store = createStore(rootReducer, defaultState, applyMiddleware(thunk, logger));
+const store = createStore(rootReducer, applyMiddleware(thunk, logger));
 
 const history = syncHistoryWithStore(browserHistory, store);
 
@@ -34,12 +34,11 @@ render((
   <Provider store={store}>
     <Router history={history}>
       <Route path="/" component={App}>
-        <IndexRoute component={Basicsearch} />
         <Route path="/signup" component={Signup} />
         <Route path="/signin" component={Signin} />
+      </Route>
         <Route path="/mealview" component={Mealview} />
         <Route path="/search" component={Search} />
-      </Route>
     </Router>
   </Provider>
 ), document.getElementById('app'));
