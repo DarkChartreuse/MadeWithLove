@@ -42,7 +42,7 @@ module.exports = class Search extends React.Component {
   }
 
   render() {
-    var Cuisines = [
+    var orders = [
       {cuisine: 'Japanese', price: '$9.99', stocked: true, food: 'Sushi', chefId:'Miyazaki'},
       {cuisine: 'Japanese', price: '$14.99', stocked: true, food: 'Dango', chefId:'Asami'},
       {cuisine: 'Japanese', price: '$7.99', stocked: false, food: 'Ramen', chefId:'Chika'},
@@ -50,7 +50,7 @@ module.exports = class Search extends React.Component {
       {cuisine: 'Indian', price: '$8.99', stocked: false, food: 'Chicken Tikka', chefId:'Balaji'},
       {cuisine: 'Indian', price: '$6.99', stocked: true, food: 'Balti Chicken', chefId:'Karishma'}
     ];    
-    return <FilterableCuisineTable cuisines={Cuisines} />;
+    return <FilterableCuisineTable orders={orders} />;
   }
 }
 
@@ -79,7 +79,7 @@ class FilterableCuisineTable extends React.Component {
           onUserInput={this._handleUserInput.bind(this)}
         />
         <CuisineTable 
-          cuisines={this.props.cuisines}
+          orders={this.props.orders}
           filterText={this.state.filterText}
           inStockOnly={this.state.inStockOnly}
         />
@@ -127,7 +127,7 @@ class CuisineTable extends React.Component {
   render() {
     var rows = [];
     var lastCategory = null;
-    this.props.cuisines.forEach((cuisine) => {
+    this.props.orders.forEach((cuisine) => {
       if(cuisine.food.toLowerCase().indexOf(this.props.filterText.toLowerCase()) === -1 || (!cuisine.stocked && this.props.inStockOnly)) { return; }   
       if(cuisine.cuisine !== lastCategory) {
         rows.push(
