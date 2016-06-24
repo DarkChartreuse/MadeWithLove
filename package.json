@@ -26,6 +26,7 @@
     "body-parser": "^1.15.1",
     "chai": "^3.5.0",
     "connect-flash": "^0.1.1",
+    "cookie-parser": "^1.4.3",
     "express": "^4.13.4",
     "express-session": "^1.13.0",
     "http-server": "^0.8.5",
@@ -38,6 +39,9 @@
     "react-addons-test-utils": "^15.1.0",
     "react-dom": "^15.1.0",
     "react-router": "^2.0.0",
+    "react-router-redux": "^4.0.5",
+    "redux-logger": "^2.6.1",
+    "redux-thunk": "^2.1.0",
     "sequelize": "^3.23.3",
     "sequelize-cli": "^2.1.0",
     "supertest": "^1.2.0"

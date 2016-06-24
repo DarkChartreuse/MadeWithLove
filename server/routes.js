@@ -1,16 +1,29 @@
-var User = require('./db/controllers/usersController.js');
-var Order = require('./db/controllers/ordersController.js');
-var Controller = require('./db/controllers/controller.js');
-var passport = require('passport');
+const User = require('./db/controllers/usersController.js');
+const Order = require('./db/controllers/ordersController.js');
+const Controller = require('./db/controllers/controller.js');
+const passport = require('passport');
 
-module.exports = function(app, express) {
+module.exports = (app) => {
+  const attemptSignIn = (req, res, user) => {
+    req.login(user, err => {
+      if (err) {
+        res.status(401).send(err);
+      } else {
+        res.json(user);
+      }
+    });
+  };
 
-  var isAuthenticated = function (req, res, next) {
-    if (req.isAuthenticated())
-      return next()
-    req.flash('error', 'You have to be logged in to access the page.')
-    res.redirect('/')
-  }
+  const signIn = (req, res, next) => {
+    passport.authenticate('local', (err, user, info) => {
+      if (err || !user) {
+        res.status(401).send(info);
+      } else {
+        attemptSignIn(req, res, user);
+      }
+    })(req, res, next);
+  };
+
 
   app.post('/api/users', User.createUser);
   app.get('/api/users', User.getAllUsers);
@@ -24,16 +37,17 @@ module.exports = function(app, express) {
 
   app.get('/api/meal/:id', Controller.getMealView);
 
-  app.post('/api/auth/sign-in', passport.authenticate('local'), (req, res)=>{
-    res.send('/');
+  app.post('/api/auth/sign-in', signIn);
+
+  app.get('/logout', (req, res) => {
+    req.logout();
+    res.redirect('/');
   });
-  // app.get('/api/auth/sign-out', Auth.signOut);
-  // app.get('/api/auth/verify', Auth.verify);
-  // app.get('/api/auth/check-authorized', Auth.checkAuthorized);
-  var isLoggedIn = function(req, res, next) {
+
+  const isLoggedIn = (req, res, next) => {
     if (req.isAuthenticated()) {
       return next();
     }
-    return res.redirect('/signup');
-  }
+    return res.redirect('/signin');
+  };
 };

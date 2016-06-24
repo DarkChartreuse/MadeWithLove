@@ -1,50 +1,44 @@
-var passport = require('passport');
-var LocalStrategy = require('passport-local').Strategy;
-var User = require('./db/models/usersModel');
-var bcrypt = require('bcrypt');
+const LocalStrategy = require('passport-local').Strategy;
+const User = require('./db/models/usersModel');
+const bcrypt = require('bcrypt');
 
-module.exports = function(passport) {
-
+module.exports = (passport) => {
   passport.use(new LocalStrategy({
     usernameField: 'email',
-    passwordField: 'password'
-  }, function(email, password, done) {
-    console.log('the email', email)
-    console.log('the password', password);
-      User.findOne({ where: {
-        email: email,
-      }
-    })
+    passwordField: 'password',
+  }, (email, password, done) => {
+    User.findOne({ where: {
+      email,
+    },
+  })
     .then(
-      function(user) {
-        console.log('what is the user', user);
-        console.log('userpassword', user.password);
+      (user) => {
         if (!user) {
           return done(null, false, { message: 'Incorrect username.' });
-        } 
+        }
         if (!bcrypt.compareSync(password, user.password)) {
           return done(null, false, { message: 'Incorrect password.' });
         }
-        console.log('successful landing');
-        return done(null, user);
-      })
-    }
+        return done(null, { id: user.id, name: user.firstName, email: user.email });
+      });
+  }
   ));
 
-  passport.serializeUser(function(user, done) {
-    done(null, user.id)
+  passport.serializeUser((user, done) => {
+    done(null, user.id);
   });
 
-  passport.deserializeUser(function(id, done) {
+  passport.deserializeUser((id, done) => {
     User.findOne({
       where: {
-        'id': id
-      }
-    }).then(function (user) {
+        id,
+      },
+    }).then((user) => {
       if (user == null) {
-        done(new Error('Wrong user id.'))
+        done(new Error('Wrong user id.'));
       }
-      done(null, user)
-    })
+      done(null, user);
+    });
   });
-}
+};
+
