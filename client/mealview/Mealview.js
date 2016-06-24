@@ -1,5 +1,7 @@
 import React from 'react';
 import  axios from 'axios';
+import { connect } from 'react-redux';
+import { fetchOrders } from '../actions'
 
 const dummyReviews = [
   {'username': 'Andrew', 'comment': 'This was okay. Needed more chicken and pasta.', 'rating': 4},
@@ -41,26 +43,12 @@ export default class Mealview extends React.Component {
       timeBlock: '1:00PM - 2:00PM',
       price: 20,
       quantity: 1,
-      deliveryCharge: 15,
       checkoutTotal: 35
     }
   }
 
   componentDidMount() {
-  	//make query to server for meal and chef info of this.props.orderId
-  	axios.post('/api/meal/' + 2);
-  	  // .then(function (response) {
-  	  //   this.setState({
-  	  //     image: response.image,
-  	  //     chefName: response.chef,
-  	  //     chefDescription: response.description,
-  	  //     reviews: response.reviews,
-  	  //     rating: response.rating,
-  	  //   })
-  	  // })
-  	  // .catch((error) => {
-  	  //     console.log(error);
-  	  // });
+    this.props.fetchOrders();
   }
 
   render() {
