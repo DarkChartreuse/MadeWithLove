@@ -8,19 +8,18 @@ export default class Signin extends React.Component {
     this.state = {
       email: '',
       password: '',
-    }
+    };
     this.handleError = this.handleError.bind(this);
+    this.handleEmail = this.handleEmail.bind(this);
   }
 
-  _handleEmail(e) {
-    this.setState({email: e.target.value});
+  handleEmail(e) {
+    this.setState({ email: e.target.value });
+  } 
+  handlePassword(e) {
+    this.setState({ password: e.target.value });
   }
-  _handlePassword(e) {
-    this.setState({password: e.target.value});
-  }
-
   handleError(err) {
-    console.log(err);
     Materialize.toast(`${err.data.message}`, 4000);
   }
   
