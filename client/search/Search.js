@@ -42,15 +42,15 @@ module.exports = class Search extends React.Component {
   }
 
   render() {
-    var Cuisines = [
-      {category: 'Japanese', price: '$9.99', stocked: true, name: 'Sushi', chef:'Miyazaki'},
-      {category: 'Japanese', price: '$14.99', stocked: true, name: 'Dango', chef:'Asami'},
-      {category: 'Japanese', price: '$7.99', stocked: false, name: 'Ramen', chef:'Chika'},
-      {category: 'Indian', price: '$9.99', stocked: true, name: 'Palak Paneer', chef:'Raveena'},
-      {category: 'Indian', price: '$8.99', stocked: false, name: 'Chicken Tikka', chef:'Balaji'},
-      {category: 'Indian', price: '$6.99', stocked: true, name: 'Balti Chicken', chef:'Karishma'}
+    var orders = [
+      {cuisine: 'Japanese', price: '$9.99', stocked: true, food: 'Sushi', chefId:'Miyazaki'},
+      {cuisine: 'Japanese', price: '$14.99', stocked: true, food: 'Dango', chefId:'Asami'},
+      {cuisine: 'Japanese', price: '$7.99', stocked: false, food: 'Ramen', chefId:'Chika'},
+      {cuisine: 'Indian', price: '$9.99', stocked: true, food: 'Palak Paneer', chefId:'Raveena'},
+      {cuisine: 'Indian', price: '$8.99', stocked: false, food: 'Chicken Tikka', chefId:'Balaji'},
+      {cuisine: 'Indian', price: '$6.99', stocked: true, food: 'Balti Chicken', chefId:'Karishma'}
     ];    
-    return <FilterableCuisineTable cuisines={Cuisines} />;
+    return <FilterableCuisineTable orders={orders} />;
   }
 }
 
@@ -79,7 +79,7 @@ class FilterableCuisineTable extends React.Component {
           onUserInput={this._handleUserInput.bind(this)}
         />
         <CuisineTable 
-          cuisines={this.props.cuisines}
+          orders={this.props.orders}
           filterText={this.state.filterText}
           inStockOnly={this.state.inStockOnly}
         />
@@ -127,17 +127,17 @@ class CuisineTable extends React.Component {
   render() {
     var rows = [];
     var lastCategory = null;
-    this.props.cuisines.forEach((cuisine) => {
-      if(cuisine.name.toLowerCase().indexOf(this.props.filterText.toLowerCase()) === -1 || (!cuisine.stocked && this.props.inStockOnly)) { return; }   
-      if(cuisine.category !== lastCategory) {
+    this.props.orders.forEach((cuisine) => {
+      if(cuisine.food.toLowerCase().indexOf(this.props.filterText.toLowerCase()) === -1 || (!cuisine.stocked && this.props.inStockOnly)) { return; }   
+      if(cuisine.cuisine !== lastCategory) {
         rows.push(
           <CuisineCategoryRow 
-          category={cuisine.category}
-          key={cuisine.category} />
+          category={cuisine.cuisine}
+          key={cuisine.cuisine} />
         );
       }
-      rows.push(<CuisineRow cuisine={cuisine} key={cuisine.name} />);
-      lastCategory = cuisine.category;
+      rows.push(<CuisineRow cuisine={cuisine} key={cuisine.food} />);
+      lastCategory = cuisine.cuisine;
     });
 
     return (
@@ -159,20 +159,20 @@ class CuisineTable extends React.Component {
 class CuisineRow extends React.Component {
   render() {
     var name = this.props.cuisine.stocked ? 
-      this.props.cuisine.name : 
+      this.props.cuisine.food : 
       <span style={{color: 'red'}}>
-        {this.props.cuisine.name}
+        {this.props.cuisine.food}
       </span>;
     return(
       <tr>
         <td width="50%"><Link to="/mealview" >{name}</Link></td>
-        <td width="50%">{this.props.cuisine.chef}</td>
+        <td width="50%">{this.props.cuisine.chefId}</td>
         <td width="50%">{this.props.cuisine.price}</td>
         <td>
           <OrderButton 
-            chef={this.props.cuisine.chef}
+            chef={this.props.cuisine.chefId}
             price={this.props.cuisine.price}
-            item={this.props.cuisine.name}
+            item={this.props.cuisine.food}
             isInStock={this.props.cuisine.stocked}
           />
         </td>  
@@ -195,7 +195,7 @@ class OrderButton extends React.Component {
   _handleSubmit() {
     
     let data = {
-      chef: this.props.chef,
+      chef: this.props.chefId,
       price: this.props.price,
       item: this.props.item  
     }

@@ -1,19 +1,24 @@
 const Order = require('../models/ordersModel.js');
 const User = require('../models/usersModel.js');
+const elasticsearch = require('../../elasticSearch.js');
 
 module.exports = {
   createOrder: (req, res) => {
-    User.findOne({ where: { email: req.body.email } })
-    .then(result => {
+    console.log('Hitting createOrder for in controller>>>>>', req.body);
+
+    elasticsearch.addOrder(req.body);
+    
+    // User.findOne({ where: { email: req.body.email } })
+    // .then(result => {
       Order.create({
-        chefId: result.id,
+        // chefId: result.id,
         food: req.body.food,
         cuisine: req.body.cuisine,
         description: req.body.cuisine,
         quantity: req.body.quantity,
         price: req.body.price,
         address: req.body.address,
-      });
+      // });
     })
     .catch(err => { console.error('Error adding order: ', err); })
     .finally(() => {
