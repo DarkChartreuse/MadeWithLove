@@ -37,7 +37,7 @@ export function fetchFailure(message) {
   };
 }
 
-export function fetchOrders() {
+export function fetchOrders(cuisine) {
   // return {
   // 	type: FETCH_REQUEST,
   // 	promise: fetch('/api/orders')
@@ -49,7 +49,19 @@ export function fetchOrders() {
     return fetch('/api/orders',
       { method: 'GET', credentials: 'same-origin' })
       .then(result => result.json())
-      .then(result => dispatch(fetchSuccess(result)))
+      .then( result => {
+        if(cuisine){
+          var newResult = [];
+          for(var i=0; i<result.length; i++) {
+            if(result[i].cuisine === cuisine) {
+              newResult.push(result[i]);
+            }
+          }
+          dispatch(fetchSuccess(newResult));
+        } else {
+          dispatch(fetchSuccess(result));
+        }
+      })
       .catch(err => dispatch(fetchFailure(err)));
   };
 }
