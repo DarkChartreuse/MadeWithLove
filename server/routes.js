@@ -1,5 +1,5 @@
 const User = require('./db/controllers/usersController.js');
-const Order = require('./db/controllers/ordersController.js');
+const Meal = require('./db/controllers/mealsController.js');
 const Controller = require('./db/controllers/controller.js');
 const passport = require('passport');
 
@@ -30,10 +30,10 @@ module.exports = (app) => {
   app.get('/api/users/:id', User.getUser);
   app.delete('/api/users/:id', User.deleteUser);
 
-  app.post('/api/orders', Order.createOrder);
-  app.get('/api/orders', Order.getAllOrders);
-  app.get('/api/orders/:id', Order.getOrder);
-  app.delete('/api/orders/:id', Order.deleteOrder);
+  app.post('/api/meals', Meal.createMeal);
+  app.get('/api/meals', Meal.getAllMeals);
+  app.get('/api/meals/:id', Meal.getMeal);
+  app.delete('/api/meals/:id', Meal.deleteMeal);
 
   app.get('/api/meal/:id', Controller.getMealView);
 
