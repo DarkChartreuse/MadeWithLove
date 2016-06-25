@@ -36,6 +36,7 @@ export function fetchFailure(message) {
 export function fetchOrders(cuisine) {
   return dispatch => {
     dispatch(fetchRequest());
+
     return fetch(`http://localhost:9200/meals/_search?q=${cuisine}`,
       { method: 'GET', credentials: 'same-origin' })
       .then(result => result.json())
