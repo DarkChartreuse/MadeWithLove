@@ -6,23 +6,24 @@ module.exports = {
   createOrder: (req, res) => {
     console.log('Hitting createOrder for in controller>>>>>', req.body);
 
-    elasticsearch.addOrder(req.body);
-    
+    // elasticsearch.addOrder(req.body);
+
     // User.findOne({ where: { email: req.body.email } })
     // .then(result => {
       Order.create({
-        // chefId: result.id,
-        food: req.body.food,
-        cuisine: req.body.cuisine,
-        description: req.body.cuisine,
-        quantity: req.body.quantity,
-        price: req.body.price,
-        address: req.body.address,
+        chefId: req.body.chefId,
+        mealId: req.body.mealId,
+        userId: req.body.userId,
+        // cuisine: req.body.cuisine,
+        // description: req.body.cuisine,
+        // quantity: req.body.quantity,
+        // price: req.body.price,
+        // address: req.body.address,
       // });
     })
     .catch(err => { console.error('Error adding order: ', err); })
     .finally(() => {
-      console.log('Chef has now added an order: ', req.body.food);
+      console.log('Chef has now added an order: ', req.body);
       res.end();
     });
   },
