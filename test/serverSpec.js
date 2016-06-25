@@ -3,7 +3,7 @@ const expect = require('chai').expect;
 const app = require('../server/server.js');
 const db = require('../server/db/db.js');
 
-const Order = require('../server/db/controllers/ordersController.js');
+const Meal = require('../server/db/controllers/mealsController.js');
 const User = require('../server/db/controllers/usersController.js');
 
 describe('', function() {
