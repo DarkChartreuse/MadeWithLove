@@ -5,8 +5,7 @@ import {
   FETCH_REQUEST,
   FETCH_FAILURE,
   FETCH_SUCCESS,
-  REQUEST_POSTS,
-  RECEIVE_POSTS
+  CREATED_MEAL,
 } from './constants';
 
 import fetch from 'isomorphic-fetch';
@@ -63,5 +62,32 @@ export function fetchOrders(cuisine) {
         }
       })
       .catch(err => dispatch(fetchFailure(err)));
+  };
+}
+
+
+export function postRequest() {
+  return {
+    type: POST_REQUEST,
+    
+  };
+}
+
+export function postSuccess(result) {
+  return {
+    type: POST_SUCCESS,
+    isFetching: false,
+    success: true,
+    result
+  };
+}
+
+// takes in error message from postedTweetFailure
+export function postFailure(message) {
+  return {
+    type: POST_FAILURE,
+    isFetching: false,
+    success: false,
+    message,
   };
 }

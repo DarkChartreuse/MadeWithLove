@@ -19,6 +19,8 @@ import Signup from './signup/Signup';
 import Signin from './signin/Signin';
 import Basicsearch from './search/Basicsearch';
 import Mealview from './mealview/Mealview';
+import Review from './review/Review';
+import ChefDashboard from './chef/ChefDashboard';
 
 // const defaultState = {
 //   quantity: 0,
@@ -36,8 +38,10 @@ render((
       <Route path="/" component={App}>
         <Route path="/signup" component={Signup} />
         <Route path="/signin" component={Signin} />
+        <Route path="/review" component={Review} />
       </Route>
         <Route path="/mealview" component={Mealview} />
+        <Route path="/chefdashboard" component={ChefDashboard} />
         <Route path="/search" component={Search} />
     </Router>
   </Provider>

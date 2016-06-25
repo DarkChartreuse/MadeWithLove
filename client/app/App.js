@@ -11,6 +11,8 @@ export default class App extends React.Component {
           <ul>
             <li style={{display: 'inline', marginRight:'10px'}}><Link to="/signup" >Sign-up</Link></li>          
             <li style={{display: 'inline', marginRight:'10px'}}><Link to="/signin" >Sign-in</Link></li>
+            <li style={{display: 'inline', marginRight:'10px'}}><Link to="/review" >Review</Link></li>
+            <li style={{display: 'inline', marginRight:'10px'}}><Link to="/chefdashboard" >Chefdashboard</Link></li>
           </ul>
       </nav>
       {this.props.children}

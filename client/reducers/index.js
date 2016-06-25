@@ -48,6 +48,7 @@ const orders = (state = {isFetching: false, result: [], error: null}, action) =>
       return state
   }
 };
+
 const rootReducer = combineReducers({
   toggleQuantity,
   saveSearchQuery,
