@@ -14,16 +14,10 @@ import { fetchOrders } from '../actions'
  //components that render something based on that state: CuisineTable 
  //common owner: FilterableCuisineTable
 export default class Search extends React.Component {
-
-  constructor(props) {
-    super(props);
-    this.state = {
-    	cuisine: ''
-    }
-  }
-
+  
   componentDidMount() {
-    this.props.fetchOrders();
+    console.log('search props...', this.props.saveSearchQuery.cuisine);
+    this.props.fetchOrders(this.props.saveSearchQuery.cuisine);
   }
 
   _handleCuisine(e) {
@@ -31,59 +25,33 @@ export default class Search extends React.Component {
     console.log(this.state);
   }
 
-  _handleSubmit(e) {
-  	var obj = {
-  		cuisine: this.state.cuisine,
-  	}
-
-  	axios.post('/api/auth/sign-in', obj)
-  	  .then( (response) => {
-  	  	//pass the request to the server
-  	  	//redirect to next view with the search results
-  	  })
-  	  .catch((error) => {
-  	      console.log(error);
-  	  });
-
-  }
-
   render() {
-    var orders = [
-      {cuisine: 'Japanese', price: '$9.99', stocked: true, food: 'Sushi', chefId:'Miyazaki'},
-      {cuisine: 'Japanese', price: '$14.99', stocked: true, food: 'Dango', chefId:'Asami'},
-      {cuisine: 'Japanese', price: '$7.99', stocked: false, food: 'Ramen', chefId:'Chika'},
-      {cuisine: 'Indian', price: '$9.99', stocked: true, food: 'Palak Paneer', chefId:'Raveena'},
-      {cuisine: 'Indian', price: '$8.99', stocked: false, food: 'Chicken Tikka', chefId:'Balaji'},
-      {cuisine: 'Indian', price: '$6.99', stocked: true, food: 'Balti Chicken', chefId:'Karishma'}
-    ];    
-    return <FilterableCuisineTable orders={orders} />;
+    var { isFetching, orders, error} = this.props;   
+    return (
+      <div>
+      { orders.isFetching && <h2>Loading...</h2>}
+      { !orders.isFetching && <FilterableCuisineTable orders={orders} /> }
+      </div>
+    )
   }
 }
 
 class FilterableCuisineTable extends React.Component {
-  constructor(props) {
-    super(props);
-    this.state = {
-      filterText: '', 
-      inStockOnly: false
-    };
-  }
-
-  _handleUserInput(filterText, inStockOnly) {
-    this.setState({
-      filterText:filterText,
-      inStockOnly:inStockOnly
-    });
-  } 
+  // _handleUserInput(filterText, inStockOnly) {
+  //   this.setState({
+  //     filterText:filterText,
+  //     inStockOnly:inStockOnly
+  //   });
+  // } 
 
   render() {
+    const { orders } = this.props.orders;
+    // console.log('filtertablecomponent...',this.props, orders);
     return (            
       <div>
         <SearchBar />
         <CuisineTable 
-          orders={this.props.orders}
-          filterText={this.state.filterText}
-          inStockOnly={this.state.inStockOnly}
+          orders={orders}
         />
       </div>
     );
@@ -104,13 +72,11 @@ class SearchBar extends React.Component {
           className="form-control" 
           type="text" 
           placeholder="Search by cuisine name"
-          ref="filterTextInput"
-        />
+          ref="filterTextInput"/>
         <p>
-          <input 
+          <input
             type="checkbox" 
-            class="checkbox"
-          />
+            className="checkbox"/>
           {' '}
           Only show items in stock         
         </p>
@@ -124,18 +90,21 @@ class CuisineTable extends React.Component {
   render() {
     var rows = [];
     var lastCategory = null;
-    this.props.orders.forEach((cuisine) => {
-      if(cuisine.food.toLowerCase().indexOf(this.props.filterText.toLowerCase()) === -1 || (!cuisine.stocked && this.props.inStockOnly)) { return; }   
-      if(cuisine.cuisine !== lastCategory) {
-        rows.push(
-          <CuisineCategoryRow 
-          category={cuisine.cuisine}
-          key={cuisine.cuisine} />
-        );
-      }
-      rows.push(<CuisineRow cuisine={cuisine} key={cuisine.food} />);
-      lastCategory = cuisine.cuisine;
-    });
+    console.log('cuisinetableprops:...', this.props);
+    if(this.props.orders !== undefined) {
+      this.props.orders.forEach((cuisine) => {
+        // if(cuisine.food.toLowerCase().indexOf(this.props.filterText.toLowerCase()) === -1 || (!cuisine.stocked && this.props.inStockOnly)) { return; }   
+        if(cuisine.cuisine !== lastCategory) {
+          rows.push(
+            <CuisineCategoryRow 
+            category={cuisine.cuisine}
+            key={cuisine.cuisine} />
+          );
+        }
+        rows.push(<CuisineRow cuisine={cuisine} key={cuisine.food} />);
+        lastCategory = cuisine.cuisine;
+      });
+    }
 
     return (
       <table className="table table-striped panel panel-primary">
@@ -181,7 +150,7 @@ class CuisineRow extends React.Component {
 class CuisineCategoryRow extends React.Component {
   render() {
     return (
-      <tr><th colSpan="4" className="bg-success">{this.props.category.toUpperCase()}</th></tr>
+      <tr><th colSpan="4" className="bg-success">{this.props.category}</th></tr>
     );
   }
 }
@@ -200,7 +169,7 @@ class OrderButton extends React.Component {
 
     console.log(data);
 
-    axios.post('/api/orders', data)
+    axios.post('/api/createOrder', data)
       .then(function (response) {
         console.log(response);
       })
@@ -227,14 +196,15 @@ class OrderButton extends React.Component {
 
 const mapDispatchToProps = (dispatch) => {
   return {
-    fetchOrders: () => dispatch(fetchOrders())
+    fetchOrders: (input) => dispatch(fetchOrders(input))
   }
 }
 
 function mapStatetoProps(state) {
   return {
-    isFetching: false,
-    result: [],
+    isFetching: true,
+    saveSearchQuery: state.saveSearchQuery,
+    orders: state.orders,
     error: null
   };
 }
