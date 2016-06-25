@@ -16,28 +16,13 @@ import { fetchOrders } from '../actions'
 export default class Search extends React.Component {
   
   componentDidMount() {
-    this.props.fetchOrders();
+    console.log('search props...', this.props.saveSearchQuery.cuisine);
+    this.props.fetchOrders(this.props.saveSearchQuery.cuisine);
   }
 
   _handleCuisine(e) {
     this.setState({cuisine: e.target.value});
     console.log(this.state);
-  }
-
-  _handleSubmit(e) {
-  	var obj = {
-  		cuisine: this.state.cuisine,
-  	}
-
-  	axios.post('/api/auth/sign-in', obj)
-  	  .then( (response) => {
-  	  	//pass the request to the server
-  	  	//redirect to next view with the search results
-  	  })
-  	  .catch((error) => {
-  	      console.log(error);
-  	  });
-
   }
 
   render() {
@@ -52,14 +37,6 @@ export default class Search extends React.Component {
 }
 
 class FilterableCuisineTable extends React.Component {
-  // constructor(props) {
-  //   super(props);
-  //   this.state = {
-  //     filterText: '', 
-  //     inStockOnly: false
-  //   };
-  // }
-
   // _handleUserInput(filterText, inStockOnly) {
   //   this.setState({
   //     filterText:filterText,
@@ -95,13 +72,11 @@ class SearchBar extends React.Component {
           className="form-control" 
           type="text" 
           placeholder="Search by cuisine name"
-          ref="filterTextInput"
-        />
+          ref="filterTextInput"/>
         <p>
-          <input 
+          <input
             type="checkbox" 
-            class="checkbox"
-          />
+            className="checkbox"/>
           {' '}
           Only show items in stock         
         </p>
@@ -221,13 +196,14 @@ class OrderButton extends React.Component {
 
 const mapDispatchToProps = (dispatch) => {
   return {
-    fetchOrders: () => dispatch(fetchOrders())
+    fetchOrders: (input) => dispatch(fetchOrders(input))
   }
 }
 
 function mapStatetoProps(state) {
   return {
     isFetching: true,
+    saveSearchQuery: state.saveSearchQuery,
     orders: state.orders,
     error: null
   };
