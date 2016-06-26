@@ -14,7 +14,7 @@ const Navbar = ({ loginUser }) => (
       <li>
         {(!loginUser.userName) ?
           <Link to="/signin" >login</Link> :
-          <Link to="/logout" >logout</Link>
+          <a href="/signout" >logout</a>
         }
       </li>
     </ul>

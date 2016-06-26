@@ -62,39 +62,15 @@ export function fetchOrders(cuisine) {
 }
 
 
-export function addMeal(cuisine) {
-  return dispatch => {
-    console.log('hello');
-    dispatch(fetchRequest());
-    return fetch('/api/meals/',
-      { method: 'GET', credentials: 'same-origin' })
-      .then(result => result.json())
-      .then( result => {
-        if(cuisine){
-          var newResult = [];
-          for(var i=0; i<result.length; i++) {
-            if(result[i].cuisine === cuisine) {
-              newResult.push(result[i]);
-            }
-          }
-          dispatch(fetchSuccess(newResult));
-        } else {
-          dispatch(fetchSuccess(result));
-        }
-      })
-      .catch(err => dispatch(fetchFailure(err)));
-  };
-}
-
-export function toggleSignInButton() {
-  return {
-    type: 'TOGGLE_AUTHBTN',
-  };
-}
-
 export function loggy(response) {
   return {
     type: 'LOGIN_USER',
     data: response.data,
+  };
+}
+
+export function logout() {
+  return {
+    type: 'LOGOUT_USER',
   };
 }

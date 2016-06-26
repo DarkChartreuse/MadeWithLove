@@ -19,7 +19,6 @@ import App from './app/App';
 import Search from './search/Search';
 import Signup from './auth/Signup';
 import Signin from './auth/Signin';
-import Logout from './auth/Logout';
 import Mealview from './mealview/Mealview';
 import Basicsearch from './search/Basicsearch';
 import AddAMeal from './chef/AddAMeal';
