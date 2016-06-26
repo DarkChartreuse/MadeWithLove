@@ -1,11 +1,7 @@
 import {
-  INCREMENT_QUANTITY,
-  DECREMENT_QUANTITY,
-  SAVE_SEARCH_QUERY,
   FETCH_REQUEST,
   FETCH_FAILURE,
   FETCH_SUCCESS,
-  CREATED_MEAL,
 } from './constants';
 
 import fetch from 'isomorphic-fetch';
@@ -22,7 +18,7 @@ export function fetchSuccess(result) {
     type: FETCH_SUCCESS,
     isFetching: false,
     success: true,
-    result
+    result,
   };
 }
 
@@ -45,7 +41,7 @@ export function fetchOrders(cuisine) {
   return dispatch => {
   	console.log('hello');
     dispatch(fetchRequest());
-    return fetch('/api/orders',
+    return fetch('http://localhost:9200/api/meals/_search',
       { method: 'GET', credentials: 'same-origin' })
       .then(result => result.json())
       .then( result => {
@@ -66,28 +62,39 @@ export function fetchOrders(cuisine) {
 }
 
 
-export function postRequest() {
-  return {
-    type: POST_REQUEST,
-    
+export function addMeal(cuisine) {
+  return dispatch => {
+    console.log('hello');
+    dispatch(fetchRequest());
+    return fetch('/api/meals/',
+      { method: 'GET', credentials: 'same-origin' })
+      .then(result => result.json())
+      .then( result => {
+        if(cuisine){
+          var newResult = [];
+          for(var i=0; i<result.length; i++) {
+            if(result[i].cuisine === cuisine) {
+              newResult.push(result[i]);
+            }
+          }
+          dispatch(fetchSuccess(newResult));
+        } else {
+          dispatch(fetchSuccess(result));
+        }
+      })
+      .catch(err => dispatch(fetchFailure(err)));
   };
 }
 
-export function postSuccess(result) {
+export function toggleSignInButton() {
   return {
-    type: POST_SUCCESS,
-    isFetching: false,
-    success: true,
-    result
+    type: 'TOGGLE_AUTHBTN',
   };
 }
 
-// takes in error message from postedTweetFailure
-export function postFailure(message) {
+export function loggy(response) {
   return {
-    type: POST_FAILURE,
-    isFetching: false,
-    success: false,
-    message,
+    type: 'LOGIN_USER',
+    data: response.data,
   };
 }

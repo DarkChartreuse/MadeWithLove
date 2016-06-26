@@ -1,13 +1,12 @@
 import React from 'react';
-import  { Link, browserHistory } from 'react-router';
-import  axios from 'axios';
+import axios from 'axios';
 
 export default class Signup extends React.Component {
   constructor(props) {
     super(props);
     this.state = {
       firstName: '',
-      lastName: '', 
+      lastName: '',
       email: '',
       password: '',
       passwordConfirm: '',
@@ -16,9 +15,9 @@ export default class Signup extends React.Component {
       city: '',
       state: '',
       zipcode: '',
-      chef: false
-    }
-    this.handleError = this.handleError.bind(this)
+      chef: false,
+    };
+    this.handleError = this.handleError.bind(this);
   }
 
   handleError(err) {
@@ -27,32 +26,21 @@ export default class Signup extends React.Component {
 
   _handleSubmit() {
     // validation
-    console.log('i was hit');
     const re = /^(([^<>()\[\]\\.,;:\s@"]+(\.[^<>()\[\]\\.,;:\s@"]+)*)|(".+"))@((\[[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}])|(([a-zA-Z\-0-9]+\.)+[a-zA-Z]{2,}))$/;
 
-    console.log('checking password');
-    //check if the passwords entered matches
+    // check if the passwords entered matches
     if (this.state.password !== this.state.passwordConfirm) {
-      console.log('PASSWORDS DO NOT MATCH');
-      this.setState({error: true, errorMessage: 'passwords do not match'});
+      Materialize.toast('passwords do not match', 4000);
     }
-    console.log('checking email');
-    //check if the email supplied is valid
+    // check if the email supplied is valid
     if (!re.test(this.state.email)) {
-      this.setState({error: true, errorMessage: 'invalid email'});
+      Materialize.toast('invalid email address', 4000);
     }
-
-    console.log('getting ready to send to server:', this.state);
-    // if everything passes, then do the ajax request
-      if(this.state.password !== this.state.passwordConfirm) {
-        console.log('passwords dont match');
-      }
-       else if (this.state.firstName === '' || this.state.lastName === '') {
-        console.log('please input your name');
-      }
-      else {
+    if (this.state.firstName === '' || this.state.lastName === '') {
+      Materialize.toast('name required', 4000);
+    } else {
         console.log('setting up data:');
-        var data = {
+        const data = {
           firstName: this.state.firstName,
           lastName: this.state.lastName,
           password: this.state.password,
@@ -62,23 +50,22 @@ export default class Signup extends React.Component {
           city: this.state.city,
           state: this.state.state,
           zipcode: this.state.zipcode,
-          chef: this.state.chef
+          chef: this.state.chef,
         };
-
-        console.log('sending to server...', data);
-
-        axios.post('/api/users/', data)
-          .then(function (response) {
-            console.log(response);
-          })
-          .catch(this.handleError);
-      }
+      axios.post('/api/users/', data)
+        .then(function (response) {
+          console.log(response);
+        })
+        .catch(this.handleError);
+    }
   }
 
   render() {
     return (
-      <div id="signup" className="input-group">
-        <input type="text" 
+      <div className="container row">
+        <div className="col s8 offset-s2">
+        <h3>create account</h3>
+        <input type="text"
           className="form-control"
           name="email"
           placeholder="email"
@@ -150,8 +137,9 @@ export default class Signup extends React.Component {
             onChange ={(event) => this.setState({chef: !this.state.chef})}
           />
         </p>          
-        <button className="submit-button btn-primary" onClick={this._handleSubmit.bind(this)}>Submit</button>
+        <button className="btn-large waves-effect waves-light #ffb74d orange lighten-2 black-text menubuttons" onClick={this._handleSubmit.bind(this)}>Submit</button>
         <span className="signup-link" onClick={()=>this.props.fn()} activeClassName="active"> Already have an account? <b>sign in</b></span>
+      </div>
       </div>
     );
   }

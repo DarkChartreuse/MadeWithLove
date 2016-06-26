@@ -4,17 +4,25 @@ import { Link } from 'react-router';
 import { connect } from 'react-redux';
 
 
-let Basicsearch = ({cuisine, inputCuisine}) => 
+const Basicsearch = ({ cuisine, inputCuisine }) =>
   (<div id="index-banner" className="parallax-container">
     <div className="section no-pad-bot">
       <div className="container">
-        <h1 className="header center teal-text text-lighten-2">Made With Love</h1>
+        <h1 className="header center">Made With Love</h1>
         <div className="row center">
           <h5 className="header col s12 light">Find your next meal</h5>
         </div>
-        <div className="row center">
-          <input placeholder='type here' onChange={inputCuisine} ></input>
-          <a id="download-button"  className="btn-large waves-effect waves-light #ffb74d orange lighten-2"><Link to="/search" >Search</Link></a>
+        <div className="row center input-field">
+          <div className="col s8 offset-s2">
+          <input className="" type="text" placeholder="type here" onChange={inputCuisine} ></input>
+          
+          <Link
+            to="/search"
+            className="btn-large waves-effect waves-light #ffb74d orange lighten-2 black-text menubuttons"
+          >
+            Search
+          </Link>
+          </div>
         </div>
       </div>
     </div>
@@ -22,19 +30,16 @@ let Basicsearch = ({cuisine, inputCuisine}) =>
 
 
 const mapStateToProps = (state) => {
-  return {cuisine: state.cuisine};
-}  
+  return { cuisine: state.cuisine };
+};
+
 const mapDispatchToProps = (dispatch) => {
   return {
-    inputCuisine: (e) => dispatch({type: 'SAVE_SEARCH_QUERY', data: e.target.value})
-  }
-}
+    inputCuisine: (e) => dispatch({ type: 'SAVE_SEARCH_QUERY', data: e.target.value }),
+  };
+};
 
-Basicsearch= connect(mapStateToProps, mapDispatchToProps)(Basicsearch);
-
-
-export default Basicsearch;
-
+export default connect(mapStateToProps, mapDispatchToProps)(Basicsearch);
 
 // class Basicsearch extends React.Component {
 

@@ -1,23 +1,15 @@
 import React from 'react';
-import {Link} from 'react-router'
-import Basicsearch from '../search/Basicsearch'
+import Navbar from './Navbar';
 
-export default class App extends React.Component {
-	render() {
-    let img = 'https://goo.gl/GAtbcS';
-		return (
-      <div>
-      <nav className="#ffb74d orange lighten-2">
-          <ul>
-            <li style={{display: 'inline', marginRight:'10px'}}><Link to="/signup" >Sign-up</Link></li>          
-            <li style={{display: 'inline', marginRight:'10px'}}><Link to="/signin" >Sign-in</Link></li>
-            <li style={{display: 'inline', marginRight:'10px'}}><Link to="/review" >Review</Link></li>
-            <li style={{display: 'inline', marginRight:'10px'}}><Link to="/chefdashboard" >Chefdashboard</Link></li>
-          </ul>
-      </nav>
-      {this.props.children}
-      <Basicsearch/>
-      </div>
-		)
-	}
+const App = ({ children }) => (
+  <div>
+    <Navbar />
+    {children}
+  </div>
+);
+
+App.propTypes = {
+  children: React.PropTypes.object,
 };
+
+export default App;

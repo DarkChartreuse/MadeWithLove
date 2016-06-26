@@ -1,0 +1,29 @@
+@import url(https://fonts.googleapis.com/css?family=Lora:400,400i,700,700i);
+
+html {
+  font-family: 'Lora', serif;
+}
+
+nav {
+  text-decoration: none;
+}
+.menubuttons, h1, h3{
+  font-weight: 700;
+  letter-spacing: 1px;
+  text-align: center;
+}
+
+h1 {
+  font-style: italic;
+  color: black;
+}
+
+
+.input-field input[type=text]:focus + label {
+  color: #000;
+}
+
+.input-field input[type=text]:focus {
+  border-bottom: 1px solid #000;
+  box-shadow: 0 1px 0 0 #000;
+}

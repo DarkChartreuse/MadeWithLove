@@ -49,21 +49,24 @@ module.exports.initMapping = function() {
 }
 
 module.exports.addMeal = function(meal) {
-  console.log('CREATING elasticsearch meal>>>>>>>>>>>>', meal)
+  console.log('CREATING elasticsearch meal>>>>>>>>>>>>', meal);
   return elasticClient.index({
     index: indexName,
     type: 'meal',
     body: {
-      food: meal.food,
+      date: meal.add_date,
+      time: meal.add_time,
+      food: meal.typeoffood,
       cuisine: meal.cuisine,
       chef: meal.chef,
-      ingredients:  meal.ingredients,
+      ingredients: meal.ingredients,
       description: meal.description,
       quantity: meal.quantity,
-      rating:meal.rating,
-      price:meal.price,
-      loc:meal.loc,
-      zipcode:meal.zipcode
-    }
+      rating: meal.rating,
+      price: meal.price,
+      loc: meal.loc,
+      zipcode: meal.zipcode,
+    },
   });
-}
+};
+
