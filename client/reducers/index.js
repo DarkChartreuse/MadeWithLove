@@ -48,10 +48,40 @@ const orders = (state = {isFetching: false, result: [], error: null}, action) =>
       return state
   }
 };
+
+const toggleAuth = (state = { isSignIn: false }, action) => {
+  switch (action.type) {
+    case 'TOGGLE_AUTHBTN':
+      return Object.assign({}, state, {
+        isSignIn: !state.isSignIn,
+      });
+    default:
+      return state;
+  }
+};
+
+
+const loginUser = (state = {}, action) => {
+  switch (action.type) {
+    case 'LOGIN_USER':
+      return Object.assign({}, state, {
+        userID: action.data.id,
+        userName: action.data.name,
+        isChef: action.data.chef,
+      });
+    case 'LOGOUT_USER':
+      return {};
+    default:
+      return state;
+  }
+};
+
 const rootReducer = combineReducers({
   toggleQuantity,
   saveSearchQuery,
   orders,
+  toggleAuth,
+  loginUser,
   routing: routerReducer,
 });
 

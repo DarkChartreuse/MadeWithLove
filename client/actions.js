@@ -1,12 +1,7 @@
 import {
-  INCREMENT_QUANTITY,
-  DECREMENT_QUANTITY,
-  SAVE_SEARCH_QUERY,
   FETCH_REQUEST,
   FETCH_FAILURE,
   FETCH_SUCCESS,
-  REQUEST_POSTS,
-  RECEIVE_POSTS
 } from './constants';
 
 import fetch from 'isomorphic-fetch';
@@ -23,7 +18,7 @@ export function fetchSuccess(result) {
     type: FETCH_SUCCESS,
     isFetching: false,
     success: true,
-    result
+    result,
   };
 }
 
@@ -38,30 +33,32 @@ export function fetchFailure(message) {
 }
 
 export function fetchOrders(cuisine) {
-  // return {
-  // 	type: FETCH_REQUEST,
-  // 	promise: fetch('/api/orders')
-  // }
-  console.log('THIS IS FIRING!!');
   return dispatch => {
-  	console.log('hello');
     dispatch(fetchRequest());
-    return fetch('/api/orders',
+    return fetch(`http://localhost:9200/meals/_search?q=${cuisine}`,
       { method: 'GET', credentials: 'same-origin' })
       .then(result => result.json())
       .then( result => {
-        if(cuisine){
-          var newResult = [];
-          for(var i=0; i<result.length; i++) {
-            if(result[i].cuisine === cuisine) {
-              newResult.push(result[i]);
-            }
-          }
+        let newResult = [];
+        if (result.hits.hits.length) {
+          const results = result.hits.hits;
+          for (var i = 0; i < results.length; i++) {
+            newResult.push(results[i]['_source']);
+          }  
           dispatch(fetchSuccess(newResult));
         } else {
-          dispatch(fetchSuccess(result));
+          dispatch(fetchFailure(Materialize.toast('Sorry, no results can be found', 4000)));
         }
       })
       .catch(err => dispatch(fetchFailure(err)));
   };
 }
+
+
+export function loggy(response) {
+  return {
+    type: 'LOGIN_USER',
+    data: response.data,
+  };
+}
+

@@ -25,6 +25,8 @@ app.use(passport.initialize());
 app.use(passport.session());
 app.use(flash());
 
+
+
  // pass passport for configuration
 
 // // TODO: change static paths
