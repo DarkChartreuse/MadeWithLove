@@ -43,7 +43,7 @@ class Signin extends React.Component {
   render() {
     return (
       <div className="container row">
-        <div className="col s4 offset-s4 input-field">
+        <div className="col s8 offset-s2 input-field">
         <h3>login</h3>
       <form onSubmit={this.handleSubmit}>
         <input type="text" placeholder="email" onChange={this.handleEmail} />

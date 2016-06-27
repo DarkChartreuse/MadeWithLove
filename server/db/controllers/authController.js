@@ -30,6 +30,7 @@ const logOut = (req, res) => {
 
 const isLoggedIn = (req, res, next) => {
   if (req.isAuthenticated()) {
+    console.log('is authenticated?', req.isAuthenticated());
     return next();
   }
   return res.redirect('/signin');

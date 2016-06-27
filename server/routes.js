@@ -12,7 +12,7 @@ module.exports = (app) => {
   app.get('/api/users/:id', User.getUser);
   app.delete('/api/users/:id', User.deleteUser);
 
-  app.post('/api/meals', Meal.createMeal);
+  app.post('/api/meals', Auth.isLoggedIn, Meal.createMeal);
   app.get('/api/meals', Meal.getAllMeals);
   app.get('/api/meals/:id', Meal.getMeal);
   app.delete('/api/meals/:id', Meal.deleteMeal);

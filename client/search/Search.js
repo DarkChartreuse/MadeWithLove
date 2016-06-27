@@ -72,7 +72,7 @@ class SearchBar extends React.Component {
           className="form-control" 
           type="text" 
           placeholder="Search by cuisine name"
-          ref="filterTextInput"/>
+          />
         <p>
           <input
             type="checkbox" 
@@ -207,5 +207,7 @@ function mapStatetoProps(state) {
     error: null
   };
 }
+
+
 
 export default connect(mapStatetoProps, mapDispatchToProps)(Search);

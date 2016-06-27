@@ -81,4 +81,10 @@ const mapStateToProps = (state) =>
   chefName: state.loginUser.userName,
 });
 
+AddAMeal.propTypes = {
+  userID: React.PropTypes.number,
+  isChef: React.PropTypes.bool,
+  chefName: React.PropTypes.string,
+};
+
 export default connect(mapStateToProps, null)(AddAMeal);
