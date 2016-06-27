@@ -3,6 +3,7 @@ import { browserHistory } from 'react-router';
 import axios from 'axios';
 import { connect } from 'react-redux';
 import { loggy } from '../actions';
+import Materialize from 'materialize-css';
 
 class Signin extends React.Component {
   constructor(props) {
