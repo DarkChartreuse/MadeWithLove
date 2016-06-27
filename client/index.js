@@ -22,6 +22,7 @@ import Signin from './auth/Signin';
 import Mealview from './mealview/Mealview';
 import Basicsearch from './search/Basicsearch';
 import AddAMeal from './chef/AddAMeal';
+// import Profile from './user/Profile';
 
 const logger = createLogger();
 const store = createStore(rootReducer, applyMiddleware(thunk, logger));
@@ -41,3 +42,5 @@ render((
     </Router>
   </Provider>
 ), document.getElementById('app'));
+
+

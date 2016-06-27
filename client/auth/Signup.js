@@ -127,16 +127,15 @@ export default class Signup extends React.Component {
           placeholder="zipcode"
           value = {this.state.zipcode}
           onChange ={(event) => this.setState({zipcode: event.target.value})}/>          
-
         <p>
-          Are you a chef?
           <input 
-            type='checkbox' 
+            type="checkbox"
+            id="test5"
             checked={this.state.chef}
-            ref="isAChef"
-            onChange ={(event) => this.setState({chef: !this.state.chef})}
           />
-        </p>          
+          <label for="test5"
+            onClick={() => this.setState({ chef: !this.state.chef })}>Are you a chef?</label>
+        </p>      
         <button className="btn-large waves-effect waves-light #ffb74d orange lighten-2 black-text menubuttons" onClick={this._handleSubmit.bind(this)}>Submit</button>
         <span className="signup-link" onClick={()=>this.props.fn()} activeClassName="active"> Already have an account? <b>sign in</b></span>
       </div>

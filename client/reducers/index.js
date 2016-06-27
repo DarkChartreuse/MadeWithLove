@@ -67,7 +67,7 @@ const loginUser = (state = {}, action) => {
       return Object.assign({}, state, {
         userID: action.data.id,
         userName: action.data.name,
-        status: true,
+        isChef: action.data.chef,
       });
     case 'LOGOUT_USER':
       return {};

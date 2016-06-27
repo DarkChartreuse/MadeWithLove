@@ -69,8 +69,3 @@ export function loggy(response) {
   };
 }
 
-export function logout() {
-  return {
-    type: 'LOGOUT_USER',
-  };
-}

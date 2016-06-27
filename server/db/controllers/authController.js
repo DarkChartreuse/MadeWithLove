@@ -27,8 +27,17 @@ const logOut = (req, res) => {
   });
 };
 
+
+const isLoggedIn = (req, res, next) => {
+  if (req.isAuthenticated()) {
+    return next();
+  }
+  return res.redirect('/signin');
+};
+
 module.exports = {
   attemptSignIn,
   signIn,
   logOut,
+  isLoggedIn,
 };

@@ -6,9 +6,15 @@ const Navbar = ({ loginUser }) => (
   <nav className="#ffb74d orange lighten-2 black-text ">
     <ul className="right menubuttons ">
       <li>
+        {(!loginUser.isChef) ?
+          '' :
+          <Link to="/addameal">add a meal</Link>
+        }
+      </li>
+      <li>
         {(!loginUser.userName) ?
           <Link to="/signup" >create account</Link> :
-          <Link to="/profile">{loginUser.userName}</Link>
+          <Link to="/profile">{loginUser.userName.toLowerCase()}</Link>
         }
       </li>
       <li>
