@@ -34,7 +34,7 @@ module.exports.initMapping = function() {
       properties: {
         food: {type: 'string'},
         cuisine:  {type: 'string'},
-        chef: {type: 'string'},
+        chefID: {type: 'integer'},
         ingredients:  {type: 'string'},
         description: {type: 'string'},
 
@@ -58,7 +58,7 @@ module.exports.addMeal = function(meal) {
       time: meal.add_time,
       food: meal.typeoffood,
       cuisine: meal.cuisine,
-      chef: meal.chef,
+      chefID: meal.chefID,
       ingredients: meal.ingredients,
       description: meal.description,
       quantity: meal.quantity,

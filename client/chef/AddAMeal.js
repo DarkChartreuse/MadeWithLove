@@ -1,7 +1,8 @@
 import React from 'react';
 import axios from 'axios';
+import { connect } from 'react-redux';
 
-export default class AddAMeal extends React.Component {
+class AddAMeal extends React.Component {
   constructor(props) {
     super(props);
     this.state = {
@@ -37,6 +38,7 @@ export default class AddAMeal extends React.Component {
   handleSubmit(e) {
     e.preventDefault();
     const mealObj = {
+      chefID: this.props.userID,
       add_date: this.state.add_date,
       add_time: this.state.add_time,
       typeoffood: this.state.typeoffood,
@@ -50,17 +52,23 @@ export default class AddAMeal extends React.Component {
   }
   render() {
     return (
-      <div className="container center">
-        <h4 className="center grey-text text-darken-4"> Add A Meal </h4>
-        <form onSubmit={this.handleSubmit}>
-          <input type="date" name="add_date" onChange={this.handleDate} />
-          <input type="time" name="add_time" onChange={this.handleTime} />
-          <input type="text" placeholder="type of food" onChange={this.handleTypeOfFood} />
-          <input type="text" placeholder="price" onChange={this.handlePrice} />
-          <input type="text" placeholder="quantity" onChange={this.handleQuantity} />
-          <button type="submit">Submit Meal</button>
-        </form>
+      <div className="container row">
+        <div className="col s8 offset-s2">
+          <h3>add a meal</h3>
+          <form onSubmit={this.handleSubmit}>
+            <input type="date" name="add_date" onChange={this.handleDate} />
+            <input type="time" name="add_time" onChange={this.handleTime} />
+            <input type="text" placeholder="type of food" onChange={this.handleTypeOfFood} />
+            <input type="text" placeholder="price" onChange={this.handlePrice} />
+            <input type="text" placeholder="quantity" onChange={this.handleQuantity} />
+            <button type="submit">Submit Meal</button>
+          </form>
+        </div>
       </div>
     );
   }
 }
+
+const mapStateToProps = (state) =>  ({ userID: state.loginUser.userID });
+
+export default connect(mapStateToProps, null)(AddAMeal);

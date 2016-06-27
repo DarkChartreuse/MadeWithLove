@@ -8,7 +8,7 @@ const Navbar = ({ loginUser }) => (
       <li>
         {(!loginUser.isChef) ?
           '' :
-          <Link to="/addameal">add a meal</Link>
+          <Link to="/addmeal">add a meal</Link>
         }
       </li>
       <li>
