@@ -24,10 +24,4 @@ module.exports = (app) => {
   app.post('/api/auth/sign-in', Auth.signIn);
   app.get('/signout', Auth.logOut);
 
-  const isLoggedIn = (req, res, next) => {
-    if (req.isAuthenticated()) {
-      return next();
-    }
-    return res.redirect('/signin');
-  };
 };

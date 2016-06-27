@@ -1,6 +1,7 @@
 import React from 'react';
 import axios from 'axios';
 import { connect } from 'react-redux';
+import { browserHistory } from 'react-router';
 
 class AddAMeal extends React.Component {
   constructor(props) {
@@ -38,7 +39,9 @@ class AddAMeal extends React.Component {
   handleSubmit(e) {
     e.preventDefault();
     const mealObj = {
+      isChef: this.props.isChef,
       chefID: this.props.userID,
+      chefName: this.props.chefName,
       add_date: this.state.add_date,
       add_time: this.state.add_time,
       typeoffood: this.state.typeoffood,
@@ -48,6 +51,8 @@ class AddAMeal extends React.Component {
     axios.post('/api/meals/', mealObj)
       .then((response) => {
         console.log('the saved response', response);
+        Materialize.toast('Meal successfully added', 2000)
+        browserHistory.push('/');
       });
   }
   render() {
@@ -69,6 +74,11 @@ class AddAMeal extends React.Component {
   }
 }
 
-const mapStateToProps = (state) =>  ({ userID: state.loginUser.userID });
+const mapStateToProps = (state) =>
+({
+  userID: state.loginUser.userID,
+  isChef: state.loginUser.isChef,
+  chefName: state.loginUser.userName,
+});
 
 export default connect(mapStateToProps, null)(AddAMeal);

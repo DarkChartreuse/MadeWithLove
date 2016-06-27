@@ -132,11 +132,11 @@ class CuisineRow extends React.Component {
     return(
       <tr>
         <td width="50%"><Link to="/mealview" >{name}</Link></td>
-        <td width="50%">{this.props.cuisine.chefId}</td>
+        <td width="50%">{this.props.cuisine.chefName}</td>
         <td width="50%">{this.props.cuisine.price}</td>
         <td>
           <OrderButton 
-            chef={this.props.cuisine.chefId}
+            chef={this.props.cuisine.chefName}
             price={this.props.cuisine.price}
             item={this.props.cuisine.food}
             isInStock={this.props.cuisine.stocked}
@@ -156,7 +156,6 @@ class CuisineCategoryRow extends React.Component {
 }
 
 class OrderButton extends React.Component {
-  
 
   _handleSubmit() {
     

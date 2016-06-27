@@ -63,7 +63,7 @@ export default class Signup extends React.Component {
   render() {
     return (
       <div className="container row">
-        <div className="col s8 offset-s2">
+        <div className="col s6 offset-s3 input-field">
         <h3>create account</h3>
         <input type="text"
           className="form-control"

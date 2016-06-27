@@ -4,7 +4,12 @@ import { Link } from 'react-router';
 
 const Navbar = ({ loginUser }) => (
   <nav className="#ffb74d orange lighten-2 black-text ">
-    <ul className="right menubuttons ">
+    <ul className="menubuttons left">
+      <li>
+        <Link to="/">made with love</Link>
+      </li>
+    </ul>
+    <ul className="menubuttons right">
       <li>
         {(!loginUser.isChef) ?
           '' :
