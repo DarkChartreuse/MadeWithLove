@@ -1,0 +1,16 @@
+version: '2'
+services:
+  db:
+    image: postgres
+  es:
+    image: elasticsearch
+  web:
+    image: node
+    build: .
+    ports:
+      - "3000:3000"
+    volumes:
+      - .:/app
+    links:
+      - db
+      - es
