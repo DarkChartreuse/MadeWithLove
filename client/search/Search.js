@@ -4,52 +4,24 @@ import { Link } from 'react-router'
 import { connect } from 'react-redux'
 import { fetchOrders } from '../actions'
 
-//FilterableCuisineTable
-  //SearchBar  
-  //CuisineTable
-    //CuisineCategoryRow
-    //CuisineRow
-
- //our state is: value of checkbox, & user input in search box
- //components that render something based on that state: CuisineTable 
- //common owner: FilterableCuisineTable
 export default class Search extends React.Component {
-  
-  componentDidMount() {
-    console.log('search props...', this.props.saveSearchQuery.cuisine);
-    this.props.fetchOrders(this.props.saveSearchQuery.cuisine);
-  }
-
-  _handleCuisine(e) {
-    this.setState({cuisine: e.target.value});
-    console.log(this.state);
-  }
-
   render() {
-    var { isFetching, orders, error} = this.props;   
+    var { isFetching, orders } = this.props;
     return (
       <div>
-      { orders.isFetching && <h2>Loading...</h2>}
-      { !orders.isFetching && <FilterableCuisineTable orders={orders} /> }
+        <SearchBar inputCuisine={this.props.inputCuisine} fetchOrders={this.props.fetchOrders} cuisine={this.props.saveSearchQuery.cuisine}/>
+        <FilterableCuisineTable orders={orders} />
       </div>
     )
   }
 }
 
 class FilterableCuisineTable extends React.Component {
-  // _handleUserInput(filterText, inStockOnly) {
-  //   this.setState({
-  //     filterText:filterText,
-  //     inStockOnly:inStockOnly
-  //   });
-  // } 
-
   render() {
-    const { orders } = this.props.orders;
-    // console.log('filtertablecomponent...',this.props, orders);
+    const { orders, inputCuisine, cuisine } = this.props.orders;
+    // console.log('filtertablecomponent...',this.props.fetchOrders);
     return (            
       <div>
-        <SearchBar />
         <CuisineTable 
           orders={orders}
         />
@@ -58,39 +30,66 @@ class FilterableCuisineTable extends React.Component {
   }
 }
 
-class SearchBar extends React.Component {
-  // _handleChange() {
-  //   let filterTextVal = this.refs.filterTextInput.value;
-  //   let inStockCheckBoxVal = this.refs.inStockOnlyInput.value;
-  //   this.props.onUserInput(filterTextVal , inStockCheckBoxVal);
-  // }
 
+class SearchBar extends React.Component {
   render() {
     return (
-      <form>             
-        <input
-          className="form-control" 
-          type="text" 
-          placeholder="Search by cuisine name"
-          />
-        <p>
-          <input
-            type="checkbox" 
-            className="checkbox"/>
-          {' '}
-          Only show items in stock         
-        </p>
-      </form>
-    );
+      <div id="index-banner" className="parallax-container">
+        <div className="section no-pad-bot">
+          <div className="container">
+            <h1 className="header center">Made With Love</h1>
+            <div className="row center">
+              <h5 className="header col s12 light">Find your next meal</h5>
+            </div>
+            <div className="row center input-field">
+              <div className="col s8 offset-s2">
+              <input className="" type="text" placeholder="type here" onChange={this.props.inputCuisine} ></input>
+              
+              <button
+                className="btn-large waves-effect waves-light #ffb74d orange lighten-2 black-text menubuttons"
+                onClick={() => { this.props.fetchOrders(this.props.cuisine) }}>
+                Search
+              </button>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    )
   }
 }
+// class SearchBar extends React.Component {
+//   // _handleChange() {
+//   //   let filterTextVal = this.refs.filterTextInput.value;
+//   //   let inStockCheckBoxVal = this.refs.inStockOnlyInput.value;
+//   //   this.props.onUserInput(filterTextVal , inStockCheckBoxVal);
+//   // }
+
+//   render() {
+//     return (
+//       <form>             
+//         <input
+//           className="form-control" 
+//           type="text" 
+//           placeholder="Search by cuisine name"
+//           />
+//         <p>
+//           <input
+//             type="checkbox" 
+//             className="checkbox"/>
+//           {' '}
+//           Only show items in stock         
+//         </p>
+//       </form>
+//     );
+//   }
+// }
 
 
 class CuisineTable extends React.Component {
   render() {
     var rows = [];
     var lastCategory = null;
-    console.log('cuisinetableprops:...', this.props);
     if(this.props.orders !== undefined) {
       this.props.orders.forEach((cuisine) => {
         // if(cuisine.food.toLowerCase().indexOf(this.props.filterText.toLowerCase()) === -1 || (!cuisine.stocked && this.props.inStockOnly)) { return; }   
@@ -195,19 +194,19 @@ class OrderButton extends React.Component {
 
 const mapDispatchToProps = (dispatch) => {
   return {
+    inputCuisine: (e) => dispatch({ type: 'SAVE_SEARCH_QUERY', data: e.target.value }),
     fetchOrders: (input) => dispatch(fetchOrders(input))
   }
 }
 
 function mapStatetoProps(state) {
   return {
+    cuisine: state.cuisine,
     isFetching: true,
     saveSearchQuery: state.saveSearchQuery,
     orders: state.orders,
     error: null
   };
 }
-
-
 
 export default connect(mapStatetoProps, mapDispatchToProps)(Search);
