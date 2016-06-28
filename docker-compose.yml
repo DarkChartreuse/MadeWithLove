@@ -4,8 +4,11 @@ services:
     image: postgres
     ports:
       - "5432:5432"
+<<<<<<< 579f21fa5a38e51ca6fe803a738f2094aa5a8242
     networks:
       - network
+=======
+>>>>>>> Add initial Docker settings
   es:
     image: elasticsearch
     networks:

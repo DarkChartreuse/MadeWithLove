@@ -2,7 +2,6 @@
   "AWSEBDockerrunVersion": "2",
   "volumes": [
     {
-<<<<<<< 02660e84bf81a0dd8637855df3e841a6ddc018d9
       "name": "mwl_web_1",
       "host": {
         "sourcePath": "/app/web"
@@ -12,66 +11,24 @@
       "name": "mwl_db_1",
       "host": {
         "sourcePath": "/app/data/db"
-=======
-      "ContainerDirectory": "/var/app",
-      "HostDirectory": "/var/app"
-    }
-  ],
-  "Logging": "/var/eb_log"
-}
-
-/************************************************************************/
-
-{
-  "AWSEBDockerrunVersion": "2",
-  "volumes": [
-    {
-      "name": "app-data",
-      "host": {
-        "sourcePath": "/var/app/current/app/mattermost/data"
-      }
-    },
-    {
-      "name": "db-data",
-      "host": {
-        "sourcePath": "/var/app/current/db/mattermost/var/lib/postgresql/data"
->>>>>>> Add Docker related files
       }
     }
   ],
   "containerDefinitions": [
     {
       "name": "app",
-<<<<<<< 02660e84bf81a0dd8637855df3e841a6ddc018d9
       "image": "darkchartreuse/mwl",
       "memory": 128,
       "mountPoints": [
         {
           "sourceVolume": "mwl_web_1",
           "containerPath": "/app/web"
-=======
-      "image": "node:latest",
-      "memory": 128,
-      "mountPoints": [
-        {
-          "sourceVolume": "app-config",
-          "containerPath": "/mattermost/config"
-        },
-        {
-          "sourceVolume": "app-data",
-          "containerPath": "/mattermost/data"
->>>>>>> Add Docker related files
         }
       ],
       "portMappings": [
         {
-<<<<<<< 02660e84bf81a0dd8637855df3e841a6ddc018d9
-          "hostPort": 3000,
-          "containerPort": 3000
-=======
           "hostPort": 80,
-          "containerPort": 80
->>>>>>> Add Docker related files
+          "containerPort": 3000
         }
       ],
       "links": [
@@ -80,7 +37,6 @@
     },
     {
       "name": "db",
-<<<<<<< 02660e84bf81a0dd8637855df3e841a6ddc018d9
       "image": "postgres",
       "memory": 128,
       "mountPoints": [
@@ -93,14 +49,6 @@
         {
           "hostPort": 5432,
           "containerPort": 5432
-=======
-      "image": "mattermost/mattermost-prod-db:latest",
-      "memory": 128,
-      "mountPoints": [
-        {
-          "sourceVolume": "db-data",
-          "containerPath": "/var/lib/postgresql/data"
->>>>>>> Add Docker related files
         }
       ]
     }
