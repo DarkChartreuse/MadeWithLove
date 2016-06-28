@@ -6,7 +6,6 @@ const Auth = require('./db/controllers/authController.js');
 
 
 module.exports = (app) => {
-
   app.post('/api/users', User.createUser);
   app.get('/api/users', User.getAllUsers);
   app.get('/api/users/:id', User.getUser);
@@ -17,6 +16,7 @@ module.exports = (app) => {
   app.get('/api/meals/:id', Meal.getMeal);
   app.delete('/api/meals/:id', Meal.deleteMeal);
 
+
   app.post('/api/createOrder', Order.createOrder);
 
   app.get('/api/meal/:id', Controller.getMealView);
@@ -24,4 +24,5 @@ module.exports = (app) => {
   app.post('/api/auth/sign-in', Auth.signIn);
   app.get('/signout', Auth.logOut);
 
+  app.get('/*', (req, res) => { res.redirect('/'); });
 };

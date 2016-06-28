@@ -51,7 +51,6 @@ class AddAMeal extends React.Component {
     axios.post('/api/meals/', mealObj)
       .then((response) => {
         console.log('the saved response', response);
-        Materialize.toast('Meal successfully added', 2000)
         browserHistory.push('/');
       });
   }
@@ -78,7 +77,7 @@ const mapStateToProps = (state) =>
 ({
   userID: state.loginUser.userID,
   isChef: state.loginUser.isChef,
-  chefName: state.loginUser.userName,
+  chefName: state.loginUser.firstName,
 });
 
 AddAMeal.propTypes = {

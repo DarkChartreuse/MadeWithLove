@@ -72,12 +72,29 @@ const toggleAuth = (state = { isSignIn: false }, action) => {
 };
 
 
-const loginUser = (state = {}, action) => {
+const userInfoState = {
+  userID: Number(localStorage.getItem('name')),
+  firstName: localStorage.getItem('firstName'),
+  lastName: localStorage.getItem('lastName'),
+  description: localStorage.getItem('description'),
+  phone: localStorage.getItem('phone'),
+  address: localStorage.getItem('address'),
+  zip: localStorage.getItem('zip'),
+  isChef: JSON.parse(localStorage.getItem('isChef')),
+};
+
+
+const loginUser = (state = userInfoState, action) => {
   switch (action.type) {
     case 'LOGIN_USER':
       return Object.assign({}, state, {
         userID: action.data.id,
-        userName: action.data.name,
+        firstName: action.data.firstName,
+        lastName: action.data.lastName,
+        description: action.data.description,
+        phone: action.data.phone,
+        address: action.data.address,
+        zip: action.data.zip,
         isChef: action.data.chef,
       });
     case 'LOGOUT_USER':
