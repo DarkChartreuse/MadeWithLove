@@ -3,7 +3,7 @@ import {
   FETCH_FAILURE,
   FETCH_SUCCESS,
 } from './constants';
-
+import Materialize from 'materialize-css'
 import fetch from 'isomorphic-fetch';
 
 export function fetchRequest() {
@@ -47,7 +47,7 @@ export function fetchOrders(cuisine) {
           }  
           dispatch(fetchSuccess(newResult));
         } else {
-          dispatch(fetchFailure(Materialize.toast('Sorry, no results can be found', 4000)));
+          dispatch(fetchFailure('Sorry, no results can be found'));
         }
       })
       .catch(err => dispatch(fetchFailure(err)));
