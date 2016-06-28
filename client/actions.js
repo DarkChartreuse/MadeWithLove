@@ -6,6 +6,7 @@ import {
 import Materialize from 'materialize-css'
 import fetch from 'isomorphic-fetch';
 
+
 export function fetchRequest() {
   return {
     type: FETCH_REQUEST,
@@ -47,7 +48,7 @@ export function fetchOrders(cuisine) {
           }  
           dispatch(fetchSuccess(newResult));
         } else {
-          dispatch(fetchFailure('Sorry, no results can be found'));
+          dispatch(fetchFailure('sorry cannot be found'))
         }
       })
       .catch(err => dispatch(fetchFailure(err)));
@@ -59,6 +60,12 @@ export function loggy(response) {
   return {
     type: 'LOGIN_USER',
     data: response.data,
+  };
+}
+
+export function logoutuser() {
+  return {
+    type: 'LOGOUT_USER',
   };
 }
 

@@ -37,6 +37,14 @@ class Signin extends React.Component {
     axios.post('/api/auth/sign-in', obj)
       .then((response) => {
         context.props.loggy(response);
+        localStorage.setItem('firstName', response.data.firstName);
+        localStorage.setItem('id', response.data.id);
+        localStorage.setItem('lastName', response.data.lastName);
+        localStorage.setItem('description', response.data.description);
+        localStorage.setItem('phone', response.data.phone);
+        localStorage.setItem('address', response.data.address);
+        localStorage.setItem('zip', response.data.zip);
+        localStorage.setItem('isChef', response.data.chef);
         browserHistory.push('/');
       })
       .catch(this.handleError);
