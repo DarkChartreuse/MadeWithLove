@@ -6,10 +6,11 @@ import { fetchOrders } from '../actions'
 
 export default class Search extends React.Component {
   render() {
+    console.log('searchprops >>>>>', this.props);
     var { isFetching, orders } = this.props;
     return (
       <div>
-        <SearchBar inputCuisine={this.props.inputCuisine} fetchOrders={this.props.fetchOrders} cuisine={this.props.saveSearchQuery.cuisine}/>
+        <SearchBar inputCuisine={this.props.inputCuisine} fetchOrders={this.props.fetchOrders} cuisine={this.props.saveSearchQuery.cuisine} vegan={this.props.vegan} toggleVegan={this.props.toggleVegan}/>
         <FilterableCuisineTable orders={orders} />
       </div>
     )
@@ -33,6 +34,7 @@ class FilterableCuisineTable extends React.Component {
 
 class SearchBar extends React.Component {
   render() {
+    console.log('vegan??? >>', this.props.vegan);
     return (
       <div id="index-banner" className="parallax-container">
         <div className="section no-pad-bot">
@@ -41,15 +43,26 @@ class SearchBar extends React.Component {
             <div className="row center">
               <h5 className="header col s12 light">Find your next meal</h5>
             </div>
-            <div className="row center input-field">
-              <div className="col s8 offset-s2">
-              <input className="" type="text" placeholder="type here" onChange={this.props.inputCuisine} ></input>
-              
+            <div className="row">
+              <div className="input-field col s4">
+                <input placeholder="Type of food" type="text" onChange={this.props.inputCuisine} />
+              </div>
+              <div className="input-field col s3">
+                <input placeholder='Address' type="text" className="validate" />
+              </div>
+              <div className="input-field col s3">
+                <input type="date" name="add_date" />
+              </div>
               <button
-                className="btn-large waves-effect waves-light #ffb74d orange lighten-2 black-text menubuttons"
-                onClick={() => { this.props.fetchOrders(this.props.cuisine) }}>
+                className="btn-large #ffb74d orange lighten-2 black-text menubuttons"
+                onClick={() => { this.props.fetchOrders(this.props.cuisine) }} >
                 Search
               </button>
+            </div>
+            <div className="row">
+              <div>
+                <input type="checkbox" id="test5" checked={this.props.vegan} />
+                <label for="test5" onClick={ () => this.props.toggleVegan() }>Vegan</label>
               </div>
             </div>
           </div>
@@ -195,6 +208,7 @@ class OrderButton extends React.Component {
 const mapDispatchToProps = (dispatch) => {
   return {
     inputCuisine: (e) => dispatch({ type: 'SAVE_SEARCH_QUERY', data: e.target.value }),
+    toggleVegan: () => dispatch({type: 'TOGGLE_VEGAN'}),
     fetchOrders: (input) => dispatch(fetchOrders(input))
   }
 }
@@ -205,7 +219,8 @@ function mapStatetoProps(state) {
     isFetching: true,
     saveSearchQuery: state.saveSearchQuery,
     orders: state.orders,
-    error: null
+    error: null,
+    vegan: false
   };
 }
 

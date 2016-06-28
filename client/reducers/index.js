@@ -16,6 +16,17 @@ const toggleQuantity = (state = {quantity: 0, price: 15}, action) => {
   }
 };
 
+const toggleVegan = (state = {}, action) => {
+  switch(action.type) {
+    case 'TOGGLE_VEGAN':
+      return Object.assign({}, state, {
+        vegan: !state.vegan
+      });
+    default:
+      return state;
+  }
+};
+
 const saveSearchQuery = (state = {cuisine: ''}, action) => {
   switch (action.type) {
     case 'SAVE_SEARCH_QUERY':
@@ -78,6 +89,7 @@ const loginUser = (state = {}, action) => {
 
 const rootReducer = combineReducers({
   toggleQuantity,
+  toggleVegan,
   saveSearchQuery,
   orders,
   toggleAuth,
