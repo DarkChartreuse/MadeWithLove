@@ -2,6 +2,8 @@ version: '2'
 services:
   db:
     image: postgres
+    ports:
+      - "5432:5432"
   es:
     image: elasticsearch
   web:
@@ -14,3 +16,10 @@ services:
     links:
       - db
       - es
+    networks:
+      - network
+    # entrypoint: "./wait-for-it.sh db:5432 -t 15"
+
+networks:
+  network:
+    driver: bridge
