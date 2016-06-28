@@ -2,50 +2,33 @@
   "AWSEBDockerrunVersion": "2",
   "volumes": [
     {
-      "ContainerDirectory": "/var/app",
-      "HostDirectory": "/var/app"
-    }
-  ],
-  "Logging": "/var/eb_log"
-}
-
-/************************************************************************/
-
-{
-  "AWSEBDockerrunVersion": "2",
-  "volumes": [
-    {
-      "name": "app-data",
+      "name": "mwl_web_1",
       "host": {
-        "sourcePath": "/var/app/current/app/mattermost/data"
+        "sourcePath": "/app/web"
       }
     },
     {
-      "name": "db-data",
+      "name": "mwl_db_1",
       "host": {
-        "sourcePath": "/var/app/current/db/mattermost/var/lib/postgresql/data"
+        "sourcePath": "/app/data/db"
       }
     }
   ],
   "containerDefinitions": [
     {
       "name": "app",
-      "image": "node:latest",
+      "image": "dfuruya/mwl",
       "memory": 128,
       "mountPoints": [
         {
-          "sourceVolume": "app-config",
-          "containerPath": "/mattermost/config"
-        },
-        {
-          "sourceVolume": "app-data",
-          "containerPath": "/mattermost/data"
+          "sourceVolume": "mwl_web_1",
+          "containerPath": "/app/web"
         }
       ],
       "portMappings": [
         {
-          "hostPort": 80,
-          "containerPort": 80
+          "hostPort": 4568,
+          "containerPort": 4568
         }
       ],
       "links": [
@@ -54,12 +37,18 @@
     },
     {
       "name": "db",
-      "image": "mattermost/mattermost-prod-db:latest",
+      "image": "postgres",
       "memory": 128,
       "mountPoints": [
         {
-          "sourceVolume": "db-data",
-          "containerPath": "/var/lib/postgresql/data"
+          "sourceVolume": "mwl_db_1",
+          "containerPath": "/data/db"
+        }
+      ],
+      "portMappings": [
+        {
+          "hostPort": 5432,
+          "containerPort": 5432
         }
       ]
     }
