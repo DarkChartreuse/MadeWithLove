@@ -41,7 +41,7 @@ export function fetchOrders(cuisine) {
     });
 
     console.log('..............Client.search')
-    client.search({
+    return dispatch => { client.search({
       index: 'mwl',
       type: 'meal',
       size: 50,
@@ -68,33 +68,21 @@ export function fetchOrders(cuisine) {
         console.log('..............INSIDE')      
         var hits = resp.hits.hits;
         console.log('HITS >>>>>>> ', hits);
-    }, function (err) {
-        console.trace(err.message);
-    });
-
-  // return dispatch => {
-  //   dispatch(fetchRequest());
-  //   return fetch(`http://localhost:9200/meals/_search?q=${cuisine}`,
-  //     { method: 'GET', credentials: 'same-origin' })
-  //     .then(result => result.json())
-  //     .then( result => {
-  //       let newResult = [];
-  //       if (result.hits.hits.length) {
-  //         const results = result.hits.hits;
-  //         for (var i = 0; i < results.length; i++) {
-  //           var orderInfo = results[i]['_source'];
-  //           var orderId = results[i]['_id'];
-  //           orderInfo['mealId'] = orderId;
-  //           newResult.push(orderInfo);
-  //         }
-  //         dispatch(fetchSuccess(newResult));
-  //       } else {
-  //         dispatch(fetchFailure('sorry cannot be found'))
-  //       }
-  //     })
-  //     .catch(err => dispatch(fetchFailure(err)));
-  // };
-
+        if (hits.length) {
+          var newResult = [];
+          for (var i = 0; i < hits.length; i++) {
+            var orderInfo = hits[i]['_source'];
+            var orderId = hits[i]['_id'];
+            orderInfo['mealId'] = orderId;
+            newResult.push(orderInfo);
+          }
+          dispatch(fetchSuccess(newResult));
+          } else {
+          dispatch(fetchFailure('sorry cannot be found'));
+          }
+          })
+          .catch(err => dispatch(fetchFailure(err)));
+        }
 }
 
 
