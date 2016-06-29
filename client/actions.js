@@ -40,7 +40,6 @@ export function fetchOrders(cuisine) {
       log: 'trace'
     });
 
-    console.log('..............Client.search')
     return dispatch => { client.search({
       index: 'mwl',
       type: 'meal',
@@ -65,10 +64,11 @@ export function fetchOrders(cuisine) {
         }//query
       }//body
     }).then(function (resp) {
-        console.log('..............INSIDE')      
+        // console.log('..............INSIDE')      
         var hits = resp.hits.hits;
         console.log('HITS >>>>>>> ', hits);
         if (hits.length) {
+<<<<<<< 077438d0f54c00dadf9c71edc19ddf27b31e94de
           var newResult = [];
           for (var i = 0; i < hits.length; i++) {
             var orderInfo = hits[i]['_source'];
@@ -83,6 +83,33 @@ export function fetchOrders(cuisine) {
           })
           .catch(err => dispatch(fetchFailure(err)));
         }
+=======
+          dispatch(fetchSuccess(hits));
+        } else {
+          dispatch(fetchFailure(Materialize.toast('Sorry, no results can be found', 4000)));
+        }
+      });
+
+  // return dispatch => {
+  //   dispatch(fetchRequest());
+  //   return fetch(`http://localhost:9200/meals/_search?q=${cuisine}`,
+  //     { method: 'GET', credentials: 'same-origin' })
+  //     .then(result => result.json())
+  //     .then( result => {
+  //       let newResult = [];
+  //       if (result.hits.hits.length) {
+  //         const results = result.hits.hits;
+  //         for (var i = 0; i < results.length; i++) {
+  //           newResult.push(results[i]['_source']);
+  //         }  
+  //         dispatch(fetchSuccess(newResult));
+  //       } else {
+  //         dispatch(fetchFailure(Materialize.toast('Sorry, no results can be found', 4000)));
+  //       }
+  //     })
+  //     .catch(err => dispatch(fetchFailure(err)));
+  // };
+>>>>>>> synced with elastic search
 }
 
 
