@@ -4,7 +4,7 @@ var elasticClient = new elasticsearch.Client({
   log: 'info'
 });
 
-var indexName = 'meals';
+var indexName = 'mwl';
 
 module.exports.resetIndex = function () {
   indexExists.then(function (exists) {
@@ -32,14 +32,17 @@ module.exports.initMapping = function() {
     type: 'meal',
     body: {
       properties: {
-        food: {type: 'string'},
-        cuisine:  {type: 'string'},
+        image: {"type": 'string', "index": "not_analyzed"},
+        date: {"type": "date", "format": "yyyy-MM-dd"},
+        time: {"type": "basic_time_no_millis", "format": "HHmmssZ"}, 
+        food: {type: 'string', "index": "analyzed", "analyzer": "english"},
+        cuisine:  {type: 'string', "index": "analyzed", "analyzer": "english"},
+        healthLabels: {type: 'string', "index": "analyzed", "analyzer": "english"},
         isChef: {type: 'boolean'},
         chefID: {type: 'integer'},
-        chefName: {type: 'string'},
-        ingredients:  {type: 'string'},
+        chefName: {type: 'string', "index": "not_analyzed", "analyzer": "english"},
+        ingredients:  {type: 'string', "index": "analyzed", "analyzer": "english"},
         description: {type: 'string'},
-
         quantity: {type: 'integer'},
         rating: {type: 'integer'},
         price: {type: 'integer'},
@@ -56,8 +59,9 @@ module.exports.addMeal = function(meal) {
     index: indexName,
     type: 'meal',
     body: {
+      image: meal.image,
       date: meal.add_date,
-      time: meal.add_time,
+      time: meal.add_time,  
       food: meal.typeoffood,
       cuisine: meal.cuisine,
       chefID: meal.chefID,
@@ -65,6 +69,7 @@ module.exports.addMeal = function(meal) {
       isChef: meal.isChef,
       ingredients: meal.ingredients,
       description: meal.description,
+      healthLabels: meal.healthLabels,
       quantity: meal.quantity,
       rating: meal.rating,
       price: meal.price,
