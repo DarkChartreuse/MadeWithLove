@@ -40,6 +40,8 @@ export function fetchOrders(cuisine) {
       log: 'trace'
     });
 
+
+    console.log('..............Client.search')
     return dispatch => { client.search({
       index: 'mwl',
       type: 'meal',
@@ -64,11 +66,14 @@ export function fetchOrders(cuisine) {
         }//query
       }//body
     }).then(function (resp) {
-        // console.log('..............INSIDE')      
+        console.log('..............INSIDE')      
         var hits = resp.hits.hits;
         console.log('HITS >>>>>>> ', hits);
         if (hits.length) {
+<<<<<<< 90e9028dec7db76cf5d1159031d8c238d25c8a98
 <<<<<<< 077438d0f54c00dadf9c71edc19ddf27b31e94de
+=======
+>>>>>>> resolved rebase issues
           var newResult = [];
           for (var i = 0; i < hits.length; i++) {
             var orderInfo = hits[i]['_source'];
@@ -82,6 +87,7 @@ export function fetchOrders(cuisine) {
           }
           })
           .catch(err => dispatch(fetchFailure(err)));
+<<<<<<< 90e9028dec7db76cf5d1159031d8c238d25c8a98
         }
 =======
           dispatch(fetchSuccess(hits));
@@ -110,6 +116,9 @@ export function fetchOrders(cuisine) {
   //     .catch(err => dispatch(fetchFailure(err)));
   // };
 >>>>>>> synced with elastic search
+=======
+        }
+>>>>>>> resolved rebase issues
 }
 
 
