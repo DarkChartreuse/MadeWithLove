@@ -27,7 +27,11 @@
       ],
       "portMappings": [
         {
+<<<<<<< 8d6201a6994016318175a5be1a025c9eac355774
           "hostPort": 80,
+=======
+          "hostPort": 3000,
+>>>>>>> Modify Docker settings
           "containerPort": 3000
         }
       ],
