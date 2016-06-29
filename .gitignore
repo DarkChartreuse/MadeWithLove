@@ -1,6 +1,6 @@
 ### node etc ###
 
-config.js
+config.env.js
 
 # Logs
 logs

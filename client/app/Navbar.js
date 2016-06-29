@@ -14,6 +14,7 @@ class Navbar extends React.Component {
       <li>
         <Link to="/">made with love</Link>
       </li>
+      <li><Link to="/ImageUploader">ImageUploader</Link></li>
     </ul>
     <ul className="menubuttons right">
       <li>
