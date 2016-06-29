@@ -10,6 +10,7 @@ class Search extends React.Component {
     var { isFetching, orders } = this.props;
     return (
       <div>
+<<<<<<< 2a6e30cabbf4226dcdd2259a1bab65fe03937d06
         <SearchBar
           inputCuisine={this.props.inputCuisine}
           fetchOrders={this.props.fetchOrders}
@@ -20,6 +21,11 @@ class Search extends React.Component {
         <FilterableCuisineTable
           orders={orders}
         />
+=======
+        <SearchBar inputCuisine={this.props.inputCuisine} fetchOrders={this.props.fetchOrders} cuisine={this.props.saveSearchQuery.cuisine} vegan={this.props.vegan} toggleVegan={this.props.toggleVegan}/>
+        { !this.props.orders.orders && <div></div> }
+        { this.props.orders.orders && <FilterableCuisineTable orders={orders} /> }
+>>>>>>> deleted test view for uploading photos
       </div>
     )
   }
@@ -50,6 +56,7 @@ class SearchBar extends React.Component {
   }
   render() {
     return (
+<<<<<<< 2a6e30cabbf4226dcdd2259a1bab65fe03937d06
       <div>
         <div className="container">
           <h1 className="header center">Made With Love</h1>
@@ -58,6 +65,16 @@ class SearchBar extends React.Component {
           </div>
           <div className="row">
             <form onSubmit={this.handleSubmit}>
+=======
+      // <div id="index-banner" className="parallax-container">
+        <div className="section no-pad-bot">
+          <div className="container">
+            <h1 className="header center">Made With Love</h1>
+            <div className="row center">
+              <h5 className="header col s12 light">Find your next meal</h5>
+            </div>
+            <div className="row">
+>>>>>>> deleted test view for uploading photos
               <div className="input-field col s4">
                 <input placeholder="Type of food" type="text" onChange={this.props.inputCuisine} />
               </div>
@@ -82,7 +99,7 @@ class SearchBar extends React.Component {
             </div>
           </div>
         </div>
-      </div>
+      // </div>
     )
   }
 }

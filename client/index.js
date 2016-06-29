@@ -21,7 +21,6 @@ import Signup from './auth/Signup';
 import Signin from './auth/Signin';
 import Mealview from './mealview/Mealview';
 import AddAMeal from './chef/AddAMeal';
-import ImageUploader from './chef/ImageUploader';
 // import Profile from './user/Profile';
 
 const logger = createLogger();
@@ -36,7 +35,7 @@ render((
         <Route path="/signup" component={Signup} />
         <Route path="/signin" component={Signin} />
         <Route path="/addmeal" component={AddAMeal} />
-
+        <Route path="/search" component={SearchBar} />
         <Route path="/mealview" component={Mealview} />
         <Route path="/user/:id" component={Profile} />
       </Route>
