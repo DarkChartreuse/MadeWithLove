@@ -17,7 +17,7 @@
   "containerDefinitions": [
     {
       "name": "app",
-      "image": "dfuruya/mwl",
+      "image": "darkchartreuse/mwl",
       "memory": 128,
       "mountPoints": [
         {
@@ -27,8 +27,8 @@
       ],
       "portMappings": [
         {
-          "hostPort": 4568,
-          "containerPort": 4568
+          "hostPort": 3000,
+          "containerPort": 3000
         }
       ],
       "links": [
