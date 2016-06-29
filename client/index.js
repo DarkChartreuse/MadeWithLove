@@ -20,7 +20,6 @@ import Search from './search/Search';
 import Signup from './auth/Signup';
 import Signin from './auth/Signin';
 import Mealview from './mealview/Mealview';
-import SearchBar from './search/SearchBar';
 import AddAMeal from './chef/AddAMeal';
 import Profile from './user/Profile';
 
@@ -36,9 +35,8 @@ render((
         <Route path="/signup" component={Signup} />
         <Route path="/signin" component={Signin} />
         <Route path="/addmeal" component={AddAMeal} />
-        <Route path="/search" component={SearchBar} />
         <Route path="/mealview" component={Mealview} />
-        <Route path="/profile" component={Profile} />
+        <Route path="/user/:id" component={Profile} />
       </Route>
     </Router>
   </Provider>

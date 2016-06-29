@@ -1,7 +1,7 @@
 import React from 'react';
 import  axios from 'axios';
 import { connect } from 'react-redux';
-import { fetchOrders } from '../actions'
+import { fetchOrders } from '../actions'  
 
 const dummyReviews = [
   {'username': 'Andrew', 'comment': 'This was okay. Needed more chicken and pasta.', 'rating': 4},

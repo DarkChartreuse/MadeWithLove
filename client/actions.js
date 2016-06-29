@@ -3,7 +3,7 @@ import {
   FETCH_FAILURE,
   FETCH_SUCCESS,
 } from './constants';
-import Materialize from 'materialize-css'
+import Materialize from 'materialize-css';
 import fetch from 'isomorphic-fetch';
 
 
@@ -34,7 +34,6 @@ export function fetchFailure(message) {
 }
 
 export function fetchOrders(cuisine) {
-
     var elasticsearch = require('elasticsearch');
     var client = new elasticsearch.Client({
       host: 'localhost:9200',
@@ -83,15 +82,19 @@ export function fetchOrders(cuisine) {
   //       if (result.hits.hits.length) {
   //         const results = result.hits.hits;
   //         for (var i = 0; i < results.length; i++) {
-  //           newResult.push(results[i]['_source']);
-  //         }  
+  //           var orderInfo = results[i]['_source'];
+  //           var orderId = results[i]['_id'];
+  //           orderInfo['mealId'] = orderId;
+  //           newResult.push(orderInfo);
+  //         }
   //         dispatch(fetchSuccess(newResult));
   //       } else {
-  //         dispatch(fetchFailure(Materialize.toast('Sorry, no results can be found', 4000)));
+  //         dispatch(fetchFailure('sorry cannot be found'))
   //       }
   //     })
   //     .catch(err => dispatch(fetchFailure(err)));
   // };
+
 }
 
 
@@ -107,7 +110,6 @@ export function logoutuser() {
     type: 'LOGOUT_USER',
   };
 }
-
 
 
 
@@ -195,5 +197,13 @@ export function logoutuser() {
 //     var match = '{"query":{"prefix":{"_all":"chick"}}}';
 //     var query = queryBaseUrl+match;
 //     console.log('QUERY >>>>>>>>>', query);
+
+
+export function updateMeal(result) {
+  return {
+    type: 'UPDATE_MEAL',
+    data: result.data,
+  }
+}
 
 
