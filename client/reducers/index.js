@@ -60,6 +60,18 @@ const orders = (state = {isFetching: false, result: [], error: null}, action) =>
   }
 };
 
+const mealState = (state, action) => {
+  switch (action.type) {
+    case 'UPDATE_CURRENT_MEAL':
+      return Object.assign({}, state, {
+        mealName: action.data.food,
+      });
+    default:
+      return state;
+  }
+};
+
+
 const toggleAuth = (state = { isSignIn: false }, action) => {
   switch (action.type) {
     case 'TOGGLE_AUTHBTN':
