@@ -17,16 +17,12 @@ var ImageUploader = function(options) {
   	'x-amz-acl': 'public-read'
   });
   req.on('response', function(res) {
-  	console.log('AWS FULL RESPONSE: >>>', res);
   	if(res.statusCode === 200) {
   	  deferred.resolve(req.url);
   	} else {
-  	  console.log(res.statusCode);
   	  deferred.reject({error: 'true'});
   	}
   });
-
-  console.log('  req: >>>> ', req);
   req.end(buf);
   return deferred.promise;
   

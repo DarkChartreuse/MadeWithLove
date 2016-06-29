@@ -20,7 +20,7 @@ class ImageUploader extends React.Component {
 		this.setState({
 			processing: true
 		});
-
+	
 		// console.log('>>>>', this.state.data_uri, '>>>>>', this.state.filename, '>>>>>', this.state.filetype);
 
 		var data = {
@@ -31,7 +31,8 @@ class ImageUploader extends React.Component {
 
 		axios.post('/api/uploadImage', data)
 		  .then( (data) => {
-		  	console.log('data.uri>>>>>>', data);
+		  	console.log('data.uri>>>>>>', data.data.uri);
+		  	this.props.handleImage(data.data.uri);
 			context.setState({
     	  	  processing: false,
     	  	  uploaded_uri: data.data.uri
@@ -61,9 +62,23 @@ class ImageUploader extends React.Component {
 		if(this.state.uploaded_uri) {
 			uploaded = (
 				<div>
-				  <h4>Image uploaded!</h4>
-				  <img className='image-preview' src={this.state.uploaded_uri} />
-				  <pre className='image-link-box'>{this.state.uploaded_uri}</pre>
+				  <h3>Image uploaded!</h3>
+				  <div className="col s12 m5">
+				    <div className="card-panel valign-wrapper">
+				      <img className='image-preview' style={{width:'400px'}} src={this.state.uploaded_uri} />
+				    </div>
+				  </div>
+			      <pre className='image-link-box'>{this.state.uploaded_uri}</pre>
+				</div>
+			);
+		} else {
+			uploaded = (
+				<div>
+				  <div className="col s12 m5">
+				    <div className="card-panel valign-wrapper">
+				      <h2>Upload an image</h2>
+				    </div>
+				  </div>
 				</div>
 			);
 		}

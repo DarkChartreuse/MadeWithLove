@@ -67,7 +67,6 @@ module.exports = {
     }).then(onGoodImageProcess, onBadImageProcess);
 
     function onGoodImageProcess(resp) {
-      console.log('onGoodImageProcess >>>>>>>', resp)
       res.send({
         status: 'success',
         uri: resp
