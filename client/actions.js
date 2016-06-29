@@ -46,7 +46,7 @@ export function fetchOrders(cuisine) {
       index: 'mwl',
       type: 'meal',
       size: 50,
-      "_source": ["food", "chef", "rating", "price", "healthLabels", "zipcode"],
+      "_source": ["food", "chefID", "rating", "image", "price", "healthLabels", "zipcode"],
       // query: { "match_all": {} },
       body:{
         "query": { 

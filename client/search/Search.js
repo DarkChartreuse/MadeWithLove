@@ -10,22 +10,9 @@ class Search extends React.Component {
     var { isFetching, orders } = this.props;
     return (
       <div>
-<<<<<<< 2a6e30cabbf4226dcdd2259a1bab65fe03937d06
-        <SearchBar
-          inputCuisine={this.props.inputCuisine}
-          fetchOrders={this.props.fetchOrders}
-          cuisine={this.props.saveSearchQuery.cuisine}
-          vegan={this.props.vegan}
-          toggleVegan={this.props.toggleVegan}
-        />
-        <FilterableCuisineTable
-          orders={orders}
-        />
-=======
         <SearchBar inputCuisine={this.props.inputCuisine} fetchOrders={this.props.fetchOrders} cuisine={this.props.saveSearchQuery.cuisine} vegan={this.props.vegan} toggleVegan={this.props.toggleVegan}/>
         { !this.props.orders.orders && <div></div> }
         { this.props.orders.orders && <FilterableCuisineTable orders={orders} /> }
->>>>>>> deleted test view for uploading photos
       </div>
     )
   }
@@ -56,16 +43,6 @@ class SearchBar extends React.Component {
   }
   render() {
     return (
-<<<<<<< 2a6e30cabbf4226dcdd2259a1bab65fe03937d06
-      <div>
-        <div className="container">
-          <h1 className="header center">Made With Love</h1>
-          <div className="row center">
-            <h5 className="header col s12 light">Find your next meal</h5>
-          </div>
-          <div className="row">
-            <form onSubmit={this.handleSubmit}>
-=======
       // <div id="index-banner" className="parallax-container">
         <div className="section no-pad-bot">
           <div className="container">
@@ -74,7 +51,6 @@ class SearchBar extends React.Component {
               <h5 className="header col s12 light">Find your next meal</h5>
             </div>
             <div className="row">
->>>>>>> deleted test view for uploading photos
               <div className="input-field col s4">
                 <input placeholder="Type of food" type="text" onChange={this.props.inputCuisine} />
               </div>
@@ -150,8 +126,9 @@ class CuisineRow extends React.Component {
       </span>;
     return(
       <tr>
-        <td width="50%"><Link to="/mealview">{name}</Link></td>
-        <td width="50%">{this.props.cuisine.chefName}</td>
+        <td width="50%"><Link to="/mealview" >{name}</Link></td>
+        <td width="50%">{this.props.cuisine.chefName} </td>
+        <td width="50%"><img src={this.props.cuisine.image}className="img-responsive" /></td>
         <td width="50%">{this.props.cuisine.price}</td>
         <td>
           <OrderButton 
