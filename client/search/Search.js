@@ -1,10 +1,10 @@
 import React from 'react';
-import axios from 'axios';
-import { Link } from 'react-router';
-import { connect } from 'react-redux';
-import { fetchOrders } from '../actions';
+import  axios from 'axios';
+import { Link } from 'react-router'
+import { connect } from 'react-redux'
+import { fetchOrders } from '../actions'
 
-class Search extends React.Component {
+export default class Search extends React.Component {
   render() {
     console.log('searchprops >>>>>', this.props);
     var { isFetching, orders } = this.props;
@@ -21,9 +21,10 @@ class Search extends React.Component {
 class FilterableCuisineTable extends React.Component {
   render() {
     const { orders, inputCuisine, cuisine } = this.props.orders;
-    return (
+    // console.log('filtertablecomponent...',this.props.fetchOrders);
+    return (            
       <div>
-        <CuisineTable
+        <CuisineTable 
           orders={orders}
         />
       </div>
@@ -33,15 +34,8 @@ class FilterableCuisineTable extends React.Component {
 
 
 class SearchBar extends React.Component {
-  constructor(props) {
-    super(props);
-    this.handleSubmit = this.handleSubmit.bind(this);
-  }
-  handleSubmit(e) {
-    e.preventDefault();
-    this.props.fetchOrders(this.props.cuisine);
-  }
   render() {
+    console.log('vegan??? >>', this.props.vegan);
     return (
       // <div id="index-banner" className="parallax-container">
         <div className="section no-pad-bot">
@@ -55,23 +49,22 @@ class SearchBar extends React.Component {
                 <input placeholder="Type of food" type="text" onChange={this.props.inputCuisine} />
               </div>
               <div className="input-field col s3">
-                <input placeholder="Address" type="text" className="validate" />
+                <input placeholder='Address' type="text" className="validate" />
               </div>
               <div className="input-field col s3">
                 <input type="date" name="add_date" />
               </div>
               <button
                 className="btn-large #ffb74d orange lighten-2 black-text menubuttons"
-                type="submit"
-              >
+                onClick={() => { this.props.fetchOrders(this.props.cuisine) }} >
                 Search
               </button>
-            </form>
-          </div>
-          <div className="row">
-            <div>
-              <input type="checkbox" id="test5" checked={this.props.vegan} />
-              <label for="test5" onClick={ () => this.props.toggleVegan() }>Vegan</label>
+            </div>
+            <div className="row">
+              <div>
+                <input type="checkbox" id="test5" checked={this.props.vegan} />
+                <label for="test5" onClick={ () => this.props.toggleVegan() }>Vegan</label>
+              </div>
             </div>
           </div>
         </div>
@@ -79,7 +72,32 @@ class SearchBar extends React.Component {
     )
   }
 }
+// class SearchBar extends React.Component {
+//   // _handleChange() {
+//   //   let filterTextVal = this.refs.filterTextInput.value;
+//   //   let inStockCheckBoxVal = this.refs.inStockOnlyInput.value;
+//   //   this.props.onUserInput(filterTextVal , inStockCheckBoxVal);
+//   // }
 
+//   render() {
+//     return (
+//       <form>             
+//         <input
+//           className="form-control" 
+//           type="text" 
+//           placeholder="Search by cuisine name"
+//           />
+//         <p>
+//           <input
+//             type="checkbox" 
+//             className="checkbox"/>
+//           {' '}
+//           Only show items in stock         
+//         </p>
+//       </form>
+//     );
+//   }
+// }
 
 
 class CuisineTable extends React.Component {
@@ -193,8 +211,7 @@ const mapDispatchToProps = (dispatch) => {
   return {
     inputCuisine: (e) => dispatch({ type: 'SAVE_SEARCH_QUERY', data: e.target.value }),
     toggleVegan: () => dispatch({type: 'TOGGLE_VEGAN'}),
-    fetchOrders: (input) => dispatch(fetchOrders(input)),
-
+    fetchOrders: (input) => dispatch(fetchOrders(input))
   }
 }
 
@@ -205,15 +222,9 @@ function mapStatetoProps(state) {
     saveSearchQuery: state.saveSearchQuery,
     orders: state.orders,
     error: null,
-    vegan: false,
+    vegan: false
   };
 }
 
-Search.propTypes = {
-  fetchOrders: React.PropTypes.func,
-  inputCuisine: React.PropTypes.func,
-  toggleVegan: React.PropTypes.func,
-  orders: React.PropTypes.object,
-};
-
 export default connect(mapStatetoProps, mapDispatchToProps)(Search);
+
