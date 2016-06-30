@@ -108,6 +108,19 @@ const loginUser = (state = userInfoState, action) => {
         address: action.data.address,
         zip: action.data.zip,
         isChef: action.data.chef,
+        image: action.data.image,
+      });
+    case 'UPDATE_PROFILE':
+      return Object.assign({}, state, {
+        firstName: action.data.firstName,
+        lastName: action.data.lastName,
+        email: action.data.email,
+        password: action.data.password,
+        description: action.data.description,
+        phone: action.data.phone,
+        address: action.data.address,
+        zip: action.data.zipcode,
+        image: action.data.image,
       });
     case 'LOGOUT_USER':
       return {};
@@ -115,6 +128,8 @@ const loginUser = (state = userInfoState, action) => {
       return state;
   }
 };
+
+
 
 const rootReducer = combineReducers({
   toggleQuantity,
