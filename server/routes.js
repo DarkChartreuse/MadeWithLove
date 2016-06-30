@@ -25,4 +25,5 @@ module.exports = (app) => {
   app.get('/signout', Auth.logOut);
 
   app.get('/*', (req, res) => { res.redirect('/'); });
+  app.post('/api/uploadImage', Meal.uploadImage);
 };

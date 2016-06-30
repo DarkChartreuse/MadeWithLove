@@ -45,7 +45,7 @@ export function fetchOrders(cuisine) {
       index: 'mwl',
       type: 'meal',
       size: 50,
-      "_source": ["food", "chef", "rating", "price", "healthLabels", "zipcode"],
+      "_source": ["food", "chefID", "rating", "image", "price", "healthLabels", "zipcode"],
       // query: { "match_all": {} },
       body:{
         "query": { 
@@ -84,6 +84,27 @@ export function fetchOrders(cuisine) {
           .catch(err => dispatch(fetchFailure(err)));
         }
 }
+
+  // return dispatch => {
+  //   dispatch(fetchRequest());
+  //   return fetch(`http://localhost:9200/meals/_search?q=${cuisine}`,
+  //     { method: 'GET', credentials: 'same-origin' })
+  //     .then(result => result.json())
+  //     .then( result => {
+  //       let newResult = [];
+  //       if (result.hits.hits.length) {
+  //         const results = result.hits.hits;
+  //         for (var i = 0; i < results.length; i++) {
+  //           newResult.push(results[i]['_source']);
+  //         }  
+  //         dispatch(fetchSuccess(newResult));
+  //       } else {
+  //         dispatch(fetchFailure(Materialize.toast('Sorry, no results can be found', 4000)));
+  //       }
+  //     })
+  //     .catch(err => dispatch(fetchFailure(err)));
+  // };
+
 
 
 export function loggy(response) {
