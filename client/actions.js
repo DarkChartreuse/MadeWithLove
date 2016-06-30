@@ -215,4 +215,11 @@ export function updateMeal(result) {
   }
 }
 
+export function updateProfile(result) { //when user clicks update profile, everything in the current loginUser store will be put in postgres
+  return {
+    type: 'UPDATE_PROFILE',
+    data: result,
+  }
+}
+
 
