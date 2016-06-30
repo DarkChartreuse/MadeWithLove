@@ -52,7 +52,7 @@ export default class Signup extends React.Component {
           zipcode: this.state.zipcode,
           chef: this.state.chef,
         };
-      axios.post('/api/users/', data)
+      axios.post('/api/updateUsers/', data)
         .then(function (response) {
           console.log(response);
         })

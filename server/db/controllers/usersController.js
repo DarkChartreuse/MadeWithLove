@@ -31,6 +31,34 @@ module.exports = {
       });
     },
 
+  updateUser: (req, res) => {
+    console.log('im passing this data as the req body userID: >>>', req.body.userID);
+    User.findOne({ where: { id: req.body.userID } })
+    .then( user => {
+      if(user) {
+        user.updateAttributes({
+          firstName: req.body.firstName,
+          lastName: req.body.lastName,
+          email: req.body.email,
+          description: req.body.description,
+          phone: req.body.phone,
+          password: req.body.password,
+          address: req.body.address,
+          zip: req.body.zip,
+          profile: req.body.image
+        })
+        .then( updatedUser => {
+          res.json(updatedUser);
+          console.log('user successfully updated!');
+        })
+        .catch(err => { console.error('Error updating user', err); });
+      } else {
+        console.log('this user does not exist. cannot update');
+      }
+    })
+
+  },
+
   deleteUser: (req, res) => {
     User.findOne({ where: { id: req.params.id } })
     .then(userToDelete => {

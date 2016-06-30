@@ -1,11 +1,13 @@
 import React from 'react';
 import { connect } from 'react-redux';
 import ImageUploader from '../chef/ImageUploader';
+import axios from 'axios';
 
 export default class EditForm extends React.Component {
   constructor(props) {
     super(props);
     this.state = {
+      userID: this.props.loginUser.userID,
       firstName: this.props.loginUser.firstName,
       lastName: this.props.loginUser.lastName,
       email: this.props.loginUser.email,
@@ -69,21 +71,39 @@ export default class EditForm extends React.Component {
 
   handleSubmit(e) {
     e.preventDefault();
-    const userInfo = {
-      firstName: this.state.firstName,
-      lastName: this.state.lastName,
-      email: this.state.email,
-      password: this.state.password,
-      phone: this.state.phone,
-      address: this.state.street + ' ' + this.state.city + ', ' + this.state.state + ' ' + this.state.zipcode,
-      zipcode: this.state.zipcode,
-      image: this.state.image,
-      description: this.state.description,
-    };
+    // validation
+    // const re = /^(([^<>()\[\]\\.,;:\s@"]+(\.[^<>()\[\]\\.,;:\s@"]+)*)|(".+"))@((\[[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}])|(([a-zA-Z\-0-9]+\.)+[a-zA-Z]{2,}))$/;
 
-    this.props.updateLoginUser(userInfo);
-    console.log('updated???!');
+    // check if the passwords entered matches
+    // if (this.state.password !== this.state.passwordConfirm) {
+    //   console.log('passwords do not match');
+    // }
+    // check if the email supplied is valid
+    // if (!re.test(this.state.email)) {
+    //   console.log('invalid email address', this.state.email);
+    // } else {
+      const userInfo = {
+        userID: this.state.userID,
+        firstName: this.state.firstName,
+        lastName: this.state.lastName,
+        email: this.state.email,
+        description: this.state.description,
+        phone: this.state.phone,
+        password: this.state.password,
+        address: this.state.street + ' ' + this.state.city + ', ' + this.state.state + ' ' + this.state.zipcode,
+        zip: this.state.zipcode,
+        image: this.state.image,
+      };
 
+      //update loginUser in the store
+      this.props.updateLoginUser(userInfo);
+
+      //update the user info in postgres
+      axios.post('/api/updateUser', userInfo)
+        .then(function (response) {
+          console.log(response);
+        })
+        .catch( err => { console.log('Failed to create account') });
   }
 
 
