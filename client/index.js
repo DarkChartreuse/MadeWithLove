@@ -21,8 +21,7 @@ import Signup from './auth/Signup';
 import Signin from './auth/Signin';
 import Mealview from './mealview/Mealview';
 import AddAMeal from './chef/AddAMeal';
-import Profile from './user/Profile';
-
+// import Profile from './user/Profile';
 const logger = createLogger();
 const store = createStore(rootReducer, applyMiddleware(thunk, logger));
 const history = syncHistoryWithStore(browserHistory, store);
@@ -35,8 +34,8 @@ render((
         <Route path="/signup" component={Signup} />
         <Route path="/signin" component={Signin} />
         <Route path="/addmeal" component={AddAMeal} />
+        <Route path="/search" component={Search} />
         <Route path="/mealview" component={Mealview} />
-        <Route path="/user/:id" component={Profile} />
       </Route>
     </Router>
   </Provider>

@@ -1,6 +1,7 @@
 const Meal = require('../models/mealsModel.js');
 const User = require('../models/usersModel.js');
 const elasticsearch = require('../../elasticSearch.js');
+const ImageUploader = require('./imageUploader');
 
 module.exports = {
   createMeal: (req, res) => {
@@ -55,5 +56,27 @@ module.exports = {
       res.json(meals);
     })
     .catch(err => { console.error('Error fetching meals', err); });
+  },
+
+  uploadImage: (req, res) => {
+
+    var image = ImageUploader({
+      data_uri: req.body.data_uri,
+      filename: req.body.filename,
+      filetype: req.body.filetype
+    }).then(onGoodImageProcess, onBadImageProcess);
+
+    function onGoodImageProcess(resp) {
+      res.send({
+        status: 'success',
+        uri: resp
+      });
+    }
+    function onBadImageProcess(resp) {
+      res.send({
+        status: 'error'
+      });
+    }
+
   },
 };
