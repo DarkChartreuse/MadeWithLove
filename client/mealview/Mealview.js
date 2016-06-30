@@ -1,34 +1,34 @@
 import React from 'react';
 import  axios from 'axios';
 import { connect } from 'react-redux';
-import { fetchOrders } from '../actions'  
+// import { fetchOrders } from '../actions'  
 
-const dummyReviews = [
-  {'username': 'Andrew', 'comment': 'This was okay. Needed more chicken and pasta.', 'rating': 4},
-  {'username': 'Alex', 'comment': 'I could have sworn I ordered katsu, but this was fine', 'rating': 3},
-  {'username': 'Scrum-Kage Sama', 'comment': 'Peasant food', 'rating': 1},
-  {'username': 'Dan', 'comment': 'Minus a star for the chef not looking like my mother', 'rating': 4},
-];
+// const dummyReviews = [
+//   {'username': 'Andrew', 'comment': 'This was okay. Needed more chicken and pasta.', 'rating': 4},
+//   {'username': 'Alex', 'comment': 'I could have sworn I ordered katsu, but this was fine', 'rating': 3},
+//   {'username': 'Scrum-Kage Sama', 'comment': 'Peasant food', 'rating': 1},
+//   {'username': 'Dan', 'comment': 'Minus a star for the chef not looking like my mother', 'rating': 4},
+// ];
 
-class Orderbox extends React.Component {
-  _updateQuantity(e) {
-    this.setState({quantity: e.target.value});
-  }
+// class Orderbox extends React.Component {
+//   _updateQuantity(e) {
+//     this.setState({quantity: e.target.value});
+//   }
 
-  render() {
-    return (
-      <div>Orderbox
-        <div>date: {this.props.date}</div>
-        <div>time block: {this.props.timeBlock}</div>
-        <div>price: {this.props.price} x <input onChange={this._updateQuantity.bind(this)} placeholder='1'></input></div>
-        <div>quantity: {this.props.quantity}</div>
-        <div>delivery charge: {this.props.deliveryCharge}</div>
-        <div>checkout total: {this.props.checkoutTotal}</div>
-      </div>
+//   render() {
+//     return (
+//       <div>Orderbox
+//         <div>date: {this.props.date}</div>
+//         <div>time block: {this.props.timeBlock}</div>
+//         <div>price: {this.props.price} x <input onChange={this._updateQuantity.bind(this)} placeholder='1'></input></div>
+//         <div>quantity: {this.props.quantity}</div>
+//         <div>delivery charge: {this.props.deliveryCharge}</div>
+//         <div>checkout total: {this.props.checkoutTotal}</div>
+//       </div>
 
-    )
-  }
-}
+//     )
+//   }
+// }
 
 export default class Mealview extends React.Component {
   constructor(props) {

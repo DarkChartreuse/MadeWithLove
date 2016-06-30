@@ -2,7 +2,7 @@ import React from 'react';
 import  axios from 'axios';
 import { Link } from 'react-router'
 import { connect } from 'react-redux'
-import { fetchOrders } from '../actions'
+import { fetchOrders, updateMeal} from '../actions'
 
 export default class Search extends React.Component {
   render() {
@@ -12,7 +12,7 @@ export default class Search extends React.Component {
       <div>
         <SearchBar inputCuisine={this.props.inputCuisine} fetchOrders={this.props.fetchOrders} cuisine={this.props.saveSearchQuery.cuisine} vegan={this.props.vegan} toggleVegan={this.props.toggleVegan}/>
         { !this.props.orders.orders && <div></div> }
-        { this.props.orders.orders && <FilterableCuisineTable orders={orders} /> }
+        { this.props.orders.orders && <FilterableCuisineTable orders={orders} meal={this.props.updateMeal} /> }
       </div>
     )
   }
@@ -21,11 +21,12 @@ export default class Search extends React.Component {
 class FilterableCuisineTable extends React.Component {
   render() {
     const { orders, inputCuisine, cuisine } = this.props.orders;
+    
     // console.log('filtertablecomponent...',this.props.fetchOrders);
     return (            
       <div>
-        <CuisineTable 
-          orders={orders}
+        <CuisineTable
+          orders={orders} meal={this.props.meal}
         />
       </div>
     );
@@ -148,7 +149,7 @@ class CuisineTable extends React.Component {
             key={cuisine.cuisine} />
           );
         }
-        rows.push(<CuisineRow cuisine={cuisine} key={cuisine.food} />);
+        rows.push(<CuisineRow meal={this.props.meal} cuisine={cuisine} key={cuisine.food} />);
         lastCategory = cuisine.cuisine;
       });
     }
@@ -170,6 +171,10 @@ class CuisineTable extends React.Component {
 }
 
 class CuisineRow extends React.Component {
+  componentDidMount() {
+    console.log('the props of CuisineRow', this.props);
+    this.props.meal(this.props.cuisine);
+  }
   render() {
     var name = this.props.cuisine.stocked ? 
       this.props.cuisine.food : 
@@ -178,7 +183,7 @@ class CuisineRow extends React.Component {
       </span>;
     return(
       <tr>
-        <td width="50%"><Link to="/mealview" >{name}</Link></td>
+        <td width="50%"><Link to="/mealview/:id" >{name}</Link></td>
         <td width="50%">{this.props.cuisine.chefName} </td>
         <td width="50%"><img src={this.props.cuisine.image}className="img-responsive" /></td>
         <td width="50%">{this.props.cuisine.price}</td>
@@ -245,7 +250,8 @@ const mapDispatchToProps = (dispatch) => {
   return {
     inputCuisine: (e) => dispatch({ type: 'SAVE_SEARCH_QUERY', data: e.target.value }),
     toggleVegan: () => dispatch({type: 'TOGGLE_VEGAN'}),
-    fetchOrders: (input) => dispatch(fetchOrders(input))
+    fetchOrders: (input) => dispatch(fetchOrders(input)),
+    updateMeal: (result) => dispatch({ type: 'UPDATE_CURRENT_MEAL', data: result }),
   }
 }
 

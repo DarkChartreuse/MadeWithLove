@@ -36,7 +36,7 @@ render((
         <Route path="/addmeal" component={AddAMeal} />
         <Route path='/profile' component={Profile} />
         <Route path="/search" component={Search} />
-        <Route path="/mealview" component={Mealview} />
+        <Route path="/mealview/:id" component={Mealview} />
       </Route>
     </Router>
   </Provider>
