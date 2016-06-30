@@ -2,8 +2,8 @@ const path = require('path');
 const express = require('express');
 const bodyParser = require('body-parser');
 const webpack = require('webpack');
-const webpackDevMiddleware = require('webpack-dev-middleware');
-const webpackHotMiddleware = require('webpack-hot-middleware');
+// const webpackDevMiddleware = require('webpack-dev-middleware');
+// const webpackHotMiddleware = require('webpack-hot-middleware');
 const config = require('../webpack.config');
 const passport = require('passport');
 const cookieParser = require('cookie-parser');
@@ -13,9 +13,9 @@ require('./passport')(passport);
 
 const app = express();
 const port = process.env.PORT || 3000;
-const compiler = webpack(config);
-app.use(webpackDevMiddleware(compiler, { noInfo: true, publicPath: config.output.publicPath }));
-app.use(webpackHotMiddleware(compiler));
+// const compiler = webpack(config);
+// app.use(webpackDevMiddleware(compiler, { noInfo: true, publicPath: config.output.publicPath }));
+// app.use(webpackHotMiddleware(compiler));
 
 app.use(bodyParser.json({limit: '50mb'}));
 app.use(bodyParser.urlencoded({ extended: false }));
@@ -31,6 +31,10 @@ app.use(flash());
 // app.use(express.static(path.join(__dirname, '../')));
 app.get('/', (req, res) => {
   res.sendFile(path.join(__dirname, '../client/index.html'));
+});
+
+app.get('/bundle.js', (req, res) => {
+  res.sendFile(path.join(__dirname, '../dist/bundle.js'));
 });
 
 require('./routes.js')(app, express);

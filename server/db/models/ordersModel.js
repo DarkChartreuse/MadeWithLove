@@ -15,10 +15,10 @@ const Order = sequelize.define('orders',
       type: Sequelize.STRING,
       field: 'id_meal',
     },
-    // food: {
-    //   type: Sequelize.STRING,
-    //   field: 'food',
-    // },
+    food: {
+      type: Sequelize.STRING,
+      field: 'food',
+    },
     // cuisine: {
     //   type: Sequelize.STRING,
     //   field: 'cuisine',
@@ -31,10 +31,10 @@ const Order = sequelize.define('orders',
     //   type: Sequelize.INTEGER,
     //   field: 'quantity',
     // },
-    // price: {
-    //   type: Sequelize.FLOAT,
-    //   field: 'price',
-    // },
+    price: {
+      type: Sequelize.FLOAT,
+      field: 'price',
+    },
     // address: {
     //   type: Sequelize.STRING,
     //   field: 'address',
@@ -43,14 +43,18 @@ const Order = sequelize.define('orders',
     //   type: Sequelize.DATE,
     //   field: 'order_date',
     // },
-    // rating: {
-    //   type: Sequelize.FLOAT,
-    //   field: 'rating',
-    // },
+    rating: {
+      type: Sequelize.FLOAT,
+      field: 'rating',
+    },
     // review: {
     //   type: Sequelize.TEXT,
     //   field: 'review',
     // },
+    image: {
+      type: Sequelize.STRING,
+      field: 'image',
+    },
   },
   {
     timestamps: true,

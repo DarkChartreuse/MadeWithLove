@@ -1,0 +1,29 @@
+version: '2'
+services:
+  db:
+    image: postgres
+    ports:
+      - "5432:5432"
+    networks:
+      - network
+  es:
+    image: elasticsearch
+    networks:
+      - network
+  web:
+    image: darkchartreuse/mwl
+    build: .
+    ports:
+      - "3000:3000"
+    volumes:
+      - .:/app
+    links:
+      - db
+      - es
+    networks:
+      - network
+    # entrypoint: "./wait-for-it.sh db:5432 -t 15"
+
+networks:
+  network:
+    driver: bridge
