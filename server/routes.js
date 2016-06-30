@@ -10,21 +10,20 @@ module.exports = (app) => {
   app.get('/api/users', User.getAllUsers);
   app.get('/api/users/:id', User.getUser);
   app.delete('/api/users/:id', User.deleteUser);
-  app.post('/api/updateUser', User.updateUser);
+  app.post('/api/updateuser', User.updateUser);
 
-  app.post('/api/meals', Auth.isLoggedIn, Meal.createMeal);
-  app.get('/api/meals', Meal.getAllMeals);
-  app.get('/api/meals/:id', Meal.getMeal);
-  app.delete('/api/meals/:id', Meal.deleteMeal);
+  app.route('/api/meals').post(Auth.isLoggedIn, Meal.createMeal);
+  app.route('/api/meals').get(Meal.getAllMeals);
+  app.route('/api/meals/:id').get(Meal.getMeal);
+  app.route('/api/meals/:id').delete(Meal.deleteMeal);
 
 
-  app.post('/api/createOrder', Order.createOrder);
+  app.route('/api/createorder').post(Order.createOrder);
+  app.route('/api/meal/:id').get(Controller.getMealView);
 
-  app.get('/api/meal/:id', Controller.getMealView);
+  app.route('/api/auth/sign-in').post(Auth.signIn);
+  app.route('/signout').get(Auth.logOut);
 
-  app.post('/api/auth/sign-in', Auth.signIn);
-  app.get('/signout', Auth.logOut);
-
-  app.get('/*', (req, res) => { res.redirect('/'); });
   app.post('/api/uploadImage', Meal.uploadImage);
+  app.route('/*').get((req, res) => { res.redirect('/'); });
 };

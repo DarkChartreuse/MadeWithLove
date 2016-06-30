@@ -216,7 +216,7 @@ class OrderButton extends React.Component {
 
     console.log(data);
 
-    axios.post('/api/createOrder', data)
+    axios.post('/api/createorder', data)
       .then(function (response) {
         console.log(response);
       })
