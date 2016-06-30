@@ -16,10 +16,9 @@ module.exports = {
     filename: 'bundle.js',
     publicPath: '/static/',
   },
-  // plugins: [
-  //   new webpack.optimize.OccurrenceOrderPlugin(),
-  //   new webpack.HotModuleReplacementPlugin(),
-  // ],
+  plugins: [
+    new webpack.optimize.OccurrenceOrderPlugin(),
+  ],
   module: {
     loaders: [
       {

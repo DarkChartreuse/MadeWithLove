@@ -4,10 +4,14 @@ services:
     image: postgres
     ports:
       - "5432:5432"
+    networks:
+      - network
   es:
     image: elasticsearch
+    networks:
+      - network
   web:
-    image: node
+    image: darkchartreuse/mwl
     build: .
     ports:
       - "3000:3000"
