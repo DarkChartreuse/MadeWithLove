@@ -1,6 +1,6 @@
 import React from 'react';
 import { connect } from 'react-redux';
-import { Link } from 'react-router';
+import { Link, browserHistory}  from 'react-router';
 import { logoutuser } from '../actions';
 
 class Navbar extends React.Component {
@@ -25,7 +25,7 @@ class Navbar extends React.Component {
       <li>
         {(!this.props.loginUser.firstName) ?
           <Link to="/signup" >create account</Link> :
-          <Link to="/profile">{this.props.loginUser.firstName.toLowerCase()}</Link>
+          <a onClick={() => { browserHistory.push(`/users/${this.props.loginUser.userID}`); }}>{this.props.loginUser.firstName.toLowerCase()}</a>
         }
       </li>
       <li>

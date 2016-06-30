@@ -14,11 +14,10 @@ module.exports = {
         chefId: req.body.chefId,
         mealId: req.body.mealId,
         userId: req.body.userId,
-        // cuisine: req.body.cuisine,
-        // description: req.body.cuisine,
-        // quantity: req.body.quantity,
-        // price: req.body.price,
-        // address: req.body.address,
+        food: req.body.food,
+        image: req.body.image,
+        price: req.body.price,
+        
       // });
     })
     .catch(err => { console.error('Error adding order: ', err); })

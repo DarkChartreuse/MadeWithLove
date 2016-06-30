@@ -1,8 +1,10 @@
 import React from 'react';
 import  axios from 'axios';
-import { Link } from 'react-router'
-import { connect } from 'react-redux'
-import { fetchOrders, updateMeal} from '../actions'
+import { Link } from 'react-router';
+import { connect } from 'react-redux';
+import { fetchOrders, updateMeal } from '../actions';
+// import OrderButton from './OrderButton';
+import CuisineRow from './CuisineRow';
 
 export default class Search extends React.Component {
   render() {
@@ -170,35 +172,7 @@ class CuisineTable extends React.Component {
   }
 }
 
-class CuisineRow extends React.Component {
-  componentDidMount() {
-    console.log('the props of CuisineRow', this.props);
-    this.props.meal(this.props.cuisine);
-  }
-  render() {
-    var name = this.props.cuisine.stocked ? 
-      this.props.cuisine.food : 
-      <span style={{color: 'red'}}>
-        {this.props.cuisine.food}
-      </span>;
-    return(
-      <tr>
-        <td width="50%"><Link to="/mealview/:id" >{name}</Link></td>
-        <td width="50%">{this.props.cuisine.chefName} </td>
-        <td width="50%"><img src={this.props.cuisine.image}className="img-responsive" /></td>
-        <td width="50%">{this.props.cuisine.price}</td>
-        <td>
-          <OrderButton 
-            chef={this.props.cuisine.chefName}
-            price={this.props.cuisine.price}
-            item={this.props.cuisine.food}
-            isInStock={this.props.cuisine.stocked}
-          />
-        </td>  
-      </tr>
-    ); 
-  }
-}
+
 
 class CuisineCategoryRow extends React.Component {
   render() {
@@ -208,17 +182,9 @@ class CuisineCategoryRow extends React.Component {
   }
 }
 
-class OrderButton extends React.Component {
-
-  _handleSubmit() {
-    
-    let data = {
-      chef: this.props.chefId,
-      price: this.props.price,
-      item: this.props.item
-    }
 
 
+<<<<<<< HEAD
     console.log(data);
 
     axios.post('/api/createorder', data)
@@ -245,6 +211,8 @@ class OrderButton extends React.Component {
   }
 }  
 
+=======
+>>>>>>> Meal Order Flow WIP
 
 const mapDispatchToProps = (dispatch) => {
   return {
@@ -262,9 +230,18 @@ function mapStatetoProps(state) {
     saveSearchQuery: state.saveSearchQuery,
     orders: state.orders,
     error: null,
-    vegan: false
+    vegan: false,
   };
 }
+
+Search.propTypes = {
+  inputCuisine: React.PropTypes.func,
+  cuisine: React.PropTypes.string,
+  saveSearchQuery: React.PropTypes.object,
+  fetchOrders: React.PropTypes.func,
+  toggleVegan: React.PropTypes.func,
+  updateMeal: React.PropTypes.func,
+};
 
 export default connect(mapStatetoProps, mapDispatchToProps)(Search);
 
