@@ -1,4 +1,8 @@
 var elasticsearch = require('elasticsearch');
+var generateEmail = require('./emailGenerator.js');
+
+
+
 var elasticClient = new elasticsearch.Client({
   host: 'localhost:9200',
   log: 'info'
@@ -54,7 +58,22 @@ module.exports.initMapping = function() {
 }
 
 module.exports.addMeal = function(meal) {
+
   console.log('CREATING elasticsearch meal>>>>>>>>>>>>', meal);
+  
+  let to = 'anonpunk123@gmail.com';
+  let chefName = meal.chefName;
+  let mealName = meal.typeoffood; 
+  let date = 'Placeholder DATE: 12.31.16';
+  let subject = 'Your meal has been created';
+  let text = 'Your meal:' + mealName + ' has been created.';
+  let htmlBody = generateEmail.mealCreatedEmailBody(chefName, mealName, date);
+
+  console.log('<<<<<<<<<<<<<<<<Generating EMAIL>>>>>>>>>>>>');
+  generateEmail.sendEmail(to, subject, text, htmlBody);
+
+
+
   return elasticClient.index({
     index: indexName,
     type: 'meal',
