@@ -1,11 +1,12 @@
 import React from 'react';
 import axios from 'axios';
 import { browserHistory } from 'react-router';
+import { connect } from 'react-redux';
 
-export default class OrderButton extends React.Component {
-  
+class OrderButton extends React.Component {
+
   _handleSubmit() {
-    console.log('order from meals prop', this.props);
+    
     let data = {
       chef: this.props.cuisine.chef,
       chefId: this.props.cuisine.chefId,
@@ -14,18 +15,16 @@ export default class OrderButton extends React.Component {
       mealId: this.props.cuisine.mealId,
       price: this.props.cuisine.price,
       userId: this.props.loginUser.userID,
+      userAddress: this.props.loginUser.address,
     };
 
     axios.post('/api/createorder', data)
-      .then(function (response) {
+      .then((response) => {
         console.log('da response', response);
         browserHistory.push(`/orders/${data.mealId}`);
       })
-      .catch(function (error) {
-        console.log(error);
-      });    
-
-      
+      .catch((error) => {
+      });
   }
 
   render() {
@@ -34,3 +33,7 @@ export default class OrderButton extends React.Component {
     );
   }
 };
+
+const mapStateToProps = ({ loginUser }) => ({ loginUser });
+
+export default connect(mapStateToProps, null)(OrderButton);

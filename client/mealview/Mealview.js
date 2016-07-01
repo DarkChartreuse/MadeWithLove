@@ -2,32 +2,38 @@ import React from 'react';
 import axios from 'axios';
 import { connect } from 'react-redux';
 import fetch from 'isomorphic-fetch';
+import { updateMeal } from '../actions';
 
-export default class Mealview extends React.Component {
+class Mealview extends React.Component {
   constructor(props) {
     super(props);
     this.state = {
-
+      meal: {},
     };
   }
 
-  componentDidMount() {
+  componentWillMount() {
     this.loadMealOrder();
   }
 
   loadMealOrder() {
+    const context = this;
     axios.get(`/api${window.location.pathname}`)
-      .then(function(response){
+      .then(response => {
         console.log('res data', response);
-      });  
+        context.props.updateMeal(response.data);
+        context.setState({ meal: response.data });
+        console.log('setstate', this.state.meal);
+      });
   }
 
   render() {
-  	
-
     return (
       <div>
-        Halo
+        <div className="container">
+          <h3>{this.state.meal.food}</h3>
+        
+        </div>
       </div>
     );
   }
@@ -60,3 +66,14 @@ export default class Mealview extends React.Component {
 // deliveryCharge={this.state.deliveryCharge}
 // checkoutTotal={this.state.checkoutTotal}
 // />
+
+const mapStateToProps = ({ mealState }) => ({ mealState });
+
+const mapDispatchToProps = (dispatch) => {
+  return {
+    updateMeal: (response) => dispatch(updateMeal(response)),
+  };
+};
+
+export default connect(mapStateToProps, mapDispatchToProps)(Mealview);
+

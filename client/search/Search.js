@@ -14,7 +14,7 @@ export default class Search extends React.Component {
       <div>
         <SearchBar  inputCuisine={this.props.inputCuisine} fetchOrders={this.props.fetchOrders} cuisine={this.props.saveSearchQuery.cuisine} vegan={this.props.vegan} toggleVegan={this.props.toggleVegan}/>
         { !this.props.orders.orders && <div></div> }
-        { this.props.orders.orders && <FilterableCuisineTable orders={orders} meal={this.props.updateMeal} loginUser={this.props.loginUser} /> }
+        { this.props.orders.orders && <FilterableCuisineTable orders={orders} meal={this.props.updateMeal} /> }
       </div>
     )
   }
@@ -28,7 +28,7 @@ class FilterableCuisineTable extends React.Component {
     return (            
       <div>
         <CuisineTable
-          orders={orders} meal={this.props.meal} loginUser={this.props.loginUser}
+          orders={orders} meal={this.props.meal} 
         />
       </div>
     );
@@ -78,7 +78,7 @@ class CuisineTable extends React.Component {
             key={cuisine.cuisine} />
           );
         }
-        rows.push(<CuisineRow loginUser={this.props.loginUser} meal={this.props.meal} cuisine={cuisine} key={cuisine.food} />);
+        rows.push(<CuisineRow meal={this.props.meal} cuisine={cuisine} key={cuisine.food} />);
         lastCategory = cuisine.cuisine;
       });
     }
@@ -158,7 +158,6 @@ function mapStatetoProps(state) {
     orders: state.orders,
     error: null,
     vegan: false,
-    loginUser: state.loginUser,
   };
 }
 

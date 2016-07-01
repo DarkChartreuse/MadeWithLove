@@ -17,6 +17,7 @@ module.exports = {
         food: req.body.food,
         image: req.body.image,
         price: req.body.price,
+        userAddress: req.body.userAddress,
     })
     .catch(err => { console.error('Error adding order: ', err); })
     .finally(() => {

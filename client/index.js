@@ -22,6 +22,7 @@ import Signin from './auth/Signin';
 import Mealview from './mealview/Mealview';
 import AddAMeal from './chef/AddAMeal';
 import Profile from './user/Profile';
+
 const logger = createLogger();
 const store = createStore(rootReducer, applyMiddleware(thunk, logger));
 const history = syncHistoryWithStore(browserHistory, store);
