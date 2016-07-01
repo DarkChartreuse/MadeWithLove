@@ -10,6 +10,7 @@ module.exports = (app) => {
   app.get('/api/users', User.getAllUsers);
   app.get('/api/users/:id', User.getUser);
   app.delete('/api/users/:id', User.deleteUser);
+  app.post('/api/updateUser', User.updateUser);
 
   app.post('/api/meals', Auth.isLoggedIn, Meal.createMeal);
   app.get('/api/meals', Meal.getAllMeals);

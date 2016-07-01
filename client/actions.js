@@ -33,12 +33,19 @@ export function fetchFailure(message) {
   };
 }
 
-export function fetchOrders(cuisine) {
+export function fetchOrders(searchQuery) {
     var elasticsearch = require('elasticsearch');
     var client = new elasticsearch.Client({
       host: 'localhost:9200',
       log: 'trace'
     });
+    console.log('SEARCHQUERY: ', searchQuery);
+
+    var cuisine = searchQuery.cuisine || '*';
+    var minPrice = searchQuery.minPrice || 0;
+    var maxPrice = searchQuery.maxPrice || 1000000;
+    var date = searchQuery.add_date;
+    console.log('variables parsing:', cuisine, minPrice, maxPrice, date);
 
     console.log('..............Client.search')
     return dispatch => { client.search({
@@ -54,11 +61,11 @@ export function fetchOrders(cuisine) {
                 {"prefix": { "_all": cuisine }},             
              //    {"match": { "chef": "Martha" }},
              //    {"match": {"healthLabels": "Tree-Nut-Free"}}
-             //    // {"match": {"zipcode": 60302}}
+                // {"match": {"zipcode": zipcode}}
              //  ],//prefix
              // "filter":    [
-             //    // {"range": {"date": {"lte": Date.now()}}},
-             //    {"range": {"price": { "lt": 13 }}}, 
+                // {"range": {"date": {"lte": date}}},
+                {"range": {"price": { "lt": maxPrice, "gt": minPrice }}}, 
              //    {"range": {"rating": { "gt": 2, "lt": 5}}}
              ]//price //range
           }//bool

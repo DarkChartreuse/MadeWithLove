@@ -108,7 +108,7 @@ const loginUser = (state = userInfoState, action) => {
         address: action.data.address,
         zip: action.data.zip,
         isChef: action.data.chef,
-        image: action.data.image,
+        profile: action.data.profile,
       });
     case 'UPDATE_PROFILE':
       return Object.assign({}, state, {
@@ -120,7 +120,7 @@ const loginUser = (state = userInfoState, action) => {
         phone: action.data.phone,
         address: action.data.address,
         zip: action.data.zipcode,
-        image: action.data.image,
+        profile: action.data.profile,
       });
     case 'LOGOUT_USER':
       return {};
