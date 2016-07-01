@@ -64,7 +64,7 @@ module.exports.addMeal = function(meal) {
 
   console.log('CREATING elasticsearch meal>>>>>>>>>>>>', meal);
   
-  let to = 'anonpunk123@gmail.com';
+  let to = meal.chefEmail;
   let chefName = meal.chefName;
   let mealName = meal.typeoffood; 
   let date = 'Placeholder DATE: 12.31.16';
