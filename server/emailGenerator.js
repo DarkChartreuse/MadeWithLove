@@ -27,7 +27,7 @@ var smtpConfig = require('../config.env.js').smtpConfig;
       }
       console.log('Message sent: ' + info.response);
     });
-  }
+  } 
    
 
   // res.send("...."); 
@@ -53,7 +53,7 @@ var smtpConfig = require('../config.env.js').smtpConfig;
         '<h2 style="font-weight:100; font-family: helvetica; color:#636363;">' + 
         time + '</h2>' +
       '<hr>' +
-      // '<h3 style="font-weight:100; font-family: helvetica;color:#636363;">Please arrive at the venue by <span id="date" style="font-weight: bold; color:#c16a3a">'+ time +'</span></h3>' +
+      // '<h3 style="font-weight:100; font-family: helvetica;color:#636363;"> MISC DATA <span id="date" style="font-weight: bold; color:#c16a3a">'+ time +'</span></h3>' +
     '</div>';
 
     return html;
