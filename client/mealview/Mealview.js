@@ -1,7 +1,6 @@
 import React from 'react';
 import axios from 'axios';
 import { connect } from 'react-redux';
-import fetch from 'isomorphic-fetch';
 import { updateMeal } from '../actions';
 
 class Mealview extends React.Component {
@@ -23,16 +22,14 @@ class Mealview extends React.Component {
         console.log('res data', response);
         context.props.updateMeal(response.data);
         context.setState({ meal: response.data });
-        console.log('setstate', this.state.meal);
-      })
-    .then(context.forceUpdate());
+      });
   }
 
   render() {
     return (
       <div>
         <div className="container">
-          <h3>{this.props.mealState.mealName.food}</h3>
+          <h3>{this.state.meal.food}</h3>
         
         </div>
       </div>
