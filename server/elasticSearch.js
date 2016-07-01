@@ -1,6 +1,8 @@
 var elasticsearch = require('elasticsearch');
 var generateEmail = require('./emailGenerator.js');
 
+var elasticAddress = process.env.MWLES_PORT_9200_TCP_ADDR || 'localhost';
+
 var ESDB_HOST;
 
 ESDB_HOST = process.env.NODE_ENV === 'production' ? 'elasticdb' : 'localhost';
