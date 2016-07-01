@@ -6,16 +6,23 @@ import { connect } from 'react-redux';
 class OrderButton extends React.Component {
 
   _handleSubmit() {
-    
+    console.log('this props cuisine', this.props);
     let data = {
-      chef: this.props.cuisine.chef,
+      chefName: this.props.cuisine.chef,
       chefId: this.props.cuisine.chefId,
+      chefEmail: this.props.cuisine.chefEmail,
+      chefAddress: this.props.cuisine.chefAddress,
+      chefPhone: this.props.cuisine.chefPhone,
       food: this.props.cuisine.food,
       image: this.props.cuisine.image,
       mealId: this.props.cuisine.mealId,
       price: this.props.cuisine.price,
+      quantity: this.props.cuisine.quantity,
       userId: this.props.loginUser.userID,
       userAddress: this.props.loginUser.address,
+      userPhone: this.props.loginUser.phone,
+      userEmail: this.props.loginUser.email,
+      orderPlaced: Date(),
     };
 
     axios.post('/api/createorder', data)

@@ -24,14 +24,15 @@ class Mealview extends React.Component {
         context.props.updateMeal(response.data);
         context.setState({ meal: response.data });
         console.log('setstate', this.state.meal);
-      });
+      })
+    .then(context.forceUpdate());
   }
 
   render() {
     return (
       <div>
         <div className="container">
-          <h3>{this.state.meal.food}</h3>
+          <h3>{this.props.mealState.mealName.food}</h3>
         
         </div>
       </div>

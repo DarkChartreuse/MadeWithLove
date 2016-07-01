@@ -103,6 +103,7 @@ const loginUser = (state = userInfoState, action) => {
         userID: action.data.id,
         firstName: action.data.firstName,
         lastName: action.data.lastName,
+        email: action.data.email,
         description: action.data.description,
         phone: action.data.phone,
         address: action.data.address,

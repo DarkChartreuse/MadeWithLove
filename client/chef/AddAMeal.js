@@ -14,7 +14,7 @@ class AddAMeal extends React.Component {
       typeoffood: '',
       price: '',
       quantity: '',
-      image: ''
+      image: '',
     };
     this.handleDate = this.handleDate.bind(this);
     this.handleTime = this.handleTime.bind(this);
@@ -49,13 +49,16 @@ class AddAMeal extends React.Component {
     const mealObj = {
       isChef: this.props.isChef,
       chefID: this.props.userID,
+      chefAddress: this.props.chefAddress,
+      chefPhone: this.props.chefPhone,
       chefName: this.props.chefName,
+      chefEmail: this.props.chefEmail,
       add_date: this.state.add_date,
       add_time: this.state.add_time,
       typeoffood: this.state.typeoffood,
       price: this.state.price,
       quantity: this.state.quantity,
-      image: this.state.image
+      image: this.state.image,
     };
     axios.post('/api/meals/', mealObj)
       .then((response) => {
@@ -76,7 +79,7 @@ class AddAMeal extends React.Component {
             <input type="text" placeholder="quantity" onChange={this.handleQuantity} />
             <button type="submit">Submit Meal</button>
           </form>
-            <ImageUploader handleImage={this.handleImage}/>
+            <ImageUploader handleImage={this.handleImage} />
         </div>
       </div>
     );
@@ -88,12 +91,18 @@ const mapStateToProps = (state) =>
   userID: state.loginUser.userID,
   isChef: state.loginUser.isChef,
   chefName: state.loginUser.firstName,
+  chefAddress: state.loginUser.address,
+  chefPhone: state.loginUser.phone,
+  chefEmail: state.loginUser.email,
 });
 
 AddAMeal.propTypes = {
   userID: React.PropTypes.number,
   isChef: React.PropTypes.bool,
   chefName: React.PropTypes.string,
+  chefAddress: React.PropTypes.string,
+  chefPhone: React.PropTypes.string,
+  chefEmail: React.PropTypes.string,
 };
 
 export default connect(mapStateToProps, null)(AddAMeal);
