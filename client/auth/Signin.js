@@ -3,7 +3,6 @@ import { browserHistory } from 'react-router';
 import axios from 'axios';
 import { connect } from 'react-redux';
 import { loggy } from '../actions';
-import Materialize from 'materialize-css';
 
 class Signin extends React.Component {
   constructor(props) {
@@ -46,7 +45,7 @@ class Signin extends React.Component {
         localStorage.setItem('address', response.data.address);
         localStorage.setItem('zip', response.data.zip);
         localStorage.setItem('isChef', response.data.chef);
-        browserHistory.push('/');
+        browserHistory.push(`/users/${this.props.loginUser.userID}`);
       })
       .catch(this.handleError);
   }
@@ -72,4 +71,6 @@ const mapDispatchToProps = (dispatch) => {
   };
 };
 
-export default connect(null, mapDispatchToProps)(Signin);
+const mapStateToProps = ({ loginUser }) => ({ loginUser });
+
+export default connect(mapStateToProps, mapDispatchToProps)(Signin);

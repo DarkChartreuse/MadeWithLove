@@ -35,10 +35,10 @@ const Order = sequelize.define('orders',
       type: Sequelize.FLOAT,
       field: 'price',
     },
-    // address: {
-    //   type: Sequelize.STRING,
-    //   field: 'address',
-    // },
+    userAddress: {
+      type: Sequelize.STRING,
+      field: 'address',
+    },
     // orderDate: {
     //   type: Sequelize.DATE,
     //   field: 'order_date',

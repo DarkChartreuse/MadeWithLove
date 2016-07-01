@@ -3,7 +3,7 @@ import {
   FETCH_FAILURE,
   FETCH_SUCCESS,
 } from './constants';
-import Materialize from 'materialize-css';
+
 import fetch from 'isomorphic-fetch';
 
 
@@ -33,6 +33,7 @@ export function fetchFailure(message) {
   };
 }
 
+
 export function fetchOrders(searchQuery) {
     var elasticsearch = require('elasticsearch');
     var client = new elasticsearch.Client({
@@ -52,7 +53,7 @@ export function fetchOrders(searchQuery) {
       index: 'mwl',
       type: 'meal',
       size: 50,
-      "_source": ["food", "chefID", "rating", "image", "price", "healthLabels", "zipcode"],
+      "_source": ["food", "chefId", "chef", "rating", "image", "price", "healthLabels", "zipcode"],
       // query: { "match_all": {} },
       body:{
         "query": { 
@@ -92,26 +93,14 @@ export function fetchOrders(searchQuery) {
         }
 }
 
-  // return dispatch => {
-  //   dispatch(fetchRequest());
-  //   return fetch(`http://localhost:9200/meals/_search?q=${cuisine}`,
-  //     { method: 'GET', credentials: 'same-origin' })
-  //     .then(result => result.json())
-  //     .then( result => {
-  //       let newResult = [];
-  //       if (result.hits.hits.length) {
-  //         const results = result.hits.hits;
-  //         for (var i = 0; i < results.length; i++) {
-  //           newResult.push(results[i]['_source']);
-  //         }  
-  //         dispatch(fetchSuccess(newResult));
-  //       } else {
-  //         dispatch(fetchFailure(Materialize.toast('Sorry, no results can be found', 4000)));
-  //       }
-  //     })
-  //     .catch(err => dispatch(fetchFailure(err)));
-  // };
 
+
+  export function updateMeal(result) {
+    return {
+      type: 'UPDATE_CURRENT_MEAL',
+      data: result,
+    }
+  }
 
 
 export function loggy(response) {
@@ -215,12 +204,6 @@ export function logoutuser() {
 //     console.log('QUERY >>>>>>>>>', query);
 
 
-export function updateMeal(result) {
-  return {
-    type: 'UPDATE_MEAL',
-    data: result.data,
-  }
-}
 
 export function updateProfile(result) { //when user clicks update profile, everything in the current loginUser store will be put in postgres
   return {
@@ -230,3 +213,22 @@ export function updateProfile(result) { //when user clicks update profile, every
 }
 
 
+// return dispatch => {
+//   dispatch(fetchRequest());
+//   return fetch(`http://localhost:9200/meals/_search?q=${cuisine}`,
+//     { method: 'GET', credentials: 'same-origin' })
+//     .then(result => result.json())
+//     .then( result => {
+//       let newResult = [];
+//       if (result.hits.hits.length) {
+//         const results = result.hits.hits;
+//         for (var i = 0; i < results.length; i++) {
+//           newResult.push(results[i]['_source']);
+//         }  
+//         dispatch(fetchSuccess(newResult));
+//       } else {
+//         dispatch(fetchFailure(Materialize.toast('Sorry, no results can be found', 4000)));
+//       }
+//     })
+//     .catch(err => dispatch(fetchFailure(err)));
+// };

@@ -99,7 +99,7 @@ export default class EditForm extends React.Component {
       this.props.updateLoginUser(userInfo);
 
       //update the user info in postgres
-      axios.post('/api/updateUser', userInfo)
+      axios.post('/api/updateuser', userInfo)
         .then(function (response) {
           console.log(response);
         })

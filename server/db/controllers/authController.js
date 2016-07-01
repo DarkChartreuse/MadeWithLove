@@ -34,7 +34,8 @@ const isLoggedIn = (req, res, next) => {
     console.log('you got req session!?', req.session);
     return next();
   }
-  return res.redirect('/signin');
+  console.log('you not logged in');
+  res.status(401).json({ message: 'not logged in' });
 };
 
 module.exports = {

@@ -60,11 +60,11 @@ const orders = (state = {isFetching: false, result: [], error: null}, action) =>
   }
 };
 
-const mealState = (state, action) => {
+const mealState = (state = {}, action) => {
   switch (action.type) {
     case 'UPDATE_CURRENT_MEAL':
       return Object.assign({}, state, {
-        mealName: action.data.food,
+        mealName: action.data,
       });
     default:
       return state;
@@ -134,6 +134,7 @@ const loginUser = (state = userInfoState, action) => {
 const rootReducer = combineReducers({
   toggleQuantity,
   toggleVegan,
+  mealState,
   saveSearchQuery,
   orders,
   toggleAuth,
