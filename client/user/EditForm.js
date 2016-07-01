@@ -17,7 +17,7 @@ export default class EditForm extends React.Component {
       city: this.props.loginUser.city,
       state: this.props.loginUser.state,
       zipcode: this.props.loginUser.zipcode,
-      image: this.props.loginUser.image,
+      profile: this.props.loginUser.profile,
       description: this.props.loginUser.description,
     };
     this.handleFirstName = this.handleFirstName.bind(this);
@@ -29,7 +29,7 @@ export default class EditForm extends React.Component {
     this.handleCity = this.handleCity.bind(this);
     this.handleState = this.handleState.bind(this);
     this.handleZip = this.handleZip.bind(this);
-    this.handleImage = this.handleImage.bind(this);
+    this.handleProfile = this.handleProfile.bind(this);
     this.handleDescription = this.handleDescription.bind(this);
     this.handleSubmit = this.handleSubmit.bind(this);
   }
@@ -64,9 +64,9 @@ export default class EditForm extends React.Component {
   handleDescription(e) {
     this.setState({ description: e.target.value});
   }
-  handleImage(uri) {
-    console.log('handleimage>>>', uri);
-    this.setState({ image: uri });
+  handleProfile(uri) {
+    console.log('handleprofile>>>', uri);
+    this.setState({ profile: uri });
   }
 
   handleSubmit(e) {
@@ -92,7 +92,7 @@ export default class EditForm extends React.Component {
         password: this.state.password,
         address: this.state.street + ' ' + this.state.city + ', ' + this.state.state + ' ' + this.state.zipcode,
         zip: this.state.zipcode,
-        image: this.state.image,
+        profile: this.state.profile,
       };
 
       //update loginUser in the store
@@ -103,7 +103,7 @@ export default class EditForm extends React.Component {
         .then(function (response) {
           console.log(response);
         })
-        .catch( err => { console.log('Failed to create account') });
+        .catch( err => { console.log('Failed to update account') });
   }
 
 
@@ -124,7 +124,7 @@ export default class EditForm extends React.Component {
         <input type='text' placeholder={this.state.zipcode}onChange={this.handleZip}/>
         <input type='submit'/>
       </form>
-      <div>Set Profile Picture<ImageUploader handleImage={this.props.putImageInLoginUserStore}/></div>
+      <div>Set Profile Picture<ImageUploader handleProfile={this.handleProfile}/></div>
       </div>
     )
   }
