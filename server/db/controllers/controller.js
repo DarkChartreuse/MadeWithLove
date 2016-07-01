@@ -4,9 +4,7 @@ const mealsController = require('../controllers/mealsController.js');
 
 module.exports = {
   getMealView: function(req, res) {
-    mealsController.getOrder(req, res)
-    .then( (mealsResult) => {
-      console.log(mealsResult);
-    });
+    var donuts = 'donuts';
+    res.json(donuts);
   }
 };

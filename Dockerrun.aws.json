@@ -1,0 +1,56 @@
+{
+  "AWSEBDockerrunVersion": "2",
+  "volumes": [
+    {
+      "name": "mwl_web_1",
+      "host": {
+        "sourcePath": "/app/web"
+      }
+    },
+    {
+      "name": "mwl_db_1",
+      "host": {
+        "sourcePath": "/app/data/db"
+      }
+    }
+  ],
+  "containerDefinitions": [
+    {
+      "name": "app",
+      "image": "darkchartreuse/mwl",
+      "memory": 128,
+      "mountPoints": [
+        {
+          "sourceVolume": "mwl_web_1",
+          "containerPath": "/app/web"
+        }
+      ],
+      "portMappings": [
+        {
+          "hostPort": 3000,
+          "containerPort": 3000
+        }
+      ],
+      "links": [
+        "db"
+      ]
+    },
+    {
+      "name": "db",
+      "image": "postgres",
+      "memory": 128,
+      "mountPoints": [
+        {
+          "sourceVolume": "mwl_db_1",
+          "containerPath": "/data/db"
+        }
+      ],
+      "portMappings": [
+        {
+          "hostPort": 5432,
+          "containerPort": 5432
+        }
+      ]
+    }
+  ]
+}

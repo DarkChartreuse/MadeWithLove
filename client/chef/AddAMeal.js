@@ -3,6 +3,8 @@ import axios from 'axios';
 import { connect } from 'react-redux';
 import { browserHistory } from 'react-router';
 
+import ImageUploader from './ImageUploader';
+
 class AddAMeal extends React.Component {
   constructor(props) {
     super(props);
@@ -12,12 +14,14 @@ class AddAMeal extends React.Component {
       typeoffood: '',
       price: '',
       quantity: '',
+      image: ''
     };
     this.handleDate = this.handleDate.bind(this);
     this.handleTime = this.handleTime.bind(this);
     this.handleTypeOfFood = this.handleTypeOfFood.bind(this);
     this.handlePrice = this.handlePrice.bind(this);
     this.handleQuantity = this.handleQuantity.bind(this);
+    this.handleImage = this.handleImage.bind(this);
     this.handleSubmit = this.handleSubmit.bind(this);
   }
 
@@ -36,6 +40,10 @@ class AddAMeal extends React.Component {
   handleQuantity(e) {
     this.setState({ quantity: e.target.value });
   }
+  handleImage(uri) {
+    console.log('handleimage>>>', uri);
+    this.setState({ image: uri });
+  }
   handleSubmit(e) {
     e.preventDefault();
     const mealObj = {
@@ -47,6 +55,7 @@ class AddAMeal extends React.Component {
       typeoffood: this.state.typeoffood,
       price: this.state.price,
       quantity: this.state.quantity,
+      image: this.state.image
     };
     axios.post('/api/meals/', mealObj)
       .then((response) => {
@@ -67,6 +76,7 @@ class AddAMeal extends React.Component {
             <input type="text" placeholder="quantity" onChange={this.handleQuantity} />
             <button type="submit">Submit Meal</button>
           </form>
+            <ImageUploader handleImage={this.handleImage}/>
         </div>
       </div>
     );

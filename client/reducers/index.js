@@ -60,11 +60,11 @@ const orders = (state = {isFetching: false, result: [], error: null}, action) =>
   }
 };
 
-const mealState = (state, action) => {
+const mealState = (state = {}, action) => {
   switch (action.type) {
     case 'UPDATE_CURRENT_MEAL':
       return Object.assign({}, state, {
-        mealName: action.data.food,
+        mealName: action.data,
       });
     default:
       return state;
@@ -108,6 +108,19 @@ const loginUser = (state = userInfoState, action) => {
         address: action.data.address,
         zip: action.data.zip,
         isChef: action.data.chef,
+        profile: action.data.profile,
+      });
+    case 'UPDATE_PROFILE':
+      return Object.assign({}, state, {
+        firstName: action.data.firstName,
+        lastName: action.data.lastName,
+        email: action.data.email,
+        password: action.data.password,
+        description: action.data.description,
+        phone: action.data.phone,
+        address: action.data.address,
+        zip: action.data.zipcode,
+        profile: action.data.profile,
       });
     case 'LOGOUT_USER':
       return {};
@@ -116,9 +129,12 @@ const loginUser = (state = userInfoState, action) => {
   }
 };
 
+
+
 const rootReducer = combineReducers({
   toggleQuantity,
   toggleVegan,
+  mealState,
   saveSearchQuery,
   orders,
   toggleAuth,

@@ -14,12 +14,10 @@ module.exports = {
         chefId: req.body.chefId,
         mealId: req.body.mealId,
         userId: req.body.userId,
-        // cuisine: req.body.cuisine,
-        // description: req.body.cuisine,
-        // quantity: req.body.quantity,
-        // price: req.body.price,
-        // address: req.body.address,
-      // });
+        food: req.body.food,
+        image: req.body.image,
+        price: req.body.price,
+        userAddress: req.body.userAddress,
     })
     .catch(err => { console.error('Error adding order: ', err); })
     .finally(() => {
@@ -42,9 +40,11 @@ module.exports = {
   },
 
   getOrder: (req, res) => {
-    Order.findOne({ where: { id: req.params.id } })
+    console.log('req params', req.params);
+    Order.findOne({ where: { mealId: req.params.id } })
     .then(order => {
-      res.json(order.dataValues);
+      console.log('we are in the order', order);
+      res.json(order);
     })
     .catch(err => { console.error('Error fetching order', err); });
   },

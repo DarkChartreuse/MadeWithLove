@@ -35,8 +35,9 @@ render((
         <Route path="/signup" component={Signup} />
         <Route path="/signin" component={Signin} />
         <Route path="/addmeal" component={AddAMeal} />
-        <Route path="/mealview" component={Mealview} />
-        <Route path="/user/:id" component={Profile} />
+        <Route path="/users/:id" component={Profile} />
+        <Route path="/search" component={Search} />
+        <Route path="/orders/:id" component={Mealview} />
       </Route>
     </Router>
   </Provider>

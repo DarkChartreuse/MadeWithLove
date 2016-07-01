@@ -1,4 +1,8 @@
 var elasticsearch = require('elasticsearch');
+var generateEmail = require('./emailGenerator.js');
+
+
+
 var elasticClient = new elasticsearch.Client({
   host: 'localhost:9200',
   log: 'info'
@@ -39,8 +43,8 @@ module.exports.initMapping = function() {
         cuisine:  {type: 'string', "index": "analyzed", "analyzer": "english"},
         healthLabels: {type: 'string', "index": "analyzed", "analyzer": "english"},
         isChef: {type: 'boolean'},
-        chefID: {type: 'integer'},
-        chefName: {type: 'string', "index": "not_analyzed", "analyzer": "english"},
+        chefId: {type: 'integer'},
+        chef: {type: 'string', "index": "not_analyzed", "analyzer": "english"},
         ingredients:  {type: 'string', "index": "analyzed", "analyzer": "english"},
         description: {type: 'string'},
         quantity: {type: 'integer'},
@@ -54,7 +58,22 @@ module.exports.initMapping = function() {
 }
 
 module.exports.addMeal = function(meal) {
+
   console.log('CREATING elasticsearch meal>>>>>>>>>>>>', meal);
+  
+  let to = 'anonpunk123@gmail.com';
+  let chefName = meal.chefName;
+  let mealName = meal.typeoffood; 
+  let date = 'Placeholder DATE: 12.31.16';
+  let subject = 'Your meal has been created';
+  let text = 'Your meal:' + mealName + ' has been created.';
+  let htmlBody = generateEmail.mealCreatedEmailBody(chefName, mealName, date);
+
+  console.log('<<<<<<<<<<<<<<<<Generating EMAIL>>>>>>>>>>>>');
+  generateEmail.sendEmail(to, subject, text, htmlBody);
+
+
+
   return elasticClient.index({
     index: indexName,
     type: 'meal',
@@ -64,8 +83,8 @@ module.exports.addMeal = function(meal) {
       time: meal.add_time,  
       food: meal.typeoffood,
       cuisine: meal.cuisine,
-      chefID: meal.chefID,
-      chefName: meal.chefName,
+      chefId: meal.chefID,
+      chef: meal.chefName,
       isChef: meal.isChef,
       ingredients: meal.ingredients,
       description: meal.description,
