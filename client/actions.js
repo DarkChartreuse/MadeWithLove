@@ -3,7 +3,7 @@ import {
   FETCH_FAILURE,
   FETCH_SUCCESS,
 } from './constants';
-import Materialize from 'materialize-css';
+
 import fetch from 'isomorphic-fetch';
 
 

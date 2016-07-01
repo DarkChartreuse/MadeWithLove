@@ -6,7 +6,7 @@ import { fetchOrders, updateMeal } from '../actions';
 import SearchBar from './SearchBar';
 import CuisineRow from './CuisineRow';
 
-export default class Search extends React.Component {
+class Search extends React.Component {
   render() {
     console.log('searchprops >>>>>', this.props);
     var { isFetching, orders } = this.props;
@@ -14,7 +14,7 @@ export default class Search extends React.Component {
       <div>
         <SearchBar  inputCuisine={this.props.inputCuisine} fetchOrders={this.props.fetchOrders} cuisine={this.props.saveSearchQuery.cuisine} vegan={this.props.vegan} toggleVegan={this.props.toggleVegan}/>
         { !this.props.orders.orders && <div></div> }
-        { this.props.orders.orders && <FilterableCuisineTable orders={orders} meal={this.props.updateMeal} /> }
+        { this.props.orders.orders && <FilterableCuisineTable orders={orders} meal={this.props.updateMeal} loginUser={this.props.loginUser} /> }
       </div>
     )
   }
@@ -28,7 +28,7 @@ class FilterableCuisineTable extends React.Component {
     return (            
       <div>
         <CuisineTable
-          orders={orders} meal={this.props.meal} 
+          orders={orders} meal={this.props.meal} loginUser={this.props.loginUser}
         />
       </div>
     );
@@ -36,33 +36,6 @@ class FilterableCuisineTable extends React.Component {
 }
 
 
-
-// class SearchBar extends React.Component {
-//   // _handleChange() {
-//   //   let filterTextVal = this.refs.filterTextInput.value;
-//   //   let inStockCheckBoxVal = this.refs.inStockOnlyInput.value;
-//   //   this.props.onUserInput(filterTextVal , inStockCheckBoxVal);
-//   // }
-
-//   render() {
-//     return (
-//       <form>             
-//         <input
-//           className="form-control" 
-//           type="text" 
-//           placeholder="Search by cuisine name"
-//           />
-//         <p>
-//           <input
-//             type="checkbox" 
-//             className="checkbox"/>
-//           {' '}
-//           Only show items in stock         
-//         </p>
-//       </form>
-//     );
-//   }
-// }
 
 class CuisineTable extends React.Component {
   render() {
@@ -78,7 +51,7 @@ class CuisineTable extends React.Component {
             key={cuisine.cuisine} />
           );
         }
-        rows.push(<CuisineRow meal={this.props.meal} cuisine={cuisine} key={cuisine.food} />);
+        rows.push(<CuisineRow loginUser={this.props.loginUser} meal={this.props.meal} cuisine={cuisine} key={cuisine.food} />);
         lastCategory = cuisine.cuisine;
       });
     }
@@ -109,38 +82,6 @@ class CuisineCategoryRow extends React.Component {
   }
 }
 
-
-
-<<<<<<< HEAD
-    console.log(data);
-
-    axios.post('/api/createorder', data)
-      .then(function (response) {
-        console.log(response);
-      })
-      .catch(function (error) {
-        console.log(error);
-      });    
-  }
-
-  render() {
-    let btn = "";
-     if(this.props.isInStock) {
-        btn = (
-             <button className="submit-button btn-primary btn-xs active" onClick={this._handleSubmit.bind(this)}>Order</button>
-        );
-      } else {
-        btn = (
-             <button className="submit-button btn-primary btn-xs disabled" onClick={this._handleSubmit.bind(this)}>Order</button>
-        );
-      } 
-    return btn;
-  }
-}  
-
-=======
->>>>>>> Meal Order Flow WIP
-
 const mapDispatchToProps = (dispatch) => {
   return {
     inputCuisine: (e) => dispatch({ type: 'SAVE_SEARCH_QUERY', data: e.target.value }),
@@ -158,6 +99,7 @@ function mapStatetoProps(state) {
     orders: state.orders,
     error: null,
     vegan: false,
+    loginUser: state.loginUser,
   };
 }
 
