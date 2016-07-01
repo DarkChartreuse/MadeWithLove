@@ -1,7 +1,6 @@
 const User = require('./db/controllers/usersController.js');
 const Meal = require('./db/controllers/mealsController.js');
 const Order = require('./db/controllers/ordersController.js');
-const Controller = require('./db/controllers/controller.js');
 const Auth = require('./db/controllers/authController.js');
 
 
@@ -25,12 +24,19 @@ module.exports = (app) => {
   app.route('/api/meals/:id').delete(Meal.deleteMeal);
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 
   app.route('/api/createorder').post(Order.createOrder);
 =======
   app.route('/api/createOrder').post(Order.createOrder);
 >>>>>>> Meal Order Flow WIP
   app.route('/api/meal/:id').get(Controller.getMealView);
+=======
+  app.route('/api/createorder').post(Order.createOrder);
+
+  // for orders from users
+  app.route('/api/orders/:id').get(Order.getOrder);
+>>>>>>> MealView gets data back and meal routing working
 
   app.route('/api/auth/sign-in').post(Auth.signIn);
   app.route('/signout').get(Auth.logOut);

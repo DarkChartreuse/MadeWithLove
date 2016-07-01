@@ -1,9 +1,9 @@
 import React from 'react';
-import  axios from 'axios';
+import axios from 'axios';
 import { Link } from 'react-router';
 import { connect } from 'react-redux';
 import { fetchOrders, updateMeal } from '../actions';
-// import OrderButton from './OrderButton';
+import SearchBar from './SearchBar';
 import CuisineRow from './CuisineRow';
 
 export default class Search extends React.Component {
@@ -12,9 +12,9 @@ export default class Search extends React.Component {
     var { isFetching, orders } = this.props;
     return (
       <div>
-        <SearchBar inputCuisine={this.props.inputCuisine} fetchOrders={this.props.fetchOrders} cuisine={this.props.saveSearchQuery.cuisine} vegan={this.props.vegan} toggleVegan={this.props.toggleVegan}/>
+        <SearchBar  inputCuisine={this.props.inputCuisine} fetchOrders={this.props.fetchOrders} cuisine={this.props.saveSearchQuery.cuisine} vegan={this.props.vegan} toggleVegan={this.props.toggleVegan}/>
         { !this.props.orders.orders && <div></div> }
-        { this.props.orders.orders && <FilterableCuisineTable orders={orders} meal={this.props.updateMeal} /> }
+        { this.props.orders.orders && <FilterableCuisineTable orders={orders} meal={this.props.updateMeal} loginUser={this.props.loginUser} /> }
       </div>
     )
   }
@@ -28,7 +28,7 @@ class FilterableCuisineTable extends React.Component {
     return (            
       <div>
         <CuisineTable
-          orders={orders} meal={this.props.meal}
+          orders={orders} meal={this.props.meal} loginUser={this.props.loginUser}
         />
       </div>
     );
@@ -36,79 +36,7 @@ class FilterableCuisineTable extends React.Component {
 }
 
 
-class SearchBar extends React.Component {
-  constructor(props) {
-    super(props);
-    this.state = {
-      cuisine: undefined,
-      add_date: undefined,
-      minPrice: undefined,
-      maxPrice: undefined
-    };
-    this.handleDate = this.handleDate.bind(this);
-    this.handleMinPrice = this.handleMinPrice.bind(this);
-    this.handleMaxPrice = this.handleMaxPrice.bind(this);
-    this.handleCuisine = this.handleCuisine.bind(this);
-  }
-  
-  handleDate(e) {
-    this.setState({ add_date: e.target.value });
-  }
-  handleCuisine(e) {
-    this.setState({ cuisine: e.target.value });
-  }
-  handleMaxPrice(e) {
-    this.setState({ maxPrice: e.target.value });
-  }
-  handleMinPrice(e) {
-    this.setState({ minPrice: e.target.value });
-  }
 
-  render() {
-    return (
-      // <div id="index-banner" className="parallax-container">
-        <div className="section no-pad-bot">
-          <div className="container">
-            <h1 className="header center">Made With Love</h1>
-            <div className="row center">
-              <h5 className="header col s12 light">Find your next meal</h5>
-            </div>
-            <div className="row">
-              <div className="input-field col s4">
-                <input placeholder="Type of food" type="text" onChange={this.handleCuisine} />
-              </div>
-              <div className="input-field col s3">
-                <input placeholder='Minimum Price'type="text" name="minPrice" onChange={this.handleMinPrice}/>
-              </div>
-              <div className="input-field col s3">
-                <input placeholder='Maximum Price'type="text" name="maxPrice" onChange={this.handleMaxPrice}/>
-              </div>
-              <div className="input-field col s3">
-                <input type="date" name="add_date" onChange={this.handleDate}/>
-              </div>
-              <button
-                className="btn-large #ffb74d orange lighten-2 black-text menubuttons"
-                onClick={() => { this.props.fetchOrders({
-                  cuisine: this.state.cuisine,
-                  maxPrice: this.state.maxPrice,
-                  minPrice: this.state.minPrice,
-                  add_date: this.state.add_date
-                }) }} >
-                Search
-              </button>
-            </div>
-            <div className="row">
-              <div>
-                <input type="checkbox" id="test5" checked={this.props.vegan} />
-                <label for="test5" onClick={ () => this.props.toggleVegan() }>Vegan</label>
-              </div>
-            </div>
-          </div>
-        </div>
-      // </div>
-    )
-  }
-}
 // class SearchBar extends React.Component {
 //   // _handleChange() {
 //   //   let filterTextVal = this.refs.filterTextInput.value;
@@ -136,7 +64,6 @@ class SearchBar extends React.Component {
 //   }
 // }
 
-
 class CuisineTable extends React.Component {
   render() {
     var rows = [];
@@ -151,7 +78,7 @@ class CuisineTable extends React.Component {
             key={cuisine.cuisine} />
           );
         }
-        rows.push(<CuisineRow meal={this.props.meal} cuisine={cuisine} key={cuisine.food} />);
+        rows.push(<CuisineRow loginUser={this.props.loginUser} meal={this.props.meal} cuisine={cuisine} key={cuisine.food} />);
         lastCategory = cuisine.cuisine;
       });
     }
@@ -231,6 +158,7 @@ function mapStatetoProps(state) {
     orders: state.orders,
     error: null,
     vegan: false,
+    loginUser: state.loginUser,
   };
 }
 

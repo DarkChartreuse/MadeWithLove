@@ -1,10 +1,11 @@
 import React from 'react';
 import axios from 'axios';
+import { browserHistory } from 'react-router';
 
 export default class OrderButton extends React.Component {
   
   _handleSubmit() {
-    console.log('order from meals prop', this.props)
+    console.log('order from meals prop', this.props);
     let data = {
       chef: this.props.cuisine.chef,
       chefId: this.props.cuisine.chefId,
@@ -12,33 +13,24 @@ export default class OrderButton extends React.Component {
       image: this.props.cuisine.image,
       mealId: this.props.cuisine.mealId,
       price: this.props.cuisine.price,
-      usersID: TO_BE_FILLED,
-      rating: TO_BE_ADDED_BY_USER,
+      userId: this.props.loginUser.userID,
     };
 
-
-    console.log(data);
-
-    axios.post('/api/createOrder', data)
+    axios.post('/api/createorder', data)
       .then(function (response) {
-        console.log(response);
+        console.log('da response', response);
+        browserHistory.push(`/orders/${data.mealId}`);
       })
       .catch(function (error) {
         console.log(error);
       });    
+
+      
   }
 
   render() {
-    let btn = "";
-     if(this.props.isInStock) {
-        btn = (
-             <button className="submit-button btn-primary btn-xs active" onClick={this._handleSubmit.bind(this)}>Order</button>
-        );
-      } else {
-        btn = (
-             <button className="submit-button btn-primary btn-xs disabled" onClick={this._handleSubmit.bind(this)}>Order</button>
-        );
-      } 
-    return btn;
+    return (
+      <button className="btn #ffb74d orange lighten-2 black-text menubuttons" onClick={this._handleSubmit.bind(this)}>Order</button>
+    );
   }
 };

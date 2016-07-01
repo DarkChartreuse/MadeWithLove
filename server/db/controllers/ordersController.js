@@ -17,8 +17,6 @@ module.exports = {
         food: req.body.food,
         image: req.body.image,
         price: req.body.price,
-        
-      // });
     })
     .catch(err => { console.error('Error adding order: ', err); })
     .finally(() => {
@@ -41,9 +39,11 @@ module.exports = {
   },
 
   getOrder: (req, res) => {
-    Order.findOne({ where: { id: req.params.id } })
+    console.log('req params', req.params);
+    Order.findOne({ where: { mealId: req.params.id } })
     .then(order => {
-      res.json(order.dataValues);
+      console.log('we are in the order', order);
+      res.json(order);
     })
     .catch(err => { console.error('Error fetching order', err); });
   },
