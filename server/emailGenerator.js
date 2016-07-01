@@ -1,5 +1,5 @@
 var nodemailer = require('nodemailer');
-var smtpConfig = require('../env.config.js').smtpConfig;
+var smtpConfig = require('../config.env.js').smtpConfig;
 // var generateEmail = require('./App/Utils/emailGenerator');
 
 //CONFIG
@@ -7,13 +7,9 @@ var smtpConfig = require('../env.config.js').smtpConfig;
 
 
 //REQUIRED VARIABLES
-  var to = 'anonpunk123@gmail.com';
-  var chefName = meal.chefName;
-  var mealName = meal.typeoffood; 
-  var date = 'Test';
-  var htmlBody = 
+
 //GENERATE EMAIL 
-  function sendEmail(to, subjectLine, plainTextBody, htmlBody) {
+  module.exports.sendEmail = function(to, subjectLine, plainTextBody, htmlBody) {
     var transporter = nodemailer.createTransport(smtpConfig); 
     var mailOptions = {
       from: '"MWL" <mwl.incorporated@gmail.com>', 
@@ -42,7 +38,7 @@ var smtpConfig = require('../env.config.js').smtpConfig;
   //Email notification to the users after the match has been made & 
   //the location has been set
 
-  module.exports.mealCreatedEmailBody(chefName, mealName, time) {
+  module.exports.mealCreatedEmailBody = function(chefName, mealName, time) {
     var html =   
     '<div style="padding:100px;">' +
         '<h1 style="padding-bottom: 20px; border-bottom: 1px solid #c16a3a; font-family: helvetica; color:#c16a3a">' +
