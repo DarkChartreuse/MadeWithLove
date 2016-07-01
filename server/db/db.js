@@ -5,8 +5,11 @@ var opts = {
   password: '',
 };
 
+var sequelizeAddress = process.env.MWLDB_PORT_5432_TCP_ADDR || 'localhost';
+console.log('>>>>>>>>>>>>>>>> sequelize ip: ', sequelizeAddress);
+
 var sequelize = new Sequelize(opts.database, opts.username, opts.password, {
-  host: 'localhost',
+  host: sequelizeAddress,
   dialect: 'postgres',
   pool: {
     max: 5,
