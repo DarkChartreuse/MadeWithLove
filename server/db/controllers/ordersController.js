@@ -14,12 +14,21 @@ module.exports = {
         chefId: req.body.chefId,
         mealId: req.body.mealId,
         userId: req.body.userId,
-        // cuisine: req.body.cuisine,
-        // description: req.body.cuisine,
-        // quantity: req.body.quantity,
-        // price: req.body.price,
-        // address: req.body.address,
-      // });
+        food: req.body.food,
+        cuisine: req.body.cuisine, 
+        image: req.body.image,
+        price: req.body.price,
+        quantity: req.body.quantity,
+        userName: req.body.userName,
+        userAddress: req.body.userAddress,
+        userPhone: req.body.userPhone,
+        userEmail: req.body.userEmail,
+        chefName: req.body.chefName,
+        chefAddress: req.body.chefAddress,
+        chefPhone: req.body.chefPhone,
+        chefEmail: req.body.chefEmail,
+        orderPlaced: req.body.orderPlaced,
+        mealAddedDate: req.body.mealAddedDate,
     })
     .catch(err => { console.error('Error adding order: ', err); })
     .finally(() => {
@@ -42,11 +51,22 @@ module.exports = {
   },
 
   getOrder: (req, res) => {
-    Order.findOne({ where: { id: req.params.id } })
+    console.log('req params', req.params);
+    Order.findOne({ where: { mealId: req.params.id } })
     .then(order => {
-      res.json(order.dataValues);
+      console.log('we are in the order', order);
+      res.json(order);
     })
     .catch(err => { console.error('Error fetching order', err); });
+  },
+
+  getUserOrders: (req, res) => {
+    console.log('req params', req.params);
+    Order.findAll({ where: { userId: req.params.id } })
+    .then(orders => {
+      res.json(orders);
+    })
+    .catch(err => { console.error('Error fetching chefs orders', err); });
   },
 
   getAllOrders: (req, res) => {

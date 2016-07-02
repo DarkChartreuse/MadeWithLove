@@ -1,8 +1,8 @@
 const db = require('./db.js');
 const User = require('./models/usersModel.js');
-const Meal = require('./models/mealsModel.js');
+const Order = require('./models/ordersModel.js');
 const usersSeed = require('./seedData/usersSeed.js');
-const mealsSeed = require('./seedData/mealsSeed.js');
+const ordersSeed = require('./seedData/ordersSeed.js');
 
 db.sync({ force: true })
   .then(() => {
@@ -11,9 +11,9 @@ db.sync({ force: true })
   .then(() => {
     User.bulkCreate(usersSeed)
     .then(() => {
-      Meal.bulkCreate(mealsSeed)
+      Order.bulkCreate(ordersSeed)
       .then(() => {
-        console.log('Seeding almost complete...');
+        console.log('Completing database seeding...');
       });
     });
   })

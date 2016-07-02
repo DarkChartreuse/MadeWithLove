@@ -20,9 +20,9 @@ import Search from './search/Search';
 import Signup from './auth/Signup';
 import Signin from './auth/Signin';
 import Mealview from './mealview/Mealview';
-import SearchBar from './search/SearchBar';
 import AddAMeal from './chef/AddAMeal';
 import Profile from './user/Profile';
+import ChefMeals from './user/ChefMeals';
 
 const logger = createLogger();
 const store = createStore(rootReducer, applyMiddleware(thunk, logger));
@@ -36,9 +36,10 @@ render((
         <Route path="/signup" component={Signup} />
         <Route path="/signin" component={Signin} />
         <Route path="/addmeal" component={AddAMeal} />
-        <Route path="/search" component={SearchBar} />
-        <Route path="/mealview" component={Mealview} />
-        <Route path="/profile" component={Profile} />
+        <Route path="/users/:id" component={Profile} />
+        <Route path="/search" component={Search} />
+        <Route path="/orders/:id" component={Mealview} />
+        <Route path="/chef" component={ChefMeals} />
       </Route>
     </Router>
   </Provider>

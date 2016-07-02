@@ -1,28 +1,32 @@
 const User = require('./db/controllers/usersController.js');
 const Meal = require('./db/controllers/mealsController.js');
 const Order = require('./db/controllers/ordersController.js');
-const Controller = require('./db/controllers/controller.js');
 const Auth = require('./db/controllers/authController.js');
+const Rec = require('./db/controllers/recomController.js');
 
 
 module.exports = (app) => {
-  app.post('/api/users', User.createUser);
-  app.get('/api/users', User.getAllUsers);
-  app.get('/api/users/:id', User.getUser);
-  app.delete('/api/users/:id', User.deleteUser);
 
-  app.post('/api/meals', Auth.isLoggedIn, Meal.createMeal);
-  app.get('/api/meals', Meal.getAllMeals);
-  app.get('/api/meals/:id', Meal.getMeal);
-  app.delete('/api/meals/:id', Meal.deleteMeal);
+  app.route('/api/users').post(User.createUser);
+  app.route('/api/users').get(User.getAllUsers);
+  app.route('/users/:id').get(User.getUser);
+  app.route('/api/users/:id').delete(User.deleteUser);
+  app.post('/api/updateuser', User.updateUser);
 
+  app.route('/api/meals').post(Auth.isLoggedIn, Meal.createMeal);
+  app.route('/api/meals').get(Meal.getAllMeals);
+  app.route('/api/meals/:id').get(Meal.getMeal);
+  app.route('/api/meals/:id').delete(Meal.deleteMeal);
 
-  app.post('/api/createOrder', Order.createOrder);
+  app.route('/api/createorder').post(Order.createOrder);
+  // for orders from users
+  app.route('/api/orders/:id').get(Order.getOrder);
 
-  app.get('/api/meal/:id', Controller.getMealView);
+  app.route('/api/auth/sign-in').post(Auth.signIn);
+  app.route('/signout').get(Auth.logOut);
 
-  app.post('/api/auth/sign-in', Auth.signIn);
-  app.get('/signout', Auth.logOut);
+  app.post('/api/uploadImage', Meal.uploadImage);
+  app.route('/*').get((req, res) => { res.redirect('/'); });
 
-  app.get('/*', (req, res) => { res.redirect('/'); });
+  app.route('/api/getrecommendation').post(Rec.getRec);
 };

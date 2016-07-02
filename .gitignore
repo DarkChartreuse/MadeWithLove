@@ -1,6 +1,6 @@
 ### node etc ###
 
-config.js
+config.env.js
 
 # Logs
 logs
@@ -27,11 +27,9 @@ dist/
 
 # temp
 server/db/controllers/_temp/
-server/db/models/_temp/
-server/db/migrations/
 server/db/seeders/
-server/db/config.json
-.sequelizerc
+wait-for-it.sh
+wait-for-postgres.sh
 
 node_modules/
 bower_components/

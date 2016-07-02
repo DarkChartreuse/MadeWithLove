@@ -53,12 +53,33 @@ const orders = (state = {isFetching: false, result: [], error: null}, action) =>
       return Object.assign({}, state, {
         isFetching: false,
         error: 'Oops'
-
+      })
+    case 'CHEF_MEALS_SUCCESS':
+      return Object.assign({}, state, {
+        isFetching: false,
+        chefMeals: action.result
+      })
+    case 'CHEF_ORDERS_SUCCESS':
+      return Object.assign({}, state, {
+        isFetching: false,
+        chefMeals: action.result
       })
     default:
       return state
   }
 };
+
+const mealState = (state = {}, action) => {
+  switch (action.type) {
+    case 'UPDATE_CURRENT_MEAL':
+      return Object.assign({}, state, {
+        mealName: action.data,
+      });
+    default:
+      return state;
+  }
+};
+
 
 const toggleAuth = (state = { isSignIn: false }, action) => {
   switch (action.type) {
@@ -91,11 +112,25 @@ const loginUser = (state = userInfoState, action) => {
         userID: action.data.id,
         firstName: action.data.firstName,
         lastName: action.data.lastName,
+        email: action.data.email,
         description: action.data.description,
         phone: action.data.phone,
         address: action.data.address,
         zip: action.data.zip,
         isChef: action.data.chef,
+        profile: action.data.profile,
+      });
+    case 'UPDATE_PROFILE':
+      return Object.assign({}, state, {
+        firstName: action.data.firstName,
+        lastName: action.data.lastName,
+        email: action.data.email,
+        password: action.data.password,
+        description: action.data.description,
+        phone: action.data.phone,
+        address: action.data.address,
+        zip: action.data.zipcode,
+        profile: action.data.profile,
       });
     case 'LOGOUT_USER':
       return {};
@@ -104,9 +139,12 @@ const loginUser = (state = userInfoState, action) => {
   }
 };
 
+
+
 const rootReducer = combineReducers({
   toggleQuantity,
   toggleVegan,
+  mealState,
   saveSearchQuery,
   orders,
   toggleAuth,
