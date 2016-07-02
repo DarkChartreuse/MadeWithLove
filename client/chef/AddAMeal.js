@@ -25,6 +25,7 @@ class AddAMeal extends React.Component {
     this.handleQuantity = this.handleQuantity.bind(this);
     this.handleImage = this.handleImage.bind(this);
     this.handleSubmit = this.handleSubmit.bind(this);
+    this.handleError = this.handleError.bind(this);
   }
 
   handleDate(e) {
@@ -50,6 +51,10 @@ class AddAMeal extends React.Component {
     console.log('handleimage>>>', uri);
     this.setState({ image: uri });
   }
+
+  handleError(error) {
+    Materialize.toast(`${error.data.message}`, 4000);
+  }
   handleSubmit(e) {
     e.preventDefault();
     const mealObj = {
@@ -71,7 +76,12 @@ class AddAMeal extends React.Component {
       .then((response) => {
         console.log('the saved response', response);
         browserHistory.push('/chef');
+      })
+      .catch((err) => {
+        this.handleError(err);
+        browserHistory.push('/signin');
       });
+    
 
 
   }
