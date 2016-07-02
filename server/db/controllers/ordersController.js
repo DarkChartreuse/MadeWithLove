@@ -15,9 +15,20 @@ module.exports = {
         mealId: req.body.mealId,
         userId: req.body.userId,
         food: req.body.food,
+        cuisine: req.body.cuisine,
         image: req.body.image,
         price: req.body.price,
+        quantity: req.body.quantity,
+        userName: req.body.userName,
         userAddress: req.body.userAddress,
+        userPhone: req.body.userPhone,
+        userEmail: req.body.userEmail,
+        chefName: req.body.chefName,
+        chefAddress: req.body.chefAddress,
+        chefPhone: req.body.chefPhone,
+        chefEmail: req.body.chefEmail,
+        orderPlaced: req.body.orderPlaced,
+        mealAddedDate: req.body.mealAddedDate,
     })
     .catch(err => { console.error('Error adding order: ', err); })
     .finally(() => {

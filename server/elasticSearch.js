@@ -44,6 +44,9 @@ module.exports.initMapping = function() {
         healthLabels: {type: 'string', "index": "analyzed", "analyzer": "english"},
         isChef: {type: 'boolean'},
         chefId: {type: 'integer'},
+        chefEmail:{type: 'string'},
+        chefAddress:{type: 'string'},
+        chefPhone:{type: 'string'},
         chef: {type: 'string', "index": "not_analyzed", "analyzer": "english"},
         ingredients:  {type: 'string', "index": "analyzed", "analyzer": "english"},
         description: {type: 'string'},
@@ -61,7 +64,7 @@ module.exports.addMeal = function(meal) {
 
   console.log('CREATING elasticsearch meal>>>>>>>>>>>>', meal);
   
-  let to = 'anonpunk123@gmail.com';
+  let to = meal.chefEmail;
   let chefName = meal.chefName;
   let mealName = meal.typeoffood; 
   let date = 'Placeholder DATE: 12.31.16';
@@ -80,11 +83,14 @@ module.exports.addMeal = function(meal) {
     body: {
       image: meal.image,
       date: meal.add_date,
-      time: meal.add_time,  
+      time: meal.add_time,
       food: meal.typeoffood,
-      cuisine: meal.cuisine,
+      cuisine: meal.cuisinetype,
       chefId: meal.chefID,
       chef: meal.chefName,
+      chefEmail: meal.chefEmail,
+      chefAddress: meal.chefAddress,
+      chefPhone: meal.chefPhone,
       isChef: meal.isChef,
       ingredients: meal.ingredients,
       description: meal.description,
