@@ -11,21 +11,21 @@ module.exports = {
 
     // User.findOne({ where: { email: req.body.email } })
     // .then(result => {
-      Meal.create({
-        // chefId: result.id,
-        food: req.body.food,
-        cuisine: req.body.cuisine,
-        description: req.body.description,
-        quantity: req.body.quantity,
-        price: req.body.price,
-        address: req.body.address,
-      // });
-    })
-    .catch(err => { console.error('Error adding meal: ', err); })
-    .finally(() => {
-      console.log('Chef has now added an meal: ', req.body.food);
+    //   Meal.create({
+    //     // chefId: result.id,
+    //     food: req.body.food,
+    //     cuisine: req.body.cuisine,
+    //     description: req.body.description,
+    //     quantity: req.body.quantity,
+    //     price: req.body.price,
+    //     address: req.body.address,
+    //   // });
+    // })
+    // .catch(err => { console.error('Error adding meal: ', err); })
+    // .finally(() => {
+    //   console.log('Chef has now added an meal: ', req.body.food);
       res.end();
-    });
+    // });
   },
 
   deleteMeal: (req, res) => {

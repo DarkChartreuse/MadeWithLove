@@ -2,14 +2,16 @@ import React from 'react';
 import axios from 'axios';
 import { browserHistory } from 'react-router';
 import { connect } from 'react-redux';
+import { updateMeal } from '../actions';
+
 
 class OrderButton extends React.Component {
 
   _handleSubmit() {
+    console.log('the order props', this.props);
     if (!this.props.loginUser.firstName) {
       return browserHistory.push('/signin');
     }
-    console.log('this props cuisine', this.props);
     let data = {
       chefName: this.props.cuisine.chef,
       chefId: this.props.cuisine.chefId,
@@ -29,14 +31,19 @@ class OrderButton extends React.Component {
       userEmail: this.props.loginUser.email,
       orderPlaced: Date(),
     };
+    
+    this.props.updateMeal(data);
+    localStorage.setItem('meal', JSON.stringify(data));
+    browserHistory.push(`/orders/${data.mealId}`);
+    
 
-    axios.post('/api/createorder', data)
-      .then((response) => {
-        console.log('da response', response);
-        browserHistory.push(`/orders/${data.mealId}`);
-      })
-      .catch((error) => {
-      });
+    // axios.post('/api/createorder', data)
+    //   .then((response) => {
+    //     console.log('da response', response);
+    //     browserHistory.push(`/orders/${data.mealId}`);
+    //   })
+    //   .catch((error) => {
+    //   });
   }
 
   render() {
@@ -46,6 +53,16 @@ class OrderButton extends React.Component {
   }
 };
 
-const mapStateToProps = ({ loginUser }) => ({ loginUser });
+const mapStateToProps = ({ loginUser, mealState }) => ({ loginUser, mealState });
 
-export default connect(mapStateToProps, null)(OrderButton);
+const mapDispatchToProps = (dispatch) => {
+  return {
+    updateMeal: (response) => dispatch(updateMeal(response)),
+  };
+};
+
+OrderButton.propTypes = {
+  updateMeal: React.PropTypes.func,
+};
+
+export default connect(mapStateToProps, mapDispatchToProps)(OrderButton);

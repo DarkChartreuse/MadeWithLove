@@ -69,12 +69,12 @@ const orders = (state = {isFetching: false, result: [], error: null}, action) =>
   }
 };
 
-const mealState = (state = {}, action) => {
+const mealInitialState = JSON.parse(localStorage.getItem('meal'));
+
+const mealState = (state = mealInitialState, action) => {
   switch (action.type) {
     case 'UPDATE_CURRENT_MEAL':
-      return Object.assign({}, state, {
-        mealName: action.data,
-      });
+      return Object.assign({}, state, action.data);
     default:
       return state;
   }
