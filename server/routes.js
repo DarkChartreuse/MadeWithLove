@@ -2,6 +2,7 @@ const User = require('./db/controllers/usersController.js');
 const Meal = require('./db/controllers/mealsController.js');
 const Order = require('./db/controllers/ordersController.js');
 const Auth = require('./db/controllers/authController.js');
+const Rec = require('./db/controllers/recomController.js');
 
 
 module.exports = (app) => {
@@ -26,4 +27,6 @@ module.exports = (app) => {
 
   app.post('/api/uploadImage', Meal.uploadImage);
   app.route('/*').get((req, res) => { res.redirect('/'); });
+
+  app.route('/api/getRec').post(Rec.getRec);
 };
