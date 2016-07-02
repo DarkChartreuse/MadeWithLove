@@ -26,6 +26,7 @@ import ChefMeals from './user/ChefMeals';
 
 const logger = createLogger();
 const store = createStore(rootReducer, applyMiddleware(thunk, logger));
+
 const history = syncHistoryWithStore(browserHistory, store);
 
 render((
@@ -40,6 +41,7 @@ render((
         <Route path="/search" component={Search} />
         <Route path="/orders/:id" component={Mealview} />
         <Route path="/chef" component={ChefMeals} />
+
       </Route>
     </Router>
   </Provider>

@@ -165,14 +165,12 @@ export function fetchOrders(searchQuery) {
         }
 }
 
-
-
-  export function updateMeal(result) {
-    return {
-      type: 'UPDATE_CURRENT_MEAL',
-      data: result,
-    }
-  }
+export function updateMeal(result) {
+  return {
+    type: 'UPDATE_CURRENT_MEAL',
+    data: result,
+  };
+}
 
 
 export function loggy(response) {
@@ -188,7 +186,30 @@ export function logoutuser() {
   };
 }
 
+export function checkSession() {
+  return {
+    type: 'CHECK_SESSION',
+  };
+}
 
+export function checkSessionResponse() {
+  return {
+    type: 'CHECK_SESSION_RESPONSE',
+  }
+}
+
+export function checkSessionFunc() {
+  return dispatch => {
+    dispatch(checkSession());
+    return axios('/api/verify', { credentials: 'same-origin' })
+      .then(res => { console.log('the response json', res.json());
+        res.json() })
+      .then(json => {
+        console.log('LOGGED IN?', json);
+        dispatch(checkSessionResponse(json));
+      });
+  };
+}
 
 
 /* 

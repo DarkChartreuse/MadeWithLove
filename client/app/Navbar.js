@@ -1,6 +1,6 @@
 import React from 'react';
 import { connect } from 'react-redux';
-import { Link, browserHistory}  from 'react-router';
+import { Link, browserHistory }  from 'react-router';
 import { logoutuser } from '../actions';
 
 class Navbar extends React.Component {
@@ -36,8 +36,8 @@ class Navbar extends React.Component {
       </li>
       <li>
         {(!this.props.loginUser.firstName) ?
-          <Link to="/signin" >login</Link> :
-          <a href="/signout" onClick={() => { window.localStorage.clear(); this.props.logoutuser(); }}>logout</a>
+          <Link to="/signin">login</Link> :
+          <a href="/signout" onClick={() => window.localStorage.clear()}>logout</a>
         }
       </li>
     </ul>

@@ -35,6 +35,7 @@ class Signin extends React.Component {
     };
     axios.post('/api/auth/sign-in', obj)
       .then((response) => {
+        console.log('login response', response)
         context.props.loggy(response);
         localStorage.setItem('firstName', response.data.firstName);
         localStorage.setItem('id', response.data.id);

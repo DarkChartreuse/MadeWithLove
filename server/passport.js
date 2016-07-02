@@ -19,7 +19,19 @@ module.exports = (passport) => {
         if (!bcrypt.compareSync(password, user.password)) {
           return done(null, false, { message: 'Incorrect password.' });
         }
-        return done(null, user);
+        return done(null, { id: user.id,
+          firstName: user.firstName,
+          lastName: user.lastName,
+          email: user.email,
+          description: user.description,
+          phone: user.phone,
+          address: user.address,
+          zip: user.zip,
+          profile: user.profile,
+          chef: user.chef,
+          numOrders: user.numOrders,
+          avgRating: user.avgRating,
+           });
       });
   }
   ));
