@@ -29,7 +29,7 @@ export function fetchFailure(message) {
     type: FETCH_FAILURE,
     isFetching: false,
     success: false,
-    message,
+    message: Materialize.toast(message, 4000, 'rounded'),
   };
 }
 
@@ -203,7 +203,7 @@ export function fetchOrders(searchQuery) {
           }
           dispatch(fetchSuccess(newResult));
           } else {
-          dispatch(fetchFailure('sorry cannot be found'));
+          dispatch(fetchFailure('No results can be found'));
           }
           })
           .catch(err => dispatch(fetchFailure(err)));
