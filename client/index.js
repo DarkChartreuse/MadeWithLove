@@ -27,6 +27,7 @@ import UserOrders from './user/UserOrders';
 
 const logger = createLogger();
 const store = createStore(rootReducer, applyMiddleware(thunk, logger));
+
 const history = syncHistoryWithStore(browserHistory, store);
 
 render((

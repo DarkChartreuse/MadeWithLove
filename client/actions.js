@@ -29,7 +29,7 @@ export function fetchFailure(message) {
     type: FETCH_FAILURE,
     isFetching: false,
     success: false,
-    message,
+    message: Materialize.toast(message, 4000, 'rounded'),
   };
 }
 
@@ -203,21 +203,19 @@ export function fetchOrders(searchQuery) {
           }
           dispatch(fetchSuccess(newResult));
           } else {
-          dispatch(fetchFailure('sorry cannot be found'));
+          dispatch(fetchFailure('No results can be found'));
           }
           })
           .catch(err => dispatch(fetchFailure(err)));
         }
 }
 
-
-
-  export function updateMeal(result) {
-    return {
-      type: 'UPDATE_CURRENT_MEAL',
-      data: result,
-    }
-  }
+export function updateMeal(result) {
+  return {
+    type: 'UPDATE_CURRENT_MEAL',
+    data: result,
+  };
+}
 
 
 export function loggy(response) {
@@ -233,7 +231,17 @@ export function logoutuser() {
   };
 }
 
+export function checkSession() {
+  return {
+    type: 'CHECK_SESSION_REQUEST',
+  };
+}
 
+export function checkSessionResponse() {
+  return {
+    type: 'CHECK_SESSION_RESPONSE',
+  }
+}
 
 
 /* 
