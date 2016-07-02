@@ -53,6 +53,7 @@ const isLoggedIn = (req, res, next) => {
   if (!req.user) {
     res.status(401).send({ message: 'you are not logged in' });
   } else {
+    console.log('you are authenticated yyo ========')
     next();
   }
 };
