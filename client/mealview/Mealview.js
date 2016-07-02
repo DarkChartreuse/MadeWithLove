@@ -16,6 +16,7 @@ class Mealview extends React.Component {
   }
 
   loadMealOrder() {
+    console.log('poooooop');
     const context = this;
     axios.get(`/api${window.location.pathname}`)
       .then(response => {

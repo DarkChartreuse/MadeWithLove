@@ -23,6 +23,12 @@ class Navbar extends React.Component {
         }
       </li>
       <li>
+        {(!this.props.loginUser.isChef) ?
+          '' :
+          <Link to="/chef">View Orders</Link>
+        }
+      </li>
+      <li>
         {(!this.props.loginUser.firstName) ?
           <Link to="/signup" >create account</Link> :
           <a onClick={() => { browserHistory.push(`/users/${this.props.loginUser.userID}`); }}>{this.props.loginUser.firstName.toLowerCase()}</a>

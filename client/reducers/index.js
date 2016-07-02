@@ -53,7 +53,16 @@ const orders = (state = {isFetching: false, result: [], error: null}, action) =>
       return Object.assign({}, state, {
         isFetching: false,
         error: 'Oops'
-
+      })
+    case 'CHEF_MEALS_SUCCESS':
+      return Object.assign({}, state, {
+        isFetching: false,
+        chefMeals: action.result
+      })
+    case 'CHEF_ORDERS_SUCCESS':
+      return Object.assign({}, state, {
+        isFetching: false,
+        chefMeals: action.result
       })
     default:
       return state
