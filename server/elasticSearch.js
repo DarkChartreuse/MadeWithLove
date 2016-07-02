@@ -64,13 +64,13 @@ module.exports.addMeal = function(meal) {
 
   console.log('CREATING elasticsearch meal>>>>>>>>>>>>', meal);
   
-  let to = meal.chefEmail;
-  let chefName = meal.chefName;
-  let mealName = meal.typeoffood; 
-  let date = 'Placeholder DATE: 12.31.16';
-  let subject = 'Your meal has been created';
-  let text = 'Your meal:' + mealName + ' has been created.';
-  let htmlBody = generateEmail.mealCreatedEmailBody(chefName, mealName, date);
+  var to = meal.chefEmail;
+  var chefName = meal.chefName;
+  var mealName = meal.typeoffood; 
+  var date = 'Placeholder DATE: 12.31.16';
+  var subject = 'Your meal has been created';
+  var text = 'Your meal:' + mealName + ' has been created.';
+  var htmlBody = generateEmail.mealCreatedEmailBody(chefName, mealName, date);
 
   console.log('<<<<<<<<<<<<<<<<Generating EMAIL>>>>>>>>>>>>');
   generateEmail.sendEmail(to, subject, text, htmlBody);
