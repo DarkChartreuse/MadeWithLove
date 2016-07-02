@@ -109,7 +109,7 @@ export function viewChefMeals(chefId) {
 export function fetchOrders(searchQuery) {
     var elasticsearch = require('elasticsearch');
     var client = new elasticsearch.Client({
-      host: 'localhost:9200',
+      host: 'elasticdb:9200',
       log: 'trace'
     });
     console.log('SEARCHQUERY: ', searchQuery);
@@ -128,24 +128,24 @@ export function fetchOrders(searchQuery) {
       "_source": ["food", "chefId", "chef", "chefEmail", "cuisine", "chefAddress", "chefPhone", "quantity", "rating", "image", "price", "healthLabels", "zipcode"],
       // query: { "match_all": {} },
       body:{
-        "query": { 
+        "query": {
           "bool" : {
              "must" :     [
-                {"prefix": { "_all": cuisine }},             
+                {"prefix": { "_all": cuisine }},
              //    {"match": { "chef": "Martha" }},
              //    {"match": {"healthLabels": "Tree-Nut-Free"}}
                 // {"match": {"zipcode": zipcode}}
              //  ],//prefix
              // "filter":    [
                 // {"range": {"date": {"lte": date}}},
-                {"range": {"price": { "lt": maxPrice, "gt": minPrice }}}, 
+                {"range": {"price": { "lt": maxPrice, "gt": minPrice }}},
              //    {"range": {"rating": { "gt": 2, "lt": 5}}}
              ]//price //range
           }//bool
         }//query
       }//body
     }).then(function (resp) {
-        console.log('..............INSIDE')      
+        console.log('..............INSIDE')
         var hits = resp.hits.hits;
         console.log('HITS >>>>>>> ', hits);
         if (hits.length) {
@@ -191,34 +191,34 @@ export function logoutuser() {
 
 
 
-/* 
+/*
   Misc. queries
-*/ 
+*/
 
 
 /*
           // "filtered": {
           //   "query": {
-          //     "prefix": { "food": "chicken" }//prefix              
-          //   },//query 
+          //     "prefix": { "food": "chicken" }//prefix
+          //   },//query
           //   "filter": {
           //     // "term": { "chef": "Tom Weaver" }//term
           //     "range": {
           //       // "rating": { "gt": 4 },//rating
           //       "price": { "gte": 7 }//price
-          //     },//range 
+          //     },//range
           //     "range": {
           //       "rating": { "gte": 4 }//rating
-          //     }//range 
+          //     }//range
 
           //     // "range": {
           //     //   "rating": {
           //     //     "gt": 3
           //     //   },//rating
-          //     // }//range  
+          //     // }//range
           //   }//filter
           // }//filtered
-      //   }//query 
+      //   }//query
       // }//body
 */
 
@@ -236,9 +236,9 @@ export function logoutuser() {
 
 
 
-/* 
+/*
   Old Data
-*/ 
+*/
     // var elasticsearch = require('elasticsearch');
     // var client = new elasticsearch.Client({
     //   host: 'localhost:9200',
@@ -257,7 +257,7 @@ export function logoutuser() {
     //     }
     //   }
     // }).then(function (resp) {
-    //     console.log('..............INSIDE')      
+    //     console.log('..............INSIDE')
     //     var hits = resp.hits.hits;
     //     console.log(hits);
     // }, function (err) {
@@ -268,7 +268,7 @@ export function logoutuser() {
 // {/*`http://localhost:9200/mwl/meal/_search?q=${cuisine}`*/}
 //     // var queryBaseUrl = 'http://localhost:9200/mwl/meal/_search?';
 //     // var match = '{"query":{"prefix": {"food":' + cuisine + '}}}';
-//     // var query = queryBaseUrl+match; 
+//     // var query = queryBaseUrl+match;
 
 //     var queryBaseUrl = "http://localhost:9200/mwl/meal/_search?";
 //     var match = '{"query":{"prefix":{"_all":"chick"}}}';
@@ -296,7 +296,7 @@ export function updateProfile(result) { //when user clicks update profile, every
 //         const results = result.hits.hits;
 //         for (var i = 0; i < results.length; i++) {
 //           newResult.push(results[i]['_source']);
-//         }  
+//         }
 //         dispatch(fetchSuccess(newResult));
 //       } else {
 //         dispatch(fetchFailure(Materialize.toast('Sorry, no results can be found', 4000)));

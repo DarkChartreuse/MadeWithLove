@@ -1,13 +1,14 @@
 {
-  "name": "MadeWithLove",
+  "name": "mwl",
   "version": "1.0.0",
   "description": "Home cooked food delivered/pickup for busy people",
   "main": "webpack.config.js",
   "scripts": {
     "test": "npm run seed && mocha test/serverSpec.js --timeout 10000",
-    "start": "nodemon server/server.js",
+    "start": "NODE_ENV=development nodemon server/server.js",
     "watch": "webpack --watch --progress",
-    "seed": "node server/db/seed.js"
+    "seed": "node server/db/seed.js",
+    "start_prod": "NODE_ENV=production node server/server.js && sequelize db:migrate"
   },
   "repository": {
     "type": "git",
@@ -77,5 +78,8 @@
     "webpack-dev-middleware": "^1.6.1",
     "webpack-dev-server": "^1.14.1",
     "webpack-hot-middleware": "^2.10.0"
+  },
+  "directories": {
+    "test": "test"
   }
 }

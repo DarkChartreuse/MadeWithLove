@@ -1,35 +1,41 @@
 version: '2'
 services:
   db:
-    image: postgres
-    volumes: ["/data/db"]
+    image: pgdb
+    container_name: postgresdb
+    # environment:
+    #   - POSTGRES_USER=postgres
+    #   - POSTGRES_PASSWORD=postgres
+    #   - POSTGRES_DB=mwl_db
+    # volumes: ["/data/db"]
+    networks:
+      - mwl-network
     ports:
       - "5432:5432"
-<<<<<<< 579f21fa5a38e51ca6fe803a738f2094aa5a8242
-    networks:
-      - network
-=======
->>>>>>> Add initial Docker settings
   es:
     image: elasticsearch
+    container_name: elasticdb
+    # environment:
+    #   - ELASTICSEARCH_PORT_9200_TCP_ADDR=172.19.0.2
     networks:
-      - network
+      - mwl-network
     ports:
       - "9200:9200"
+      - "9300:9300"
   web:
     image: darkchartreuse/mwl
-    build: .
+    container_name: mwl
+    # build: .
     ports:
-      - "3000:3000"
-    volumes:
-      - .:/app
+      - "80:3000"
+    # volumes:
+    #   - .:/app
     links:
       - db
       - es
+    # entrypoint: ./wait-for-it.sh db:5432 -- npm run seed
     networks:
-      - network
-    # entrypoint: "./wait-for-it.sh db:5432 -t 15"
-
+      - mwl-network
 networks:
-  network:
+  mwl-network:
     driver: bridge
