@@ -85,7 +85,7 @@ module.exports.addMeal = function(meal) {
       date: meal.add_date,
       time: meal.add_time,
       food: meal.typeoffood,
-      cuisine: meal.cuisine,
+      cuisine: meal.cuisinetype,
       chefId: meal.chefID,
       chef: meal.chefName,
       chefEmail: meal.chefEmail,

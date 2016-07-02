@@ -20,14 +20,14 @@ const Order = sequelize.define('orders',
       field: 'food',
     },
 
-    // cuisine: {
-    //   type: Sequelize.STRING,
-    //   field: 'cuisine',
-    // },
-    // description: {
-    //   type: Sequelize.STRING,
-    //   field: 'description',
-    // },
+    cuisine: {
+      type: Sequelize.STRING,
+      field: 'cuisine',
+    },
+    description: {
+      type: Sequelize.STRING,
+      field: 'description',
+    },
     quantity: {
       type: Sequelize.INTEGER,
       field: 'quantity',
@@ -35,6 +35,10 @@ const Order = sequelize.define('orders',
     price: {
       type: Sequelize.FLOAT,
       field: 'price',
+    },
+    userName: {
+      type: Sequelize.STRING,
+      field: 'user_name',
     },
     userEmail: {
       type: Sequelize.STRING,
@@ -47,6 +51,10 @@ const Order = sequelize.define('orders',
     userPhone: {
       type: Sequelize.STRING,
       field: 'user_phone',
+    },
+    chefName: {
+      type: Sequelize.STRING,
+      field: 'chef_name',
     },
     chefEmail: {
       type: Sequelize.STRING,
@@ -79,10 +87,10 @@ const Order = sequelize.define('orders',
       type: Sequelize.FLOAT,
       field: 'rating',
     },
-    // review: {
-    //   type: Sequelize.TEXT,
-    //   field: 'review',
-    // },
+    review: {
+      type: Sequelize.TEXT,
+      field: 'review',
+    },
     image: {
       type: Sequelize.STRING,
       field: 'image',

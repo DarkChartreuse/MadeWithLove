@@ -6,6 +6,9 @@ import { connect } from 'react-redux';
 class OrderButton extends React.Component {
 
   _handleSubmit() {
+    if (!this.props.loginUser.firstName) {
+      return browserHistory.push('/signin');
+    }
     console.log('this props cuisine', this.props);
     let data = {
       chefName: this.props.cuisine.chef,
@@ -13,11 +16,13 @@ class OrderButton extends React.Component {
       chefEmail: this.props.cuisine.chefEmail,
       chefAddress: this.props.cuisine.chefAddress,
       chefPhone: this.props.cuisine.chefPhone,
+      cuisine: this.props.cuisine.cuisine,
       food: this.props.cuisine.food,
       image: this.props.cuisine.image,
       mealId: this.props.cuisine.mealId,
       price: this.props.cuisine.price,
       quantity: this.props.cuisine.quantity,
+      userName: `${this.props.loginUser.firstName} ${this.props.loginUser.lastName}`,
       userId: this.props.loginUser.userID,
       userAddress: this.props.loginUser.address,
       userPhone: this.props.loginUser.phone,
