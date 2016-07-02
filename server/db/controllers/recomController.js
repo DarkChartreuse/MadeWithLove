@@ -1,43 +1,86 @@
-const sequelize = require('../server/db/db.js');
-const elasticClient = require('../server/instantiateES');
+const sequelize = require('../db.js');
+const elasticClient = require('../../instantiateES.js');
 
-module.exports = function(req, res) {
-  var userId = req.body.userId;
+module.exports.getRec = function(req, res) {
+    var userId = req.body.userId;
+    console.log('HERE IS THE USER ID >>>>>', userId);
 
-
+    // fetchUserOrderHistory(userId)
+    // var cuisines = {};
+    sequelize.query('SELECT * FROM orders WHERE id_user =' + userId)
+    .then((userOrders) => orderCountMapping(userOrders[0]))
+    .then((cuisineCountByCuisineType) => findMaxOccurance(cuisineCountByCuisineType))
+    .then((mostBoughtCuisine) => {
+      console.log('<<><>>>>>>>>>', mostBoughtCuisine)
+      elasticClient.search({
+        index: 'mwl',
+        type: 'meal', 
+        size: 5,
+        body: {
+          query: {
+            bool: {
+              must: [
+                {match: {cuisine: mostBoughtCuisine}}
+              ],//must
+              filter: [
+                {range: {rating: {"gte": 4}}}
+              ]//filter
+            }//bool
+          }//query
+        }//body
+      }).catch(err => console.log)
+    .then((results) => {
+      var results = results.hits.hits;
+      console.log('I AM HERE IN RESULTS >>>>>>>' , results);
+      res.send(results);
+    })
+    .catch(err => console.log("Elastic search errored out: ", err));
+    })
+    .finally(() => console.log('Function complete'))
 }
 
-function fetchUserOrderHistory(userId) {
-  var cuisines = {};
-  sequelize.query('SELECT * FROM orders WHERE id_user = 1')
-  .then(function(orders) {
-
-  })
-} 
+// function fetchUserOrderHistory(userId) {
+//   .then(function(orders) {
+//     console.log(orders);
+//     // next(orders);
+//   })
+//   .catch(err => { console.error('Error finding orders', err); })
+// } 
 
 
 function orderCountMapping(ordersArray) {
   var cuisineCount = {};
+  // console.log('>>>>>>>>>>>>>>>>>>> ORDERS', JSON.stringify(ordersArray));
   for(var i = 0; i < ordersArray.length; i++) {
-    var currCuisine = ordersArray[i];
+    var currCuisine = ordersArray[i].cuisine;
 
-    if(cuisineCount[currCuisine]) cuisineCount[currCuisine]++;
-    else cuisineCount[currCuisine] = 1; 
+    if(cuisineCount[currCuisine]) { cuisineCount[currCuisine]++; }
+    else { cuisineCount[currCuisine] = 1; } 
   }
+
+  // console.log(JSON.stringify(cuisineCount));
   return cuisineCount;
 }
 
 
 function findMaxOccurance(cuisinesByOrderCount) {
-  var maxCount  = 0, 
-      maxCuisine    = "", 
+  // console.log(cuisinesByOrderCount);
+  var maxCount      = 0;
+  var maxCuisine    = "";
 
-  for(var cuisine in cuisinesByOrderCount) {
-    var currCount = cuisinesByOrderCount[cuisine];
+  for(var props in cuisinesByOrderCount) {
+    var currCount = cuisinesByOrderCount[props];
     if( currCount > maxCount) {
       maxCount = currCount;
-      maxCuisine = cuisine;
+      console.log(props);
+      maxCuisine = props;
     }
   }
-  return cuisine;
+  console.log('Max Cuisine:',  maxCuisine);
+  return maxCuisine;
 }
+
+
+// function mealsToRecommendByCuisine(cuisine) {
+
+// }
