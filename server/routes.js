@@ -10,7 +10,7 @@ module.exports = (app) => {
   app.route('/api/users').get(User.getAllUsers);
   app.route('/api/users/:id').get(User.getUser);
   app.route('/api/users/:id').delete(User.deleteUser);
-  app.post('/api/updateuser', User.updateUser);
+  app.route('/api/updateuser').post(User.updateUser);
 
   app.route('/api/meals').post(Auth.isLoggedIn, Meal.createMeal);
   app.route('/api/meals').get(Meal.getAllMeals);
@@ -30,7 +30,7 @@ module.exports = (app) => {
   // auth
   app.route('/api/auth/sign-in').post(Auth.signIn);
   app.route('/signout').get(Auth.logOut);
-  app.post('/api/uploadimage', Meal.uploadImage);
+  app.route('/api/uploadimage').post(Meal.uploadImage);
   app.route('/*').get((req, res) => { res.redirect('/'); });
 
   // recommendations
