@@ -28,5 +28,5 @@ module.exports = (app) => {
   app.post('/api/uploadImage', Meal.uploadImage);
   app.route('/*').get((req, res) => { res.redirect('/'); });
 
-  app.route('/api/getRec').post(Rec.getRec);
+  app.route('/api/getrecommendation').post(Rec.getRec);
 };
