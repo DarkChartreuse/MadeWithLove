@@ -3,10 +3,14 @@ var generateEmail = require('./emailGenerator.js');
 
 var elasticAddress = process.env.MWLES_PORT_9200_TCP_ADDR || 'localhost';
 
-console.log('>>>>>>>>>>>>> elasticsearch: ', elasticAddress);
+var ESDB_HOST;
+
+ESDB_HOST = process.env.NODE_ENV === 'production' ? 'elasticdb' : 'localhost';
+
+console.log('>>>>>>>>>>>>> elasticsearch: ', ESDB_HOST);
 
 var elasticClient = new elasticsearch.Client({
-  host: elasticAddress + ':9200',
+  host: ESDB_HOST + ':9200',
   log: 'info'
 });
 
