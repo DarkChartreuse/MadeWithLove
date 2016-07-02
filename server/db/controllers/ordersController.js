@@ -15,7 +15,7 @@ module.exports = {
         mealId: req.body.mealId,
         userId: req.body.userId,
         food: req.body.food,
-        cuisine: req.body.cuisine,
+        cuisine: req.body.cuisine, 
         image: req.body.image,
         price: req.body.price,
         quantity: req.body.quantity,
