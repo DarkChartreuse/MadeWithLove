@@ -20,18 +20,22 @@ export default class ChefMeals extends React.Component {
   	return (
   	  <div>
   	  {this.props.orders.chefMeals &&
-  	  	<ul>
-  	  	  {this.props.orders.chefMeals.map(function(meal) {
-  	  	  	return<li>{meal.food}</li>;
-  	  	  })}
-  	  	</ul>
+  	  	<div>
+  	  	  <h3>Your Meals</h3>
+	  	  	{this.props.orders.chefMeals.map(function(meal) {
+	  	  	  return<li>Name: {meal.food} Price: {meal.price} Image: {meal.image}</li>;
+	  	  	})}
+  	  	</div>
   	  }
   	  {this.props.orders.chefOrders &&
-  	  	<ul>
-  	  	  {this.props.orders.chefOrders.map(function(order) {
-  	  	  	return<li>{order.food}</li>;
-  	  	  })}
-  	  	</ul>
+  	  	<div>
+  	  	  <h3>Your Orders</h3>
+  	  	  <ul>
+  	  	    {this.props.orders.chefOrders.map(function(order) {
+  	  	  	  return<li>{order.food}</li>;
+  	  	    })}
+  	  	  </ul>
+  	  	</div>
   	  }
   	  </div>
   	)
