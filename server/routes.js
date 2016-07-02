@@ -12,6 +12,7 @@ module.exports = (app) => {
   app.route('/users/:id').get(User.getUser);
   app.route('/api/users/:id').delete(User.deleteUser);
   app.post('/api/updateuser', User.updateUser);
+  app.post('/api/updateusersearch', User.updateSearchHistory);
 
   app.route('/api/meals').post(Auth.isLoggedIn, Meal.createMeal);
   app.route('/api/meals').get(Meal.getAllMeals);
@@ -21,6 +22,8 @@ module.exports = (app) => {
   app.route('/api/createorder').post(Order.createOrder);
   // for orders from users
   app.route('/api/orders/:id').get(Order.getOrder);
+  app.route('/api/getcheforders').post(Order.getChefOrders);
+  app.route('/api/getuserorders').post(Order.getUserOrders);
 
   app.route('/api/auth/sign-in').post(Auth.signIn);
   app.route('/signout').get(Auth.logOut);

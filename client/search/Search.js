@@ -5,6 +5,7 @@ import { connect } from 'react-redux';
 import { fetchOrders, updateMeal } from '../actions';
 import SearchBar from './SearchBar';
 import CuisineRow from './CuisineRow';
+import Recommend from './Recommend';
 
 class Search extends React.Component {
   render() {
@@ -12,7 +13,8 @@ class Search extends React.Component {
     var { isFetching, orders } = this.props;
     return (
       <div>
-        <SearchBar  inputCuisine={this.props.inputCuisine} fetchOrders={this.props.fetchOrders} cuisine={this.props.saveSearchQuery.cuisine} vegan={this.props.vegan} toggleVegan={this.props.toggleVegan}/>
+        <SearchBar loginUser={this.props.loginUser} fetchOrders={this.props.fetchOrders} vegan={this.props.vegan} toggleVegan={this.props.toggleVegan}/>
+        { this.props.loginUser.firstName && <Recommend loginUser={this.props.loginUser}/> }
         { !this.props.orders.orders && <div></div> }
         { this.props.orders.orders && <FilterableCuisineTable orders={orders} meal={this.props.updateMeal} loginUser={this.props.loginUser} /> }
       </div>
@@ -84,7 +86,6 @@ class CuisineCategoryRow extends React.Component {
 
 const mapDispatchToProps = (dispatch) => {
   return {
-    inputCuisine: (e) => dispatch({ type: 'SAVE_SEARCH_QUERY', data: e.target.value }),
     toggleVegan: () => dispatch({type: 'TOGGLE_VEGAN'}),
     fetchOrders: (input) => dispatch(fetchOrders(input)),
     updateMeal: (result) => dispatch({ type: 'UPDATE_CURRENT_MEAL', data: result }),
@@ -95,7 +96,6 @@ function mapStatetoProps(state) {
   return {
     cuisine: state.cuisine,
     isFetching: true,
-    saveSearchQuery: state.saveSearchQuery,
     orders: state.orders,
     error: null,
     vegan: false,

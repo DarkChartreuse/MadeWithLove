@@ -68,11 +68,6 @@ const Order = sequelize.define('orders',
       field: 'chef_phone',
     },
 
-    orderPlaced: {
-      type: Sequelize.STRING,
-      field: 'user_order_date',
-    },
-
     mealAddedDate: {
       type: Sequelize.STRING,
       field: 'meal_added_date',
@@ -93,6 +88,10 @@ const Order = sequelize.define('orders',
     image: {
       type: Sequelize.STRING,
       field: 'image',
+    },
+    delivered: {
+      type: Sequelize.BOOLEAN,
+      field: 'delivered',
     },
   },
   {

@@ -27,17 +27,6 @@ const toggleVegan = (state = {}, action) => {
   }
 };
 
-const saveSearchQuery = (state = {cuisine: ''}, action) => {
-  switch (action.type) {
-    case 'SAVE_SEARCH_QUERY':
-      return Object.assign({}, state, {
-        cuisine: action.data
-      });
-    default:
-    return state;
-  }
-};
-
 const orders = (state = {isFetching: false, result: [], error: null}, action) => {
   switch (action.type) {
     case 'FETCH_REQUEST':
@@ -62,7 +51,12 @@ const orders = (state = {isFetching: false, result: [], error: null}, action) =>
     case 'CHEF_ORDERS_SUCCESS':
       return Object.assign({}, state, {
         isFetching: false,
-        chefMeals: action.result
+        chefOrders: action.result
+      })
+    case 'USER_ORDERS_SUCCESS':
+      return Object.assign({}, state, {
+        isFetching: false,
+        userOrders: action.result
       })
     default:
       return state
@@ -145,7 +139,6 @@ const rootReducer = combineReducers({
   toggleQuantity,
   toggleVegan,
   mealState,
-  saveSearchQuery,
   orders,
   toggleAuth,
   loginUser,

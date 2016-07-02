@@ -24,8 +24,8 @@ class Navbar extends React.Component {
       </li>
       <li>
         {(!this.props.loginUser.isChef) ?
-          '' :
-          <Link to="/chef">View Orders</Link>
+          <Link to="/orderstatus">View Orders</Link> :
+          <Link to="/chefstatus">View Orders</Link>
         }
       </li>
       <li>

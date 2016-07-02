@@ -1,30 +1,32 @@
 import React from 'react';
 import axios from 'axios';
+import { connect } from 'react-redux';
 
 export default class Recommend extends React.Component {
+  constructor(props) {
+    super(props);
+    this.state = {
+      results: undefined,
+    }
+  }
 
-  if(this.props.loginUser.firstName) {
-  	axios.post('/api/getRecs', this.props.loginUser.userID)
-  	.then( results => {
-  		//save results 
-  	})
+  componentDidMount() {
+    // if(this.props.loginUser.firstName) {
+    // 	axios.post('/api/getRec', this.props.loginUser.userID)
+    // 	.then( results => {
+    // 		this.state.results = results;
+    // 	})
+    //   .error( err => console.log(err));
+    // }
   }
 
   render() {
   	return (
-  	  results.map()
-
+      <div>
+        <h3>Your Recommendations</h3>
+  	    { this.state.results && <div>we have results!</div> }
+        { !this.state.results && <div>we have no results!</div> }
+      </div>
   	)
   }
 }
-
-const mapDispatchToProps = (dispatch) => {
-  return {
-
-  }
-}
-
-const mapStateToProps = ({ loginUser }) => ({ loginUser });
-
-
-export default connect(mapStatetoProps, mapDispatchToProps)(Recommend);
