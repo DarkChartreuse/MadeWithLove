@@ -4,7 +4,7 @@ import {
   FETCH_SUCCESS,
 } from './constants';
 
-import fetch from 'isomorphic-fetch';
+import axios from 'axios';
 
 
 export function fetchRequest() {
@@ -31,6 +31,78 @@ export function fetchFailure(message) {
     success: false,
     message,
   };
+}
+
+export function chefMealsSuccess(result) {
+  return {
+    type: 'CHEF_MEALS_SUCCESS',
+    result,
+  };
+}
+
+export function chefOrdersSuccess(result) {
+  return {
+    type: 'CHEF_ORDERS_SUCCESS',
+    result,
+  };
+}
+
+export function viewChefOrders(chefId) {
+  return dispatch => {
+    axios.post('/api/get', chefId)
+    .then( results => {
+      console.log('results!!>>>>>>>>> ', results);
+      if(results.length) {
+        dispatch(chefOrdersSuccess(results));
+      } else {
+        dispatch(fetchFailure('cannot find chef orders'));
+      }
+    })
+    .catch(err => dispatch(fetchFailure(err)));
+  }
+}
+
+export function viewChefMeals(chefId) {
+  var elasticsearch = require('elasticsearch');
+  var client = new elasticsearch.Client({
+    host: 'localhost:9200',
+    log: 'trace'
+  });
+  console.log('chefIdforQUERY: ', chefId);
+  console.log('..............Client.search')
+  return dispatch => { client.search({
+    index: 'mwl',
+    type: 'meal',
+    size: 50,
+    "_source": ["food", "chefId", "chef", "rating", "image", "price", "healthLabels", "zipcode"],
+    body:{
+      "query": { 
+        "bool" : {
+           "must" : [
+              {"match": { "chefId": chefId }},
+           ]
+        }
+      }
+    }
+  }).then(function (resp) {
+      console.log('..............INSIDE')      
+      var hits = resp.hits.hits;
+      console.log('HITS >>>>>>> ', hits);
+      if (hits.length) {
+        var newResult = [];
+        for (var i = 0; i < hits.length; i++) {
+          var orderInfo = hits[i]['_source'];
+          var orderId = hits[i]['_id'];
+          orderInfo['mealId'] = orderId;
+          newResult.push(orderInfo);
+        }
+        dispatch(chefMealsSuccess(newResult));
+        } else {
+        dispatch(fetchFailure('sorry cannot be found'));
+        }
+        })
+        .catch(err => dispatch(fetchFailure(err)));
+      }
 }
 
 

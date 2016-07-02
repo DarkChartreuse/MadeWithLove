@@ -60,6 +60,15 @@ module.exports = {
     .catch(err => { console.error('Error fetching order', err); });
   },
 
+  getUserOrders: (req, res) => {
+    console.log('req params', req.params);
+    Order.findAll({ where: { userId: req.params.id } })
+    .then(orders => {
+      res.json(orders);
+    })
+    .catch(err => { console.error('Error fetching chefs orders', err); });
+  },
+
   getAllOrders: (req, res) => {
     console.log('Im getting pinged!');
     Order.findAll()

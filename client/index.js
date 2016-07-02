@@ -22,6 +22,7 @@ import Signin from './auth/Signin';
 import Mealview from './mealview/Mealview';
 import AddAMeal from './chef/AddAMeal';
 import Profile from './user/Profile';
+import ChefMeals from './user/ChefMeals';
 
 const logger = createLogger();
 const store = createStore(rootReducer, applyMiddleware(thunk, logger));
@@ -38,6 +39,7 @@ render((
         <Route path="/users/:id" component={Profile} />
         <Route path="/search" component={Search} />
         <Route path="/orders/:id" component={Mealview} />
+        <Route path="/chef" component={ChefMeals} />
       </Route>
     </Router>
   </Provider>
