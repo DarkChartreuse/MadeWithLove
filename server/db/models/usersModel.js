@@ -53,6 +53,10 @@ const User = sequelize.define('users',
       field: 'avg_rating',
       defaultValue: 0,
     },
+    searchHistory: {
+      type: Sequelize.STRING,
+      field: 'search_history',
+    },
   },
   {
     timestamps: true,

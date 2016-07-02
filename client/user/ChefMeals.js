@@ -1,6 +1,7 @@
 import React from 'react';
 import { viewChefMeals, viewChefOrders } from '../actions';
 import { connect } from 'react-redux';
+import DeliveredButton from './DeliveredButton';
 
 
 export default class ChefMeals extends React.Component {
@@ -10,6 +11,11 @@ export default class ChefMeals extends React.Component {
 	  this.props.viewChefMeals(this.props.loginUser.userID);
 	  this.props.viewChefOrders(this.props.loginUser.userID);
   	}
+
+  }
+
+  reloadOrders() {
+    console.log('hi from reload orders');
 
   }
 
@@ -32,7 +38,7 @@ export default class ChefMeals extends React.Component {
   	  	  <h3>Your Orders</h3>
   	  	  <ul>
   	  	    {this.props.orders.chefOrders.map(function(order) {
-  	  	  	  return<li>{order.food}</li>;
+  	  	  	  return<li><div>{order.food}</div><DeliveredButton order={order} /></li>;
   	  	    })}
   	  	  </ul>
   	  	</div>

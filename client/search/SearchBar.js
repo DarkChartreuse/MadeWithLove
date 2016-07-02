@@ -53,6 +53,7 @@ class SearchBar extends React.Component {
               <button
                 className="btn-large #ffb74d orange lighten-2 black-text menubuttons"
                 onClick={() => { this.props.fetchOrders({
+                  userID: this.props.loginUser.userID,
                   cuisine: this.state.cuisine,
                   maxPrice: this.state.maxPrice,
                   minPrice: this.state.minPrice,

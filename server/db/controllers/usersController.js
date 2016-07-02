@@ -29,7 +29,28 @@ module.exports = {
       })
       .catch(err => { console.error(err); });
       });
-    },
+  },
+
+  updateSearchHistory: (req, res) => {
+    console.log('im passing this data as the req body userID: >>>', req.body.userID);
+
+    User.findOne({ where: { id: req.body.userID } })
+    .then( user => {
+      if(user) {
+        console.log("THIS IS THE USER>>>>>>>>>>", user);
+        user.updateAttributes({
+          searches: req.body.searchQuery
+        })
+        .then( updatedUser => {
+          res.json(updatedUser);
+          console.log('user search history updated!');
+        })
+        .catch(err => { console.error('Error updating user search history'); });
+      } else {
+        console.log('this user does not exist, cannot update search history');
+      }
+    })
+  },
 
   updateUser: (req, res) => {
     console.log('im passing this data as the req body userID: >>>', req.body.userID);
@@ -77,6 +98,7 @@ module.exports = {
   getUser: (req, res) => {
     User.findOne({ where: { id: req.params.id } })
     .then(user => {
+      console.log('this is the user data entirety:', user);
       res.json(user.dataValues);
     })
     .catch(err => { console.error('Error fetching user', err); });

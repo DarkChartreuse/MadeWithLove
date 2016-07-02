@@ -47,18 +47,38 @@ export function chefOrdersSuccess(result) {
   };
 }
 
+export function userOrdersSuccess(result) {
+  return {
+    type: 'USER_ORDERS_SUCCESS',
+    result,
+  };
+}
+
 export function viewChefOrders(chefId) {
   return dispatch => {
-    axios.post('/api/get', chefId)
+    axios.post('/api/getcheforders', {chefId: chefId})
     .then( results => {
-      console.log('results!!>>>>>>>>> ', results);
-      if(results.length) {
-        dispatch(chefOrdersSuccess(results));
+      console.log('results!!>>>>>>>>> ', results.data);
+      if(results.data.length) {
+        dispatch(chefOrdersSuccess(results.data));
       } else {
         dispatch(fetchFailure('cannot find chef orders'));
       }
     })
-    .catch(err => dispatch(fetchFailure(err)));
+  }
+}
+
+export function viewUserOrders(userId) {
+  return dispatch => {
+    axios.post('/api/getuserorders', {userId: userId})
+    .then( results => {
+      console.log('results!!>>>>>>>>> ', results.data);
+      if(results.data.length) {
+        dispatch(userOrdersSuccess(results.data));
+      } else {
+        dispatch(fetchFailure('cannot find users orders'));
+      }
+    })
   }
 }
 
@@ -105,6 +125,22 @@ export function viewChefMeals(chefId) {
       }
 }
 
+export function saveSearchQuery(searchQuery) {
+  return dispatch => {
+    console.log()
+    axios('api/users/:id', searchQuery.userID)
+    .then( results => {
+      console.log('>>>>>MY RESULTS>>>>>>>>', results); //get the search results and append your stuff and then update it
+
+      // axios('/api/updateusersearch', searchQuery)
+      // .then( results => {
+      //   console.log('>>>>>>>>>>>>>>passed user searchQuery to controller', results);
+      // })
+      
+    })
+    .catch( err => console.error(err));
+  }
+}
 
 export function fetchOrders(searchQuery) {
     var elasticsearch = require('elasticsearch');
@@ -112,8 +148,8 @@ export function fetchOrders(searchQuery) {
       host: 'localhost:9200',
       log: 'trace'
     });
-    console.log('SEARCHQUERY: ', searchQuery);
-
+    
+    var userID = searchQuery.userID;
     var cuisine = searchQuery.cuisine || '*';
     var minPrice = searchQuery.minPrice || 0;
     var maxPrice = searchQuery.maxPrice || 1000000;
@@ -121,7 +157,16 @@ export function fetchOrders(searchQuery) {
     console.log('variables parsing:', cuisine, minPrice, maxPrice, date);
 
     console.log('..............Client.search')
-    return dispatch => { client.search({
+    return dispatch => { 
+
+    dispatch(saveSearchQuery({
+      userID: userID,
+      cuisine: cuisine,
+      minPrice: minPrice,
+      maxPrice: maxPrice
+    }));
+
+    client.search({
       index: 'mwl',
       type: 'meal',
       size: 50,
