@@ -1,9 +1,6 @@
 var elasticsearch = require('elasticsearch');
 var generateEmail = require('./emailGenerator.js');
 
-var elasticAddress = process.env.MWLES_PORT_9200_TCP_ADDR || 'localhost';
-
-<<<<<<< dda89c2de3adededdf502602d770a693bb8fc9f5
 var ESDB_HOST;
 
 ESDB_HOST = process.env.NODE_ENV === 'production' ? 'elasticdb' : 'localhost';
@@ -12,12 +9,6 @@ console.log('>>>>>>>>>>>>> elasticsearch: ', ESDB_HOST);
 
 var elasticClient = new elasticsearch.Client({
   host: ESDB_HOST + ':9200',
-=======
-console.log('>>>>>>>>>>>>> elasticsearch: ', elasticAddress);
-
-var elasticClient = new elasticsearch.Client({
-  host: elasticAddress + ':9200',
->>>>>>> Adjust docker settings
   log: 'info'
 });
 
