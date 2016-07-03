@@ -1,15 +1,21 @@
 var Sequelize = require('sequelize');
+
+var DB_HOST;
+var DB_USER = 'postgres';
+var DB_PW = 'postgres';
+
+DB_HOST = process.env.NODE_ENV === 'production' ? 'postgresdb' : 'localhost';
+
 var opts = {
   database: 'mwl_db',
-  username: 'postgres',
-  password: '',
+  username: DB_USER,
+  password: DB_PW,
 };
 
-var sequelizeAddress = process.env.MWLDB_PORT_5432_TCP_ADDR || 'localhost';
-console.log('>>>>>>>>>>>>>>>> sequelize ip: ', sequelizeAddress);
+console.log('>>>>>>>>>>>>>>>> sequelize ip: ', DB_HOST);
 
 var sequelize = new Sequelize(opts.database, opts.username, opts.password, {
-  host: sequelizeAddress,
+  host: DB_HOST,
   dialect: 'postgres',
   pool: {
     max: 5,
