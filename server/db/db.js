@@ -12,18 +12,10 @@ var opts = {
   password: DB_PW,
 };
 
-<<<<<<< 0f9676418bac656bea92a7fffcba4ba73d6df834
 console.log('>>>>>>>>>>>>>>>> sequelize ip: ', DB_HOST);
 
 var sequelize = new Sequelize(opts.database, opts.username, opts.password, {
   host: DB_HOST,
-=======
-var sequelizeAddress = process.env.MWLDB_PORT_5432_TCP_ADDR || 'localhost';
-console.log('>>>>>>>>>>>>>>>> sequelize ip: ', sequelizeAddress);
-
-var sequelize = new Sequelize(opts.database, opts.username, opts.password, {
-  host: sequelizeAddress,
->>>>>>> Adjust docker settings
   dialect: 'postgres',
   pool: {
     max: 5,
