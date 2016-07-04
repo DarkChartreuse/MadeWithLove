@@ -12,6 +12,7 @@ const authController = require('./db/controllers/authController.js');
 const session = require('express-session');
 require('./passport')(passport);
 
+// const request = require('request');
 
 const app = express();
 const port = process.env.PORT || 3000;
@@ -27,6 +28,17 @@ app.use(session({ secret: 'onionsarerare', resave: false, saveUninitialized: fal
 app.use(passport.initialize());
 app.use(passport.session());
 app.use(flash());
+
+// if (process.env.TYPE === 'sender') {
+//   var url = 'http://' + MWL_PORT_3000_TCP_ADDR + '3000';
+//   request.get(url, function(err, res) {
+//     if (err) {
+//       console.error(err);
+//     } else {
+//       console.log(res.body);
+//     }
+//   });
+// }
 
  // pass passport for configuration
 

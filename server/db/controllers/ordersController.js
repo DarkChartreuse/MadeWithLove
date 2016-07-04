@@ -1,5 +1,5 @@
-const Order = require('../models/ordersModel.js');
-const User = require('../models/usersModel.js');
+const Order = require('../models/index.js').orders;
+const User = require('../models/index.js').users;
 const elasticsearch = require('../../elasticSearch.js');
 
 module.exports = {

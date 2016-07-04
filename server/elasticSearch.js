@@ -1,10 +1,14 @@
 var elasticsearch = require('elasticsearch');
 var generateEmail = require('./emailGenerator.js');
 
+var ESDB_HOST;
 
+ESDB_HOST = process.env.NODE_ENV === 'production' ? 'elasticdb' : 'localhost';
+
+console.log('>>>>>>>>>>>>> elasticsearch: ', ESDB_HOST);
 
 var elasticClient = new elasticsearch.Client({
-  host: 'localhost:9200',
+  host: ESDB_HOST + ':9200',
   log: 'info'
 });
 
@@ -38,7 +42,7 @@ module.exports.initMapping = function() {
       properties: {
         image: {"type": 'string', "index": "not_analyzed"},
         date: {"type": "date", "format": "yyyy-MM-dd"},
-        time: {"type": "basic_time_no_millis", "format": "HHmmssZ"}, 
+        time: {"type": "basic_time_no_millis", "format": "HHmmssZ"},
         food: {type: 'string', "index": "analyzed", "analyzer": "english"},
         cuisine:  {type: 'string', "index": "analyzed", "analyzer": "english"},
         healthLabels: {type: 'string', "index": "analyzed", "analyzer": "english"},
@@ -63,10 +67,10 @@ module.exports.initMapping = function() {
 module.exports.addMeal = function(meal) {
 
   console.log('CREATING elasticsearch meal>>>>>>>>>>>>', meal);
-  
+
   var to = meal.chefEmail;
   var chefName = meal.chefName;
-  var mealName = meal.typeoffood; 
+  var mealName = meal.typeoffood;
   var date = 'Placeholder DATE: 12.31.16';
   var subject = 'Your meal has been created';
   var text = 'Your meal:' + mealName + ' has been created.';
@@ -103,4 +107,3 @@ module.exports.addMeal = function(meal) {
     },
   });
 };
-
