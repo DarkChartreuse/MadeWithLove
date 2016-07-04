@@ -1,3 +1,5 @@
+var moment = require('moment');
+
 module.exports = [
   {
     firstName: 'Andrew',
@@ -10,6 +12,8 @@ module.exports = [
     zip: '47401',
     profile: 'https://avatars3.githubusercontent.com/u/15877600?v=3&s=460',
     chef: true,
+    createdAt: moment().format('YYYY-MM-DD HH:mm:ss.SSS Z'),
+    updatedAt: moment().format('YYYY-MM-DD HH:mm:ss.SSS Z'),
   },
   {
     firstName: 'Shinji',
@@ -22,6 +26,8 @@ module.exports = [
     zip: '55318',
     profile: 'https://avatars2.githubusercontent.com/u/12400009?v=3&s=460',
     chef: false,
+    createdAt: moment().format('YYYY-MM-DD HH:mm:ss.SSS Z'),
+    updatedAt: moment().format('YYYY-MM-DD HH:mm:ss.SSS Z'),
   },
   {
     firstName: 'Dan',
@@ -34,6 +40,8 @@ module.exports = [
     zip: '60107',
     profile: 'https://avatars1.githubusercontent.com/u/13027474?v=3&s=460',
     chef: true,
+    createdAt: moment().format('YYYY-MM-DD HH:mm:ss.SSS Z'),
+    updatedAt: moment().format('YYYY-MM-DD HH:mm:ss.SSS Z'),
   },
   {
     firstName: 'Alex',
@@ -46,5 +54,7 @@ module.exports = [
     zip: '08046',
     profile: 'https://avatars1.githubusercontent.com/u/17346712?v=3&s=460',
     chef: false,
+    createdAt: moment().format('YYYY-MM-DD HH:mm:ss.SSS Z'),
+    updatedAt: moment().format('YYYY-MM-DD HH:mm:ss.SSS Z'),
   },
 ];

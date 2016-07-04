@@ -1,20 +1,15 @@
 version: '2'
 services:
   db:
-<<<<<<< 0f9676418bac656bea92a7fffcba4ba73d6df834
-    image: pgdb
+    image: postgres
     container_name: postgresdb
-    # environment:
-    #   - POSTGRES_USER=postgres
-    #   - POSTGRES_PASSWORD=postgres
-    #   - POSTGRES_DB=mwl_db
+    environment:
+      - POSTGRES_USER=postgres
+      - POSTGRES_PASSWORD=postgres
+      - POSTGRES_DB=mwl_db
     # volumes: ["/data/db"]
     networks:
       - mwl-network
-=======
-    image: postgres
-    volumes: ["/data/db"]
->>>>>>> Adjust docker settings
     ports:
       - "5432:5432"
   es:
@@ -23,16 +18,10 @@ services:
     # environment:
     #   - ELASTICSEARCH_PORT_9200_TCP_ADDR=172.19.0.2
     networks:
-<<<<<<< 0f9676418bac656bea92a7fffcba4ba73d6df834
       - mwl-network
     ports:
       - "9200:9200"
       - "9300:9300"
-=======
-      - network
-    ports:
-      - "9200:9200"
->>>>>>> Adjust docker settings
   web:
     image: darkchartreuse/mwl
     container_name: mwl
