@@ -4,8 +4,8 @@ const sequelize = require('../models/index.js');
 const elasticClient = require('../../instantiateES.js');
 
 module.exports.getRec = function(req, res) {
-    let userId = req.body.userId;
-    console.log('HERE IS THE USER ID >>>>>', userId);
+    var userId = req.body.userId;
+    console.log('HERE IS THE USER ID >>>>>', req.body.userId);
 
     // fetchUserOrderHistory(userId)
     // var cuisines = {};

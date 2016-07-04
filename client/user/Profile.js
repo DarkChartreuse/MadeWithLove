@@ -1,28 +1,66 @@
 import React from 'react';
 import { connect } from 'react-redux';
+import Avatar from 'material-ui/Avatar';
+import Dialog from 'material-ui/Dialog';
+import FlatButton from 'material-ui/FlatButton';
+import RaisedButton from 'material-ui/RaisedButton';
+
 import EditForm from './EditForm';
 import { updateProfile, viewChefMeals } from '../actions';
 
 class Profile extends React.Component {
-            // <div><img src={loginUser.image} /></div>
+  constructor(props) {
+    super(props);
+    this.state = {
+      open: false,
+    };
+    this.handleOpen = this.handleOpen.bind(this);
+    this.handleClose = this.handleClose.bind(this);
+  }
+  
+  handleOpen() {
+    this.setState({open: true});
+  };
+
+  handleClose() {
+    this.setState({open: false});
+  };
 
   render() {
     var loginUser = this.props.loginUser;
+    const actions = [
+      <FlatButton
+        label="Ok"
+        primary={true}
+        keyboardFocused={true}
+        onTouchTap={this.handleClose}/>,
+    ];
+
     return (
       <div className="container">
         <div className="row">
           <div className="col s6 offset-s3">
-            <h3>Profile</h3>
+
+            <h3>Profile</h3><Avatar src={loginUser.profile} size={60} />
             <ul>
               <li>First Name: {loginUser.first_name}</li>
               <li>Last Name: {loginUser.last_name}</li>
               <li>Address: {loginUser.address}</li>
               <li>Description: {loginUser.description}</li>
               <li>Phone: {loginUser.phone} </li>
-              <li>Image: <img src={loginUser.profile} style={{width: '300px'}}/></li>
             </ul>
           </div>
-          <EditForm updateLoginUser={this.props.updateLoginUser} loginUser={loginUser}/>
+          <RaisedButton label="Edit Profile" onTouchTap={this.handleOpen} />
+          <Dialog
+            title="Edit Profile"
+            actions={actions}
+            modal={false}
+            open={this.state.open}
+            onRequestClose={this.handleClose}
+          >
+            <EditForm updateLoginUser={this.props.updateLoginUser} loginUser={loginUser}/>
+          </Dialog>
+          
         </div>
       </div>
     )

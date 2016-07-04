@@ -3,6 +3,8 @@ import { viewChefMeals, viewChefOrders } from '../actions';
 import { connect } from 'react-redux';
 import DeliveredButton from './DeliveredButton';
 
+import {Card, CardActions, CardHeader, CardMedia, CardTitle, CardText} from 'material-ui/Card';
+import FlatButton from 'material-ui/FlatButton';
 
 export default class ChefMeals extends React.Component {
   
@@ -28,9 +30,22 @@ export default class ChefMeals extends React.Component {
   	  {this.props.orders.chefMeals &&
   	  	<div>
   	  	  <h3>Your Meals</h3>
-	  	  	{this.props.orders.chefMeals.map(function(meal) {
-	  	  	  return<li>Name: {meal.food} Price: {meal.price} Image: {meal.image}</li>;
-	  	  	})}
+          <ul>
+	  	  	{ this.props.orders.chefMeals.map( function(meal) { 
+            return
+            <li><Card> 
+              <CardMedia
+                overlay={<CardTitle title={meal.food} subtitle={meal.price} />}
+              >
+                <img src={meal.image} />
+              </CardMedia>
+              <CardActions>
+                <FlatButton label="Delete Meal" />
+              </CardActions>
+            </Card></li>;
+            })
+          }
+          </ul>
   	  	</div>
   	  }
   	  {this.props.orders.chefOrders &&

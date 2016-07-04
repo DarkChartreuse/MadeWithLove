@@ -124,7 +124,7 @@ export default class EditForm extends React.Component {
         <input type='text' placeholder={this.state.zipcode}onChange={this.handleZip}/>
         <input type='submit'/>
       </form>
-      <div>Set Profile Picture<ImageUploader handleProfile={this.handleProfile}/></div>
+      <div>Set Profile Picture<ImageUploader handleImage={this.handleProfile}/></div>
       </div>
     )
   }

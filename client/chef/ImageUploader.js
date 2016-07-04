@@ -32,7 +32,7 @@ class ImageUploader extends React.Component {
 		axios.post('/api/uploadImage', data)
 		  .then( (data) => {
 		  	console.log('data.uri>>>>>>', data.data.uri);
-		  	this.props.handleProfile(data.data.uri);
+		  	this.props.handleImage(data.data.uri);
 			context.setState({
     	  	  processing: false,
     	  	  uploaded_uri: data.data.uri

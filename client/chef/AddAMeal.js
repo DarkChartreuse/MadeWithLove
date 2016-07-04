@@ -2,6 +2,7 @@ import React from 'react';
 import axios from 'axios';
 import { connect } from 'react-redux';
 import { browserHistory } from 'react-router';
+import DatePicker from 'material-ui/DatePicker';
 
 import ImageUploader from './ImageUploader';
 
@@ -9,7 +10,7 @@ class AddAMeal extends React.Component {
   constructor(props) {
     super(props);
     this.state = {
-      add_date: '',
+      add_date: null,
       add_time: '',
       typeoffood: '',
       cuisinetype: '',
@@ -28,8 +29,8 @@ class AddAMeal extends React.Component {
     this.handleError = this.handleError.bind(this);
   }
 
-  handleDate(e) {
-    this.setState({ add_date: e.target.value });
+  handleDate(event, date) {
+    this.setState({ add_date: date });
   }
   handleTime(e) {
     this.setState({ add_time: e.target.value });
@@ -90,8 +91,11 @@ class AddAMeal extends React.Component {
       <div className="container row">
         <div className="col s8 offset-s2">
           <h3>add a meal</h3>
+            <DatePicker
+              hintText="Add Date" 
+              value={this.state.add_date}
+              onChange={this.handleDate} />
           <form onSubmit={this.handleSubmit}>
-            <input type="date" name="add_date" onChange={this.handleDate} />
             <input type="time" name="add_time" onChange={this.handleTime} />
             <input type="text" placeholder="dish" onChange={this.handleTypeOfFood} />
             <input type="text" placeholder="type of cuisine" onChange={this.handleCuisineType} />

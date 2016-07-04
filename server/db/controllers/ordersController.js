@@ -123,8 +123,8 @@ module.exports = {
 
     Order.findOne({ where: { id: req.body.id } })
     .then( order => {
-      console.log('found order: ', order);
       if(order) {
+        console.log('found order: ', order);
         order.updateAttributes({
           delivered: true,
         })
