@@ -35,7 +35,7 @@ module.exports = (app) => {
   app.route('/api/auth/sign-in').post(Auth.signIn);
   app.route('/signout').get(Auth.logOut);
   app.route('/api/uploadimage').post(Meal.uploadImage);
-  app.route('/*').get((req, res) => { res.redirect('/'); });
+  // app.route('/*').get((req, res) => { res.redirect('/'); });
 
   // recommendations
   app.route('/api/getrecommendation').post(Rec.getRec);
