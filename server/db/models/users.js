@@ -12,26 +12,14 @@ module.exports = function(sequelize, DataTypes) {
     profile: DataTypes.STRING,
     chef: DataTypes.BOOLEAN,
     numOrders: DataTypes.INTEGER,
-    avgRating: DataTypes.FLOAT
+    avgRating: DataTypes.FLOAT,
+    stripe: DataTypes.STRING
   }, {
     classMethods: {
       associate: function(models) {
         // associations can be defined here
-        // users.hasMany(models.orders);
-        // users.hasMany(models.meals);
-      },
-    },
-    hooks: {
-      beforeBulkCreate: function (users, options, fn) {
-        users.createdAt = new Date();
-        users.updatedAt = new Date();
-        fn(null, users);
-      },
-      beforeUpdate: function (users, options, fn) {
-        users.updatedAt = new Date();
-        fn(null, users);
-      },
-    },
+      }
+    }
   });
   return users;
 };

@@ -61,8 +61,8 @@
     "redux-thunk": "^2.1.0",
     "s3": "^4.4.0",
     "sass-loader": "^3.2.1",
-    "sequelize": "^3.23.3",
-    "sequelize-cli": "^2.1.0",
+    "sequelize": "^3.23.4",
+    "sequelize-cli": "^2.4.0",
     "stripe": "^4.7.0",
     "style-loader": "^0.13.1",
     "supertest": "^1.2.0"
