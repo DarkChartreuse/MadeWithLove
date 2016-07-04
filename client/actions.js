@@ -1,3 +1,5 @@
+const elasticClient = require('../server/instantiateES.js');
+
 import {
   FETCH_REQUEST,
   FETCH_FAILURE,
@@ -83,14 +85,9 @@ export function viewUserOrders(userId) {
 }
 
 export function viewChefMeals(chefId) {
-  var elasticsearch = require('elasticsearch');
-  var client = new elasticsearch.Client({
-    host: 'localhost:9200',
-    log: 'trace'
-  });
   console.log('chefIdforQUERY: ', chefId);
   console.log('..............Client.search')
-  return dispatch => { client.search({
+  return dispatch => { elasticClient.search({
     index: 'mwl',
     type: 'meal',
     size: 50,
@@ -143,11 +140,7 @@ export function saveSearchQuery(searchQuery) {
 }
 
 export function fetchOrders(searchQuery) {
-    var elasticsearch = require('elasticsearch');
-    var client = new elasticsearch.Client({
-      host: 'localhost:9200',
-      log: 'trace'
-    });
+
 
     var userID = searchQuery.userID;
     var cuisine = searchQuery.cuisine || '*';
@@ -166,7 +159,7 @@ export function fetchOrders(searchQuery) {
       maxPrice: maxPrice
     }));
 
-    client.search({
+    elasticClient.search({
       index: 'mwl',
       type: 'meal',
       size: 50,
