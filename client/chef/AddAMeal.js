@@ -75,13 +75,13 @@ class AddAMeal extends React.Component {
     axios.post('/api/meals/', mealObj)
       .then((response) => {
         console.log('the saved response', response);
-        browserHistory.push('/chef');
+        browserHistory.push('/chefstatus');
       })
       .catch((err) => {
         this.handleError(err);
         browserHistory.push('/signin');
       });
-    
+
 
 
   }

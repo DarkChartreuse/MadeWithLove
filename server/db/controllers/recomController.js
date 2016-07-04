@@ -1,4 +1,4 @@
-const sequelize = require('../db.js');
+const sequelize = require('../models/index.js');
 const elasticClient = require('../../instantiateES.js');
 
 module.exports.getRec = function(req, res) {
@@ -14,7 +14,7 @@ module.exports.getRec = function(req, res) {
       console.log('<<><>>>>>>>>>', mostBoughtCuisine)
       elasticClient.search({
         index: 'mwl',
-        type: 'meal', 
+        type: 'meal',
         size: 5,
         body: {
           query: {
@@ -45,7 +45,7 @@ module.exports.getRec = function(req, res) {
 //     // next(orders);
 //   })
 //   .catch(err => { console.error('Error finding orders', err); })
-// } 
+// }
 
 
 function orderCountMapping(ordersArray) {
@@ -55,7 +55,7 @@ function orderCountMapping(ordersArray) {
     var currCuisine = ordersArray[i].cuisine;
 
     if(cuisineCount[currCuisine]) { cuisineCount[currCuisine]++; }
-    else { cuisineCount[currCuisine] = 1; } 
+    else { cuisineCount[currCuisine] = 1; }
   }
 
   // console.log(JSON.stringify(cuisineCount));
