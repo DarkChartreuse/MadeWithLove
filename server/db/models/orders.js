@@ -18,18 +18,6 @@ module.exports = function(sequelize, DataTypes) {
     classMethods: {
       associate: function(models) {
         // associations can be defined here
-        // orders.belongsTo(models.users);
-      }
-    },
-    hooks: {
-      beforeBulkCreate: function (orders, options, fn) {
-        orders.createdAt = new Date();
-        orders.updatedAt = new Date();
-        fn(null, orders);
-      },
-      beforeUpdate: function (orders, options, fn) {
-        orders.updatedAt = new Date();
-        fn(null, orders);
       }
     }
   });
