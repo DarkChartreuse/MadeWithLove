@@ -41,9 +41,9 @@ CREATE DATABASE mwl_db;
 - From your application folder, copy "meals.json" file
 - Go to the root folder of the unzipped elasticsearch file
 - Paste the copied file into the folder
+- To drop the data run the following command from anywhere in the terminal:  curl -XDELETE 'http://localhost:9200/_all'
 - In the terminal, from inside the elasticsearch folder run the following command: curl -XPOST 'localhost:9200/mwl/meal/_bulk?pretty' --data-binary "@meals.json";
 
-- To drop the data run the following command from anywhere in the terminal:  curl -XDELETE 'http://localhost:9200/_all'
 
 ## Requirements
 
