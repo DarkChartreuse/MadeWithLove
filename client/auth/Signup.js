@@ -1,5 +1,8 @@
 import React from 'react';
+import { browserHistory } from 'react-router';
 import axios from 'axios';
+import { connect } from 'react-redux';
+import { loggy } from '../actions';
 
 export default class Signup extends React.Component {
   constructor(props) {
@@ -39,6 +42,7 @@ export default class Signup extends React.Component {
     if (this.state.firstName === '' || this.state.lastName === '') {
       Materialize.toast('name required', 4000);
     } else {
+      const context = this;
         console.log('setting up data:');
         const data = {
           firstName: this.state.firstName,
@@ -54,9 +58,25 @@ export default class Signup extends React.Component {
         };
       axios.post('/api/users', data)
         .then(function (response) {
-          console.log(response);
-        })
-        .catch(this.handleError);
+          
+          var data = JSON.parse(response.config.data);
+          console.log('dat daaaata', data);
+          axios.post('/api/auth/sign-in', data)
+          .then((response) => {
+            console.log('LOGIN RESPONSE', response);
+            context.props.loggy(response);
+            localStorage.setItem('firstName', response.data.firstName);
+            localStorage.setItem('id', response.data.id);
+            localStorage.setItem('lastName', response.data.lastName);
+            localStorage.setItem('profile', response.data.profile);
+            localStorage.setItem('description', response.data.description);
+            localStorage.setItem('phone', response.data.phone);
+            localStorage.setItem('address', response.data.address);
+            localStorage.setItem('zip', response.data.zip);
+            localStorage.setItem('isChef', response.data.chef);
+            browserHistory.push(`/users/${context.props.loginUser.userID}`);
+          });
+        });
     }
   }
 
@@ -143,3 +163,13 @@ export default class Signup extends React.Component {
     );
   }
 }
+
+const mapDispatchToProps = (dispatch) => {
+  return {
+    loggy: (response) => dispatch(loggy(response)),
+  };
+};
+
+const mapStateToProps = ({ loginUser }) => ({ loginUser });
+
+export default connect(mapStateToProps, mapDispatchToProps)(Signup);

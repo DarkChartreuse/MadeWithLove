@@ -17,6 +17,7 @@ class Mealview extends React.Component {
     };
     
     this.handleStripeSubmit = this.handleStripeSubmit.bind(this);
+    // this.handleConnect = this.handleConnect.bind(this);
   }
 
   componentWillMount() {
@@ -44,6 +45,16 @@ class Mealview extends React.Component {
     //   });
   }
 
+  // handleConnect(e) {
+  //   const context = this;
+  //   e.preventDefault();
+  //   axios.get('/authorize')
+  //     .then((response) => {
+  //       console.log('the handleconnect response', response);
+  //     });
+  // }
+
+
   handleStripeSubmit(e) {
     const context = this;
     e.preventDefault();
@@ -54,9 +65,11 @@ class Mealview extends React.Component {
       const mealObj = context.props.mealState;
 
       console.log('the respone stripe', res);
+      res.amount = context.props.mealState.price;
+      res.chefId = context.props.mealState.chefId;
       axios.post('/api/payments', res)
         .then((response) => {
-          console.log(response);
+          console.log('what is the purchase response', response);
         });
     });
   }
@@ -86,6 +99,9 @@ class Mealview extends React.Component {
           </div>
           <div>
           checkoutTotal: {`$${this.props.mealState.quantity * this.props.mealState.price}`}
+          <div>
+          
+          </div>
           </div>
           <div>
           {!!this.state.stripeLoading ? <div>Loading</div> : this.state.stripeLoadingError}
@@ -147,3 +163,5 @@ export default connect(mapStateToProps, mapDispatchToProps)(Mealview);
 // deliveryCharge={this.state.deliveryCharge}
 // checkoutTotal={this.state.checkoutTotal}
 // />
+
+// <a href="https://connect.stripe.com/oauth/authorize?response_type=code&client_id=ca_8kQux35EriTK7xxw2Bvhcuz0PXwpP0rw&scope=read_write">connect to stripe</a>

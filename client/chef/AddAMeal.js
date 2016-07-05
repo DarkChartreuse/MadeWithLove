@@ -97,6 +97,7 @@ class AddAMeal extends React.Component {
             <input type="text" placeholder="type of cuisine" onChange={this.handleCuisineType} />
             <input type="text" placeholder="price" onChange={this.handlePrice} />
             <input type="text" placeholder="quantity" onChange={this.handleQuantity} />
+            <a href="/authorize">CONNECT STRIPE</a>
             <button type="submit">Submit Meal</button>
           </form>
             <ImageUploader handleImage={this.handleImage} />

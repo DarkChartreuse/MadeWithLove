@@ -1,6 +1,10 @@
+const User = require('./db/models/usersModel.js');
 const path = require('path');
 const express = require('express');
 const bodyParser = require('body-parser');
+const cors = require('cors');
+const qs = require('querystring');
+const request = require('request');
 const webpack = require('webpack');
 // const webpackDevMiddleware = require('webpack-dev-middleware');
 // const webpackHotMiddleware = require('webpack-hot-middleware');
@@ -12,17 +16,26 @@ const authController = require('./db/controllers/authController.js');
 const session = require('express-session');
 require('./passport')(passport);
 
-// const request = require('request');
-
 const app = express();
 const port = process.env.PORT || 3000;
+
+const CLIENT_ID = 'ca_8kQux35EriTK7xxw2Bvhcuz0PXwpP0rw';
+const API_KEY = 'sk_test_y1L0h0zWW6KNvLpMHi5yOKoD';
+
+const TOKEN_URI = 'https://connect.stripe.com/oauth/token';
+const AUTHORIZE_URI = 'https://connect.stripe.com/oauth/authorize';
 // const compiler = webpack(config);
 // app.use(webpackDevMiddleware(compiler, { noInfo: true, publicPath: config.output.publicPath }));
 // app.use(webpackHotMiddleware(compiler));
-
+// app.use((req, res, next) => {
+//   res.header("Access-Control-Allow-Origin", "*");
+//   res.header("Access-Control-Allow-Headers", "Origin, X-Requested-With, Content-Type, Accept");
+//   next();
+// });
 app.use(bodyParser.json({limit: '50mb'}));
 app.use(bodyParser.urlencoded({ extended: false }));
 app.use(cookieParser());
+// app.use(cors());
 app.use(authController.globalSessionMiddleware);
 app.use(session({ secret: 'onionsarerare', resave: false, saveUninitialized: false }));
 app.use(passport.initialize());
@@ -48,6 +61,51 @@ app.use(flash());
 //   res.sendFile(path.join(__dirname, '../client/index.html'));
 // });
 require('./routes.js')(app, express);
+
+app.get('/authorize', (req, res) => {
+  // Redirect to Stripe /oauth/authorize endpoint
+  res.redirect(AUTHORIZE_URI + '?' + qs.stringify({
+    response_type: 'code',
+    scope: 'read_write',
+    client_id: CLIENT_ID,
+  }));
+});
+
+app.get('/oauth/callback', (req, res) => {
+
+  var code = req.query.code;
+
+  // Make /oauth/token endpoint POST request
+  request.post({
+    url: TOKEN_URI,
+    form: {
+      grant_type: 'authorization_code',
+      client_id: CLIENT_ID,
+      code,
+      client_secret: API_KEY,
+    }
+  }, (err, r, body) => {
+    console.log('non parse body', JSON.parse(body));
+    
+    // Do something with your accessToken
+    console.log('we have req sesion?', req.session.user.id)
+    User.findOne({ where: { id: req.session.user.id } })
+        .then(user => {
+          if (user) {
+            user.updateAttributes({
+              access_token: JSON.parse(body).access_token,
+              refresh_token: JSON.parse(body).refresh_token,
+              token_type: JSON.parse(body).token_type,
+              stripe_publishable_key: JSON.parse(body).stripe_publishable_key,
+              stripe_user_id: JSON.parse(body).stripe_user_id,
+              scope: JSON.parse(body).scope,
+            });
+    // For demo's sake, output in response:
+        res.redirect('/');
+        }
+    });
+  });
+});
 
 app.use(express.static(path.resolve(`${__dirname}/../dist`)));
 
