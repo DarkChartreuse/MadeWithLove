@@ -24,7 +24,7 @@ module.exports = {
       if (err && err.type === 'StripeCardError') {
         console.log('we got an err', err);
       } else {
-        res.send({ message: 'Your card was successfully charged' });
+        res.send({ message: 'Your card was successfully charged!' });
       }
     });
   },
