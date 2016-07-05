@@ -15,9 +15,7 @@ class Mealview extends React.Component {
       paymentSuccess: false,
       token: null,
     };
-    
     this.handleStripeSubmit = this.handleStripeSubmit.bind(this);
-    // this.handleConnect = this.handleConnect.bind(this);
   }
 
   componentWillMount() {

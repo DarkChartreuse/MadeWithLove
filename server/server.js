@@ -64,18 +64,16 @@ require('./routes.js')(app, express);
 
 app.get('/authorize', (req, res) => {
   // Redirect to Stripe /oauth/authorize endpoint
-  res.redirect(AUTHORIZE_URI + '?' + qs.stringify({
+  res.redirect(`${AUTHORIZE_URI}?${qs.stringify({
     response_type: 'code',
     scope: 'read_write',
     client_id: CLIENT_ID,
-  }));
+  })}`);
 });
 
 app.get('/oauth/callback', (req, res) => {
+  const code = req.query.code;
 
-  var code = req.query.code;
-
-  // Make /oauth/token endpoint POST request
   request.post({
     url: TOKEN_URI,
     form: {
@@ -83,12 +81,8 @@ app.get('/oauth/callback', (req, res) => {
       client_id: CLIENT_ID,
       code,
       client_secret: API_KEY,
-    }
+    },
   }, (err, r, body) => {
-    console.log('non parse body', JSON.parse(body));
-    
-    // Do something with your accessToken
-    console.log('we have req sesion?', req.session.user.id)
     User.findOne({ where: { id: req.session.user.id } })
         .then(user => {
           if (user) {
@@ -101,9 +95,9 @@ app.get('/oauth/callback', (req, res) => {
               scope: JSON.parse(body).scope,
             });
     // For demo's sake, output in response:
-        res.redirect('/');
-        }
-    });
+            res.redirect('/');
+          }
+        });
   });
 });
 
