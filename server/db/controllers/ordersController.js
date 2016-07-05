@@ -30,9 +30,9 @@ module.exports = {
         // chefEmail: req.body.chefEmail,
         // mealAddedDate: req.body.mealAddedDate,
         // delivered: false,
-        chef_id: req.body.chef_id,
-        meal_id: req.body.meal_id,
-        user_id: req.body.user_id,
+        chef_id: req.body.chefId,
+        meal_id: req.body.mealId,
+        user_id: req.body.userId,
         food: req.body.food,
         cuisine: req.body.cuisine,
         description: req.body.description,
@@ -49,7 +49,8 @@ module.exports = {
         chef_email: req.body.chef_email,
         meal_added_date: req.body.meal_added_date,
         delivered: false,
-    })
+      })
+    .then((response) => res.send(response))
     .catch(err => { console.error('Error adding order: ', err); })
     .finally(() => {
       console.log('Chef has now added an order: ', req.body);

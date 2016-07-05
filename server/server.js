@@ -24,18 +24,10 @@ const API_KEY = 'sk_test_y1L0h0zWW6KNvLpMHi5yOKoD';
 
 const TOKEN_URI = 'https://connect.stripe.com/oauth/token';
 const AUTHORIZE_URI = 'https://connect.stripe.com/oauth/authorize';
-// const compiler = webpack(config);
-// app.use(webpackDevMiddleware(compiler, { noInfo: true, publicPath: config.output.publicPath }));
-// app.use(webpackHotMiddleware(compiler));
-// app.use((req, res, next) => {
-//   res.header("Access-Control-Allow-Origin", "*");
-//   res.header("Access-Control-Allow-Headers", "Origin, X-Requested-With, Content-Type, Accept");
-//   next();
-// });
-app.use(bodyParser.json({limit: '50mb'}));
+
+app.use(bodyParser.json({ limit: '50mb' }));
 app.use(bodyParser.urlencoded({ extended: false }));
 app.use(cookieParser());
-// app.use(cors());
 app.use(authController.globalSessionMiddleware);
 app.use(session({ secret: 'onionsarerare', resave: false, saveUninitialized: false }));
 app.use(passport.initialize());
@@ -94,8 +86,12 @@ app.get('/oauth/callback', (req, res) => {
               stripe_user_id: JSON.parse(body).stripe_user_id,
               scope: JSON.parse(body).scope,
             });
+            console.log('う～ザー', user);
     // For demo's sake, output in response:
-            res.redirect('/');
+            res.writeHead(301,
+              { Location: 'http://localhost:3000/addmeal' }
+            );
+            res.end();
           }
         });
   });
