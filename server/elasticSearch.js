@@ -48,9 +48,9 @@ module.exports.initMapping = function() {
         healthLabels: {type: 'string', "index": "analyzed", "analyzer": "english"},
         isChef: {type: 'boolean'},
         chefId: {type: 'integer'},
-        chefEmail:{type: 'string'},
-        chefAddress:{type: 'string'},
-        chefPhone:{type: 'string'},
+        chef_email:{type: 'string'},
+        chef_address:{type: 'string'},
+        chef_phone:{type: 'string'},
         chef: {type: 'string', "index": "not_analyzed", "analyzer": "english"},
         ingredients:  {type: 'string', "index": "analyzed", "analyzer": "english"},
         description: {type: 'string'},
@@ -68,13 +68,13 @@ module.exports.addMeal = function(meal) {
 
   console.log('CREATING elasticsearch meal>>>>>>>>>>>>', meal);
 
-  var to = meal.chefEmail;
-  var chefName = meal.chefName;
+  var to = meal.chef_email;
+  var chef_name = meal.chef_name;
   var mealName = meal.typeoffood;
   var date = 'Placeholder DATE: 12.31.16';
   var subject = 'Your meal has been created';
   var text = 'Your meal:' + mealName + ' has been created.';
-  var htmlBody = generateEmail.mealCreatedEmailBody(chefName, mealName, date);
+  var htmlBody = generateEmail.mealCreatedEmailBody(chef_name, mealName, date);
 
   console.log('<<<<<<<<<<<<<<<<Generating EMAIL>>>>>>>>>>>>');
   generateEmail.sendEmail(to, subject, text, htmlBody);
@@ -91,10 +91,10 @@ module.exports.addMeal = function(meal) {
       food: meal.typeoffood,
       cuisine: meal.cuisinetype,
       chefId: meal.chefID,
-      chef: meal.chefName,
-      chefEmail: meal.chefEmail,
-      chefAddress: meal.chefAddress,
-      chefPhone: meal.chefPhone,
+      chef: meal.chef_name,
+      chef_email: meal.chef_email,
+      chef_address: meal.chef_address,
+      chef_phone: meal.chef_phone,
       isChef: meal.isChef,
       ingredients: meal.ingredients,
       description: meal.description,

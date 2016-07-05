@@ -11,7 +11,7 @@ export default class Recommend extends React.Component {
   }
 
   componentDidMount() {
-    // if(this.props.loginUser.firstName) {
+    // if(this.props.loginUser.first_name) {
     // 	axios.post('/api/getRec', this.props.loginUser.userID)
     // 	.then( results => {
     // 		this.state.results = results;

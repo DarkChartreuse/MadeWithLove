@@ -163,9 +163,11 @@ export function fetchOrders(searchQuery) {
       index: 'mwl',
       type: 'meal',
       size: 50,
-      "_source": ["food", "chefId", "chef", "chefEmail", "cuisine", "chefAddress", "chefPhone", "quantity", "rating", "image", "price", "healthLabels", "zipcode"],
+      _source: ['food', 'chefId', 'chef', 'chef_email',
+      'cuisine', 'chef_address', 'chef_phone', 'quantity',
+      'rating', 'image', 'price', 'healthLabels', 'zipcode'],
       // query: { "match_all": {} },
-      body:{
+      body: {
         "query": {
           "bool" : {
              "must" :     [

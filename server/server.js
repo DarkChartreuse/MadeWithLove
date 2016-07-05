@@ -1,4 +1,4 @@
-const User = require('./db/models/usersModel.js');
+const User = require('./db/models/index.js').users;
 const path = require('path');
 const express = require('express');
 const bodyParser = require('body-parser');

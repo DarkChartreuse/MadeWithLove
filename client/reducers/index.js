@@ -17,7 +17,7 @@ const toggleQuantity = (state = {quantity: 0, price: 15}, action) => {
 };
 
 const toggleVegan = (state = {}, action) => {
-  switch(action.type) {
+  switch (action.type) {
     case 'TOGGLE_VEGAN':
       return Object.assign({}, state, {
         vegan: !state.vegan
@@ -89,8 +89,8 @@ const toggleAuth = (state = { isSignIn: false }, action) => {
 
 const userInfoState = {
   userID: Number(localStorage.getItem('name')),
-  firstName: localStorage.getItem('firstName'),
-  lastName: localStorage.getItem('lastName'),
+  first_name: localStorage.getItem('first_name'),
+  last_name: localStorage.getItem('last_name'),
   description: localStorage.getItem('description'),
   phone: localStorage.getItem('phone'),
   address: localStorage.getItem('address'),
@@ -104,8 +104,8 @@ const loginUser = (state = userInfoState, action) => {
     case 'LOGIN_USER':
       return Object.assign({}, state, {
         userID: action.data.id,
-        firstName: action.data.firstName,
-        lastName: action.data.lastName,
+        first_name: action.data.first_name,
+        last_name: action.data.last_name,
         email: action.data.email,
         description: action.data.description,
         phone: action.data.phone,
@@ -116,8 +116,8 @@ const loginUser = (state = userInfoState, action) => {
       });
     case 'UPDATE_PROFILE':
       return Object.assign({}, state, {
-        firstName: action.data.firstName,
-        lastName: action.data.lastName,
+        first_name: action.data.first_name,
+        last_name: action.data.last_name,
         email: action.data.email,
         password: action.data.password,
         description: action.data.description,
@@ -132,8 +132,6 @@ const loginUser = (state = userInfoState, action) => {
       return state;
   }
 };
-
-
 
 const rootReducer = combineReducers({
   toggleQuantity,

@@ -18,7 +18,7 @@ export default class UserOrders extends React.Component {
 
   	return (
       <div>
-  	  { !this.props.loginUser.firstName && <h4>Please <Link to='signin'>log in</Link> to view your orders</h4> }
+  	  { !this.props.loginUser.first_name && <h4>Please <Link to='signin'>log in</Link> to view your orders</h4> }
       { this.props.orders.userOrders !== undefined && 
         <div>
   	  	  <h3>Your Orders</h3>

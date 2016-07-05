@@ -20,8 +20,8 @@ module.exports = (passport) => {
           return done(null, false, { message: 'Incorrect password.' });
         }
         return done(null, { id: user.id,
-          firstName: user.firstName,
-          lastName: user.lastName,
+          first_name: user.first_name,
+          last_name: user.last_name,
           email: user.email,
           description: user.description,
           phone: user.phone,

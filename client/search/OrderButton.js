@@ -9,27 +9,27 @@ class OrderButton extends React.Component {
 
   _handleSubmit() {
     console.log('the order props', this.props);
-    if (!this.props.loginUser.firstName) {
+    if (!this.props.loginUser.first_name) {
       return browserHistory.push('/signin');
     }
     let data = {
-      chefName: this.props.cuisine.chef,
+      chef_name: this.props.cuisine.chef,
       chefId: this.props.cuisine.chefId,
-      chefEmail: this.props.cuisine.chefEmail,
-      chefAddress: this.props.cuisine.chefAddress,
-      chefPhone: this.props.cuisine.chefPhone,
+      chef_email: this.props.cuisine.chef_email,
+      chef_address: this.props.cuisine.chef_address,
+      chef_phone: this.props.cuisine.chef_phone,
       cuisine: this.props.cuisine.cuisine,
       food: this.props.cuisine.food,
       image: this.props.cuisine.image,
       mealId: this.props.cuisine.mealId,
       price: this.props.cuisine.price,
       quantity: this.props.cuisine.quantity,
-      userName: `${this.props.loginUser.firstName} ${this.props.loginUser.lastName}`,
+      user_name: `${this.props.loginUser.first_name} ${this.props.loginUser.last_name}`,
       userId: this.props.loginUser.userID,
-      userAddress: this.props.loginUser.address,
-      userPhone: this.props.loginUser.phone,
-      userEmail: this.props.loginUser.email,
-      orderPlaced: Date(),
+      user_address: this.props.loginUser.address,
+      user_phone: this.props.loginUser.phone,
+      user_email: this.props.loginUser.email,
+      order_placed: Date(),
     };
     
     this.props.updateMeal(data);
