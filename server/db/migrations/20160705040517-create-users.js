@@ -8,10 +8,10 @@ module.exports = {
         primaryKey: true,
         type: Sequelize.INTEGER
       },
-      firstName: {
+      first_name: {
         type: Sequelize.STRING
       },
-      lastName: {
+      last_name: {
         type: Sequelize.STRING
       },
       email: {
@@ -38,11 +38,32 @@ module.exports = {
       chef: {
         type: Sequelize.BOOLEAN
       },
-      numOrders: {
+      num_orders: {
         type: Sequelize.INTEGER
       },
-      avgRating: {
+      avg_rating: {
         type: Sequelize.FLOAT
+      },
+      stripe_payment_token: {
+        type: Sequelize.STRING
+      },
+      access_token: {
+        type: Sequelize.STRING
+      },
+      refresh_token: {
+        type: Sequelize.STRING
+      },
+      token_type: {
+        type: Sequelize.STRING
+      },
+      stripe_publishable_key: {
+        type: Sequelize.STRING
+      },
+      stripe_user_id: {
+        type: Sequelize.STRING
+      },
+      scope: {
+        type: Sequelize.STRING
       },
       createdAt: {
         allowNull: false,

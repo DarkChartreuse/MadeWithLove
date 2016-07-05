@@ -1,3 +1,5 @@
+'use strict';
+
 const sequelize = require('../models/index.js');
 const elasticClient = require('../../instantiateES.js');
 
@@ -7,7 +9,7 @@ module.exports.getRec = function(req, res) {
 
     // fetchUserOrderHistory(userId)
     // var cuisines = {};
-    sequelize.query('SELECT * FROM orders WHERE id_user =' + userId)
+    sequelize.query('SELECT * FROM orders WHERE user_id =' + userId)
     .then((userOrders) => orderCountMapping(userOrders[0]))
     .then((cuisineCountByCuisineType) => findMaxOccurance(cuisineCountByCuisineType))
     .then((mostBoughtCuisine) => {

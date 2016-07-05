@@ -11,24 +11,43 @@ module.exports = {
     // User.findOne({ where: { email: req.body.email } })
     // .then(result => {
       Order.create({
-        chefId: req.body.chefId,
-        mealId: req.body.mealId,
-        userId: req.body.userId,
+        // chefId: req.body.chefId,
+        // mealId: req.body.mealId,
+        // userId: req.body.userId,
+        // food: req.body.food,
+        // cuisine: req.body.cuisine,
+        // description: req.body.description,
+        // image: req.body.image,
+        // price: req.body.price,
+        // quantity: req.body.quantity,
+        // userName: req.body.userName,
+        // userAddress: req.body.userAddress,
+        // userPhone: req.body.userPhone,
+        // userEmail: req.body.userEmail,
+        // chefName: req.body.chefName,
+        // chefAddress: req.body.chefAddress,
+        // chefPhone: req.body.chefPhone,
+        // chefEmail: req.body.chefEmail,
+        // mealAddedDate: req.body.mealAddedDate,
+        // delivered: false,
+        chef_id: req.body.chef_id,
+        meal_id: req.body.meal_id,
+        user_id: req.body.user_id,
         food: req.body.food,
         cuisine: req.body.cuisine,
         description: req.body.description,
         image: req.body.image,
         price: req.body.price,
         quantity: req.body.quantity,
-        userName: req.body.userName,
-        userAddress: req.body.userAddress,
-        userPhone: req.body.userPhone,
-        userEmail: req.body.userEmail,
-        chefName: req.body.chefName,
-        chefAddress: req.body.chefAddress,
-        chefPhone: req.body.chefPhone,
-        chefEmail: req.body.chefEmail,
-        mealAddedDate: req.body.mealAddedDate,
+        user_name: req.body.user_name,
+        user_address: req.body.user_address,
+        user_phone: req.body.user_phone,
+        user_email: req.body.user_email,
+        chef_name: req.body.chef_name,
+        chef_address: req.body.chef_address,
+        chef_phone: req.body.chef_phone,
+        chef_email: req.body.chef_email,
+        meal_added_date: req.body.meal_added_date,
         delivered: false,
     })
     .catch(err => { console.error('Error adding order: ', err); })
@@ -40,7 +59,7 @@ module.exports = {
 
   updateOrder: (req, res) => {
     console.log('req params', req.params);
-    Order.findOne({ where: { mealId: req.params.id } })
+    Order.findOne({ where: { meal_id: req.params.id } })
     .then(order => {
       console.log('we are in the order', order);
       res.json(order);
@@ -63,7 +82,7 @@ module.exports = {
 
   getOrder: (req, res) => {
     console.log('req params', req.params);
-    Order.findOne({ where: { mealId: req.params.id } })
+    Order.findOne({ where: { meal_id: req.params.id } })
     .then(order => {
       console.log('we are in the order', order);
       res.json(order);
@@ -73,7 +92,7 @@ module.exports = {
 
   getChefOrders: (req, res) => {
     console.log('req params', req.body);
-    Order.findAll({ where: { chefId: req.body.chefId, delivered: false } })
+    Order.findAll({ where: { chef_id: req.body.chef_id, delivered: false } })
     .then(orders => {
       // console.log('controller shows these resulting orders:', orders);
       res.json(orders);
@@ -83,7 +102,7 @@ module.exports = {
 
   getUserOrders: (req, res) => {
     console.log('req params', req.body);
-    Order.findAll({ where: { userId: req.body.userId } })
+    Order.findAll({ where: { user_id: req.body.user_id } })
     .then(orders => {
       // console.log('controller shows these resulting orders:', orders);
       res.json(orders);
