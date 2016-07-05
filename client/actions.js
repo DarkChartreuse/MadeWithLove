@@ -58,7 +58,7 @@ export function userOrdersSuccess(result) {
 
 export function viewChefOrders(chefId) {
   return dispatch => {
-    axios.post('/api/getcheforders', {chefId: chefId})
+    axios.post('/api/getcheforders', {chef_id: chefId})
     .then( results => {
       console.log('results!!>>>>>>>>> ', results.data);
       if(results.data.length) {
@@ -72,7 +72,7 @@ export function viewChefOrders(chefId) {
 
 export function viewUserOrders(userId) {
   return dispatch => {
-    axios.post('/api/getuserorders', {userId: userId})
+    axios.post('/api/getuserorders', {user_id: userId})
     .then( results => {
       console.log('results!!>>>>>>>>> ', results.data);
       if(results.data.length) {
