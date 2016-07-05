@@ -1,8 +1,8 @@
 'use strict';
 module.exports = function(sequelize, DataTypes) {
   var users = sequelize.define('users', {
-    firstName: DataTypes.STRING,
-    lastName: DataTypes.STRING,
+    first_name: DataTypes.STRING,
+    last_name: DataTypes.STRING,
     email: DataTypes.STRING,
     description: DataTypes.STRING,
     phone: DataTypes.STRING,
@@ -11,9 +11,15 @@ module.exports = function(sequelize, DataTypes) {
     zip: DataTypes.STRING,
     profile: DataTypes.STRING,
     chef: DataTypes.BOOLEAN,
-    numOrders: DataTypes.INTEGER,
-    avgRating: DataTypes.FLOAT,
-    stripe: DataTypes.STRING
+    num_orders: DataTypes.INTEGER,
+    avg_rating: DataTypes.FLOAT,
+    stripe_payment_token: DataTypes.STRING,
+    access_token: DataTypes.STRING,
+    refresh_token: DataTypes.STRING,
+    token_type: DataTypes.STRING,
+    stripe_publishable_key: DataTypes.STRING,
+    stripe_user_id: DataTypes.STRING,
+    scope: DataTypes.STRING
   }, {
     classMethods: {
       associate: function(models) {

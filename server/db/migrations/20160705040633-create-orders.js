@@ -8,13 +8,13 @@ module.exports = {
         primaryKey: true,
         type: Sequelize.INTEGER
       },
-      userId: {
+      user_id: {
         type: Sequelize.INTEGER
       },
-      chefId: {
+      chef_id: {
         type: Sequelize.INTEGER
       },
-      mealId: {
+      meal_id: {
         type: Sequelize.STRING
       },
       food: {
@@ -32,10 +32,7 @@ module.exports = {
       price: {
         type: Sequelize.FLOAT
       },
-      userAddress: {
-        type: Sequelize.STRING
-      },
-      orderDate: {
+      order_date: {
         type: Sequelize.DATE
       },
       rating: {
@@ -46,6 +43,33 @@ module.exports = {
       },
       image: {
         type: Sequelize.STRING
+      },
+      user_name: {
+        type: Sequelize.STRING
+      },
+      user_address: {
+        type: Sequelize.STRING
+      },
+      user_phone: {
+        type: Sequelize.STRING
+      },
+      user_email: {
+        type: Sequelize.STRING
+      },
+      chef_name: {
+        type: Sequelize.STRING
+      },
+      chef_address: {
+        type: Sequelize.STRING
+      },
+      chef_phone: {
+        type: Sequelize.STRING
+      },
+      chef_email: {
+        type: Sequelize.STRING
+      },
+      meal_added_date: {
+        type: Sequelize.DATE
       },
       createdAt: {
         allowNull: false,

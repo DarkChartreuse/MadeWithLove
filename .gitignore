@@ -26,7 +26,6 @@ build/
 dist/
 
 # temp
-server/db/db.js
 server/db/Dockerfile
 server/db/init.sql
 wait-for-it.sh

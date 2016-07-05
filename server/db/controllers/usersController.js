@@ -13,8 +13,10 @@ module.exports = {
       const salt = bcrypt.genSaltSync(10);
       const hashedPassword = bcrypt.hashSync(req.body.password, salt);
       return User.create({
-        firstName: req.body.firstName,
-        lastName: req.body.lastName,
+        // firstName: req.body.firstName,
+        // lastName: req.body.lastName,
+        first_name: req.body.first_name,
+        last_name: req.body.last_name,
         email: req.body.email,
         description: req.body.description,
         phone: req.body.phone,
@@ -61,8 +63,8 @@ module.exports = {
         const hashedPassword = bcrypt.hashSync(req.body.password, salt);
 
         user.updateAttributes({
-          firstName: req.body.firstName,
-          lastName: req.body.lastName,
+          first_name: req.body.first_name,
+          last_name: req.body.last_name,
           email: req.body.email,
           description: req.body.description,
           phone: req.body.phone,
