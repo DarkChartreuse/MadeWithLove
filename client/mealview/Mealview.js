@@ -2,6 +2,7 @@ import React from 'react';
 import axios from 'axios';
 import { connect } from 'react-redux';
 import { updateMeal } from '../actions';
+import { browserHistory } from 'react-router';
 
 class Mealview extends React.Component {
   constructor(props) {
@@ -32,13 +33,26 @@ class Mealview extends React.Component {
 
       console.log('the respone stripe', res);
       res.amount = context.props.mealState.price;
+      res.food = context.props.mealState.food;
       res.chefId = context.props.mealState.chefId;
       axios.post('/api/payments', res)
         .then((response) => {
           console.log('what is the purchase response', response);
+          Materialize.toast(response.data.message, 4000);
+          axios.post('/api/createorder', mealObj)
+          .then((response) => {
+            console.log('we saved the order yo!', response);
+            browserHistory.push('/orderstatus');
+          });
         });
     });
   }
+
+  // axios.post('/api/createorder', data)
+  //   .then((response) => {
+  //     console.log('da response', response);
+  //     browserHistory.push(`/orders/${data.mealId}`);
+  //   })
 
   render() {
     return (
