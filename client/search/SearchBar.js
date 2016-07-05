@@ -1,11 +1,12 @@
 import React from 'react';
+import DatePicker from 'material-ui/DatePicker';
 
 class SearchBar extends React.Component {
   constructor(props) {
     super(props);
     this.state = {
       cuisine: undefined,
-      add_date: undefined,
+      add_date: null,
       minPrice: undefined,
       maxPrice: undefined
     };
@@ -15,8 +16,8 @@ class SearchBar extends React.Component {
     this.handleCuisine = this.handleCuisine.bind(this);
   }
   
-  handleDate(e) {
-    this.setState({ add_date: e.target.value });
+  handleDate(event, date) {
+    this.setState({ add_date: date });
   }
   handleCuisine(e) {
     this.setState({ cuisine: e.target.value });
@@ -48,7 +49,10 @@ class SearchBar extends React.Component {
                 <input placeholder='Maximum Price'type="text" name="maxPrice" onChange={this.handleMaxPrice}/>
               </div>
               <div className="input-field col s3">
-                <input type="date" name="add_date" onChange={this.handleDate}/>
+                <DatePicker
+                  hintText="Pick a date" 
+                  value={this.state.add_date}
+                  onChange={this.handleDate} />
               </div>
               <button
                 className="btn-large #ffb74d orange lighten-2 black-text menubuttons"
@@ -61,12 +65,6 @@ class SearchBar extends React.Component {
                 }) }} >
                 Search
               </button>
-            </div>
-            <div className="row">
-              <div>
-                <input type="checkbox" id="test5" checked={this.props.vegan} />
-                <label for="test5" onClick={ () => this.props.toggleVegan() }>Vegan</label>
-              </div>
             </div>
           </div>
         </div>

@@ -1,20 +1,19 @@
 'use strict';
 
-const sequelize = require('../models/index.js');
+const db = require('../models/index.js');
 const elasticClient = require('../../instantiateES.js');
 
 module.exports.getRec = function(req, res) {
-    let userId = req.body.userId;
-    console.log('HERE IS THE USER ID >>>>>', userId);
+    console.log('HERE IS THE USER ID >>>>>', req.body.userId);
 
     // fetchUserOrderHistory(userId)
     // var cuisines = {};
-    sequelize.query('SELECT * FROM orders WHERE user_id =' + userId)
+    db.sequelize.query('SELECT * FROM orders WHERE user_id = 1')
     .then((userOrders) => orderCountMapping(userOrders[0]))
     .then((cuisineCountByCuisineType) => findMaxOccurance(cuisineCountByCuisineType))
     .then((mostBoughtCuisine) => {
-      console.log('<<><>>>>>>>>>', mostBoughtCuisine)
-      elasticClient.search({
+      console.log('<<><>>>>>>>>>', mostBoughtCuisine);
+      return elasticClient.search({
         index: 'mwl',
         type: 'meal',
         size: 5,

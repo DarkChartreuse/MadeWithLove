@@ -60,16 +60,15 @@ module.exports = {
     User.findOne({ where: { id: req.body.userID } })
     .then( user => {
       if(user) {
-        const salt = bcrypt.genSaltSync(10);
-        const hashedPassword = bcrypt.hashSync(req.body.password, salt);
-
+        // const salt = bcrypt.genSaltSync(10);
+        // const hashedPassword = bcrypt.hashSync(req.body.password, salt);
+        
         user.updateAttributes({
           first_name: req.body.first_name,
           last_name: req.body.last_name,
           email: req.body.email,
           description: req.body.description,
           phone: req.body.phone,
-          password: hashedPassword,
           address: req.body.address,
           zip: req.body.zip,
           profile: req.body.profile
