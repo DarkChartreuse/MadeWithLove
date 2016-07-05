@@ -4,11 +4,11 @@ const db = require('../models/index.js');
 const elasticClient = require('../../instantiateES.js');
 
 module.exports.getRec = function(req, res) {
-    console.log('HERE IS THE USER ID >>>>>', req.body.userId);
+    console.log('HERE IS THE USER ID >>>>>', req.body.user_id);
 
     // fetchUserOrderHistory(userId)
     // var cuisines = {};
-    db.sequelize.query('SELECT * FROM orders WHERE user_id = 1')
+    db.sequelize.query('SELECT * FROM orders WHERE user_id = 4')
     .then((userOrders) => orderCountMapping(userOrders[0]))
     .then((cuisineCountByCuisineType) => findMaxOccurance(cuisineCountByCuisineType))
     .then((mostBoughtCuisine) => {
@@ -21,7 +21,7 @@ module.exports.getRec = function(req, res) {
           query: {
             bool: {
               must: [
-                {match: {cuisine: mostBoughtCuisine}}
+                {match: {cuisine: 'american'}}
               ],//must
               filter: [
                 {range: {rating: {"gte": 4}}}
@@ -51,13 +51,13 @@ function orderCountMapping(ordersArray) {
     else { cuisineCount[currCuisine] = 1; }
   }
 
-  // console.log(JSON.stringify(cuisineCount));
+  console.log(JSON.stringify(cuisineCount));
   return cuisineCount;
 }
 
 
 function findMaxOccurance(cuisinesByOrderCount) {
-  // console.log(cuisinesByOrderCount);
+  console.log('cuisinesByOrderCount: ', cuisinesByOrderCount);
   let maxCount      = 0,
       maxCuisine    = "";
 

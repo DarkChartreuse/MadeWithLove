@@ -21,7 +21,8 @@ module.exports = function(sequelize, DataTypes) {
     chef_address: DataTypes.STRING,
     chef_phone: DataTypes.STRING,
     chef_email: DataTypes.STRING,
-    meal_added_date: DataTypes.DATE
+    meal_added_date: DataTypes.DATE,
+    delivered: DataTypes.BOOLEAN
   }, {
     classMethods: {
       associate: function(models) {
