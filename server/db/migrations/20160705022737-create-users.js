@@ -1,44 +1,50 @@
 'use strict';
 module.exports = {
   up: function(queryInterface, Sequelize) {
-    return queryInterface.createTable('meals', {
+    return queryInterface.createTable('users', {
       id: {
         allowNull: false,
         autoIncrement: true,
         primaryKey: true,
         type: Sequelize.INTEGER
       },
-      userId: {
-        type: Sequelize.INTEGER
-      },
-      chefId: {
-        type: Sequelize.INTEGER
-      },
-      food: {
+      first_name: {
         type: Sequelize.STRING
       },
-      cuisine: {
+      last_name: {
+        type: Sequelize.STRING
+      },
+      email: {
         type: Sequelize.STRING
       },
       description: {
         type: Sequelize.STRING
       },
-      quantity: {
-        type: Sequelize.INTEGER
+      phone: {
+        type: Sequelize.STRING
       },
-      price: {
-        type: Sequelize.FLOAT
+      password: {
+        type: Sequelize.STRING
       },
       address: {
         type: Sequelize.STRING
       },
-      orderDate: {
-        type: Sequelize.DATE
+      zip: {
+        type: Sequelize.STRING
       },
-      rating: {
+      profile: {
+        type: Sequelize.STRING
+      },
+      chef: {
+        type: Sequelize.BOOLEAN
+      },
+      num_orders: {
+        type: Sequelize.INTEGER
+      },
+      avg_rating: {
         type: Sequelize.FLOAT
       },
-      review: {
+      stripe: {
         type: Sequelize.STRING
       },
       createdAt: {
@@ -52,6 +58,6 @@ module.exports = {
     });
   },
   down: function(queryInterface, Sequelize) {
-    return queryInterface.dropTable('meals');
+    return queryInterface.dropTable('users');
   }
 };

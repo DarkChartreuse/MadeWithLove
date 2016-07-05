@@ -140,8 +140,6 @@ export function saveSearchQuery(searchQuery) {
 }
 
 export function fetchOrders(searchQuery) {
-
-
     var userID = searchQuery.userID;
     var cuisine = searchQuery.cuisine || '*';
     var minPrice = searchQuery.minPrice || 0;

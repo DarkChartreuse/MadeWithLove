@@ -2,8 +2,8 @@ var moment = require('moment');
 
 module.exports = [
   {
-    firstName: 'Andrew',
-    lastName: 'Fung',
+    first_name: 'Andrew',
+    last_name: 'Fung',
     email: 'andrew@andrew.com',
     description: 'They call me the Wu-shef; adding plenty of kick to your meals!',
     phone: '(812)133-8036',
@@ -16,8 +16,8 @@ module.exports = [
     updatedAt: moment().format('YYYY-MM-DD HH:mm:ss.SSS Z'),
   },
   {
-    firstName: 'Shinji',
-    lastName: 'Furuya',
+    first_name: 'Shinji',
+    last_name: 'Furuya',
     email: 'shinji@shinji.com',
     description: '',
     phone: '(952)288-4204',
@@ -30,8 +30,8 @@ module.exports = [
     updatedAt: moment().format('YYYY-MM-DD HH:mm:ss.SSS Z'),
   },
   {
-    firstName: 'Dan',
-    lastName: 'Sajjad',
+    first_name: 'Dan',
+    last_name: 'Sajjad',
     email: 'dan@dan.com',
     description: 'Conquer Illinois today, dominate the world tomorrow!!!',
     phone: '(630)470-7327',
@@ -44,8 +44,8 @@ module.exports = [
     updatedAt: moment().format('YYYY-MM-DD HH:mm:ss.SSS Z'),
   },
   {
-    firstName: 'Alex',
-    lastName: 'Wong',
+    first_name: 'Alex',
+    last_name: 'Wong',
     email: 'alex@alex.com',
     description: '',
     phone: '(609)860-2286',

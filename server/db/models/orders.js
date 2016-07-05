@@ -1,16 +1,16 @@
 'use strict';
 module.exports = function(sequelize, DataTypes) {
   var orders = sequelize.define('orders', {
-    userId: DataTypes.INTEGER,
-    chefId: DataTypes.INTEGER,
-    mealId: DataTypes.STRING,
+    user_id: DataTypes.INTEGER,
+    chef_id: DataTypes.INTEGER,
+    meal_id: DataTypes.STRING,
     food: DataTypes.STRING,
     cuisine: DataTypes.STRING,
     description: DataTypes.STRING,
     quantity: DataTypes.INTEGER,
     price: DataTypes.FLOAT,
-    userAddress: DataTypes.STRING,
-    orderDate: DataTypes.DATE,
+    user_address: DataTypes.STRING,
+    order_date: DataTypes.DATE,
     rating: DataTypes.FLOAT,
     review: DataTypes.STRING,
     image: DataTypes.STRING

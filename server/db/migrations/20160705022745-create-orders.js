@@ -8,13 +8,13 @@ module.exports = {
         primaryKey: true,
         type: Sequelize.INTEGER
       },
-      userId: {
+      user_id: {
         type: Sequelize.INTEGER
       },
-      chefId: {
+      chef_id: {
         type: Sequelize.INTEGER
       },
-      mealId: {
+      meal_id: {
         type: Sequelize.STRING
       },
       food: {
@@ -32,10 +32,10 @@ module.exports = {
       price: {
         type: Sequelize.FLOAT
       },
-      userAddress: {
+      user_address: {
         type: Sequelize.STRING
       },
-      orderDate: {
+      order_date: {
         type: Sequelize.DATE
       },
       rating: {
