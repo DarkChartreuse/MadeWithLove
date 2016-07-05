@@ -73,6 +73,38 @@ npm install
 bower install
 ```
 
+###Starting the application
+
+- From project root folder
+```sh
+npm start
+npm run watch
+
+- To start ElasticSearch db: from elasticsearch's unzipped folder
+```sh
+./bin/elasticsearch
+```
+- To start postgres: run Postgres application 
+- Install Postgres globally
+```sh
+npm install -g pg
+npm install -g sequelize sequelize-cli
+```
+- Creating tables with seed data
+```sh
+sequelize model:create --name users --force --attributes firstName:string,lastName:string,email:string,description:string,phone:string,password:string,address:string,zip:string,profile:string,chef:boolean,numOrders:integer,avgRating:float,stripe:string
+```
+```sh
+sequelize model:create --name orders --force --attributes userId:integer,chefId:integer,mealId:string,food:string,cuisine:string,description:string,quantity:integer,price:float,userAddress:string,orderDate:date,rating:float,review:string,image:string
+```
+```sh
+sequelize db:migrate
+```
+```sh
+sequelize db:seed:all
+```
+- With everything running visit your *localhost:3000* to view the application
+
 ### Roadmap
 
 View the project roadmap [here](LINK_TO_PROJECT_ISSUES)
