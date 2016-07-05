@@ -1,3 +1,5 @@
+var moment = require('moment');
+
 module.exports = [
   {
     userId: 2,
@@ -11,6 +13,8 @@ module.exports = [
     orderDate: '2007-07-15 11:15:52.973',
     rating: 5,
     review: 'My kids loved the fried rice!!! Thanks chef Dan!',
+    createdAt: moment().format('YYYY-MM-DD HH:mm:ss.SSS Z'),
+    updatedAt: moment().format('YYYY-MM-DD HH:mm:ss.SSS Z'),
   },
   {
     userId: 2,
@@ -24,6 +28,8 @@ module.exports = [
     orderDate: '2013-09-22 01:48:40.745',
     rating: 1,
     review: 'Meh, I\'ve had better.',
+    createdAt: moment().format('YYYY-MM-DD HH:mm:ss.SSS Z'),
+    updatedAt: moment().format('YYYY-MM-DD HH:mm:ss.SSS Z'),
   },
   {
     userId: 4,
@@ -37,6 +43,8 @@ module.exports = [
     orderDate: '2009-11-25 20:03:28.482',
     rating: 3,
     review: 'It tasted alright, but falafels made from chia seeds??',
+    createdAt: moment().format('YYYY-MM-DD HH:mm:ss.SSS Z'),
+    updatedAt: moment().format('YYYY-MM-DD HH:mm:ss.SSS Z'),
   },
   {
     userId: 4,
@@ -50,6 +58,8 @@ module.exports = [
     orderDate: '2008-05-30 07:38:24.006',
     rating: 3,
     review: 'I asked for extra-spicy, but it barely broke mild.',
+    createdAt: moment().format('YYYY-MM-DD HH:mm:ss.SSS Z'),
+    updatedAt: moment().format('YYYY-MM-DD HH:mm:ss.SSS Z'),
   },
   {
     userId: 1,
@@ -63,6 +73,8 @@ module.exports = [
     orderDate: '2011-09-12 20:47:25.435',
     rating: 5,
     review: 'Nothing like a great home-cooked meal... without cooking it myself!',
+    createdAt: moment().format('YYYY-MM-DD HH:mm:ss.SSS Z'),
+    updatedAt: moment().format('YYYY-MM-DD HH:mm:ss.SSS Z'),
   },
   {
     userId: 3,
@@ -76,6 +88,7 @@ module.exports = [
     orderDate: '2010-02-17 12:59:17.677',
     rating: 4,
     review: 'Expensive, but worth every piece.',
+    createdAt: moment().format('YYYY-MM-DD HH:mm:ss.SSS Z'),
+    updatedAt: moment().format('YYYY-MM-DD HH:mm:ss.SSS Z'),
   },
-
 ];

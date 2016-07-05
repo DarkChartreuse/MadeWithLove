@@ -1,8 +1,8 @@
-const sequelize = require('../db.js');
+const sequelize = require('../models/index.js');
 const elasticClient = require('../../instantiateES.js');
 
 module.exports.getRec = function(req, res) {
-    var userId = req.body.userId;
+    let userId = req.body.userId;
     console.log('HERE IS THE USER ID >>>>>', userId);
 
     // fetchUserOrderHistory(userId)
@@ -14,7 +14,7 @@ module.exports.getRec = function(req, res) {
       console.log('<<><>>>>>>>>>', mostBoughtCuisine)
       elasticClient.search({
         index: 'mwl',
-        type: 'meal', 
+        type: 'meal',
         size: 5,
         body: {
           query: {
@@ -39,23 +39,15 @@ module.exports.getRec = function(req, res) {
     .finally(() => console.log('Function complete'))
 }
 
-// function fetchUserOrderHistory(userId) {
-//   .then(function(orders) {
-//     console.log(orders);
-//     // next(orders);
-//   })
-//   .catch(err => { console.error('Error finding orders', err); })
-// } 
-
 
 function orderCountMapping(ordersArray) {
-  var cuisineCount = {};
+  let cuisineCount = {};
   // console.log('>>>>>>>>>>>>>>>>>>> ORDERS', JSON.stringify(ordersArray));
   for(var i = 0; i < ordersArray.length; i++) {
     var currCuisine = ordersArray[i].cuisine;
 
     if(cuisineCount[currCuisine]) { cuisineCount[currCuisine]++; }
-    else { cuisineCount[currCuisine] = 1; } 
+    else { cuisineCount[currCuisine] = 1; }
   }
 
   // console.log(JSON.stringify(cuisineCount));
@@ -65,8 +57,8 @@ function orderCountMapping(ordersArray) {
 
 function findMaxOccurance(cuisinesByOrderCount) {
   // console.log(cuisinesByOrderCount);
-  var maxCount      = 0;
-  var maxCuisine    = "";
+  let maxCount      = 0,
+      maxCuisine    = "";
 
   for(var props in cuisinesByOrderCount) {
     var currCount = cuisinesByOrderCount[props];
@@ -79,8 +71,3 @@ function findMaxOccurance(cuisinesByOrderCount) {
   console.log('Max Cuisine:',  maxCuisine);
   return maxCuisine;
 }
-
-
-// function mealsToRecommendByCuisine(cuisine) {
-
-// }

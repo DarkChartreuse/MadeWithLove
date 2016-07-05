@@ -1,3 +1,5 @@
+const elasticClient = require('../server/instantiateES.js');
+
 import {
   FETCH_REQUEST,
   FETCH_FAILURE,
@@ -83,20 +85,15 @@ export function viewUserOrders(userId) {
 }
 
 export function viewChefMeals(chefId) {
-  var elasticsearch = require('elasticsearch');
-  var client = new elasticsearch.Client({
-    host: 'localhost:9200',
-    log: 'trace'
-  });
   console.log('chefIdforQUERY: ', chefId);
   console.log('..............Client.search')
-  return dispatch => { client.search({
+  return dispatch => { elasticClient.search({
     index: 'mwl',
     type: 'meal',
     size: 50,
     "_source": ["food", "chefId", "chef", "rating", "image", "price", "healthLabels", "zipcode"],
     body:{
-      "query": { 
+      "query": {
         "bool" : {
            "must" : [
               {"match": { "chefId": chefId }},
@@ -105,7 +102,7 @@ export function viewChefMeals(chefId) {
       }
     }
   }).then(function (resp) {
-      console.log('..............INSIDE')      
+      console.log('..............INSIDE')
       var hits = resp.hits.hits;
       console.log('HITS >>>>>>> ', hits);
       if (hits.length) {
@@ -136,19 +133,13 @@ export function saveSearchQuery(searchQuery) {
       // .then( results => {
       //   console.log('>>>>>>>>>>>>>>passed user searchQuery to controller', results);
       // })
-      
+
     })
     .catch( err => console.error(err));
   }
 }
 
 export function fetchOrders(searchQuery) {
-    var elasticsearch = require('elasticsearch');
-    var client = new elasticsearch.Client({
-      host: 'elasticdb:9200',
-      log: 'trace'
-    });
-    
     var userID = searchQuery.userID;
     var cuisine = searchQuery.cuisine || '*';
     var minPrice = searchQuery.minPrice || 0;
@@ -157,7 +148,7 @@ export function fetchOrders(searchQuery) {
     console.log('variables parsing:', cuisine, minPrice, maxPrice, date);
 
     console.log('..............Client.search')
-    return dispatch => { 
+    return dispatch => {
 
     dispatch(saveSearchQuery({
       userID: userID,
@@ -166,7 +157,7 @@ export function fetchOrders(searchQuery) {
       maxPrice: maxPrice
     }));
 
-    client.search({
+    elasticClient.search({
       index: 'mwl',
       type: 'meal',
       size: 50,

@@ -1,5 +1,5 @@
-const Meal = require('../models/mealsModel.js');
-const User = require('../models/usersModel.js');
+const Meal = require('../models/index.js').meals;
+const User = require('../models/index.js').users;
 const elasticsearch = require('../../elasticSearch.js');
 const ImageUploader = require('./imageUploader');
 

@@ -1,4 +1,4 @@
-const User = require('../models/usersModel.js');
+const User = require('../models/index.js').users;
 const bcrypt = require('bcrypt');
 
 module.exports = {
@@ -59,7 +59,7 @@ module.exports = {
       if(user) {
         const salt = bcrypt.genSaltSync(10);
         const hashedPassword = bcrypt.hashSync(req.body.password, salt);
-        
+
         user.updateAttributes({
           firstName: req.body.firstName,
           lastName: req.body.lastName,

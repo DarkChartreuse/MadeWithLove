@@ -1,7 +1,7 @@
 {
   "development": {
     "username": "postgres",
-    "password": null,
+    "password": "postgres",
     "database": "mwl_db",
     "host": "localhost",
     "port": 5432,
@@ -9,7 +9,7 @@
   },
   "test": {
     "username": "postgres",
-    "password": null,
+    "password": "postgres",
     "database": "mwl_db",
     "host": "localhost",
     "port": 5432,
@@ -17,9 +17,9 @@
   },
   "production": {
     "username": "postgres",
-    "password": null,
+    "password": "postgres",
     "database": "mwl_db",
-    "host": "postgres",
+    "host": "postgresdb",
     "port": 5432,
     "dialect": "postgres"
   }

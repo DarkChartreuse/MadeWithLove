@@ -1,12 +1,12 @@
 version: '2'
 services:
   db:
-    image: pgdb
+    image: postgres
     container_name: postgresdb
-    # environment:
-    #   - POSTGRES_USER=postgres
-    #   - POSTGRES_PASSWORD=postgres
-    #   - POSTGRES_DB=mwl_db
+    environment:
+      - POSTGRES_USER=postgres
+      - POSTGRES_PASSWORD=postgres
+      - POSTGRES_DB=mwl_db
     # volumes: ["/data/db"]
     networks:
       - mwl-network

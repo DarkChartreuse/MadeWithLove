@@ -26,10 +26,12 @@ build/
 dist/
 
 # temp
-server/db/controllers/_temp/
-server/db/seeders/
+server/db/db.js
+server/db/Dockerfile
+server/db/init.sql
 wait-for-it.sh
 wait-for-postgres.sh
+Dockerrun.aws.json
 
 node_modules/
 bower_components/
