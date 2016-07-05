@@ -12,8 +12,8 @@ export default class Recommend extends React.Component {
   }
 
   componentDidMount() {
-    if(this.props.loginUser.firstName) {
-    	axios.post('/api/getrecommendation', {userId: this.props.loginUser.userID})
+    if(this.props.loginUser.first_name) {
+    	axios.post('/api/getrecommendation', this.props.loginUser.userID)
     	.then( results => {
         console.log('recommendations!: ', results.data);
     		this.setState({ results: results.data });

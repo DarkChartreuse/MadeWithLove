@@ -4,12 +4,11 @@ const db = require('../models/index.js');
 const elasticClient = require('../../instantiateES.js');
 
 module.exports.getRec = function(req, res) {
-    var userId = req.body.userId;
     console.log('HERE IS THE USER ID >>>>>', req.body.userId);
 
     // fetchUserOrderHistory(userId)
     // var cuisines = {};
-    db.sequelize.query('SELECT * FROM orders WHERE userid = 1')
+    db.sequelize.query('SELECT * FROM orders WHERE user_id = 1')
     .then((userOrders) => orderCountMapping(userOrders[0]))
     .then((cuisineCountByCuisineType) => findMaxOccurance(cuisineCountByCuisineType))
     .then((mostBoughtCuisine) => {

@@ -107,7 +107,6 @@ class AddAMeal extends React.Component {
             <input type="text" placeholder="quantity" onChange={this.handleQuantity} />
             <a href="/authorize">CONNECT STRIPE</a>
             <button type="submit">Submit Meal</button>
-          </form>
             <ImageUploader handleImage={this.handleImage} />
             <button type="submit">Confirm</button>
           </form>
