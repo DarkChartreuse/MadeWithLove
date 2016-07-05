@@ -14,7 +14,7 @@ class Search extends React.Component {
     return (
       <div>
         <SearchBar loginUser={this.props.loginUser} fetchOrders={this.props.fetchOrders} vegan={this.props.vegan} toggleVegan={this.props.toggleVegan}/>
-        { this.props.loginUser.firstName && <Recommend loginUser={this.props.loginUser}/> }
+        { this.props.loginUser.first_name && <Recommend loginUser={this.props.loginUser}/> }
         { !this.props.orders.orders && <div></div> }
         { this.props.orders.orders && <FilterableCuisineTable orders={orders} meal={this.props.updateMeal} loginUser={this.props.loginUser} /> }
       </div>

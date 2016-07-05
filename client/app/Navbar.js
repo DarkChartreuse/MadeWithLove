@@ -29,13 +29,13 @@ class Navbar extends React.Component {
         }
       </li>
       <li>
-        {(!this.props.loginUser.firstName) ?
+        {(!this.props.loginUser.first_name) ?
           <Link to="/signup" >create account</Link> :
-          <a onClick={() => { browserHistory.push(`/users/${this.props.loginUser.userID}`); }}>{this.props.loginUser.firstName.toLowerCase()}</a>
+          <a onClick={() => { browserHistory.push(`/users/${this.props.loginUser.userID}`); }}>{this.props.loginUser.first_name.toLowerCase()}</a>
         }
       </li>
       <li>
-        {(!this.props.loginUser.firstName) ?
+        {(!this.props.loginUser.first_name) ?
           <Link to="/signin">login</Link> :
           <a href="/signout" onClick={() => window.localStorage.clear()}>logout</a>
         }

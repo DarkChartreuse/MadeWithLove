@@ -14,8 +14,8 @@ class Profile extends React.Component {
           <div className="col s6 offset-s3">
             <h3>Profile</h3>
             <ul>
-              <li>First Name: {loginUser.firstName}</li>
-              <li>Last Name: {loginUser.lastName}</li>
+              <li>First Name: {loginUser.first_name}</li>
+              <li>Last Name: {loginUser.last_name}</li>
               <li>Address: {loginUser.address}</li>
               <li>Description: {loginUser.description}</li>
               <li>Phone: {loginUser.phone} </li>

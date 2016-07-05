@@ -37,9 +37,9 @@ class Signin extends React.Component {
       .then((response) => {
         console.log('login response', response)
         context.props.loggy(response);
-        localStorage.setItem('firstName', response.data.firstName);
+        localStorage.setItem('first_name', response.data.first_name);
         localStorage.setItem('id', response.data.id);
-        localStorage.setItem('lastName', response.data.lastName);
+        localStorage.setItem('last_name', response.data.last_name);
         localStorage.setItem('profile', response.data.profile);
         localStorage.setItem('description', response.data.description);
         localStorage.setItem('phone', response.data.phone);

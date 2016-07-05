@@ -8,8 +8,8 @@ export default class EditForm extends React.Component {
     super(props);
     this.state = {
       userID: this.props.loginUser.userID,
-      firstName: this.props.loginUser.firstName,
-      lastName: this.props.loginUser.lastName,
+      first_name: this.props.loginUser.first_name,
+      last_name: this.props.loginUser.last_name,
       email: this.props.loginUser.email,
       password: this.props.loginUser.password,
       phone: this.props.loginUser.phone,
@@ -35,10 +35,10 @@ export default class EditForm extends React.Component {
   }
 
   handleFirstName(e) {
-    this.setState({ firstName: e.target.value });
+    this.setState({ first_name: e.target.value });
   }
   handleLastName(e) {
-    this.setState({ lastName: e.target.value });
+    this.setState({ last_name: e.target.value });
   }
   handleEmail(e) {
     this.setState({ email: e.target.value });
@@ -84,8 +84,8 @@ export default class EditForm extends React.Component {
     // } else {
       const userInfo = {
         userID: this.state.userID,
-        firstName: this.state.firstName,
-        lastName: this.state.lastName,
+        first_name: this.state.first_name,
+        last_name: this.state.last_name,
         email: this.state.email,
         description: this.state.description,
         phone: this.state.phone,
@@ -112,8 +112,8 @@ export default class EditForm extends React.Component {
     return (
       <div>
       <form action='' onSubmit={this.handleSubmit}>
-        <input type='text' placeholder={this.state.firstName} onChange={this.handleFirstName}/>
-        <input type='text' placeholder={this.state.lastName} onChange={this.handleLastName}/>
+        <input type='text' placeholder={this.state.first_name} onChange={this.handleFirstName}/>
+        <input type='text' placeholder={this.state.last_name} onChange={this.handleLastName}/>
         <input type='text' placeholder={this.state.email} onChange={this.handleEmail}/>
         <input type='text' placeholder='Password'onChange={this.handlePassword}/>
         <input type='text' placeholder='Confirm Password'/>
@@ -130,8 +130,8 @@ export default class EditForm extends React.Component {
   }
 };
 
-      // firstName: '',
-      // lastName: '',
+      // first_name: '',
+      // last_name: '',
       // email: '',
       // password: '',
       // passwordConfirm: '',

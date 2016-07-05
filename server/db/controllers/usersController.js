@@ -27,6 +27,7 @@ module.exports = {
         chef: req.body.chef,
       })
       .then(user => {
+        console.log('dat config', user);
         res.json(user);
       })
       .catch(err => { console.error(err); });

@@ -10,7 +10,7 @@ export default class CuisineRow extends React.Component {
         <td width="50%">
         <Link to="/mealview/:id" >{this.props.cuisine.stocked ? this.props.cuisine.food : this.props.cuisine.food
       }</Link></td>
-        <td width="50%">{this.props.cuisine.chefName} </td>
+        <td width="50%">{this.props.cuisine.chef_name} </td>
         <td width="50%"><img src={this.props.cuisine.image}className="img-responsive" /></td>
         <td width="50%">{this.props.cuisine.price}</td>
         <td>

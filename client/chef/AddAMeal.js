@@ -60,10 +60,10 @@ class AddAMeal extends React.Component {
     const mealObj = {
       isChef: this.props.isChef,
       chefID: this.props.userID,
-      chefAddress: this.props.chefAddress,
-      chefPhone: this.props.chefPhone,
-      chefName: this.props.chefName,
-      chefEmail: this.props.chefEmail,
+      chef_address: this.props.chef_address,
+      chef_phone: this.props.chef_phone,
+      chef_name: this.props.chef_name,
+      chef_email: this.props.chef_email,
       add_date: this.state.add_date,
       add_time: this.state.add_time,
       typeoffood: this.state.typeoffood,
@@ -97,6 +97,7 @@ class AddAMeal extends React.Component {
             <input type="text" placeholder="type of cuisine" onChange={this.handleCuisineType} />
             <input type="text" placeholder="price" onChange={this.handlePrice} />
             <input type="text" placeholder="quantity" onChange={this.handleQuantity} />
+            <a href="/authorize">CONNECT STRIPE</a>
             <button type="submit">Submit Meal</button>
           </form>
             <ImageUploader handleImage={this.handleImage} />
@@ -110,19 +111,19 @@ const mapStateToProps = (state) =>
 ({
   userID: state.loginUser.userID,
   isChef: state.loginUser.isChef,
-  chefName: `${state.loginUser.firstName} ${state.loginUser.lastName}`,
-  chefAddress: state.loginUser.address,
-  chefPhone: state.loginUser.phone,
-  chefEmail: state.loginUser.email,
+  chef_name: `${state.loginUser.first_name} ${state.loginUser.last_name}`,
+  chef_address: state.loginUser.address,
+  chef_phone: state.loginUser.phone,
+  chef_email: state.loginUser.email,
 });
 
 AddAMeal.propTypes = {
   userID: React.PropTypes.number,
   isChef: React.PropTypes.bool,
-  chefName: React.PropTypes.string,
-  chefAddress: React.PropTypes.string,
-  chefPhone: React.PropTypes.string,
-  chefEmail: React.PropTypes.string,
+  chef_name: React.PropTypes.string,
+  chef_address: React.PropTypes.string,
+  chef_phone: React.PropTypes.string,
+  chef_email: React.PropTypes.string,
 };
 
 export default connect(mapStateToProps, null)(AddAMeal);
