@@ -74,11 +74,6 @@ class ImageUploader extends React.Component {
 		} else {
 			uploaded = (
 				<div>
-				  <div className="col s12 m5">
-				    <div className="card-panel valign-wrapper">
-				      <h2>Upload an image</h2>
-				    </div>
-				  </div>
 				</div>
 			);
 		}
@@ -90,10 +85,9 @@ class ImageUploader extends React.Component {
 		return (
 			<div className='row'>
 			  <div className='col-sm-12'>
-			    <label>Upload an image</label>
 			    <form onSubmit={this.handleSubmit} encType="multipart/form-data">
 			      <input type='file' onChange={this.handleFile} />
-			      <input disabled={this.state.processing} className='btn btn-primary' type="submit" value="Upload" />
+			      <button disabled={this.state.processing} onClick={this.handleSubmit}>Submit</button>
 			      {processing}
 			    </form>
 			    {uploaded}

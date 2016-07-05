@@ -28,13 +28,13 @@ class Profile extends React.Component {
 
   render() {
     var loginUser = this.props.loginUser;
-    const actions = [
-      <FlatButton
-        label="Ok"
-        primary={true}
-        keyboardFocused={true}
-        onTouchTap={this.handleClose}/>,
-    ];
+    // const actions = [
+    //   <FlatButton
+    //     label="Ok"
+    //     primary={true}
+    //     keyboardFocused={true}
+    //     onTouchTap={this.handleClose}/>,
+    // ];
 
     return (
       <div className="container">
@@ -53,12 +53,12 @@ class Profile extends React.Component {
           <RaisedButton label="Edit Profile" onTouchTap={this.handleOpen} />
           <Dialog
             title="Edit Profile"
-            actions={actions}
             modal={false}
             open={this.state.open}
             onRequestClose={this.handleClose}
+            autoScrollBodyContent={true}
           >
-            <EditForm updateLoginUser={this.props.updateLoginUser} loginUser={loginUser}/>
+            <EditForm updateLoginUser={this.props.updateLoginUser} loginUser={loginUser} handleClose={this.handleClose}/>
           </Dialog>
           
         </div>

@@ -3,6 +3,7 @@ import axios from 'axios';
 import { connect } from 'react-redux';
 import { browserHistory } from 'react-router';
 import DatePicker from 'material-ui/DatePicker';
+import TimePicker from 'material-ui/TimePicker';
 
 import ImageUploader from './ImageUploader';
 
@@ -83,28 +84,33 @@ class AddAMeal extends React.Component {
         browserHistory.push('/signin');
       });
 
-
-
+    this.props.handleClose()
   }
+
   render() {
     return (
       <div className="container row">
         <div className="col s8 offset-s2">
-          <h3>add a meal</h3>
-            <DatePicker
-              hintText="Add Date" 
-              value={this.state.add_date}
-              onChange={this.handleDate} />
+          <DatePicker
+            hintText="pickup date" 
+            value={this.state.add_date}
+            onChange={this.handleDate} />
+          <TimePicker
+            format="ampm"
+            hintText="pickup time"
+            value={this.state.add_time}
+            onChange={this.handleTime} />
           <form onSubmit={this.handleSubmit}>
-            <input type="time" name="add_time" onChange={this.handleTime} />
-            <input type="text" placeholder="dish" onChange={this.handleTypeOfFood} />
-            <input type="text" placeholder="type of cuisine" onChange={this.handleCuisineType} />
+            <input type="text" placeholder="dish name" onChange={this.handleTypeOfFood} />
+            <input type="text" placeholder="cuisine type" onChange={this.handleCuisineType} />
             <input type="text" placeholder="price" onChange={this.handlePrice} />
             <input type="text" placeholder="quantity" onChange={this.handleQuantity} />
             <a href="/authorize">CONNECT STRIPE</a>
             <button type="submit">Submit Meal</button>
           </form>
             <ImageUploader handleImage={this.handleImage} />
+            <button type="submit">Confirm</button>
+          </form>
         </div>
       </div>
     );

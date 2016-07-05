@@ -13,10 +13,7 @@ export default class EditForm extends React.Component {
       email: this.props.loginUser.email,
       password: this.props.loginUser.password,
       phone: this.props.loginUser.phone,
-      street: this.props.loginUser.street,
-      city: this.props.loginUser.city,
-      state: this.props.loginUser.state,
-      zipcode: this.props.loginUser.zipcode,
+      address: this.props.loginUser.address,
       profile: this.props.loginUser.profile,
       description: this.props.loginUser.description,
     };
@@ -25,10 +22,7 @@ export default class EditForm extends React.Component {
     this.handleEmail = this.handleEmail.bind(this);
     this.handlePassword = this.handlePassword.bind(this);
     this.handlePhone = this.handlePhone.bind(this);
-    this.handleStreet = this.handleStreet.bind(this);
-    this.handleCity = this.handleCity.bind(this);
-    this.handleState = this.handleState.bind(this);
-    this.handleZip = this.handleZip.bind(this);
+    this.handleAddress = this.handleAddress.bind(this);
     this.handleProfile = this.handleProfile.bind(this);
     this.handleDescription = this.handleDescription.bind(this);
     this.handleSubmit = this.handleSubmit.bind(this);
@@ -49,17 +43,8 @@ export default class EditForm extends React.Component {
   handlePhone(e) {
     this.setState({ phone: e.target.value });
   }
-  handleStreet(e) {
-    this.setState({ street: e.target.value});
-  }
-  handleCity(e) {
-    this.setState({ city: e.target.value});
-  }
-  handleState(e) {
-    this.setState({ state: e.target.value});
-  }
-  handleZip(e) {
-    this.setState({ zipcode: e.target.value});
+  handleAddress(e) {
+    this.setState({ address: e.target.value});
   }
   handleDescription(e) {
     this.setState({ description: e.target.value});
@@ -90,7 +75,7 @@ export default class EditForm extends React.Component {
         description: this.state.description,
         phone: this.state.phone,
         password: this.state.password,
-        address: this.state.street + ' ' + this.state.city + ', ' + this.state.state + ' ' + this.state.zipcode,
+        address: this.state.address,
         zip: this.state.zipcode,
         profile: this.state.profile,
       };
@@ -104,13 +89,15 @@ export default class EditForm extends React.Component {
           console.log(response);
         })
         .catch( err => { console.log('Failed to update account') });
+
+      this.props.handleClose();
   }
 
 
   render() {
     var loginUser = this.props.loginUser;
     return (
-      <div>
+    <div>
       <form action='' onSubmit={this.handleSubmit}>
         <input type='text' placeholder={this.state.first_name} onChange={this.handleFirstName}/>
         <input type='text' placeholder={this.state.last_name} onChange={this.handleLastName}/>
@@ -118,14 +105,11 @@ export default class EditForm extends React.Component {
         <input type='text' placeholder='Password'onChange={this.handlePassword}/>
         <input type='text' placeholder='Confirm Password'/>
         <input type='text' placeholder={this.state.phone}onChange={this.handlePhone}/>
-        <input type='text' placeholder={this.state.street}onChange={this.handleStreet}/>
-        <input type='text' placeholder={this.state.city}onChange={this.handleCity}/>
-        <input type='text' placeholder={this.state.state}onChange={this.handleState}/>
-        <input type='text' placeholder={this.state.zipcode}onChange={this.handleZip}/>
-        <input type='submit'/>
+        <input type='text' placeholder={this.state.address}onChange={this.handleAddress}/>
+        <button type="submit">Submit</button>
       </form>
-      <div>Set Profile Picture<ImageUploader handleImage={this.handleProfile}/></div>
-      </div>
+      <div><ImageUploader handleImage={this.handleProfile}/></div>
+    </div>
     )
   }
 };
