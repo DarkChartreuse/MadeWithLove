@@ -68,7 +68,6 @@ export default class EditForm extends React.Component {
     //   console.log('invalid email address', this.state.email);
     // } else {
       const userInfo = {
-        userID: this.state.userID,
         first_name: this.state.first_name,
         last_name: this.state.last_name,
         email: this.state.email,
@@ -84,7 +83,7 @@ export default class EditForm extends React.Component {
       this.props.updateLoginUser(userInfo);
 
       //update the user info in postgres
-      axios.post('/api/updateuser', userInfo)
+      axios.put(`/api/users/${this.state.userID}`, userInfo)
         .then(function (response) {
           console.log(response);
         })

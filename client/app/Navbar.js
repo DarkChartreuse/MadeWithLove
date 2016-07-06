@@ -30,50 +30,44 @@ class Navbar extends React.Component {
   render() {
     console.log('this is my image!', this.props.loginUser.profile);
     return (
-  <nav className="#ffb74d orange lighten-2 black-text ">
-    <ul className="menubuttons left">
+      <div className="navbar-fixed">
+      
+      
+  <nav>
+    <ul className="left">
       <li>
         <Link to="/">made with love</Link>
       </li>
     </ul>
-    <ul className="menubuttons right">
+    <ul className="right">
       <li>
         {(!this.props.loginUser.isChef) ?
           '' :
-          <div>
-            <a onTouchTap={this.handleOpen}>Add a Meal</a>
-            <Dialog
-              title="Add a Meal"
-              modal={false}
-              open={this.state.open}
-              onRequestClose={this.handleClose}
-              autoScrollBodyContent={true}
-            >
-              <AddAMeal handleClose={this.handleClose}/>
-            </Dialog>
-          </div>
+          <Link to="/addmeal" >ADD A MEAL</Link>
         }
       </li>
       <li>
-        {(!this.props.loginUser.isChef) ?
-          <Link to="/orderstatus">View Orders</Link> :
-          <Link to="/chefstatus">View Orders</Link>
+        {(!this.props.loginUser.first_name) ? null : (!this.props.loginUser.isChef) ?
+          <Link to="/orderstatus">Order Status</Link> :
+          <Link to="/chefstatus">Order Status</Link>
         }
       </li>
       <li>
         {(!this.props.loginUser.first_name) ?
-          <Link to="/signup" >create account</Link> :
-          <a onClick={() => { browserHistory.push(`/users/${this.props.loginUser.userID}`); }}><Avatar src={this.props.loginUser.profile} size={35} /></a>
+          <Link to="/signup" >Sign Up</Link> :
+          <a onClick={() => { browserHistory.push(`/users/${this.props.loginUser.userID}`); }}>
+          <img className="circle" src={this.props.loginUser.profile} /></a>
         }
       </li>
       <li>
         {(!this.props.loginUser.first_name) ?
-          <Link to="/signin">login</Link> :
+          <Link to="/signin">Log In</Link> :
           <a href="/signout" onClick={() => window.localStorage.clear()}>logout</a>
         }
       </li>
     </ul>
   </nav>
+  </div>
   );
   }
 }
@@ -92,3 +86,6 @@ Navbar.propTypes = {
 };
 
 export default connect(mapStateToProps, mapDispatchToProps)(Navbar);
+
+
+// <Avatar src={this.props.loginUser.profile} size={35} />

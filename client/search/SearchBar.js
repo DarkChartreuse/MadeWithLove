@@ -8,7 +8,7 @@ class SearchBar extends React.Component {
       cuisine: undefined,
       add_date: null,
       minPrice: undefined,
-      maxPrice: undefined
+      maxPrice: undefined,
     };
     this.handleDate = this.handleDate.bind(this);
     this.handleMinPrice = this.handleMinPrice.bind(this);
@@ -32,45 +32,48 @@ class SearchBar extends React.Component {
   render() {
     return (
       // <div id="index-banner" className="parallax-container">
-        <div className="section no-pad-bot">
-          <div className="container">
-            <h1 className="header center">Made With Love</h1>
-            <div className="row center">
-              <h5 className="header col s12 light">Find your next meal</h5>
+      <div>
+        <div className="emptybox">
+        </div>
+        <div className="container">
+          <div>
+            <h1 className="header splash">Eat at home</h1>
+                <h4 className="col s12">Home-cooked meals to your doorstep in San Francisco</h4>
+          </div>
+          <br /><br />
+          <div className="row">
+            <div className="input-field col s6">
+              <input placeholder="type of food" type="text" onChange={this.handleCuisine} />
             </div>
-            <div className="row">
-              <div className="input-field col s4">
-                <input placeholder="Type of food" type="text" onChange={this.handleCuisine} />
-              </div>
-              <div className="input-field col s3">
-                <input placeholder='Minimum Price'type="text" name="minPrice" onChange={this.handleMinPrice}/>
-              </div>
-              <div className="input-field col s3">
-                <input placeholder='Maximum Price'type="text" name="maxPrice" onChange={this.handleMaxPrice}/>
-              </div>
-              <div className="input-field col s3">
-                <DatePicker
-                  hintText="Pick a date" 
-                  value={this.state.add_date}
-                  onChange={this.handleDate} />
-              </div>
-              <button
-                className="btn-large #ffb74d orange lighten-2 black-text menubuttons"
-                onClick={() => { this.props.fetchOrders({
-                  userID: this.props.loginUser.userID,
-                  cuisine: this.state.cuisine,
-                  maxPrice: this.state.maxPrice,
-                  minPrice: this.state.minPrice,
-                  add_date: this.state.add_date
-                }) }} >
-                Search
-              </button>
+            <div className="input-field col s2">
+              <input placeholder="min. price" type="text" name="minPrice" onChange={this.handleMinPrice} />
             </div>
+            <div className="input-field col s2">
+              <input placeholder="max. price" type="text" name="maxPrice" onChange={this.handleMaxPrice} />
+            </div>
+            <button
+              className="btn-large black-text searchbutton"
+              onClick={() => { this.props.fetchOrders({
+                userID: this.props.loginUser.userID,
+                cuisine: this.state.cuisine,
+                maxPrice: this.state.maxPrice,
+                minPrice: this.state.minPrice,
+                add_date: this.state.add_date,
+              }) }} >
+              Search
+            </button>
           </div>
         </div>
+      </div>
       // </div>
     )
   }
 }
 
 export default SearchBar;
+
+
+// <DatePicker
+//   hintText="Pick a date" 
+//   value={this.state.add_date}
+//   onChange={this.handleDate} />

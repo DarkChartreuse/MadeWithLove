@@ -37,18 +37,21 @@ class Profile extends React.Component {
     // ];
 
     return (
-      <div className="container">
+      <div className="container center">
         <div className="row">
           <div className="col s6 offset-s3">
 
-            <h3>Profile</h3><Avatar src={loginUser.profile} size={60} />
-            <ul>
-              <li>First Name: {loginUser.first_name}</li>
-              <li>Last Name: {loginUser.last_name}</li>
-              <li>Address: {loginUser.address}</li>
-              <li>Description: {loginUser.description}</li>
-              <li>Phone: {loginUser.phone} </li>
-            </ul>
+            <h3>Profile</h3>
+            <div className="themode">
+              <Avatar src={loginUser.profile} size={60} />
+              <ul>
+                <li>First Name: {loginUser.first_name}</li>
+                <li>Last Name: {loginUser.last_name}</li>
+                <li>Address: {loginUser.address}</li>
+                <li>Description: {loginUser.description}</li>
+                <li>Phone: {loginUser.phone} </li>
+              </ul>
+            </div>
           </div>
           <RaisedButton label="Edit Profile" onTouchTap={this.handleOpen} />
           <Dialog

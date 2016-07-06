@@ -38,7 +38,7 @@ class Signin extends React.Component {
         console.log('login response', response)
         context.props.loggy(response);
         localStorage.setItem('first_name', response.data.first_name);
-        localStorage.setItem('id', response.data.id);
+        localStorage.setItem('userID', response.data.id);
         localStorage.setItem('last_name', response.data.last_name);
         localStorage.setItem('profile', response.data.profile);
         localStorage.setItem('description', response.data.description);
@@ -52,14 +52,19 @@ class Signin extends React.Component {
   }
   render() {
     return (
-      <div className="container row">
-        <div className="col s8 offset-s2 input-field">
-        <h3>login</h3>
-      <form onSubmit={this.handleSubmit}>
-        <input type="text" placeholder="email" onChange={this.handleEmail} />
-        <input type="password" placeholder="password" onChange={this.handlePassword} />
-        <button className="center waves-effect waves-light btn #ffb74d orange lighten-2 menubuttons black-text" type="submit" value="Post">Submit</button>
-      </form>
+      <div className="container row center">
+        <div className="col s4 offset-s4">
+          <h3>login</h3>
+          <form className="themode" onSubmit={this.handleSubmit}>
+            <input type="text" placeholder="email" onChange={this.handleEmail} />
+            <input type="password" placeholder="password" onChange={this.handlePassword} />
+            <button
+              className="center btn black-text menubuttons"
+              type="submit"
+              value="Post"
+            >Submit
+            </button>
+          </form>
         </div>
       </div>
     );

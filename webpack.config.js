@@ -14,7 +14,7 @@ module.exports = {
   output: {
     path: path.join(__dirname, 'dist'),
     filename: 'bundle.js',
-    publicPath: '/static/',
+    publicPath: '/',
   },
   plugins: [
     new webpack.optimize.OccurrenceOrderPlugin(),
@@ -27,6 +27,13 @@ module.exports = {
         loader: 'babel-loader',
         query: {
           presets: ['es2015', 'react'],
+        },
+      },
+      {
+        test: /\.(png|gif|jpe?g|svg)$/i,
+        loader: 'url',
+        query: {
+          limit: 10000,
         },
       },
       {

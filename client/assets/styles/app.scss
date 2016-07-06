@@ -1,14 +1,18 @@
 @import url(https://fonts.googleapis.com/css?family=Lora:400,400i,700,700i);
+@import url("https://fonts.googleapis.com/css?family=Raleway:400,500");
+
+
 
 html {
-  font-family: 'Lora', serif;
+  font-family: 'Raleway';
+  height: 100%;
 }
 
 nav {
   text-decoration: none;
 }
-.menubuttons, h1, h3{
-  text-align: center;
+
+/*h1, h3{
   font-weight: 700;
 }
 
@@ -16,16 +20,132 @@ h1 {
   font-style: italic;
   font-weight: 400;
   color: black;
+}*/
+
+/*.splash {
+  font-style: italic;
+  color: white;
+}*/
+
+.menubuttons {
+  background-color: #CBBAB8;
+  border-radius: 0px;
+  font-family: 'Raleway';
+  font-weight: 400px;
+  font-size: 14px;
+  letter-spacing: 1px;
+  opacity: 1;
+  z-index: 1;
+}
+
+.menubuttons:hover {
+  background-color: #F28D8D;
+}
+.menubuttons:focus {
+  background-color: #CBBAB8;
+}
+
+.searchbutton {
+  background-color: #CBBAB8;
+  height:56px;
+  border-radius: 0px;
+  font-family: 'Raleway';
+  font-weight: 400px;
+  font-size: 14px;
+  letter-spacing: 1px;
+  opacity: 1;
+  z-index: 1;
+}
+
+.searchbutton:hover {
+  background-color: #F28D8D;
+}
+.searchbutton:focus {
+  background-color: #CBBAB8;
+}
+
+.themode {
+  background-color: #FCF3EA;
+  padding: 20px;
+  display: inline-block;
+  border-radius: 5px;
+  z-index: 0;
+}
+
+.splash, .splashsub {
+  color: white;
+  font-weight: 700;
+}
+
+.splash { 
+  font-size: 45px;
+}
+
+.splashsub {
+  font-weight: 400;
+  font-size: 23px;
+}
+
+h1 {
+  font-family: 'Lora', serif;
+  font-size: 50px;
+  font-weight: 700;
+  letter-spacing: 1px;
+  color: white;
 }
 
 h3 {
+  font-family: 'Lora', serif;
   font-size: 30px;
+  font-weight: 700;
+  letter-spacing: 1px;
+  color: white;
 }
 
+h4 {
+  font-family: 'Lora', serif;
+  font-size: 18px;
+  font-weight: 400;
+  letter-spacing: 1px;
+  color: white;
+}
+
+nav {
+  padding: 0 14px;
+  background-color: transparent;
+  border-color: transparent;
+  background: transparent;
+  box-shadow: none;
+  color: white;
+}
 nav ul a {
-  color: black;
+  color: white;
+  font-family: 'Raleway';
+  font-weight: 400;
+  letter-spacing: 1px;
+  font-size:13px;
 }
 
+body {
+  top: 0;
+  left: 0;
+  height: 100%;
+  background-image: url("../images/foodkitchen.jpg");
+  background-size: 100%;
+  background-repeat: no-repeat;
+  z-index: -1;
+}
+
+.emptybox {
+  height: 300px;
+}
+
+.input-field {
+  font-family: 'Raleway';
+  font-weight: 400px;
+  font-size: 12px;
+  max-height: 56px;
+}
 .input-field input[type=text]:focus {
   border-bottom: 1px solid #000;
   box-shadow: 0 1px 0 0 #000;
@@ -34,4 +154,21 @@ nav ul a {
 .input-field input[type=password]:focus {
   border-bottom: 1px solid #000;
   box-shadow: 0 1px 0 0 #000;
+}
+
+::-webkit-input-placeholder {
+   color: black;
+}
+
+.input-field {
+  background-color: #FCF3EA;
+  opacity: 0.9;
+  margin: 0;
+  padding: 0;
+
+}
+
+.circle {
+  max-height: 30px;
+ 
 }
