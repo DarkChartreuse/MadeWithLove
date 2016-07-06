@@ -50,6 +50,15 @@ export default class ChefMeals extends React.Component {
   render() {
   	console.log('chefmeals this.props.orders.chefMeals: ', this.props.orders.chefMeals);
   	console.log('chefmeals this.props.orders.chefOrders: ', this.props.orders.chefOrders);
+    const filteredOrders = [];
+    if(this.props.orders.chefOrders !== undefined){
+      for(var i=0; i<this.props.orders.chefOrders.length; i++) {
+        if(this.props.orders.chefOrders[i].delivered === false) {
+          filteredOrders.push(this.props.orders.chefOrders[i]);
+        }
+      }
+    }
+    console.log(filteredOrders);
     const viewChefOrders = this.props.viewChefOrders;
     const loginUser = this.props.loginUser;
   	return (
@@ -89,7 +98,7 @@ export default class ChefMeals extends React.Component {
               </tr>
             </thead>
             <tbody>
-  	  	    {this.props.orders.chefOrders.map((order) => (
+  	  	    {filteredOrders.map((order) => (
               <tr>
                 <th>{order.food}</th>
                 <th>{order.user_name}</th>

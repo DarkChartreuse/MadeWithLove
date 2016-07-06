@@ -6,9 +6,12 @@ import OrderButton from './OrderButton';
 export default class Grid extends React.Component {
   render() {
     return (
-      <div style={styles.root}>
+      <div style={styles.root} className='container'>
+      <h3>Search Results</h3>
         <GridList
-          cellHeight={200}
+          cellHeight={250}
+          cols={3}
+          padding={10}
           style={styles.gridList}
         >
           {this.props.orders.map((tile) => (
@@ -29,16 +32,14 @@ export default class Grid extends React.Component {
 
 const styles = {
   root: {
-    display: 'flex',
-    flexWrap: 'wrap',
-    justifyContent: 'space-around',
+    // display: 'flex',
+    // flexWrap: 'wrap',
+    // justifyContent: 'space-around',
   },
   gridList: {
-    cols: 4,
-    width: 1000,
-    height: 500,
+    width: '100%',
+    height: '100%',
     overflowY: 'auto',
     marginBottom: 24,
-    padding: 30
   },
 };

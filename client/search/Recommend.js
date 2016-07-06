@@ -3,6 +3,8 @@ import axios from 'axios';
 import { connect } from 'react-redux';
 import { Link } from 'react-router';
 var Carousel = require('nuka-carousel');
+import {GridTile} from 'material-ui/GridList';
+import OrderButton from './OrderButton';
 
 export default class Recommend extends React.Component {
   constructor(props) {
@@ -30,12 +32,19 @@ export default class Recommend extends React.Component {
 
   render() {
   	return (
-        <div className="container">
-        <h3>Your Recommendations</h3>
+        <div className='container'>
+        <div>Top Picks for {this.props.loginUser.first_name}</div>
         { this.state.results && 
-  	    <Carousel slidesToShow={3} cellAlign="center" >
+  	    <Carousel slidesToShow={3} slideWidth={1} wrapAround={true}>
           { this.state.results.map((meal) => (
-                <img src={meal._source.image} style={{width: '300'}}/>
+                <GridTile
+                  key={meal._source.image}
+                  title={meal._source.food}
+                  subtitle={<span>by <b>{meal._source.chef}</b></span>}
+                  actionIcon={ <OrderButton meal={this.props.meal} cuisine={meal}/> }
+                >
+                <img src={meal._source.image} style={{width: '100%', height: '250px', margin: '0 auto'}}/>
+                </GridTile>
                ))}
         </Carousel>
         }
