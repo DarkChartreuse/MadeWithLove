@@ -31,13 +31,15 @@ class Navbar extends React.Component {
     console.log('this is my image!', this.props.loginUser.profile);
     return (
       <div className="navbar-fixed">
+      
+      
   <nav>
-    <ul className="menubuttons left">
+    <ul className="left">
       <li>
         <Link to="/">made with love</Link>
       </li>
     </ul>
-    <ul className="menubuttons right">
+    <ul className="right">
       <li>
         {(!this.props.loginUser.isChef) ?
           '' :

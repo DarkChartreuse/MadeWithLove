@@ -9,7 +9,7 @@ injectTapEventPlugin();
 const muiTheme = getMuiTheme();
 
 const App = ({ children }) => (
-  <MuiThemeProvider muiTheme={muiTheme} >
+  <MuiThemeProvider muiTheme={muiTheme}>
     <div>
       <Navbar />
       {children}

@@ -2,7 +2,6 @@ import React from 'react';
 import axios from 'axios';
 import { Link } from 'react-router';
 import { connect } from 'react-redux';
-
 import { fetchOrders, updateMeal } from '../actions';
 import SearchBar from './SearchBar';
 // import CuisineRow from './CuisineRow';
@@ -11,12 +10,18 @@ import Grid from './Grid';
 
 
 class Search extends React.Component {
+  constructor(props) {
+    super(props);
+  }
+
   render() {
     console.log('searchprops >>>>>', this.props);
     var { isFetching, orders } = this.props;
     return (
       <div>
         <SearchBar loginUser={this.props.loginUser} fetchOrders={this.props.fetchOrders} vegan={this.props.vegan} toggleVegan={this.props.toggleVegan}/>
+        <div className="emptybox">
+        </div>
         { this.props.loginUser.first_name && <Recommend loginUser={this.props.loginUser}/> }
         { !this.props.orders.orders && <div></div> }
         { this.props.orders.orders && <Grid orders={this.props.orders.orders} meal={this.props.updateMeal} loginUser={this.props.loginUser} /> }
@@ -27,7 +32,7 @@ class Search extends React.Component {
 
 const mapDispatchToProps = (dispatch) => {
   return {
-    toggleVegan: () => dispatch({ type: 'TOGGLE_VEGAN' }),
+    toggleVegan: () => dispatch({type: 'TOGGLE_VEGAN'}),
     fetchOrders: (input) => dispatch(fetchOrders(input)),
     updateMeal: (result) => dispatch({ type: 'UPDATE_CURRENT_MEAL', data: result }),
   }

@@ -36,28 +36,22 @@ class SearchBar extends React.Component {
         <div className="emptybox">
         </div>
         <div className="container">
-          <h1 className="header splash">eat at home</h1>
+          <h1 className="header splash">Eat at home</h1>
           <div className="row">
-            <h5 className="header col s12 splashsub">Home-cooked meals to your doorsteps in San Francisco</h5>
+            <h5 className="header col s12 splashsub">Home-cooked meals to your doorstep in San Francisco</h5>
           </div>
           <div className="row">
-            <div className="input-field col s4">
-              <input placeholder="Type of food" type="text" onChange={this.handleCuisine} />
+            <div className="input-field col s6">
+              <input placeholder="type of food" type="text" onChange={this.handleCuisine} />
             </div>
-            <div className="input-field col s3">
-              <input placeholder='Minimum Price'type="text" name="minPrice" onChange={this.handleMinPrice}/>
+            <div className="input-field col s2">
+              <input placeholder="min. price" type="text" name="minPrice" onChange={this.handleMinPrice} />
             </div>
-            <div className="input-field col s3">
-              <input placeholder='Maximum Price'type="text" name="maxPrice" onChange={this.handleMaxPrice}/>
-            </div>
-            <div className="input-field col s3">
-              <DatePicker
-                hintText="Pick a date" 
-                value={this.state.add_date}
-                onChange={this.handleDate} />
+            <div className="input-field col s2">
+              <input placeholder="max. price" type="text" name="maxPrice" onChange={this.handleMaxPrice} />
             </div>
             <button
-              className="btn-large #ffb74d orange lighten-2 black-text menubuttons"
+              className="btn-large black-text menubuttons"
               onClick={() => { this.props.fetchOrders({
                 userID: this.props.loginUser.userID,
                 cuisine: this.state.cuisine,
@@ -76,3 +70,9 @@ class SearchBar extends React.Component {
 }
 
 export default SearchBar;
+
+
+// <DatePicker
+//   hintText="Pick a date" 
+//   value={this.state.add_date}
+//   onChange={this.handleDate} />
