@@ -4,7 +4,7 @@ const stripe = require('stripe')('sk_test_y1L0h0zWW6KNvLpMHi5yOKoD');
 module.exports = {
   stripeCharges: (req, res) => {
     console.log('そのトーケン', req.body.id);
-    let datdestination;
+    const datdestination;
     const paymentAmount = Number(req.body.amount) * 100;
     console.log('the chef ID in payment', req.body.chefId);
     console.log('the bodyin payment', req.body);
