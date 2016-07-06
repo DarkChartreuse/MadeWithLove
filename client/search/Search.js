@@ -25,69 +25,9 @@ class Search extends React.Component {
   }
 }
 
-// class FilterableCuisineTable extends React.Component {
-//   render() {
-//     const { orders, inputCuisine, cuisine } = this.props.orders;
-    
-//     // console.log('filtertablecomponent...',this.props.fetchOrders);
-//     return (            
-//       <div>
-//         <Grid
-//           orders={orders} meal={this.props.meal} loginUser={this.props.loginUser}
-//         />
-//       </div>
-//     );
-//   }
-// }
-
-// class CuisineTable extends React.Component {
-//   render() {
-//     var rows = [];
-//     var lastCategory = null;
-//     if(this.props.orders !== undefined) {
-//       this.props.orders.forEach((cuisine) => {
-//         // if(cuisine.food.toLowerCase().indexOf(this.props.filterText.toLowerCase()) === -1 || (!cuisine.stocked && this.props.inStockOnly)) { return; }   
-//         if(cuisine.cuisine !== lastCategory) {
-//           rows.push(
-//             <CuisineCategoryRow 
-//             category={cuisine.cuisine}
-//             key={cuisine.cuisine} />
-//           );
-//         }
-//         rows.push(<CuisineRow loginUser={this.props.loginUser} meal={this.props.meal} cuisine={cuisine} key={cuisine.food} />);
-//         lastCategory = cuisine.cuisine;
-//       });
-//     }
-
-//     return (
-//       <table className="table table-striped panel panel-primary">
-//         <thead className="panel-heading">
-//           <tr>
-//             <th scope="row" >Name</th>
-//             <th scope="row" >Chef</th>
-//             <th scope="row" >Price</th>
-//             <th scope="row" ></th>
-//           </tr>
-//         </thead>
-//         <tbody>{rows}</tbody>
-//       </table>
-//     );
-//   }
-// }
-
-
-
-// class CuisineCategoryRow extends React.Component {
-//   render() {
-//     return (
-//       <tr><th colSpan="4" className="bg-success">{this.props.category}</th></tr>
-//     );
-//   }
-// }
-
 const mapDispatchToProps = (dispatch) => {
   return {
-    toggleVegan: () => dispatch({type: 'TOGGLE_VEGAN'}),
+    toggleVegan: () => dispatch({ type: 'TOGGLE_VEGAN' }),
     fetchOrders: (input) => dispatch(fetchOrders(input)),
     updateMeal: (result) => dispatch({ type: 'UPDATE_CURRENT_MEAL', data: result }),
   }

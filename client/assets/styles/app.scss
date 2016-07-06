@@ -1,14 +1,18 @@
 @import url(https://fonts.googleapis.com/css?family=Lora:400,400i,700,700i);
+@import url("https://fonts.googleapis.com/css?family=Raleway:400,500");
+
+
 
 html {
   font-family: 'Lora', serif;
+  height: 100%;
 }
 
 nav {
   text-decoration: none;
 }
-.menubuttons, h1, h3{
-  text-align: center;
+
+/*h1, h3{
   font-weight: 700;
 }
 
@@ -16,14 +20,50 @@ h1 {
   font-style: italic;
   font-weight: 400;
   color: black;
+}*/
+
+/*.splash {
+  font-style: italic;
+  color: white;
+}*/
+
+.splash {
+  font-weight: 700;
+  font-size: 45px;
+  padding: 5px;
+  color: white;
 }
 
 h3 {
   font-size: 30px;
 }
 
+nav {
+  padding: 0 14px;
+  background-color: transparent;
+  border-color: transparent;
+  background: transparent;
+  box-shadow: none;
+  color: white;
+}
 nav ul a {
-  color: black;
+  color: white;
+  font-family: 'Raleway';
+  font-weight: 400;
+  letter-spacing: 1px;
+  font-size:13px;
+}
+
+body {
+  height: 100%;
+  background-image: url("../images/foodkitchen.jpg");
+  background-size: 100%;
+  background-repeat: no-repeat;
+  z-index: -1;
+}
+
+.emptybox {
+  height: 400px;
 }
 
 .input-field input[type=text]:focus {
