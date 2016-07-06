@@ -1,6 +1,7 @@
-const Meal = require('../models/mealsModel.js');
-const User = require('../models/usersModel.js');
+const Meal = require('../models/index.js').meals;
+const User = require('../models/index.js').users;
 const elasticsearch = require('../../elasticSearch.js');
+const ImageUploader = require('./imageUploader');
 
 module.exports = {
   createMeal: (req, res) => {
@@ -10,21 +11,21 @@ module.exports = {
 
     // User.findOne({ where: { email: req.body.email } })
     // .then(result => {
-      Meal.create({
-        // chefId: result.id,
-        food: req.body.food,
-        cuisine: req.body.cuisine,
-        description: req.body.description,
-        quantity: req.body.quantity,
-        price: req.body.price,
-        address: req.body.address,
-      // });
-    })
-    .catch(err => { console.error('Error adding meal: ', err); })
-    .finally(() => {
-      console.log('Chef has now added an meal: ', req.body.food);
+    //   Meal.create({
+    //     // chefId: result.id,
+    //     food: req.body.food,
+    //     cuisine: req.body.cuisine,
+    //     description: req.body.description,
+    //     quantity: req.body.quantity,
+    //     price: req.body.price,
+    //     address: req.body.address,
+    //   // });
+    // })
+    // .catch(err => { console.error('Error adding meal: ', err); })
+    // .finally(() => {
+    //   console.log('Chef has now added an meal: ', req.body.food);
       res.end();
-    });
+    // });
   },
 
   deleteMeal: (req, res) => {
@@ -55,5 +56,27 @@ module.exports = {
       res.json(meals);
     })
     .catch(err => { console.error('Error fetching meals', err); });
+  },
+
+  uploadImage: (req, res) => {
+
+    var image = ImageUploader({
+      data_uri: req.body.data_uri,
+      filename: req.body.filename,
+      filetype: req.body.filetype
+    }).then(onGoodImageProcess, onBadImageProcess);
+
+    function onGoodImageProcess(resp) {
+      res.send({
+        status: 'success',
+        uri: resp
+      });
+    }
+    function onBadImageProcess(resp) {
+      res.send({
+        status: 'error'
+      });
+    }
+
   },
 };

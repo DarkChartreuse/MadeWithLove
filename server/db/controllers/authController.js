@@ -1,4 +1,5 @@
 const passport = require('passport');
+const User = require('./usersController.js');
 
 
 const attemptSignIn = (req, res, user) => {
@@ -6,6 +7,8 @@ const attemptSignIn = (req, res, user) => {
     if (err) {
       res.status(401).send(err);
     } else {
+      req.session.user = user;
+      console.log('req session wiht user', req.session);
       res.json(user);
     }
   });
@@ -26,20 +29,39 @@ const logOut = (req, res) => {
     res.redirect('/');
   });
 };
+//
+
+const globalSessionMiddleware = (req, res, next) => {
+  if (req.isAuthenticated()) {
+    console.log('is authenticated?', req.isAuthenticated());
+    User.findOne({ where: { email: req.session.user.email } }, (err, user) => {
+      if (user) {
+        console.log('we have a user?', req.user);
+        req.user = user;
+        delete req.user.password;
+        req.session.user = user;
+      }
+      next();
+    });
+  } else {
+    next();
+  }
+};
 
 
 const isLoggedIn = (req, res, next) => {
-  if (req.isAuthenticated()) {
-    console.log('is authenticated?', req.isAuthenticated());
-    console.log('you got req session!?', req.session);
-    return next();
+  if (!req.user) {
+    res.status(401).send({ message: 'you are not logged in' });
+  } else {
+    console.log('you are authenticated yyo ========')
+    next();
   }
-  return res.redirect('/signin');
 };
 
 module.exports = {
   attemptSignIn,
   signIn,
   logOut,
+  globalSessionMiddleware,
   isLoggedIn,
 };

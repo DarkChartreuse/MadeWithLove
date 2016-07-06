@@ -22,9 +22,12 @@ import Signin from './auth/Signin';
 import Mealview from './mealview/Mealview';
 import AddAMeal from './chef/AddAMeal';
 import Profile from './user/Profile';
+import ChefMeals from './user/ChefMeals';
+import UserOrders from './user/UserOrders';
 
 const logger = createLogger();
 const store = createStore(rootReducer, applyMiddleware(thunk, logger));
+
 const history = syncHistoryWithStore(browserHistory, store);
 
 render((
@@ -35,8 +38,11 @@ render((
         <Route path="/signup" component={Signup} />
         <Route path="/signin" component={Signin} />
         <Route path="/addmeal" component={AddAMeal} />
-        <Route path="/mealview" component={Mealview} />
-        <Route path="/user/:id" component={Profile} />
+        <Route path="/users/:id" component={Profile} />
+        <Route path="/search" component={Search} />
+        <Route path="/orders/:id" component={Mealview} />
+        <Route path="/chefstatus" component={ChefMeals} />
+        <Route path="/orderstatus" component={UserOrders} />
       </Route>
     </Router>
   </Provider>

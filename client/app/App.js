@@ -1,11 +1,20 @@
 import React from 'react';
 import Navbar from './Navbar';
+import MuiThemeProvider from 'material-ui/styles/MuiThemeProvider';
+import getMuiTheme from 'material-ui/styles/getMuiTheme';
+
+var injectTapEventPlugin = require("react-tap-event-plugin");
+injectTapEventPlugin();
+
+const muiTheme = getMuiTheme();
 
 const App = ({ children }) => (
-  <div>
-    <Navbar />
-    {children}
-  </div>
+  <MuiThemeProvider muiTheme={muiTheme} >
+    <div>
+      <Navbar />
+      {children}
+    </div>
+  </MuiThemeProvider>
 );
 
 App.propTypes = {

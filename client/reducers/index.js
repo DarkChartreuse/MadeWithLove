@@ -17,24 +17,13 @@ const toggleQuantity = (state = {quantity: 0, price: 15}, action) => {
 };
 
 const toggleVegan = (state = {}, action) => {
-  switch(action.type) {
+  switch (action.type) {
     case 'TOGGLE_VEGAN':
       return Object.assign({}, state, {
         vegan: !state.vegan
       });
     default:
       return state;
-  }
-};
-
-const saveSearchQuery = (state = {cuisine: ''}, action) => {
-  switch (action.type) {
-    case 'SAVE_SEARCH_QUERY':
-      return Object.assign({}, state, {
-        cuisine: action.data
-      });
-    default:
-    return state;
   }
 };
 
@@ -53,19 +42,33 @@ const orders = (state = {isFetching: false, result: [], error: null}, action) =>
       return Object.assign({}, state, {
         isFetching: false,
         error: 'Oops'
-
+      })
+    case 'CHEF_MEALS_SUCCESS':
+      return Object.assign({}, state, {
+        isFetching: false,
+        chefMeals: action.result
+      })
+    case 'CHEF_ORDERS_SUCCESS':
+      return Object.assign({}, state, {
+        isFetching: false,
+        chefOrders: action.result
+      })
+    case 'USER_ORDERS_SUCCESS':
+      return Object.assign({}, state, {
+        isFetching: false,
+        userOrders: action.result
       })
     default:
       return state
   }
 };
 
-const mealState = (state, action) => {
+const mealInitialState = JSON.parse(localStorage.getItem('meal'));
+
+const mealState = (state = mealInitialState, action) => {
   switch (action.type) {
     case 'UPDATE_CURRENT_MEAL':
-      return Object.assign({}, state, {
-        mealName: action.data.food,
-      });
+      return Object.assign({}, state, action.data);
     default:
       return state;
   }
@@ -86,8 +89,8 @@ const toggleAuth = (state = { isSignIn: false }, action) => {
 
 const userInfoState = {
   userID: Number(localStorage.getItem('name')),
-  firstName: localStorage.getItem('firstName'),
-  lastName: localStorage.getItem('lastName'),
+  first_name: localStorage.getItem('first_name'),
+  last_name: localStorage.getItem('last_name'),
   description: localStorage.getItem('description'),
   phone: localStorage.getItem('phone'),
   address: localStorage.getItem('address'),
@@ -101,13 +104,27 @@ const loginUser = (state = userInfoState, action) => {
     case 'LOGIN_USER':
       return Object.assign({}, state, {
         userID: action.data.id,
-        firstName: action.data.firstName,
-        lastName: action.data.lastName,
+        first_name: action.data.first_name,
+        last_name: action.data.last_name,
+        email: action.data.email,
         description: action.data.description,
         phone: action.data.phone,
         address: action.data.address,
         zip: action.data.zip,
         isChef: action.data.chef,
+        profile: action.data.profile,
+      });
+    case 'UPDATE_PROFILE':
+      return Object.assign({}, state, {
+        first_name: action.data.first_name,
+        last_name: action.data.last_name,
+        email: action.data.email,
+        password: action.data.password,
+        description: action.data.description,
+        phone: action.data.phone,
+        address: action.data.address,
+        zip: action.data.zipcode,
+        profile: action.data.profile,
       });
     case 'LOGOUT_USER':
       return {};
@@ -119,7 +136,7 @@ const loginUser = (state = userInfoState, action) => {
 const rootReducer = combineReducers({
   toggleQuantity,
   toggleVegan,
-  saveSearchQuery,
+  mealState,
   orders,
   toggleAuth,
   loginUser,

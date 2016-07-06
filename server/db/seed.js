@@ -1,22 +1,23 @@
-const db = require('./db.js');
-const User = require('./models/usersModel.js');
-const Meal = require('./models/mealsModel.js');
+var db = require('./models/index');
+// const db = require('./db.js');
+// const User = require('./models/usersModel.js');
+// const Order = require('./models/ordersModel.js');
 const usersSeed = require('./seedData/usersSeed.js');
-const mealsSeed = require('./seedData/mealsSeed.js');
+const ordersSeed = require('./seedData/ordersSeed.js');
 
-db.sync({ force: true })
-  .then(() => {
-    console.log('Connection has been established successfully.');
-  })
-  .then(() => {
-    User.bulkCreate(usersSeed)
+// db.sync({ force: true })
+//   .then(() => {
+//     console.log('Connection has been established successfully.');
+//   })
+//   .then(() => {
+    db.users.bulkCreate(usersSeed, {individualHooks: true})
     .then(() => {
-      Meal.bulkCreate(mealsSeed)
+      db.orders.bulkCreate(ordersSeed, {individualHooks: true})
       .then(() => {
-        console.log('Seeding almost complete...');
+        console.log('Completing database seeding...');
       });
-    });
-  })
+    })
+  // })
   .catch(err => {
     console.log('Unable to connect to the database:', err);
   });

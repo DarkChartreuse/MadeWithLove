@@ -1,5 +1,5 @@
 const LocalStrategy = require('passport-local').Strategy;
-const User = require('./db/models/usersModel');
+const User = require('./db/models/index').users;
 const bcrypt = require('bcrypt');
 
 module.exports = (passport) => {
@@ -19,7 +19,19 @@ module.exports = (passport) => {
         if (!bcrypt.compareSync(password, user.password)) {
           return done(null, false, { message: 'Incorrect password.' });
         }
-        return done(null, user);
+        return done(null, { id: user.id,
+          first_name: user.first_name,
+          last_name: user.last_name,
+          email: user.email,
+          description: user.description,
+          phone: user.phone,
+          address: user.address,
+          zip: user.zip,
+          profile: user.profile,
+          chef: user.chef,
+          numOrders: user.numOrders,
+          avgRating: user.avgRating,
+           });
       });
   }
   ));
@@ -41,4 +53,3 @@ module.exports = (passport) => {
     });
   });
 };
-

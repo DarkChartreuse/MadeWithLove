@@ -1,0 +1,41 @@
+version: '2'
+services:
+  db:
+    image: postgres
+    container_name: postgresdb
+    environment:
+      - POSTGRES_USER=postgres
+      - POSTGRES_PASSWORD=postgres
+      - POSTGRES_DB=mwl_db
+    # volumes: ["/data/db"]
+    networks:
+      - mwl-network
+    ports:
+      - "5432:5432"
+  es:
+    image: elasticsearch
+    container_name: elasticdb
+    # environment:
+    #   - ELASTICSEARCH_PORT_9200_TCP_ADDR=172.19.0.2
+    networks:
+      - mwl-network
+    ports:
+      - "9200:9200"
+      - "9300:9300"
+  web:
+    image: darkchartreuse/mwl
+    container_name: mwl
+    # build: .
+    ports:
+      - "80:3000"
+    # volumes:
+    #   - .:/app
+    links:
+      - db
+      - es
+    # entrypoint: ./wait-for-it.sh db:5432 -- npm run seed
+    networks:
+      - mwl-network
+networks:
+  mwl-network:
+    driver: bridge
