@@ -10,8 +10,7 @@ module.exports = (app) => {
   app.route('/api/users').get(User.getAllUsers);
   app.route('/api/users/:id').get(User.getUser);
   app.route('/api/users/:id').delete(User.deleteUser);
-
-  app.route('/api/updateuser').post(User.updateUser);
+  app.route('/api/users/:id').put(User.updateUser);
   app.route('/api/updateusersearch').post(User.updateSearchHistory);
 
   app.route('/api/meals').post(Auth.isLoggedIn, Meal.createMeal);
