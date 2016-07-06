@@ -10,6 +10,8 @@ module.exports = function(sequelize, DataTypes) {
     quantity: DataTypes.INTEGER,
     price: DataTypes.FLOAT,
     order_date: DataTypes.DATE,
+    delivered: DataTypes.BOOLEAN,
+    paid: DataTypes.BOOLEAN,
     rating: DataTypes.FLOAT,
     review: DataTypes.STRING,
     image: DataTypes.STRING,
@@ -28,7 +30,8 @@ module.exports = function(sequelize, DataTypes) {
       associate: function(models) {
         // associations can be defined here
       }
-    }
+    },
+    underscored: true
   });
   return orders;
 };

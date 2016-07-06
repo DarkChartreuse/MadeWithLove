@@ -1,8 +1,6 @@
 var elasticsearch = require('elasticsearch');
 
-var ESDB_HOST;
-
-ESDB_HOST = process.env.NODE_ENV === 'production' ? 'elasticdb' : 'localhost';
+var ESDB_HOST = process.env.NODE_ENV === 'production' ? 'elasticdb' : 'localhost';
 
 console.log('>>>>>>>>>>>>> elasticsearch: ', ESDB_HOST);
 

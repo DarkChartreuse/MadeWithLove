@@ -1,31 +1,44 @@
 version: '2'
 services:
   db:
-    image: postgres
+    image: pgdb
     container_name: postgresdb
-    environment:
-      - POSTGRES_USER=postgres
-      - POSTGRES_PASSWORD=postgres
-      - POSTGRES_DB=mwl_db
-    # volumes: ["/data/db"]
+    # environment:
+    #   - POSTGRES_USER=postgres
+    #   - POSTGRES_PASSWORD=postgres
+    #   - POSTGRES_DB=mwl_db
+    restart: on-failure:10
     networks:
       - mwl-network
     ports:
       - "5432:5432"
+    # entrypoint: ./docker-entrypoint-initdb.d
+    volumes:
+      - pg-data
   es:
     image: elasticsearch
     container_name: elasticdb
-    # environment:
-    #   - ELASTICSEARCH_PORT_9200_TCP_ADDR=172.19.0.2
+    environment:
+      - HOSTNAME=elasticdb
+    # command: elasticsearch -Des.network.publish_host=elasticdb
+    restart: on-failure:10
     networks:
       - mwl-network
+      # mwl-network:
+      #   aliases:
+      #     - elasticdb
     ports:
       - "9200:9200"
       - "9300:9300"
+    volumes:
+      - es-data
   web:
     image: darkchartreuse/mwl
+    # command: ./wait_to_start.sh
     container_name: mwl
-    # build: .
+    restart: on-failure:10
+    networks:
+      - mwl-network
     ports:
       - "80:3000"
     # volumes:
@@ -33,9 +46,12 @@ services:
     links:
       - db
       - es
-    # entrypoint: ./wait-for-it.sh db:5432 -- npm run seed
-    networks:
-      - mwl-network
+    # entrypoint: ./wait-for-it.sh postgresdb:5432 --timeout=30 -- node_modules/.bin/sequelize db:seed:all
 networks:
   mwl-network:
     driver: bridge
+volumes:
+  pg-data:
+    driver:
+  es-data:
+    driver:

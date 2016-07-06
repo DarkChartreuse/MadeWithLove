@@ -1,13 +1,13 @@
 {
-  "development": {
+  "production": {
     "username": "postgres",
     "password": "postgres",
     "database": "mwl_db",
-    "host": "localhost",
+    "host": "postgresdb",
     "port": 5432,
     "dialect": "postgres"
   },
-  "test": {
+  "development": {
     "username": "postgres",
     "password": "postgres",
     "database": "mwl_test",
@@ -15,11 +15,11 @@
     "port": 5432,
     "dialect": "postgres"
   },
-  "production": {
+  "test": {
     "username": "postgres",
     "password": "postgres",
     "database": "mwl_db",
-    "host": "postgresdb",
+    "host": "localhost",
     "port": 5432,
     "dialect": "postgres"
   }
