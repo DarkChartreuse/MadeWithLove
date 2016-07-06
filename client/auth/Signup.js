@@ -81,12 +81,13 @@ class Signup extends React.Component {
 
   render() {
     return (
-      <div className="container row">
-        <div className="col s6 offset-s3 input-field">
+      <div className="container row center">
+        <div className="col s4 offset-s4">
           <h3>create account</h3>
+          <div className="themode">
           <input
             type="text"
-            className="form-control"
+            className="input-field"
             name="email"
             placeholder="email"
             value={this.state.email}
@@ -94,7 +95,7 @@ class Signup extends React.Component {
           />
           <input
             type="password"
-            className="form-control"
+            className="input-field"
             name="password"
             placeholder="password"
             value={this.state.password}
@@ -102,7 +103,7 @@ class Signup extends React.Component {
           />
           <input
             type="password"
-            className="form-control"
+            className="input-field"
             name="passwordConfirm"
             placeholder="confirm password"
             value={this.state.passwordConfirm}
@@ -111,7 +112,7 @@ class Signup extends React.Component {
           <p>Additional Information</p>
           <input
             type="text"
-            className="form-control"
+            className="input-field"
             name="first_name"
             placeholder="first name (required)"
             value={this.state.first_name}
@@ -119,7 +120,7 @@ class Signup extends React.Component {
           />
           <input
             type="text"
-            className="form-control"
+            className="input-field"
             name="last_name"
             placeholder="last name (required)"
             value={this.state.last_name}
@@ -127,7 +128,7 @@ class Signup extends React.Component {
           />
           <input
             type="text"
-            className="form-control"
+            className="input-field"
             name="phone"
             placeholder="phone number"
             value={this.state.phone}
@@ -136,7 +137,7 @@ class Signup extends React.Component {
           <br />
           <input
             type="text"
-            className="form-control"
+            className="input-field"
             name="street"
             placeholder="street"
             value={this.state.street}
@@ -144,7 +145,7 @@ class Signup extends React.Component {
           />
           <input
             type="text"
-            className="form-control"
+            className="input-field"
             name="city"
             placeholder="city"
             value={this.state.city}
@@ -152,7 +153,7 @@ class Signup extends React.Component {
           />
           <input
             type="text"
-            className="form-control"
+            className="input-field"
             name="state"
             placeholder="state"
             value={this.state.state}
@@ -160,7 +161,7 @@ class Signup extends React.Component {
           />
           <input
             type="text"
-            className="form-control"
+            className="input-field"
             name="zipcode"
             placeholder="zipcode"
             value={this.state.zipcode}
@@ -178,11 +179,10 @@ class Signup extends React.Component {
             >Are you a chef?</label>
           </p>    
         <button
-          className="btn-large waves-effect waves-light
-          #ffb74d orange lighten-2 black-text menubuttons"
+          className="center btn black-text menubuttons"
           onClick={this._handleSubmit.bind(this)}
         >Submit</button>
-        <span className="signup-link" onClick={()=>this.props.fn()} activeClassName="active"> Already have an account? <b>sign in</b></span>
+        </div>
       </div>
       </div>
     );
@@ -198,3 +198,5 @@ const mapDispatchToProps = (dispatch) => {
 const mapStateToProps = ({ loginUser }) => ({ loginUser });
 
 export default connect(mapStateToProps, mapDispatchToProps)(Signup);
+
+// <span className="signup-link" onClick={()=>this.props.fn()} activeClassName="active"> Already have an account? <b>sign in</b></span>

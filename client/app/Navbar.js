@@ -55,7 +55,8 @@ class Navbar extends React.Component {
       <li>
         {(!this.props.loginUser.first_name) ?
           <Link to="/signup" >Sign Up</Link> :
-          <a onClick={() => { browserHistory.push(`/users/${this.props.loginUser.userID}`); }}><Avatar src={this.props.loginUser.profile} size={35} /></a>
+          <a onClick={() => { browserHistory.push(`/users/${this.props.loginUser.userID}`); }}>
+          <img className="circle" src={this.props.loginUser.profile} /></a>
         }
       </li>
       <li>
@@ -85,3 +86,6 @@ Navbar.propTypes = {
 };
 
 export default connect(mapStateToProps, mapDispatchToProps)(Navbar);
+
+
+// <Avatar src={this.props.loginUser.profile} size={35} />

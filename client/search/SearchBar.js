@@ -36,10 +36,11 @@ class SearchBar extends React.Component {
         <div className="emptybox">
         </div>
         <div className="container">
-          <h1 className="header splash">Eat at home</h1>
-          <div className="row">
-            <h5 className="header col s12 splashsub">Home-cooked meals to your doorstep in San Francisco</h5>
+          <div>
+            <h1 className="header splash">Eat at home</h1>
+                <h4 className="col s12">Home-cooked meals to your doorstep in San Francisco</h4>
           </div>
+          <br /><br />
           <div className="row">
             <div className="input-field col s6">
               <input placeholder="type of food" type="text" onChange={this.handleCuisine} />
@@ -51,7 +52,7 @@ class SearchBar extends React.Component {
               <input placeholder="max. price" type="text" name="maxPrice" onChange={this.handleMaxPrice} />
             </div>
             <button
-              className="btn-large black-text menubuttons"
+              className="btn-large black-text searchbutton"
               onClick={() => { this.props.fetchOrders({
                 userID: this.props.loginUser.userID,
                 cuisine: this.state.cuisine,
