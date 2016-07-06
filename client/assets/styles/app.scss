@@ -27,11 +27,18 @@ h1 {
   color: white;
 }*/
 
-.splash {
-  font-weight: 700;
-  font-size: 45px;
-  padding: 5px;
+.splash, .splashsub {
   color: white;
+  font-weight: 700;
+}
+
+.splash { 
+  font-size: 45px;
+}
+
+.splashsub {
+  font-weight: 400;
+  font-size: 23px;
 }
 
 h3 {
