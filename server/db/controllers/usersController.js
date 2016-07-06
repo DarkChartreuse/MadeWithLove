@@ -13,8 +13,6 @@ module.exports = {
       const salt = bcrypt.genSaltSync(10);
       const hashedPassword = bcrypt.hashSync(req.body.password, salt);
       return User.create({
-        // firstName: req.body.firstName,
-        // lastName: req.body.lastName,
         first_name: req.body.first_name,
         last_name: req.body.last_name,
         email: req.body.email,
@@ -27,7 +25,7 @@ module.exports = {
         chef: req.body.chef,
       })
       .then(user => {
-        console.log('dat config', user);
+        // console.log('dat config', user);
         res.json(user);
       })
       .catch(err => { console.error(err); });
@@ -40,7 +38,7 @@ module.exports = {
     User.findOne({ where: { id: req.body.userID } })
     .then( user => {
       if(user) {
-        console.log("THIS IS THE USER>>>>>>>>>>", user);
+        // console.log("THIS IS THE USER>>>>>>>>>>", user);
         user.updateAttributes({
           searches: req.body.searchQuery
         })
@@ -56,13 +54,12 @@ module.exports = {
   },
 
   updateUser: (req, res) => {
-    console.log('im passing this data as the req body userID: >>>', req.body.userID);
-    User.findOne({ where: { id: req.body.userID } })
+    // console.log('im passing this data as the req body userID: >>>', req.body.userID);
+    User.findOne({ where: { id: req.params.id } })
     .then( user => {
       if(user) {
         // const salt = bcrypt.genSaltSync(10);
         // const hashedPassword = bcrypt.hashSync(req.body.password, salt);
-        
         user.updateAttributes({
           first_name: req.body.first_name,
           last_name: req.body.last_name,
@@ -74,7 +71,8 @@ module.exports = {
           profile: req.body.profile
         })
         .then( updatedUser => {
-          res.json(updatedUser);
+          // console.log('Updating user:', updatedUser)
+          res.json({UPDATED: updatedUser});
           console.log('user successfully updated!');
         })
         .catch(err => { console.error('Error updating user', err); });
@@ -88,19 +86,17 @@ module.exports = {
   deleteUser: (req, res) => {
     User.findOne({ where: { id: req.params.id } })
     .then(userToDelete => {
-      console.log('Deleting user: ', userToDelete.dataValues);
+      // console.log('Deleting user: ', userToDelete.dataValues);
       userToDelete.destroy();
+      res.json({msg: 'success'});
     })
     .catch(err => { console.error('Error deleting user', err); })
-    .finally(() => {
-      res.end();
-    });
   },
 
   getUser: (req, res) => {
     User.findOne({ where: { id: req.params.id } })
     .then(user => {
-      console.log('this is the user data entirety:', user);
+      // console.log('this is the user data entirety:', user);
       res.json(user.dataValues);
     })
     .catch(err => { console.error('Error fetching user', err); });
