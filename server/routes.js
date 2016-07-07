@@ -26,7 +26,7 @@ module.exports = (app) => {
   app.route('/api/orders/:id').get(Order.getOrder);
   app.route('/api/getcheforders').post(Order.getChefOrders);
   app.route('/api/getuserorders').post(Order.getUserOrders);
-  app.route('/api/deliverystatus').post(Order.updateDeliveryStatus);
+  app.route('/api/deliverystatus').post(Order.updateDelivery);
 
 
   // stripe payments

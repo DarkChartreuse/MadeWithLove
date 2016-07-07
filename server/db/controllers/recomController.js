@@ -4,7 +4,7 @@ const db = require('../models/index.js');
 const elasticClient = require('../../instantiateES.js');
 
 module.exports.getRec = function(req, res) {
-    console.log('HERE IS THE USER ID >>>>>', req.body.userId);
+    console.log('HERE IS THE USER ID >>>>>', req.body.user_id);
 
     // fetchUserOrderHistory(userId)
     // var cuisines = {};
@@ -51,13 +51,13 @@ function orderCountMapping(ordersArray) {
     else { cuisineCount[currCuisine] = 1; }
   }
 
-  // console.log(JSON.stringify(cuisineCount));
+  console.log(JSON.stringify(cuisineCount));
   return cuisineCount;
 }
 
 
 function findMaxOccurance(cuisinesByOrderCount) {
-  // console.log(cuisinesByOrderCount);
+  console.log('cuisinesByOrderCount: ', cuisinesByOrderCount);
   let maxCount      = 0,
       maxCuisine    = "";
 

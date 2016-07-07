@@ -50,7 +50,17 @@ export default class ChefMeals extends React.Component {
   render() {
   	console.log('chefmeals this.props.orders.chefMeals: ', this.props.orders.chefMeals);
   	console.log('chefmeals this.props.orders.chefOrders: ', this.props.orders.chefOrders);
-
+    const filteredOrders = [];
+    if(this.props.orders.chefOrders !== undefined){
+      for(var i=0; i<this.props.orders.chefOrders.length; i++) {
+        if(this.props.orders.chefOrders[i].delivered === false) {
+          filteredOrders.push(this.props.orders.chefOrders[i]);
+        }
+      }
+    }
+    console.log(filteredOrders);
+    const viewChefOrders = this.props.viewChefOrders;
+    const loginUser = this.props.loginUser;
   	return (
   	  <div>
   	  {this.props.orders.chefMeals &&
@@ -79,12 +89,31 @@ export default class ChefMeals extends React.Component {
   	  {this.props.orders.chefOrders &&
   	  	<div>
   	  	  <h3>Your Orders</h3>
-  	  	  <ul>
-  	  	    {this.props.orders.chefOrders.map(function(order) {
-  	  	  	  return<li><div>{order.food}</div><DeliveredButton order={order} /></li>;
-  	  	    })}
-  	  	  </ul>
-  	  	</div>
+  	  	  <table>
+            <thead>
+              <tr>
+                <th>Meal</th>
+                <th>Name</th>
+                <th>Status</th>
+              </tr>
+            </thead>
+            <tbody>
+  	  	    {filteredOrders.map((order) => (
+              <tr>
+                <th>{order.food}</th>
+                <th>{order.user_name}</th>
+                <th>
+                  <DeliveredButton 
+                    order={order} 
+                    viewChefOrders={viewChefOrders} 
+                    loginUser={loginUser}
+                    />
+                </th>
+              </tr>
+  	  	    ))}
+            </tbody>
+          </table>
+        </div>
   	  }
   	  </div>
   	)

@@ -120,23 +120,23 @@ module.exports = {
     .catch(err => { console.error('Error fetching orders', err); });
   },
 
-  updateDeliveryStatus: (req, res) => {
-
+  updateDelivery: (req, res) => {
+    console.log('PINGED UPDATE DELIVERY STATUS!!!>>>>>>>>>>>');
     Order.findOne({ where: { id: req.body.id } })
     .then( order => {
       if(order) {
-        console.log('found order: ', order);
+        console.log('FOUND ORDER>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>> ', order);
         order.updateAttributes({
           delivered: true,
         })
         .then( updatedOrder => {
           res.json(updatedOrder);
+          console.log('order delivery status updated!');
         });
       } else {
         res.send('order does not exist');
       }
     })
-    .error( err=> console.log(err));
-  },
+  }
 
 };
