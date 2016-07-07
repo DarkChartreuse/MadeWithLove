@@ -52,17 +52,18 @@ class Profile extends React.Component {
                 <li>Phone: {loginUser.phone} </li>
               </ul>
             </div>
-          </div>
-          <RaisedButton label="Edit Profile" onTouchTap={this.handleOpen} />
+            
           <Dialog
             title="Edit Profile"
-            modal={false}
-            open={this.state.handleOpen}
+            modal={true}
+            open={this.state.open}
             onRequestClose={this.handleClose}
             autoScrollBodyContent={true}
           >
             <EditForm updateLoginUser={this.props.updateLoginUser} loginUser={loginUser} handleClose={this.handleClose}/>
           </Dialog>
+          </div>
+          <RaisedButton label="Edit Profile" onTouchTap={this.handleOpen} />
           
         </div>
       </div>
