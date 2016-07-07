@@ -20,9 +20,7 @@ class Search extends React.Component {
     return (
       <div>
         <SearchBar loginUser={this.props.loginUser} fetchOrders={this.props.fetchOrders} vegan={this.props.vegan} toggleVegan={this.props.toggleVegan}/>
-        <div className="emptybox">
-        </div>
-        { this.props.loginUser.first_name && <Recommend loginUser={this.props.loginUser} updateMeal={this.props.updateMeal} /> }
+        { this.props.loginUser.first_name && <Recommend loginUser={this.props.loginUser} meal={this.props.updateMeal} /> }
         { !this.props.orders.orders && <div></div> }
         { this.props.orders.orders && <Grid orders={this.props.orders.orders} meal={this.props.updateMeal} loginUser={this.props.loginUser} /> }
       </div>

@@ -2,8 +2,8 @@ import React from 'react';
 import axios from 'axios';
 import { connect } from 'react-redux';
 import { browserHistory } from 'react-router';
-import DatePicker from 'material-ui/DatePicker';
-import TimePicker from 'material-ui/TimePicker';
+// import DatePicker from 'material-ui/DatePicker';
+// import TimePicker from 'material-ui/TimePicker';
 
 import ImageUploader from './ImageUploader';
 
@@ -89,26 +89,23 @@ class AddAMeal extends React.Component {
 
   render() {
     return (
-      <div className="container row">
-        <div className="col s8 offset-s2">
-          <DatePicker
-            hintText="pickup date" 
-            value={this.state.add_date}
-            onChange={this.handleDate} />
-          <TimePicker
-            format="ampm"
-            hintText="pickup time"
-            value={this.state.add_time}
-            onChange={this.handleTime} />
+      <div className="container row center">
+      <h3>add a meal</h3>
+        <div className="col s8 offset-s2 themode">
+       <br />
+       <a href="/authorize" className="stripe-connect light-blue"><span>Connect with Stripe</span></a>
+       <br />
+
+        <p>Please connect your account with Stripe to receive payments first</p>
           <form onSubmit={this.handleSubmit}>
             <input type="text" placeholder="dish name" onChange={this.handleTypeOfFood} />
             <input type="text" placeholder="cuisine type" onChange={this.handleCuisineType} />
             <input type="text" placeholder="price" onChange={this.handlePrice} />
             <input type="text" placeholder="quantity" onChange={this.handleQuantity} />
-            <a href="/authorize">CONNECT STRIPE</a>
-            <button type="submit">Submit Meal</button>
+            
+            <button className="btn menubuttons" type="submit">Submit Meal</button>
             <ImageUploader handleImage={this.handleImage} />
-            <button type="submit">Confirm</button>
+            <button className="btn menubuttons" type="submit">Confirm</button>
           </form>
         </div>
       </div>
@@ -136,3 +133,13 @@ AddAMeal.propTypes = {
 };
 
 export default connect(mapStateToProps, null)(AddAMeal);
+
+// <DatePicker
+//   hintText="pickup date" 
+//   value={this.state.add_date}
+//   onChange={this.handleDate} />
+// <TimePicker
+//   format="ampm"
+//   hintText="pickup time"
+//   value={this.state.add_time}
+//   onChange={this.handleTime} />

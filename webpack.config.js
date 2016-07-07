@@ -30,6 +30,10 @@ module.exports = {
         },
       },
       {
+        test: /.(woff|woff2)$/,
+        loader: 'url?prefix=font/&limit=5000',
+      },
+      {
         test: /\.(png|gif|jpe?g|svg)$/i,
         loader: 'url',
         query: {

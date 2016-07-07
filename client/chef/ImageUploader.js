@@ -87,7 +87,7 @@ class ImageUploader extends React.Component {
 			  <div className='col-sm-12'>
 			    <form onSubmit={this.handleSubmit} encType="multipart/form-data">
 			      <input type='file' onChange={this.handleFile} />
-			      <button disabled={this.state.processing} onClick={this.handleSubmit}>Submit</button>
+			      <button className="btn menubuttons" disabled={this.state.processing} onClick={this.handleSubmit}>Upload Image</button>
 			      {processing}
 			    </form>
 			    {uploaded}
