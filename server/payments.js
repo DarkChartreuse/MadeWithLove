@@ -1,3 +1,4 @@
+'use strict';
 const User = require('./db/models/index').users;
 const stripe = require('stripe')('sk_test_y1L0h0zWW6KNvLpMHi5yOKoD');
 
