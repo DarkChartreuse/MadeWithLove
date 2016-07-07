@@ -37,14 +37,13 @@ class Mealview extends React.Component {
       res.chefId = context.props.mealState.chefId;
       axios.post('/api/payments', res)
         .then((response) => {
-          console.log('what is the purchase response', response);
           Materialize.toast(response.data.message, 4000);
-          axios.post('/api/createorder', mealObj)
+        })
+          .then(() => { axios.post('/api/createorder', mealObj) })
           .then((response) => {
             console.log('we saved the order yo!', response);
             browserHistory.push('/orderstatus');
           });
-        });
     });
   }
 

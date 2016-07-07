@@ -170,17 +170,34 @@ export function fetchOrders(searchQuery) {
       body: {
         "query": {
           "bool" : {
-             "must" :     [
-                {"prefix": { "_all": cuisine }},
-             //    {"match": { "chef": "Martha" }},
-             //    {"match": {"healthLabels": "Tree-Nut-Free"}}
-                // {"match": {"zipcode": zipcode}}
-             //  ],//prefix
-             // "filter":    [
-                // {"range": {"date": {"lte": date}}},
-                {"range": {"price": { "lt": maxPrice, "gt": minPrice }}},
-             //    {"range": {"rating": { "gt": 2, "lt": 5}}}
-             ]//price //range
+            "must": [
+              {
+                "multi_match": {
+                  "query": cuisine,
+                  "type" : "phrase_prefix",
+                  "fields": ["chef", "food", "description", "healthLabels", "ingredients"],
+                },
+              },
+              {
+                "range": {
+                  "price": { 
+                    "lt": maxPrice,
+                    "gt": minPrice,
+                  },
+                },
+              },
+            ],
+             // "must" :     [
+             //    {"prefix": { "_all": cuisine }},
+             // //    {"match": { "chef": "Martha" }},
+             // //    {"match": {"healthLabels": "Tree-Nut-Free"}}
+             //    // {"match": {"zipcode": zipcode}}
+             // //  ],//prefix
+             // // "filter":    [
+             //    // {"range": {"date": {"lte": date}}},
+             //    {"range": {"price": { "lt": maxPrice, "gt": minPrice }}},
+             // //    {"range": {"rating": { "gt": 2, "lt": 5}}}
+             // ]//price //range
           }//bool
         }//query
       }//body
