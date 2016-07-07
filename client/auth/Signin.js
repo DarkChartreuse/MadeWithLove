@@ -53,7 +53,7 @@ class Signin extends React.Component {
   render() {
     return (
       <div className="container row center">
-        <div className="col s4 offset-s4">
+        
           <h3>login</h3>
           <form className="themode loginmode" onSubmit={this.handleSubmit}>
             <input type="text" placeholder="email" onChange={this.handleEmail} />
@@ -65,7 +65,7 @@ class Signin extends React.Component {
             >Submit
             </button>
           </form>
-        </div>
+        
       </div>
     );
   }

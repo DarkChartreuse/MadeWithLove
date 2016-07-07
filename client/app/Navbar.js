@@ -62,7 +62,7 @@ class Navbar extends React.Component {
       <li>
         {(!this.props.loginUser.first_name) ?
           <Link to="/signin">Log In</Link> :
-          <a href="/signout" onClick={() => window.localStorage.clear()}>logout</a>
+          <a href="/signout" onClick={() => window.localStorage.clear()}>Logout</a>
         }
       </li>
     </ul>

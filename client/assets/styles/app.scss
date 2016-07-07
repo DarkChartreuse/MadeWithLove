@@ -6,11 +6,13 @@
 html {
   font-family: 'Raleway';
   height: 100%;
+  font-size: 14px;
 }
 
 nav {
   text-decoration: none;
 }
+
 
 /*h1, h3{
   font-weight: 700;
@@ -38,7 +40,7 @@ h1 {
 }
 
 .menubuttons:hover {
-  background-color: #2A8EA9;
+  background-color: #F28D8D;
 }
 .menubuttons:focus {
   background-color: #CBBAB8;
@@ -67,8 +69,12 @@ h1 {
   background-color: #FCF3EA;
   padding: 10px;
   display: inline-block;
+  background-color: rgba(252,243,234,0.9);
   z-index: -1;
-  opacity: 0.9;
+}
+
+.mealviewform {
+  text-align: left
 }
 
 .gridmode {
@@ -80,9 +86,23 @@ h1 {
   padding: 30px 10px;
 }
 
+.paymode {
+  width:320px;
+  padding: 20px 20px;
+}
+
+.boldsubtitle {
+  font-weight: 500;
+}
+
 .loginmode {
   text-align: center;
-  width: 400px;
+  width: 350px;
+  padding: 20px 20px;
+}
+
+.signupmode {
+  width: 800px;
   padding: 20px 20px;
 }
 
@@ -116,6 +136,10 @@ h3 {
   color: white;
 }
 
+.headerblack {
+  color: black;
+}
+
 h4 {
   font-family: 'Lora', serif;
   font-size: 18px;
@@ -126,9 +150,8 @@ h4 {
 
 nav {
   padding: 0 14px;
-  background-color: transparent;
+  background-color: rgba(0, 0, 0, 0.3);
   border-color: transparent;
-  background: transparent;
   box-shadow: none;
   color: white;
 }
@@ -168,8 +191,6 @@ body {
   font-weight: 400px;
   font-size: 12px;
   max-height: 56px;
-  margin: 0 20px;
-  opacity: 0.9;
 }
 .input-field input[type=text]:focus {
   border-bottom: 1px solid #000;
@@ -191,6 +212,10 @@ body {
   margin: 0;
   padding: 0;
 
+}
+
+.imagepreview {
+  max-width: 100px;
 }
 
 .circle {

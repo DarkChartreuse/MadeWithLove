@@ -24,6 +24,7 @@ module.exports = {
         if (err) {
           res.send({message: err })
         } else {
+          console.log('you got charged');
           res.send({message: 'successful!'});
         }
       });

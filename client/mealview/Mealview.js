@@ -9,12 +9,8 @@ class Mealview extends React.Component {
     super(props);
     this.state = {
       meal: {},
-      stripeLoading: true,
-      stripeLoadingError: false,
       submitDisable: false,
       paymentError: null,
-      paymentSuccess: false,
-      token: null,
     };
     this.handleStripeSubmit = this.handleStripeSubmit.bind(this);
   }
@@ -37,7 +33,7 @@ class Mealview extends React.Component {
       res.chefId = context.props.mealState.chefId;
       axios.post('/api/payments', res)
         .then((response) => {
-          Materialize.toast(response.data.message, 4000);
+          console.log(response.data.message);
         })
           .then(() => { axios.post('/api/createorder', mealObj) })
           .then((response) => {
@@ -47,56 +43,41 @@ class Mealview extends React.Component {
     });
   }
 
-  // axios.post('/api/createorder', data)
-  //   .then((response) => {
-  //     console.log('da response', response);
-  //     browserHistory.push(`/orders/${data.mealId}`);
-  //   })
-
   render() {
     return (
-      <div>
-        <div className="container">
-          <div>
-            <h3>{this.props.mealState.food}</h3>
+        <div className="container row center">
+          <h3>{this.props.mealState.food}</h3>
+          <div className="col s6 offset-3 themode mealviewform">
+            <p className="boldsubtitle">Your meal information</p>
             <ul>
-              <li>chef: {this.props.mealState.chef_name}</li>
-              <li>phone: {this.props.mealState.chef_phone} </li>
+              <li>food: {this.props.mealState.food} </li>
               <li>price: {this.props.mealState.price} </li>
               <li>quantity: {this.props.mealState.quantity} </li>
+              <li>chef: {this.props.mealState.chef_name}</li>
+              <li>phone: {this.props.mealState.chef_phone} </li>
+              
             </ul>
-          </div>
-          <div>
-            <p>Delivered to: </p>
-          </div>
-          <div>
+            <p className="boldsubtitle">Delivered to: </p>
+          
+          
             <ul>
               <li>{this.props.mealState.user_name} </li>
               <li>{this.props.mealState.user_address} </li>
               <li>{this.props.mealState.user_phone} </li>
             </ul>
+            checkoutTotal: {`$${this.props.mealState.quantity * this.props.mealState.price}`}
           </div>
-          <div>
-          checkoutTotal: {`$${this.props.mealState.quantity * this.props.mealState.price}`}
-          <div>
-          
-          </div>
-          </div>
-          <div>
-          {!!this.state.stripeLoading ? <div>Loading</div> : this.state.stripeLoadingError}
-          {!!this.state.stripeLoadingError ? <div>Error</div> : <div>Loaded!</div>}
-          {!!this.state.paymentSuccess ? <div>Payment Complete!</div> : <div>Not completed</div>}
+          <div className="themode paymode">
             <form onSubmit={this.handleStripeSubmit} >
-              <span>{this.state.paymentError}</span><br />
+              <p>Please enter your credit card info.</p>
               <input type="text" data-stripe="number" placeholder="credit card number" /><br />
               <input type="text" data-stripe="exp-month" placeholder="expiration month" /><br />
               <input type="text" data-stripe="exp-year" placeholder="expiration year" /><br />
               <input type="text" data-stripe="cvc" placeholder="cvc" /><br />
-              <input disabled={this.state.submitDisabled} type="submit" value="Purchase" />
+              <input className="btn menubuttons" disabled={this.state.submitDisabled} type="submit" value="Purchase" />
             </form>
           </div>
         </div>
-      </div>
     );
   }
 }
