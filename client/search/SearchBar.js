@@ -32,9 +32,7 @@ class SearchBar extends React.Component {
   render() {
     return (
       // <div id="index-banner" className="parallax-container">
-      <div>
-        <div className="emptybox">
-        </div>
+      
         <div className="container">
           <div>
             <h1 className="header splash">Eat at home</h1>
@@ -63,7 +61,7 @@ class SearchBar extends React.Component {
               Search
             </button>
           </div>
-        </div>
+        
       </div>
       // </div>
     )
@@ -77,3 +75,6 @@ export default SearchBar;
 //   hintText="Pick a date" 
 //   value={this.state.add_date}
 //   onChange={this.handleDate} />
+
+// <div className="emptybox">
+// </div>
