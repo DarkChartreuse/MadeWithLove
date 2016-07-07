@@ -57,7 +57,7 @@ class Profile extends React.Component {
           <Dialog
             title="Edit Profile"
             modal={false}
-            open={this.state.open}
+            open={this.state.handleOpen}
             onRequestClose={this.handleClose}
             autoScrollBodyContent={true}
           >

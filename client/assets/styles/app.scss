@@ -126,6 +126,10 @@ nav ul a {
   font-size:13px;
 }
 
+nav ul a img {
+  padding: 15px;
+}
+
 body {
   top: 0;
   left: 0;
@@ -169,6 +173,7 @@ body {
 }
 
 .circle {
-  max-height: 30px;
- 
+  height: 70px;
+  width: 70px;
+
 }
