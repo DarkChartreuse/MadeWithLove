@@ -19,7 +19,7 @@ class Signup extends React.Component {
       city: '',
       state: '',
       zipcode: '',
-      profile: '',
+      profile: null,
       chef: false,
     };
     this.handleError = this.handleError.bind(this);

@@ -122,28 +122,28 @@ export function viewChefMeals(chefId) {
       }
 }
 
-export function saveSearchQuery(searchQuery) {
-  return dispatch => {
-    console.log()
-    axios('api/users/:id', searchQuery.userID)
-    .then( results => {
-      console.log('>>>>>MY RESULTS>>>>>>>>', results); //get the search results and append your stuff and then update it
+// export function saveSearchQuery(searchQuery) {
+//   return dispatch => {
+//     console.log()
+//     axios('api/users/:id', searchQuery.userID)
+//     .then( results => {
+//       console.log('>>>>>MY RESULTS>>>>>>>>', results); //get the search results and append your stuff and then update it
 
-      // axios('/api/updateusersearch', searchQuery)
-      // .then( results => {
-      //   console.log('>>>>>>>>>>>>>>passed user searchQuery to controller', results);
-      // })
+//       // axios('/api/updateusersearch', searchQuery)
+//       // .then( results => {
+//       //   console.log('>>>>>>>>>>>>>>passed user searchQuery to controller', results);
+//       // })
 
-    })
-    .catch( err => console.error(err));
-  }
-}
+//     })
+//     .catch( err => console.error(err));
+//   }
+// }
 
 export function fetchOrders(searchQuery) {
 
 
     var userID = searchQuery.userID;
-    var cuisine = searchQuery.cuisine || '*';
+    var cuisine = searchQuery.cuisine.toLowerCase() || '*';
     var minPrice = searchQuery.minPrice || 0;
     var maxPrice = searchQuery.maxPrice || 1000000;
     var date = searchQuery.add_date;
