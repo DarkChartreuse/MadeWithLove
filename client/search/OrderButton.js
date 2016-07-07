@@ -47,6 +47,7 @@ class OrderButton extends React.Component {
   }
 
   render() {
+    console.log('this.props.cuisine: ', this.props.cuisine);
     return (
       <button className="btn #ffb74d orange lighten-2 black-text menubuttons" onClick={this._handleSubmit.bind(this)}>${this.props.cuisine.price}</button>
     );

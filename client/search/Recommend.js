@@ -41,7 +41,7 @@ export default class Recommend extends React.Component {
                   key={meal._source.image}
                   title={meal._source.food}
                   subtitle={<span>by <b>{meal._source.chef}</b></span>}
-                  actionIcon={ <OrderButton meal={this.props.meal} cuisine={meal}/> }
+                  actionIcon={ <OrderButton cuisine={meal._source} /> }
                 >
                 <img src={meal._source.image} style={{width: '100%', height: '250px', margin: '0 auto'}}/>
                 </GridTile>

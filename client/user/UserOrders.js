@@ -15,7 +15,14 @@ export default class UserOrders extends React.Component {
 
   render() {
   	console.log('usermeals this.props.orders.userOrders: ', this.props.orders.userOrders);
-
+    const filteredOrders = [];
+    if(this.props.orders.userOrders !== undefined){
+      for(var i=0; i<this.props.orders.userOrders.length; i++) {
+        if(this.props.orders.userOrders[i].delivered === false) {
+          filteredOrders.push(this.props.orders.userOrders[i]);
+        }
+      }
+    }
   	return (
       <div>
   	  { (!this.props.loginUser.first_name) ? 
@@ -25,7 +32,7 @@ export default class UserOrders extends React.Component {
             <div>
               <h3>Your Orders</h3>
               <ul>
-                {this.props.orders.userOrders.map(function(order) {
+                {filteredOrders.map(function(order) {
                   return<li>{order.food}</li>;
                 })}
               </ul>

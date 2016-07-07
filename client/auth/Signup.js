@@ -3,6 +3,7 @@ import { browserHistory } from 'react-router';
 import axios from 'axios';
 import { connect } from 'react-redux';
 import { loggy } from '../actions';
+import ImageUploader from '../chef/ImageUploader';
 
 class Signup extends React.Component {
   constructor(props) {
@@ -18,13 +19,20 @@ class Signup extends React.Component {
       city: '',
       state: '',
       zipcode: '',
+      profile: '',
       chef: false,
     };
     this.handleError = this.handleError.bind(this);
+    this.handleProfile = this.handleProfile.bind(this);
   }
 
   handleError(err) {
     Materialize.toast(`Failed to create account: ${err.data.message}`, 4000);
+  }
+
+  handleProfile(uri) {
+    console.log('handleprofile>>>', uri);
+    this.setState({ profile: uri });
   }
 
   _handleSubmit() {
@@ -55,6 +63,7 @@ class Signup extends React.Component {
           state: this.state.state,
           zipcode: this.state.zipcode,
           chef: this.state.chef,
+          profile: this.state.profile,
         };
       axios.post('/api/users', data)
         .then((response) => {
@@ -73,6 +82,7 @@ class Signup extends React.Component {
             localStorage.setItem('address', response.data.address);
             localStorage.setItem('zip', response.data.zip);
             localStorage.setItem('isChef', response.data.chef);
+            localStorage.setItem('profile', response.data.profile);
             browserHistory.push(`/users/${context.props.loginUser.userID}`);
           });
         });
@@ -85,6 +95,17 @@ class Signup extends React.Component {
         <div className="col s4 offset-s4">
           <h3>create account</h3>
           <div className="themode">
+          <p>
+            <input
+              type="checkbox"
+              id="test5"
+              checked={this.state.chef}
+            />
+            <label
+              for="test5"
+              onClick={() => this.setState({ chef: !this.state.chef })}
+            >Are you a chef?</label>
+          </p>
           <input
             type="text"
             className="input-field"
@@ -166,18 +187,8 @@ class Signup extends React.Component {
             placeholder="zipcode"
             value={this.state.zipcode}
             onChange={(event) => this.setState({ zipcode: event.target.value })}
-          />
-          <p>
-            <input
-              type="checkbox"
-              id="test5"
-              checked={this.state.chef}
-            />
-            <label
-              for="test5"
-              onClick={() => this.setState({ chef: !this.state.chef })}
-            >Are you a chef?</label>
-          </p>    
+          /> 
+          <div><ImageUploader handleImage={this.handleProfile}/></div>
         <button
           className="center btn black-text menubuttons"
           onClick={this._handleSubmit.bind(this)}
