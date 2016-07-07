@@ -55,7 +55,7 @@ class Signin extends React.Component {
       <div className="container row center">
         <div className="col s4 offset-s4">
           <h3>login</h3>
-          <form className="themode" onSubmit={this.handleSubmit}>
+          <form className="themode loginmode" onSubmit={this.handleSubmit}>
             <input type="text" placeholder="email" onChange={this.handleEmail} />
             <input type="password" placeholder="password" onChange={this.handlePassword} />
             <button

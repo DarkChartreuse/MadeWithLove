@@ -188,7 +188,8 @@ class Signup extends React.Component {
             value={this.state.zipcode}
             onChange={(event) => this.setState({ zipcode: event.target.value })}
           /> 
-          <div><ImageUploader handleImage={this.handleProfile}/></div>
+          <br />
+          <ImageUploader handleImage={this.handleProfile}/>
         <button
           className="center btn black-text menubuttons"
           onClick={this._handleSubmit.bind(this)}
