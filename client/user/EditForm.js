@@ -73,7 +73,6 @@ export default class EditForm extends React.Component {
         email: this.state.email,
         description: this.state.description,
         phone: this.state.phone,
-        password: this.state.password,
         address: this.state.address,
         zip: this.state.zipcode,
         profile: this.state.profile,
@@ -98,16 +97,14 @@ export default class EditForm extends React.Component {
     return (
     <div>
       <form action='' onSubmit={this.handleSubmit}>
-        <input type='text' placeholder={this.state.first_name} onChange={this.handleFirstName}/>
-        <input type='text' placeholder={this.state.last_name} onChange={this.handleLastName}/>
-        <input type='text' placeholder={this.state.email} onChange={this.handleEmail}/>
-        <input type='text' placeholder='Password'onChange={this.handlePassword}/>
-        <input type='text' placeholder='Confirm Password'/>
-        <input type='text' placeholder={this.state.phone}onChange={this.handlePhone}/>
-        <input type='text' placeholder={this.state.address}onChange={this.handleAddress}/>
-        <button type="submit">Submit</button>
+        <input type='text' className='input-field' placeholder={this.state.first_name} onChange={this.handleFirstName}/>
+        <input type='text' className='input-field' placeholder={this.state.last_name} onChange={this.handleLastName}/>
+        <input type='text' className='input-field' placeholder={this.state.email} onChange={this.handleEmail}/>
+        <input type='text' className='input-field' placeholder={this.state.phone}onChange={this.handlePhone}/>
+        <input type='text' className='input-field' placeholder={this.state.address}onChange={this.handleAddress}/>
+        <div><ImageUploader handleImage={this.handleProfile}/></div>
+        <button className='btn menubuttons' type="submit">Update Profile</button>
       </form>
-      <div><ImageUploader handleImage={this.handleProfile}/></div>
     </div>
     )
   }

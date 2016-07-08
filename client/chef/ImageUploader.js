@@ -83,7 +83,7 @@ class ImageUploader extends React.Component {
 
 		return (
 			<div className="center">
-			 Upload your profile image
+			 <span className='input-field'>Upload your profile image</span>
 			 <br/>
 			 <br/>
 			    <form onSubmit={this.handleSubmit} encType="multipart/form-data">

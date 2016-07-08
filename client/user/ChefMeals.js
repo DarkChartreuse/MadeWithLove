@@ -42,11 +42,6 @@ export default class ChefMeals extends React.Component {
 
   }
 
-  reloadOrders() {
-    console.log('hi from reload orders');
-
-  }
-
   render() {
   	console.log('chefmeals this.props.orders.chefMeals: ', this.props.orders.chefMeals);
   	console.log('chefmeals this.props.orders.chefOrders: ', this.props.orders.chefOrders);
@@ -62,10 +57,10 @@ export default class ChefMeals extends React.Component {
     const viewChefOrders = this.props.viewChefOrders;
     const loginUser = this.props.loginUser;
   	return (
-  	  <div>
+  	  <div className="container row center">
   	  {this.props.orders.chefMeals &&
-  	  	<div>
-  	  	  <h3>Your Meals</h3>
+  	  	<div className='col s5 themode'>
+  	  	  <h2>Your Meals</h2>
           <table>
             <thead>
               <tr>
@@ -86,14 +81,15 @@ export default class ChefMeals extends React.Component {
           </table>
   	  	</div>
   	  }
+      <div className=' col s2 emptybox2'></div>
   	  {this.props.orders.chefOrders &&
-  	  	<div>
-  	  	  <h3>Your Orders</h3>
+  	  	<div className='col s5 themode'>
+  	  	  <h2>Your Orders</h2>
   	  	  <table>
             <thead>
               <tr>
                 <th>Meal</th>
-                <th>Name</th>
+                <th>Recipient</th>
                 <th>Status</th>
               </tr>
             </thead>

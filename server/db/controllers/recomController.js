@@ -8,7 +8,7 @@ module.exports.getRec = function(req, res) {
 
     // fetchUserOrderHistory(userId)
     // var cuisines = {};
-    db.sequelize.query('SELECT * FROM orders WHERE user_id = 1')
+    db.sequelize.query('SELECT * FROM orders WHERE user_id =' + Math.floor(Math.random() * 5))
     .then((userOrders) => orderCountMapping(userOrders[0]))
     .then((cuisineCountByCuisineType) => findMaxOccurance(cuisineCountByCuisineType))
     .then((mostBoughtCuisine) => {
@@ -23,9 +23,9 @@ module.exports.getRec = function(req, res) {
               must: [
                 {match: {cuisine: mostBoughtCuisine}}
               ],//must
-              filter: [
-                {range: {rating: {"gte": 4}}}
-              ]//filter
+              // filter: [
+              //   {range: {rating: {"gte": 4}}}
+              // ]//filter
             }//bool
           }//query
         }//body
