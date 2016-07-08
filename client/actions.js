@@ -152,12 +152,12 @@ export function fetchOrders(searchQuery) {
     console.log('..............Client.search')
     return dispatch => {
 
-    dispatch(saveSearchQuery({
-      userID: userID,
-      cuisine: cuisine,
-      minPrice: minPrice,
-      maxPrice: maxPrice
-    }));
+    // dispatch(saveSearchQuery({
+    //   userID: userID,
+    //   cuisine: cuisine,
+    //   minPrice: minPrice,
+    //   maxPrice: maxPrice
+    // }));
 
     elasticClient.search({
       index: 'mwl',

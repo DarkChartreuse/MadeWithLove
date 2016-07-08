@@ -28,13 +28,16 @@ class Profile extends React.Component {
 
   render() {
     var loginUser = this.props.loginUser;
-    // const actions = [
-    //   <FlatButton
-    //     label="Ok"
-    //     primary={true}
-    //     keyboardFocused={true}
-    //     onTouchTap={this.handleClose}/>,
-    // ];
+    var buttonStyle = {
+      backgroundColor: '#CBBAB8',
+      borderRadius: '0px',
+      fontFamily: 'Raleway',
+      fontWeight: '400px',
+      fontSize: '14px',
+      letterSpacing: '1px',
+      padding: '10px',
+      opacity: 1,
+    };
 
     return (
       <div className="container center">
@@ -51,6 +54,7 @@ class Profile extends React.Component {
                 <li>Description: {loginUser.description}</li>
                 <li>Phone: {loginUser.phone} </li>
               </ul>
+              <RaisedButton labelStyle={buttonStyle} label="Edit Profile" onTouchTap={this.handleOpen} />
             </div>
             
           <Dialog
@@ -63,7 +67,6 @@ class Profile extends React.Component {
             <EditForm updateLoginUser={this.props.updateLoginUser} loginUser={loginUser} handleClose={this.handleClose}/>
           </Dialog>
           </div>
-          <RaisedButton label="Edit Profile" onTouchTap={this.handleOpen} />
           
         </div>
       </div>

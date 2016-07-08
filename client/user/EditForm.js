@@ -105,9 +105,9 @@ export default class EditForm extends React.Component {
         <input type='text' placeholder='Confirm Password'/>
         <input type='text' placeholder={this.state.phone}onChange={this.handlePhone}/>
         <input type='text' placeholder={this.state.address}onChange={this.handleAddress}/>
-        <button type="submit">Submit</button>
+        <div><ImageUploader handleImage={this.handleProfile}/></div>
+        <button className='btn menubuttons' type="submit">Update Profile</button>
       </form>
-      <div><ImageUploader handleImage={this.handleProfile}/></div>
     </div>
     )
   }

@@ -18,7 +18,7 @@ class Search extends React.Component {
     console.log('searchprops >>>>>', this.props);
     var { isFetching, orders } = this.props;
     return (
-      <div>
+      <div className='container'>
         <SearchBar loginUser={this.props.loginUser} fetchOrders={this.props.fetchOrders} vegan={this.props.vegan} toggleVegan={this.props.toggleVegan}/>
         { this.props.loginUser.first_name && <Recommend loginUser={this.props.loginUser} meal={this.props.updateMeal} /> }
         { !this.props.orders.orders && <div></div> }
