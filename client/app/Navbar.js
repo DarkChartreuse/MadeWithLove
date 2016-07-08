@@ -35,7 +35,7 @@ class Navbar extends React.Component {
   <nav>
     <ul className="left">
       <li>
-        <Link to="/">made with love</Link>
+        <Link to="/">savory</Link>
       </li>
     </ul>
     <ul className="right">

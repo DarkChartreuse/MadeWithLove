@@ -48,7 +48,7 @@ export default class Recommend extends React.Component {
                ))}
         </Carousel>
         }
-        { !this.state.results && <div>want some recommendations? <Link to='/search'>click here</Link></div> }
+        { !this.state.results && <div className="recommendsub">want some recommendations? <Link to='/search'>click here</Link></div> }
       </div>
     )
   }

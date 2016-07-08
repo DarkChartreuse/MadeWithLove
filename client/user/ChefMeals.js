@@ -57,34 +57,38 @@ export default class ChefMeals extends React.Component {
     const viewChefOrders = this.props.viewChefOrders;
     const loginUser = this.props.loginUser;
   	return (
-  	  <div className="container row center">
-  	  {this.props.orders.chefMeals &&
+  	  <div className="container row center tablemode">
+  	  {this.props.orders.chefMeals && <div>
+        <h2>meals</h2>
   	  	<div className='col s5 themode'>
-  	  	  <h2>Your Meals</h2>
+  	  	  
           <table>
             <thead>
               <tr>
-                <th>Meal ID</th>
-                <th>Name</th>
+                <th>Meal</th>
+                <th></th>
                 <th>Price</th>
               </tr>
             </thead>
             <tbody>
               { this.props.orders.chefMeals.map((meal) => (
                   <tr>
-                    <th>{meal.mealId}</th>
+                    <th><img className="smallthumb z-depth-3" src={meal.image} /></th>
                     <th>{meal.food}</th>
-                    <th>{meal.price}</th>
+                    <th>${meal.price}</th>
                   </tr>
                 ))}
             </tbody>
           </table>
   	  	</div>
+        </div>
   	  }
       <div className=' col s2 emptybox2'></div>
-  	  {this.props.orders.chefOrders &&
+  	  {this.props.orders.chefOrders ?
+        <div>
+        <h2>orders</h2>
   	  	<div className='col s5 themode'>
-  	  	  <h2>Your Orders</h2>
+  	  	  
   	  	  <table>
             <thead>
               <tr>
@@ -96,6 +100,7 @@ export default class ChefMeals extends React.Component {
             <tbody>
   	  	    {filteredOrders.map((order) => (
               <tr>
+                <th><img className="smallthumb z-depth-3" src={order.image} /></th>
                 <th>{order.food}</th>
                 <th>{order.user_name}</th>
                 <th>
@@ -110,7 +115,15 @@ export default class ChefMeals extends React.Component {
             </tbody>
           </table>
         </div>
-  	  }
+        </div> :
+        <div className='col s5 themode ordermode'>
+                  <h2>orders</h2>
+                  <div>You have no orders</div>
+                  <br />
+                  <br />
+      </div>
+  	   
+    }
   	  </div>
   	)
   }

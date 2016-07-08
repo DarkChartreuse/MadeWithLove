@@ -23,19 +23,36 @@ export default class UserOrders extends React.Component {
         }
       }
     }
+    console.log('the filteredOrders', filteredOrders);
   	return (
       <div>
   	  { (!this.props.loginUser.first_name) ? 
         <h4>Please <Link to='signin'>log in</Link> to view your orders</h4> :
-        <div>
+        <div className="container center">
           { this.props.orders.userOrders !== undefined && 
-            <div>
-              <h3>Your Orders</h3>
-              <ul>
-                {filteredOrders.map(function(order) {
-                  return<li>{order.food}</li>;
-                })}
-              </ul>
+            <div className="themode ordermode">
+              <h2>orders</h2>
+              <table>
+                <thead>
+                  <tr>
+                    
+                    <th>Meal</th>
+                    <th></th>
+                    <th>Chef Name</th>
+                    <th>Price</th>
+                  </tr>
+                </thead>
+                <tbody>
+                  {filteredOrders.map((order) => (
+                      <tr>
+                        <th><img className="smallthumb z-depth-3" src={order.image} /></th>
+                        <th>{order.food}</th>
+                        <th>{order.chef_name}</th>
+                        <th>${order.price}</th>
+                      </tr>
+                    ))}
+                </tbody>
+              </table>
             </div>
           }
         </div>
