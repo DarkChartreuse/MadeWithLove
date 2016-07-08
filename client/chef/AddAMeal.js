@@ -91,22 +91,24 @@ class AddAMeal extends React.Component {
     return (
       <div className="container row center">
       <h3>add a meal</h3>
-        <div className="col s8 offset-s2 themode">
+      <div className="themode addmealmode">
+      <p>Please connect your account with Stripe to receive payments first.</p>
+       <a href="/authorize" className="stripe-connect light-blue dark"><span>Connect with Stripe</span></a>
        <br />
-       <a href="/authorize" className="stripe-connect light-blue"><span>Connect with Stripe</span></a>
        <br />
 
-        <p>Please connect your account with Stripe to receive payments first</p>
+       
           <form onSubmit={this.handleSubmit}>
             <input type="text" placeholder="dish name" onChange={this.handleTypeOfFood} />
             <input type="text" placeholder="cuisine type" onChange={this.handleCuisineType} />
             <input type="text" placeholder="price" onChange={this.handlePrice} />
             <input type="text" placeholder="quantity" onChange={this.handleQuantity} />
-            
-            <button className="btn menubuttons" type="submit">Submit Meal</button>
+            <br/>
             <ImageUploader handleImage={this.handleImage} />
-            <button className="btn menubuttons" type="submit">Confirm</button>
+            <br/>
+            <button className="btn black-text menubuttons" type="submit">Add Meal</button>
           </form>
+          
         </div>
       </div>
     );

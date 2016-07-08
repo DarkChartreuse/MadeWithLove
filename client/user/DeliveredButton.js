@@ -15,7 +15,7 @@ export default class DeliveredButton extends React.Component {
 
   render() {
   	return (
-  	  <button onClick={this.handleSubmit.bind(this)}>Delivered</button>
+  	  <button className="btn menubuttons black-text" onClick={this.handleSubmit.bind(this)}>delivered ?</button>
   	)
   }
 

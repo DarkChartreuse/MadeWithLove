@@ -24,7 +24,7 @@ class Signin extends React.Component {
     this.setState({ password: e.target.value });
   }
   handleError(err) {
-    Materialize.toast(`${err.data.message}`, 4000);
+    Materialize.toast(`${err.data.message}`, 4000, 'pink lighten-2');
   }
   handleSubmit(e) {
     const context = this;
@@ -35,7 +35,7 @@ class Signin extends React.Component {
     };
     axios.post('/api/auth/sign-in', obj)
       .then((response) => {
-        console.log('login response', response)
+        console.log('login response', response);
         context.props.loggy(response);
         localStorage.setItem('first_name', response.data.first_name);
         localStorage.setItem('userID', response.data.id);
@@ -46,16 +46,16 @@ class Signin extends React.Component {
         localStorage.setItem('address', response.data.address);
         localStorage.setItem('zip', response.data.zip);
         localStorage.setItem('isChef', response.data.chef);
-        browserHistory.push(`/users/${this.props.loginUser.userID}`);
+        browserHistory.push('/');
       })
       .catch(this.handleError);
   }
   render() {
     return (
       <div className="container row center">
-        <div className="col s4 offset-s4">
+        
           <h3>login</h3>
-          <form className="themode" onSubmit={this.handleSubmit}>
+          <form className="themode loginmode" onSubmit={this.handleSubmit}>
             <input type="text" placeholder="email" onChange={this.handleEmail} />
             <input type="password" placeholder="password" onChange={this.handlePassword} />
             <button
@@ -65,7 +65,7 @@ class Signin extends React.Component {
             >Submit
             </button>
           </form>
-        </div>
+        
       </div>
     );
   }

@@ -33,7 +33,7 @@ export default class Recommend extends React.Component {
   render() {
   	return (
         <div className='container'>
-        <div>Top Picks for {this.props.loginUser.first_name}</div>
+        <h4>Top Picks for {this.props.loginUser.first_name}</h4>
         { this.state.results && 
   	    <Carousel slidesToShow={3} slideWidth={1} wrapAround={true}>
           { this.state.results.map((meal) => (

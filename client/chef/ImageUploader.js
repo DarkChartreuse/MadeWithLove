@@ -62,14 +62,13 @@ class ImageUploader extends React.Component {
 		if(this.state.uploaded_uri) {
 			uploaded = (
 				<div>
-				  <h3>Image uploaded!</h3>
-				  <div className="col s12 m5">
-				    <div className="card-panel valign-wrapper">
-				      <img className='image-preview' style={{width:'400px'}} src={this.state.uploaded_uri} />
-				    </div>
+				  <p>Image uploaded!</p>
+				 
+				      <img className='imagepreview' src={this.state.uploaded_uri} />
+				  
 				  </div>
-			      <pre className='image-link-box'>{this.state.uploaded_uri}</pre>
-				</div>
+			
+				
 			);
 		} else {
 			uploaded = (
@@ -83,16 +82,21 @@ class ImageUploader extends React.Component {
 		}
 
 		return (
-			<div className='row'>
-			  <div className='col-sm-12'>
+			<div className="center">
+			 Upload your profile image
+			 <br/>
+			 <br/>
 			    <form onSubmit={this.handleSubmit} encType="multipart/form-data">
+			    	
 			      <input type='file' onChange={this.handleFile} />
-			      <button className="btn menubuttons" disabled={this.state.processing} onClick={this.handleSubmit}>Upload Image</button>
+			      <br/>
+			      <br/>
+
+			      <button className="btn black-text menubuttons" disabled={this.state.processing} onClick={this.handleSubmit}>Upload Image</button>
 			      {processing}
 			    </form>
 			    {uploaded}
 			  </div>
-			</div>
 		);
 	}
 }

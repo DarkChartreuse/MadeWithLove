@@ -31,7 +31,7 @@ export function fetchFailure(message) {
     type: FETCH_FAILURE,
     isFetching: false,
     success: false,
-    message: Materialize.toast(message, 4000, 'rounded'),
+    message: Materialize.toast(message, 4000, 'pink lighten-2'),
   };
 }
 

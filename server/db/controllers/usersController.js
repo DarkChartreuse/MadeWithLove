@@ -21,7 +21,7 @@ module.exports = {
         password: hashedPassword,
         address: `${req.body.street}, ${req.body.city}, ${req.body.state}`,
         zip: req.body.zipcode,
-        profile: '', // TODO: point to uploaded image link
+        profile: req.body.profile,
         chef: req.body.chef,
       })
       .then(user => {

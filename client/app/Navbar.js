@@ -28,7 +28,6 @@ class Navbar extends React.Component {
   };
 
   render() {
-    console.log('this is my image!', this.props.loginUser.profile);
     return (
       <div className="navbar-fixed">
       
@@ -56,13 +55,22 @@ class Navbar extends React.Component {
         {(!this.props.loginUser.first_name) ?
           <Link to="/signup" >Sign Up</Link> :
           <a onClick={() => { browserHistory.push(`/users/${this.props.loginUser.userID}`); }}>
-          <img className="circle" src={this.props.loginUser.profile} /></a>
+          <img className="circle" src={this.props.loginUser.profile} />  </a>
         }
       </li>
       <li>
         {(!this.props.loginUser.first_name) ?
+          null :
+          <a onClick={() => { browserHistory.push(`/users/${this.props.loginUser.userID}`); }}>
+          {this.props.loginUser.first_name}
+          </a>
+        }
+      </li>
+
+      <li>
+        {(!this.props.loginUser.first_name) ?
           <Link to="/signin">Log In</Link> :
-          <a href="/signout" onClick={() => window.localStorage.clear()}>logout</a>
+          <a href="/signout" onClick={() => window.localStorage.clear()}>Log out</a>
         }
       </li>
     </ul>

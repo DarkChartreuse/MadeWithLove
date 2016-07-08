@@ -7,9 +7,9 @@ export default class Grid extends React.Component {
   render() {
     return (
       <div style={styles.root} className='container'>
-      <h3>Search Results</h3>
+      <h4>Search Results</h4>
         <GridList
-          className="themode"
+          className="themode gridmode"
           cellHeight={250}
           cols={3}
           padding={10}

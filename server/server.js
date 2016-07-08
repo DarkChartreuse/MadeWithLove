@@ -88,10 +88,11 @@ app.get('/oauth/callback', (req, res) => {
             });
             console.log('う～ザー', user);
     // For demo's sake, output in response:
-            res.writeHead(301,
-              { Location: 'http://localhost:3000/addmeal' }
-            );
-            res.end();
+            res.redirect('/addmeal');
+            // res.writeHead(301,
+            //   { Location: 'http://localhost:3000/addmeal' }
+            // );
+            // res.end();
           }
         });
   });

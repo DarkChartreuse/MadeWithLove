@@ -41,14 +41,17 @@ class Signup extends React.Component {
 
     // check if the passwords entered matches
     if (this.state.password !== this.state.passwordConfirm) {
-      Materialize.toast('passwords do not match', 4000);
+      Materialize.toast('passwords do not match', 4000, 'pink lighten-2');
+      return;
     }
     // check if the email supplied is valid
     if (!re.test(this.state.email)) {
-      Materialize.toast('invalid email address', 4000);
+      Materialize.toast('invalid email address', 4000, 'pink lighten-2');
+      return;
     }
-    if (this.state.first_name === '' || this.state.last_name === '') {
-      Materialize.toast('name required', 4000);
+    if (this.state.first_name === '' || this.state.last_name === '' || this.state.phone === '' || this.state.street === '' || this.state.city === '' || this.state.state === '' || this.state.zipcode === '') {
+      Materialize.toast('Please complete all the fields', 4000, 'pink lighten-2');
+      return;
     } else {
       const context = this;
         console.log('setting up data:');
@@ -91,21 +94,15 @@ class Signup extends React.Component {
 
   render() {
     return (
-      <div className="container row center">
-        <div className="col s4 offset-s4">
-          <h3>create account</h3>
-          <div className="themode">
-          <p>
-            <input
-              type="checkbox"
-              id="test5"
-              checked={this.state.chef}
-            />
-            <label
-              for="test5"
-              onClick={() => this.setState({ chef: !this.state.chef })}
-            >Are you a chef?</label>
-          </p>
+      <div className="container center">
+        <br />
+        <h3>create account</h3>
+        <div className="themode signupmode">
+          
+          <div className="row">
+          <div className="col s4">
+          
+          
           <input
             type="text"
             className="input-field"
@@ -129,8 +126,20 @@ class Signup extends React.Component {
             placeholder="confirm password"
             value={this.state.passwordConfirm}
             onChange={(event) => this.setState({ passwordConfirm: event.target.value })}
-          />        
-          <p>Additional Information</p>
+          />     
+          <input
+            type="checkbox"
+            id="test5"
+            checked={this.state.chef}
+          />
+          <label
+            for="test5"
+            onClick={() => this.setState({ chef: !this.state.chef })}
+          >Are you a chef?</label>
+          <p>Please check if you want to make meals</p>
+          
+          </div>
+          <div className="col s4"> 
           <input
             type="text"
             className="input-field"
@@ -187,12 +196,18 @@ class Signup extends React.Component {
             placeholder="zipcode"
             value={this.state.zipcode}
             onChange={(event) => this.setState({ zipcode: event.target.value })}
-          /> 
-          <div><ImageUploader handleImage={this.handleProfile}/></div>
-        <button
-          className="center btn black-text menubuttons"
-          onClick={this._handleSubmit.bind(this)}
-        >Submit</button>
+          />
+          </div>
+          <div className="col s4">
+          <ImageUploader handleImage={this.handleProfile}/>
+          </div>
+        
+        </div>
+        <div className="row center">
+          <button
+            className="center btn black-text menubuttons"
+            onClick={this._handleSubmit.bind(this)}
+          >Sign Up</button>
         </div>
       </div>
       </div>
