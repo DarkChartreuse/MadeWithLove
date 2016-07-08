@@ -95,7 +95,7 @@ npm install -g sequelize sequelize-cli
 sequelize model:create --name users --force --attributes firstName:string,lastName:string,email:string,description:string,phone:string,password:string,address:string,zip:string,profile:string,chef:boolean,numOrders:integer,avgRating:float,stripe:string
 ```
 ```sh
-sequelize model:create --name orders --force --attributes userId:integer,chefId:integer,mealId:string,food:string,cuisine:string,description:string,quantity:integer,price:float,userAddress:string,orderDate:date,rating:float,review:string,image:string
+sequelize model:create --name orders --force --attributes userId:integer,chefId:integer,mealId:string,food:string,cuisine:string,description:string,quantity:integer,price:float,userAddress:string,orderDate:date,rating:float,review:string,image:string,delivered:boolean
 ```
 ```sh
 sequelize db:migrate
