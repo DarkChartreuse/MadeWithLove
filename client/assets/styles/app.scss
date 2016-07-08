@@ -94,7 +94,6 @@ h1 {
 
 .mealviewform {
   padding: 0px 15px 0px 15px;
-  text-align: left
 }
 
 .alignleft {
@@ -104,8 +103,10 @@ h1 {
 .paymode {
   width:320px;
   padding: 10px 20px 20px 20px;
-  right: 0;
-  position: absolute;
+}
+
+.relpos {
+  margin-left: 550px;
 }
 
 .bigboldsubtitle {
@@ -172,6 +173,15 @@ h3 {
 
 h4 {
   font-family: 'Lora', serif;
+  font-size: 23px;
+  font-weight: 700;
+  font-style: italic;
+  letter-spacing: 1px;
+  color: white;
+}
+
+h5 {
+  font-family: 'Lora', serif;
   font-size: 18px;
   font-weight: 400;
   letter-spacing: 1px;
@@ -212,6 +222,7 @@ body {
   max-height: 30px;
 }
 
+
 .emptybox {
   height: 300px;
 }
@@ -246,6 +257,10 @@ body {
 
 .imagepreview {
   max-width: 150px;
+}
+
+.mealviewimagepreview {
+  max-width: 300px;
 }
 
 .circle {

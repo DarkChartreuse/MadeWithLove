@@ -46,11 +46,22 @@ class Mealview extends React.Component {
 
   render() {
     return (
-        <div className="container row center">
-          <div className="themode mealviewform">
+        <div>
+        <div className="themode paymode right">
+        
+          <p>Please enter your credit card info.</p>
+          <form onSubmit={this.handleStripeSubmit} >
+            <input type="text" data-stripe="number" placeholder="credit card number" /><br />
+            <input type="text" data-stripe="exp-month" placeholder="expiration month" /><br />
+            <input type="text" data-stripe="exp-year" placeholder="expiration year" /><br />
+            <input type="text" data-stripe="cvc" placeholder="cvc" /><br />
+            <input className="btn black-text menubuttons" type="submit" value="Purchase" />
+          </form>
+        </div>
+          <div className="themode mealviewform relpos center">
             <ul className="center">
             <li className="bigboldsubtitle">{this.props.mealState.food} </li>
-              <li><img src={this.props.mealState.image} /></li>
+              <li><img className="mealviewimagepreview" src={this.props.mealState.image} /></li>
               <li className="boldsubtitle">Meal Info</li>
               <li>Price: {this.props.mealState.price} </li>
               <li>Quantity: {this.props.mealState.quantity} </li>
@@ -58,25 +69,7 @@ class Mealview extends React.Component {
               <li>Phone: {this.props.mealState.chef_phone === "" ? 'N/A' : this.props.mealState.chef_phone} </li>
             </ul>
           </div>
-          <div className="themode paymode fixed">
-            <form onSubmit={this.handleStripeSubmit} >
-              <div className="alignleft">
-              <b className="boldsubtitle underline">Delivery Address: </b>
-              <ul>
-                <li>{this.props.mealState.user_name} </li>
-                <li>{this.props.mealState.user_address} </li>
-                <li>{this.props.mealState.user_phone} </li>
-              </ul>
-              <b className="boldsubtitle"> Checkout Total: {this.props.mealState.price}</b>
-              </div>
-              <p>Please enter your credit card info.</p>
-              <input type="text" data-stripe="number" placeholder="credit card number" /><br />
-              <input type="text" data-stripe="exp-month" placeholder="expiration month" /><br />
-              <input type="text" data-stripe="exp-year" placeholder="expiration year" /><br />
-              <input type="text" data-stripe="cvc" placeholder="cvc" /><br />
-              <input className="btn black-text menubuttons" disabled={this.state.submitDisabled} type="submit" value="Check Out" />
-            </form>
-          </div>
+    
         </div>
     );
   }
@@ -121,3 +114,14 @@ export default connect(mapStateToProps, mapDispatchToProps)(Mealview);
 // />
 
 // <a href="https://connect.stripe.com/oauth/authorize?response_type=code&client_id=ca_8kQux35EriTK7xxw2Bvhcuz0PXwpP0rw&scope=read_write">connect to stripe</a>
+
+
+// <div className="alignleft">
+// <b className="boldsubtitle underline">Delivery Address: </b>
+// <ul>
+//   <li>{this.props.mealState.user_name} </li>
+//   <li>{this.props.mealState.user_address} </li>
+//   <li>{this.props.mealState.user_phone} </li>
+// </ul>
+// <b className="boldsubtitle"> Checkout Total: {this.props.mealState.price}</b>
+// </div>

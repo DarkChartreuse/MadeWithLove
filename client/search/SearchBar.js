@@ -37,8 +37,12 @@ class SearchBar extends React.Component {
           <div>
           <br />
           <br />
+          <br />
+          <br />
+          <br />
+          <br />
             <h1 className="header splash">Eat at home</h1>
-                <h4 className="col s12">Home-cooked meals to your doorstep in San Francisco</h4>
+                <h5 className="col s12">Home-cooked meals to your doorstep in San Francisco</h5>
           </div>
           <br /><br />
           <div className="row">
