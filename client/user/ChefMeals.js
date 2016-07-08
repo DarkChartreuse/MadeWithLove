@@ -57,24 +57,23 @@ export default class ChefMeals extends React.Component {
     const viewChefOrders = this.props.viewChefOrders;
     const loginUser = this.props.loginUser;
   	return (
-  	  <div className="container row center">
+  	  <div className="container row center tablemode">
   	  {this.props.orders.chefMeals &&
   	  	<div className='col s5 themode'>
-  	  	  <h2>Your Meals</h2>
+  	  	  <h2>meals</h2>
           <table>
             <thead>
               <tr>
-                <th>Meal ID</th>
-                <th>Name</th>
+                <th>Meal</th>
                 <th>Price</th>
               </tr>
             </thead>
             <tbody>
               { this.props.orders.chefMeals.map((meal) => (
                   <tr>
-                    <th>{meal.mealId}</th>
+                    <th><img className="smallthumb" src={meal.image} /></th>
                     <th>{meal.food}</th>
-                    <th>{meal.price}</th>
+                    <th>${meal.price}</th>
                   </tr>
                 ))}
             </tbody>
@@ -82,9 +81,9 @@ export default class ChefMeals extends React.Component {
   	  	</div>
   	  }
       <div className=' col s2 emptybox2'></div>
-  	  {this.props.orders.chefOrders &&
+  	  {this.props.orders.chefOrders ?
   	  	<div className='col s5 themode'>
-  	  	  <h2>Your Orders</h2>
+  	  	  <h2>orders</h2>
   	  	  <table>
             <thead>
               <tr>
@@ -109,8 +108,15 @@ export default class ChefMeals extends React.Component {
   	  	    ))}
             </tbody>
           </table>
-        </div>
-  	  }
+        </div> :
+        <div className='col s5 themode ordermode'>
+                  <h2>orders</h2>
+                  <div>You have no orders</div>
+                  <br />
+                  <br />
+      </div>
+  	   
+    }
   	  </div>
   	)
   }

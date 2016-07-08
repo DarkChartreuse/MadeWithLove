@@ -44,7 +44,7 @@ class Profile extends React.Component {
         <div className="row">
           <div className="col s6 offset-s3">
 
-            <h3>Profile</h3>
+            <h3>profile</h3>
             <div className="themode profilemode">
               <Avatar src={loginUser.profile} size={60} />
               <ul>
