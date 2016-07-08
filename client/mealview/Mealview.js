@@ -11,15 +11,37 @@ class Mealview extends React.Component {
       meal: {},
       submitDisable: false,
       paymentError: null,
+      // quantity: 1,
+      // price: this.props.mealState.price,
+      // total: this.props.mealState.price,
+      
     };
+    // this.handleIncrement = this.handleIncrement.bind(this);
+    // this.handleDecrement = this.handleDecrement.bind(this);
     this.handleError = this.handleError.bind(this);
     this.handleStripeSubmit = this.handleStripeSubmit.bind(this);
   }
+
+
+
   componentDidMount() {
     Stripe.setPublishableKey('pk_test_XEXhLE6bcWx5GBeDrsDkSvyy');
   }
+
+  // handleIncrement() {
+  //   this.setState({ quantity: this.state.quantity + 1});
+  //   console.log('the total', this.state.total)
+  //   this.setState({ total: (this.state.quantity + 1) * this.state.price});
+  //   console.log('the real total', this.state.total)
+  // }
+
+  // handleDecrement() {
+  //   this.setState({ quantity: this.state.quantity - 1});
+  //   this.setState({ total: (this.state.quantity -1) * this.state.price});
+  // }
+
   handleError(err) {
-    Materialize.toast(`${err.data.message}`, 4000, 'pink lighten-2');
+    Materialize.toast(`${err}`, 4000, 'pink lighten-2');
   }
 
   handleStripeSubmit(e) {
@@ -30,7 +52,12 @@ class Mealview extends React.Component {
     Stripe.card.createToken(e.target, (status, res) => {
       console.log('the status', status);
       const mealObj = context.props.mealState;
-
+      console.log('the ressssss----', res);
+      
+      if (status === 402) {
+        Materialize.toast(res.error.message, 4000, 'pink lighten-2');
+        return;
+      }
       console.log('the respone stripe', res);
       res.amount = context.props.mealState.price;
       res.food = context.props.mealState.food;
@@ -53,8 +80,17 @@ class Mealview extends React.Component {
     return (
         <div>
         <div className="themode paymode right">
-        
-          <p>Please enter your credit card info.</p>
+          <div className="alignleft">
+          <b className="boldsubtitle underline">Delivery Address: </b>
+          <ul>
+            <li>{this.props.mealState.user_name} </li>
+            <li>{this.props.mealState.user_address} </li>
+            <li>{this.props.mealState.user_phone} </li>
+          </ul>
+          <b className="boldsubtitle"> Checkout Total: ${this.props.mealState.price}</b>
+          </div>
+          <br />
+          <i>Please enter your credit card info.</i>
           <form onSubmit={this.handleStripeSubmit} >
             <input type="text" data-stripe="number" placeholder="credit card number" /><br />
             <input type="text" data-stripe="exp-month" placeholder="expiration month" /><br />
@@ -68,7 +104,7 @@ class Mealview extends React.Component {
             <li className="bigboldsubtitle">{this.props.mealState.food} </li>
               <li><img className="mealviewimagepreview" src={this.props.mealState.image} /></li>
               <li className="boldsubtitle">Meal Info</li>
-              <li>Price: {this.props.mealState.price} </li>
+              <li>Price: ${this.props.mealState.price} </li>
               <li>Quantity: {this.props.mealState.quantity} </li>
               <li>Chef: {this.props.mealState.chef_name}</li>
               <li>Phone: {this.props.mealState.chef_phone === "" ? 'N/A' : this.props.mealState.chef_phone} </li>
@@ -119,14 +155,3 @@ export default connect(mapStateToProps, mapDispatchToProps)(Mealview);
 // />
 
 // <a href="https://connect.stripe.com/oauth/authorize?response_type=code&client_id=ca_8kQux35EriTK7xxw2Bvhcuz0PXwpP0rw&scope=read_write">connect to stripe</a>
-
-
-// <div className="alignleft">
-// <b className="boldsubtitle underline">Delivery Address: </b>
-// <ul>
-//   <li>{this.props.mealState.user_name} </li>
-//   <li>{this.props.mealState.user_address} </li>
-//   <li>{this.props.mealState.user_phone} </li>
-// </ul>
-// <b className="boldsubtitle"> Checkout Total: {this.props.mealState.price}</b>
-// </div>

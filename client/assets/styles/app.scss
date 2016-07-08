@@ -103,6 +103,7 @@ h1 {
 .paymode {
   width:320px;
   padding: 10px 20px 20px 20px;
+  margin-top: 115px;
 }
 
 .relpos {
@@ -133,6 +134,20 @@ h1 {
   color: white;
   font-weight: 700;
 }
+
+.buttonblack {
+  background-color: #CBBAB8;
+  text-decoration: none;
+  border: none;
+  font-family: 'Avenir';
+  font-size: 14px;
+  font-weight: 400;
+  width:25px;
+  margin-top: 3px;
+  margin-bottom: 3px;
+}
+
+
 
 .splash { 
   font-size: 45px;
@@ -228,6 +243,9 @@ body {
   height: 300px;
 }
 
+.quantityfloat {
+  display: inline;
+}
 .input-field {
   font-family: 'Raleway';
   font-weight: 400px;

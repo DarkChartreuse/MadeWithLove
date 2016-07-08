@@ -23,7 +23,7 @@ module.exports = {
         // asynchronously called
         if (err) {
           console.log('charge that error', err)
-          res.send({message: err.Error })
+          res.send(err.message);
         } else {
           console.log('you got charged');
           res.send({message: 'Thank you. Your card was charged successfully'});
