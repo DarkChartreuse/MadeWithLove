@@ -1,5 +1,5 @@
 @import url(https://fonts.googleapis.com/css?family=Lora:400,400i,700,700i);
-@import url("https://fonts.googleapis.com/css?family=Raleway:400,500");
+@import url("https://fonts.googleapis.com/css?family=Raleway:400,600");
 
 
 
@@ -73,8 +73,14 @@ h1 {
   z-index: -1;
 }
 
-.mealviewform {
-  text-align: left
+
+.addmealmode {
+  width:350px;
+  padding: 20px 20px
+}
+
+.underline {
+  text-decoration: underline;
 }
 
 .gridmode {
@@ -86,13 +92,29 @@ h1 {
   padding: 30px 10px;
 }
 
+.mealviewform {
+  padding: 0px 15px 0px 15px;
+  text-align: left
+}
+
+.alignleft {
+  text-align: left;
+}
+
 .paymode {
   width:320px;
-  padding: 20px 20px;
+  padding: 10px 20px 20px 20px;
+  right: 0;
+  position: absolute;
+}
+
+.bigboldsubtitle {
+  font-size: 20px;
+  font-weight: 600;
 }
 
 .boldsubtitle {
-  font-weight: 500;
+  font-weight: 600;
 }
 
 .loginmode {
@@ -118,6 +140,14 @@ h1 {
 .splashsub {
   font-weight: 400;
   font-size: 23px;
+}
+
+.shiftleft {
+  margin-left: 225px;
+}
+
+.profilename {
+  top:-100px;
 }
 
 h1 {
@@ -164,7 +194,7 @@ nav ul a {
 }
 
 nav ul a img {
-  padding: 15px;
+  padding: 4px;
 }
 
 body {
@@ -215,12 +245,13 @@ body {
 }
 
 .imagepreview {
-  max-width: 100px;
+  max-width: 150px;
 }
 
 .circle {
-  height: 70px;
-  width: 70px;
+  margin-top: 10px;
+  height: 45px;
+  width: 45px;
 
 }
 .stripe-connect {

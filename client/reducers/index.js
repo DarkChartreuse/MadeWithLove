@@ -92,6 +92,7 @@ const userInfoState = {
   first_name: localStorage.getItem('first_name'),
   last_name: localStorage.getItem('last_name'),
   description: localStorage.getItem('description'),
+  profile: localStorage.getItem('profile'),
   phone: localStorage.getItem('phone'),
   address: localStorage.getItem('address'),
   zip: localStorage.getItem('zip'),

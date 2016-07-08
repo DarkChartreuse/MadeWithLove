@@ -33,8 +33,10 @@ class SearchBar extends React.Component {
     return (
       // <div id="index-banner" className="parallax-container">
       
-        <div className="container">
+        <div className="container shiftleft">
           <div>
+          <br />
+          <br />
             <h1 className="header splash">Eat at home</h1>
                 <h4 className="col s12">Home-cooked meals to your doorstep in San Francisco</h4>
           </div>

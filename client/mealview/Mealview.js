@@ -33,6 +33,7 @@ class Mealview extends React.Component {
       res.chefId = context.props.mealState.chefId;
       axios.post('/api/payments', res)
         .then((response) => {
+          Materialize.toast(response.data.message, 4000);
           console.log(response.data.message);
         })
           .then(() => { axios.post('/api/createorder', mealObj) })
@@ -46,35 +47,34 @@ class Mealview extends React.Component {
   render() {
     return (
         <div className="container row center">
-          <h3>{this.props.mealState.food}</h3>
-          <div className="col s6 offset-3 themode mealviewform">
-            <p className="boldsubtitle">Your meal information</p>
-            <ul>
-              <li>food: {this.props.mealState.food} </li>
-              <li>price: {this.props.mealState.price} </li>
-              <li>quantity: {this.props.mealState.quantity} </li>
-              <li>chef: {this.props.mealState.chef_name}</li>
-              <li>phone: {this.props.mealState.chef_phone} </li>
-              
+          <div className="themode mealviewform">
+            <ul className="center">
+            <li className="bigboldsubtitle">{this.props.mealState.food} </li>
+              <li><img src={this.props.mealState.image} /></li>
+              <li className="boldsubtitle">Meal Info</li>
+              <li>Price: {this.props.mealState.price} </li>
+              <li>Quantity: {this.props.mealState.quantity} </li>
+              <li>Chef: {this.props.mealState.chef_name}</li>
+              <li>Phone: {this.props.mealState.chef_phone === "" ? 'N/A' : this.props.mealState.chef_phone} </li>
             </ul>
-            <p className="boldsubtitle">Delivered to: </p>
-          
-          
-            <ul>
-              <li>{this.props.mealState.user_name} </li>
-              <li>{this.props.mealState.user_address} </li>
-              <li>{this.props.mealState.user_phone} </li>
-            </ul>
-            checkoutTotal: {`$${this.props.mealState.quantity * this.props.mealState.price}`}
           </div>
-          <div className="themode paymode">
+          <div className="themode paymode fixed">
             <form onSubmit={this.handleStripeSubmit} >
+              <div className="alignleft">
+              <b className="boldsubtitle underline">Delivery Address: </b>
+              <ul>
+                <li>{this.props.mealState.user_name} </li>
+                <li>{this.props.mealState.user_address} </li>
+                <li>{this.props.mealState.user_phone} </li>
+              </ul>
+              <b className="boldsubtitle"> Checkout Total: {this.props.mealState.price}</b>
+              </div>
               <p>Please enter your credit card info.</p>
               <input type="text" data-stripe="number" placeholder="credit card number" /><br />
               <input type="text" data-stripe="exp-month" placeholder="expiration month" /><br />
               <input type="text" data-stripe="exp-year" placeholder="expiration year" /><br />
               <input type="text" data-stripe="cvc" placeholder="cvc" /><br />
-              <input className="btn menubuttons" disabled={this.state.submitDisabled} type="submit" value="Purchase" />
+              <input className="btn black-text menubuttons" disabled={this.state.submitDisabled} type="submit" value="Check Out" />
             </form>
           </div>
         </div>
