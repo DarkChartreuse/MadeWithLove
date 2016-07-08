@@ -10,12 +10,12 @@ module.exports = (app) => {
   app.route('/api/users').get(User.getAllUsers);
   app.route('/api/users/:id').get(User.getUser);
   app.route('/api/users/:id').delete(User.deleteUser);
-  app.route('/api/users/:id').put(Auth.isLoggedIn, User.updateUser);
+  app.route('/api/users/:id').put(User.updateUser);
   app.route('/api/updateusersearch').post(User.updateSearchHistory);
 
   app.route('/api/meals').post(Auth.isLoggedIn, Meal.createMeal);
   app.route('/api/meals').get(Meal.getAllMeals);
-  app.route('/api/meals/:id').get(Auth.isLoggedIn, Meal.getMeal);
+  app.route('/api/meals/:id').get(Meal.getMeal);
   app.route('/api/meals/:id').delete(Meal.deleteMeal);
 
   // check login
@@ -30,7 +30,7 @@ module.exports = (app) => {
 
 
   // stripe payments
-  app.route('/api/payments').post(Auth.isLoggedIn, Payments.stripeCharges);
+  app.route('/api/payments').post(Payments.stripeCharges);
 
   // auth
   app.route('/api/auth/sign-in').post(Auth.signIn);
