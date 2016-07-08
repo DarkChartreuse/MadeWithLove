@@ -59,9 +59,9 @@ export default class ChefMeals extends React.Component {
   	return (
   	  <div className="container row center tablemode">
   	  {this.props.orders.chefMeals && <div>
-        <h2>meals</h2>
+        
   	  	<div className='col s5 themode'>
-  	  	  
+  	  	<h2>meals</h2>
           <table>
             <thead>
               <tr>
