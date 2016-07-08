@@ -86,13 +86,14 @@ export default class ChefMeals extends React.Component {
       <div className=' col s2 emptybox2'></div>
   	  {this.props.orders.chefOrders ?
         <div>
-        <h2>orders</h2>
+        
   	  	<div className='col s5 themode'>
-  	  	  
+  	  	  <h2>orders</h2>
   	  	  <table>
             <thead>
               <tr>
                 <th>Meal</th>
+                <th></th>
                 <th>Recipient</th>
                 <th>Status</th>
               </tr>
