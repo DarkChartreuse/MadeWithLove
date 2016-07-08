@@ -1,5 +1,4 @@
 import React from 'react';
-import axios from 'axios';
 import { Link } from 'react-router';
 import { connect } from 'react-redux';
 import { fetchOrders, updateMeal } from '../actions';
@@ -57,4 +56,3 @@ Search.propTypes = {
 };
 
 export default connect(mapStatetoProps, mapDispatchToProps)(Search);
-

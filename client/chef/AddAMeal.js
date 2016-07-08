@@ -7,6 +7,8 @@ import { browserHistory } from 'react-router';
 
 import ImageUploader from './ImageUploader';
 
+const indexName = 'mwl';
+
 class AddAMeal extends React.Component {
   constructor(props) {
     super(props);
@@ -60,21 +62,44 @@ class AddAMeal extends React.Component {
   handleSubmit(e) {
     e.preventDefault();
     const mealObj = {
-      isChef: this.props.isChef,
-      chefID: this.props.userID,
-      chef_address: this.props.chef_address,
-      chef_phone: this.props.chef_phone,
-      chef_name: this.props.chef_name,
-      chef_email: this.props.chef_email,
-      add_date: this.state.add_date,
-      add_time: this.state.add_time,
-      typeoffood: this.state.typeoffood,
-      cuisinetype: this.state.cuisinetype,
-      price: this.state.price,
-      quantity: this.state.quantity,
-      image: this.state.image,
+      // isChef: this.props.isChef,
+      // chefID: this.props.userID,
+      // chef_address: this.props.chef_address,
+      // chef_phone: this.props.chef_phone,
+      // chef_name: this.props.chef_name,
+      // chef_email: this.props.chef_email,
+      // add_date: this.state.add_date,
+      // add_time: this.state.add_time,
+      // typeoffood: this.state.typeoffood,
+      // cuisinetype: this.state.cuisinetype,
+      // price: this.state.price,
+      // quantity: this.state.quantity,
+      // image: this.state.image,
+
+      // index: indexName,
+      // type: 'meal',
+      // properties: {
+        isChef: this.props.isChef,
+        chefId: this.props.userID,
+        chef_address: this.props.chef_address,
+        chef_phone: this.props.chef_phone,
+        chef_name: this.props.chef_name,
+        chef_email: this.props.chef_email,
+        add_date: this.state.add_date,
+        add_time: this.state.add_time,
+        food: this.state.typeoffood,
+        cuisine: this.state.cuisinetype,
+        price: this.state.price,
+        quantity: this.state.quantity,
+        image: this.state.image,
+      // },
     };
-    axios.post('/api/meals/', mealObj)
+
+    const axiosInstance = axios.create({
+      baseURL: 'https://search-elasticmwl-xterfj3nmjftzwol6co6uwucoi.us-east-1.es.amazonaws.com',
+    });
+    // axios.post('/api/meals/', mealObj)
+    axiosInstance.post('/mwl/meal', mealObj)
       .then((response) => {
         console.log('the saved response', response);
         browserHistory.push('/chefstatus');
@@ -84,7 +109,7 @@ class AddAMeal extends React.Component {
         browserHistory.push('/signin');
       });
 
-    this.props.handleClose()
+    this.props.handleClose();
   }
 
   render() {
@@ -97,18 +122,19 @@ class AddAMeal extends React.Component {
        <br />
        <br />
 
-       
+
           <form onSubmit={this.handleSubmit}>
             <input type="text" placeholder="dish name" onChange={this.handleTypeOfFood} />
             <input type="text" placeholder="cuisine type" onChange={this.handleCuisineType} />
             <input type="text" placeholder="price" onChange={this.handlePrice} />
             <input type="text" placeholder="quantity" onChange={this.handleQuantity} />
-            <br/>
+
+            <button className="btn menubuttons" type="submit">Submit Meal</button>
             <ImageUploader handleImage={this.handleImage} />
             <br/>
             <button className="btn black-text menubuttons" type="submit">Add Meal</button>
           </form>
-          
+
         </div>
       </div>
     );
@@ -137,7 +163,7 @@ AddAMeal.propTypes = {
 export default connect(mapStateToProps, null)(AddAMeal);
 
 // <DatePicker
-//   hintText="pickup date" 
+//   hintText="pickup date"
 //   value={this.state.add_date}
 //   onChange={this.handleDate} />
 // <TimePicker

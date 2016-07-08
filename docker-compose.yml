@@ -14,7 +14,7 @@ services:
     #   - .:/app
     links:
       - pg
-      - es
+      # - es
     # entrypoint: ./wait-for-it.sh postgresdb:5432 --timeout=200 -- node_modules/.bin/sequelize db:seed:all
   pg:
     image: pgdb
@@ -27,19 +27,19 @@ services:
     # entrypoint: ./docker-entrypoint-initdb.d
     volumes:
       - pg-data:/var/lib/data/postgresdb
-  es:
-    image: elasticsearch
-    container_name: elasticdb
-    environment:
-      - HOSTNAME=elasticdb
-    restart: on-failure:10
-    networks:
-      - mwl-network
-    ports:
-      - "9200:9200"
-      - "9300:9300"
-    volumes:
-      - es-data:/var/lib/data/elasticdb
+  # es:
+  #   image: elasticsearch
+  #   container_name: elasticdb
+  #   environment:
+  #     - HOSTNAME=elasticdb
+  #   restart: on-failure:10
+  #   networks:
+  #     - mwl-network
+  #   ports:
+  #     - "9200:9200"
+  #     - "9300:9300"
+  #   volumes:
+  #     - es-data:/var/lib/data/elasticdb
 
 networks:
   mwl-network:

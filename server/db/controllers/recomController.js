@@ -31,9 +31,9 @@ module.exports.getRec = function(req, res) {
         }//body
       }).catch(err => console.log)
     .then((results) => {
-      var results = results.hits.hits;
-      console.log('I AM HERE IN RESULTS >>>>>>>' , results);
-      res.send(results);
+      var resultHits = results.hits.hits;
+      console.log('I AM HERE IN RESULTS >>>>>>>' , resultHits);
+      res.send(resultHits);
     })
     .catch(err => console.log("Elastic search errored out: ", err));
     })
