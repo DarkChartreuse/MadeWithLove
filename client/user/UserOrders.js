@@ -45,7 +45,7 @@ export default class UserOrders extends React.Component {
                 <tbody>
                   {filteredOrders.map((order) => (
                       <tr>
-                        <th><img className="smallthumb" src={order.image} /></th>
+                        <th><img className="smallthumb z-depth-3" src={order.image} /></th>
                         <th>{order.food}</th>
                         <th>{order.chef_name}</th>
                         <th>${order.price}</th>
