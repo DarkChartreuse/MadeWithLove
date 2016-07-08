@@ -41,14 +41,17 @@ class Signup extends React.Component {
 
     // check if the passwords entered matches
     if (this.state.password !== this.state.passwordConfirm) {
-      Materialize.toast('passwords do not match', 4000);
+      Materialize.toast('passwords do not match', 4000, 'pink lighten-2');
+      return;
     }
     // check if the email supplied is valid
     if (!re.test(this.state.email)) {
-      Materialize.toast('invalid email address', 4000);
+      Materialize.toast('invalid email address', 4000, 'pink lighten-2');
+      return;
     }
-    if (this.state.first_name === '' || this.state.last_name === '') {
-      Materialize.toast('name required', 4000);
+    if (this.state.first_name === '' || this.state.last_name === '' || this.state.phone === '' || this.state.street === '' || this.state.city === '' || this.state.state === '' || this.state.zipcode === '') {
+      Materialize.toast('Please complete all the fields', 4000, 'pink lighten-2');
+      return;
     } else {
       const context = this;
         console.log('setting up data:');

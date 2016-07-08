@@ -12,10 +12,14 @@ class Mealview extends React.Component {
       submitDisable: false,
       paymentError: null,
     };
+    this.handleError = this.handleError.bind(this);
     this.handleStripeSubmit = this.handleStripeSubmit.bind(this);
   }
   componentDidMount() {
     Stripe.setPublishableKey('pk_test_XEXhLE6bcWx5GBeDrsDkSvyy');
+  }
+  handleError(err) {
+    Materialize.toast(`${err.data.message}`, 4000, 'pink lighten-2');
   }
 
   handleStripeSubmit(e) {
@@ -33,14 +37,15 @@ class Mealview extends React.Component {
       res.chefId = context.props.mealState.chefId;
       axios.post('/api/payments', res)
         .then((response) => {
-          Materialize.toast(response.data.message, 4000);
+          Materialize.toast(response.data.message, 4000, 'indigo lighten-2');
           console.log(response.data.message);
         })
           .then(() => { axios.post('/api/createorder', mealObj) })
           .then((response) => {
             console.log('we saved the order yo!', response);
             browserHistory.push('/orderstatus');
-          });
+          })
+          .catch(this.handleError);
     });
   }
 

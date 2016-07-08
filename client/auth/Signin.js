@@ -24,7 +24,7 @@ class Signin extends React.Component {
     this.setState({ password: e.target.value });
   }
   handleError(err) {
-    Materialize.toast(`${err.data.message}`, 4000);
+    Materialize.toast(`${err.data.message}`, 4000, 'pink lighten-2');
   }
   handleSubmit(e) {
     const context = this;
