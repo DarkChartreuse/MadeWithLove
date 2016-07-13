@@ -29,6 +29,7 @@ module.exports = (app) => {
   app.route('/api/deliverystatus').post(Order.updateDelivery);
 
 
+
   // stripe payments
   app.route('/api/payments').post(Payments.stripeCharges);
 
@@ -40,3 +41,4 @@ module.exports = (app) => {
   // recommendations
   app.route('/api/getrecommendation').post(Auth.isLoggedIn, Rec.getRec);
 };
+
