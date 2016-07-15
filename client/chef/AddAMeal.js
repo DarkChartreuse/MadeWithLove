@@ -83,7 +83,7 @@ class AddAMeal extends React.Component {
         chefId: this.props.userID,
         chef_address: this.props.chef_address,
         chef_phone: this.props.chef_phone,
-        chef_name: this.props.chef_name,
+        chef: this.props.chef_name,
         chef_email: this.props.chef_email,
         add_date: this.state.add_date,
         add_time: this.state.add_time,
@@ -108,8 +108,6 @@ class AddAMeal extends React.Component {
         this.handleError(err);
         browserHistory.push('/signin');
       });
-
-    this.props.handleClose();
   }
 
   render() {
@@ -129,7 +127,6 @@ class AddAMeal extends React.Component {
             <input type="text" placeholder="price" onChange={this.handlePrice} />
             <input type="text" placeholder="quantity" onChange={this.handleQuantity} />
 
-            <button className="btn menubuttons" type="submit">Submit Meal</button>
             <ImageUploader handleImage={this.handleImage} />
             <br/>
             <button className="btn black-text menubuttons" type="submit">Add Meal</button>

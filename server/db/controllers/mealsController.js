@@ -3,11 +3,6 @@ const User = require('../models/index.js').users;
 const elasticsearch = require('../../elasticSearch.js');
 const ImageUploader = require('./imageUploader');
 
-const axios = require('axios');
-const axiosInstance = axios.create({
-  baseURL: 'https://search-elasticmwl-xterfj3nmjftzwol6co6uwucoi.us-east-1.es.amazonaws.com',
-});
-
 module.exports = {
   createMeal: (req, res) => {
     console.log('Hitting createMeal for in controller>>>>>', req.body);
