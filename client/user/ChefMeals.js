@@ -3,21 +3,7 @@ import { viewChefMeals, viewChefOrders } from '../actions';
 import { connect } from 'react-redux';
 import DeliveredButton from './DeliveredButton';
 
-import {Card, CardActions, CardHeader, CardMedia, CardTitle, CardText} from 'material-ui/Card';
-import FlatButton from 'material-ui/FlatButton';
-
-const styles = {
-  propContainer: {
-    width: 200,
-    overflow: 'hidden',
-    margin: '20px auto 0',
-  },
-  propToggleHeader: {
-    margin: '20px auto 10px',
-  },
-};
-
-export default class ChefMeals extends React.Component {
+class ChefMeals extends React.Component {
   constructor(props) {
     super(props);
     this.state = {
@@ -31,14 +17,14 @@ export default class ChefMeals extends React.Component {
       deselectOnClickaway: true,
       showCheckboxes: true,
       height: '300px',
-    }
+    };
   }
-  
+
   componentDidMount() {
-  	if(this.props.loginUser.isChef) {
-	  this.props.viewChefMeals(this.props.loginUser.userID);
-	  this.props.viewChefOrders(this.props.loginUser.userID);
-  	}
+    if (this.props.loginUser.isChef) {
+      this.props.viewChefMeals(this.props.loginUser.userID);
+      this.props.viewChefOrders(this.props.loginUser.userID);
+    }
 
   }
 
@@ -139,4 +125,12 @@ const mapDispatchToProps = (dispatch) => {
   }
 }
 
+ChefMeals.propTypes = {
+  loginUser: React.PropTypes.object,
+  orders: React.PropTypes.object,
+  viewChefMeals: React.PropTypes.func,
+  viewChefOrders: React.PropTypes.func,
+};
+
 export default connect(mapStateToProps, mapDispatchToProps)(ChefMeals);
+

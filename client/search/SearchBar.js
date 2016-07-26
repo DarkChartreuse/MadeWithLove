@@ -33,9 +33,9 @@ class SearchBar extends React.Component {
     return (
       // <div id="index-banner" className="parallax-container">
       
-        <div className="container shiftleft">
+        <div className="container">
           <div>
-          <br />
+          
           <br />
           <br />
           <br />
@@ -56,7 +56,7 @@ class SearchBar extends React.Component {
               <input placeholder="max. price" type="text" name="maxPrice" onChange={this.handleMaxPrice} />
             </div>
             <button
-              className="btn-large black-text searchbutton"
+              className="btn-large black-text searchbutton col s1"
               onClick={() => { this.props.fetchOrders({
                 userID: this.props.loginUser.userID,
                 cuisine: this.state.cuisine,
