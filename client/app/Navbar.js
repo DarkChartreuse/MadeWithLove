@@ -1,13 +1,7 @@
 import React from 'react';
 import { connect } from 'react-redux';
-import { Link, browserHistory }  from 'react-router';
+import { Link, browserHistory } from 'react-router';
 import { logoutuser } from '../actions';
-import Avatar from 'material-ui/Avatar';
-import Dialog from 'material-ui/Dialog';
-import FlatButton from 'material-ui/FlatButton';
-import RaisedButton from 'material-ui/RaisedButton';
-
-import AddAMeal from '../chef/AddAMeal';
 
 class Navbar extends React.Component {
   constructor(props) {
@@ -15,78 +9,57 @@ class Navbar extends React.Component {
     this.state = {
       open: false,
     };
-    this.handleOpen = this.handleOpen.bind(this);
-    this.handleClose = this.handleClose.bind(this);
   }
-  
-  handleOpen() {
-    this.setState({open: true});
-  };
-
-  handleClose() {
-    this.setState({open: false});
-  };
-
   render() {
     return (
-      <div className="navbar-fixed">
-      
-      
-  <nav>
-    <ul className="left">
-      <li>
-        <Link to="/">savory</Link>
-      </li>
-    </ul>
-    <ul className="right">
-      <li>
-        {(!this.props.loginUser.isChef) ?
-          '' :
-          <Link to="/addmeal" >ADD A MEAL</Link>
-        }
-      </li>
-      <li>
-        {(!this.props.loginUser.first_name) ? null : (!this.props.loginUser.isChef) ?
-          <Link to="/orderstatus">Order Status</Link> :
-          <Link to="/chefstatus">Order Status</Link>
-        }
-      </li>
-      <li>
-        {(!this.props.loginUser.first_name) ?
-          <Link to="/signup" >Sign Up</Link> :
-          <a onClick={() => { browserHistory.push(`/users/${this.props.loginUser.userID}`); }}>
-          <img className="circle" src={this.props.loginUser.profile} />  </a>
-        }
-      </li>
-      <li>
-        {(!this.props.loginUser.first_name) ?
-          null :
-          <a onClick={() => { browserHistory.push(`/users/${this.props.loginUser.userID}`); }}>
-          {this.props.loginUser.first_name}
-          </a>
-        }
-      </li>
-
-      <li>
-        {(!this.props.loginUser.first_name) ?
-          <Link to="/signin">Log In</Link> :
-          <a href="/signout" onClick={() => window.localStorage.clear()}>Log out</a>
-        }
-      </li>
-    </ul>
-  </nav>
-  </div>
+      <div className="wrapper">
+        <nav className="flex-nav">
+          <ul>
+            <li className="leftlogo">
+              <Link to="/">savory</Link>
+            </li>
+            <li>
+              {(!this.props.loginUser.isChef) ?
+                '' :
+                <Link to="/addmeal" >ADD A MEAL</Link>
+              }
+            </li>
+            <li>
+              {(!this.props.loginUser.first_name) ? null : (!this.props.loginUser.isChef)}
+              {(!this.props.loginUser.isChef) ?
+                <Link to="/orderstatus">Order Status</Link> :
+                <Link to="/chefstatus">Order Status</Link>
+              }
+            </li>
+            <li className="imageli">
+              {(!this.props.loginUser.first_name) ?
+                <Link to="/signup" >Sign Up</Link> :
+                <a
+                  onClick={
+                    () => { browserHistory.push(`/users/${this.props.loginUser.userID}`); }}
+                >
+                  <img className="circle" src={this.props.loginUser.profile} alt="login" />
+                </a>
+              }
+            </li>
+            <li>
+              {(!this.props.loginUser.first_name) ?
+                <Link to="/signin">Log In</Link> :
+                <a href="/signout" onClick={() => window.localStorage.clear()}>Log out</a>
+              }
+            </li>
+          </ul>
+        </nav>
+      </div>
   );
   }
 }
 
 const mapStateToProps = ({ loginUser }) => ({ loginUser });
 
-const mapDispatchToProps = (dispatch) => {
-  return {
-    logoutuser: () => dispatch(logoutuser()),
-  };
-};
+const mapDispatchToProps = (dispatch) => ({
+  logoutuser: () => dispatch(logoutuser()),
+});
 
 
 Navbar.propTypes = {
@@ -94,6 +67,3 @@ Navbar.propTypes = {
 };
 
 export default connect(mapStateToProps, mapDispatchToProps)(Navbar);
-
-
-// <Avatar src={this.props.loginUser.profile} size={35} />

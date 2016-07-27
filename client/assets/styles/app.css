@@ -5,16 +5,65 @@
 
 html {
   font-family: 'Raleway';
-  height: 100%;
   font-size: 14px;
+  box-sizing: border-box;
+}
+
+*, *:before, *:after {
+  box-sizing: inherit;
+}
+
+.wrapper {
+  max-width: 100%;
+  margin: 0 auto;
+  padding: 0px 0px 50px 0px;
 }
 
 nav {
-  text-decoration: none;
+  background-color: rgba(0, 0, 0, 0.8);
+  box-shadow: none;
+  position: fixed;
+  z-index: 2;
+  max-height: 64px;
+}
+
+.flex-nav ul {
+  padding: 0 14px;
+  border-color: transparent;
+  box-shadow: none;
+  /*list-style: none;*/
+  margin: 0;
+  padding: 0;
+  display:flex;
+  justify-content:flex-end;
+}
+
+.leftlogo {
+    margin-right:auto;
+}
+
+nav ul a {
+  color: white;
+  font-family: 'Raleway';
+  font-weight: 400;
+  letter-spacing: 1px;
+  font-size:13px;
+  /*display: inline-block;*/
+  width: 100%;
+}
+
+nav ul a:hover {
+  background-color: rgba(255, 255, 255, 0.4);
 }
 
 
 
+.navy-flex a img {
+  padding: 4px;
+}
+/*.navy-links {
+  display:inline-block;
+}*/
 /*h1, h3{
   font-weight: 700;
 }
@@ -239,32 +288,16 @@ h5 {
   color: white;
 }
 
-nav {
-  padding: 0 14px;
-  background-color: rgba(0, 0, 0, 0.3);
-  border-color: transparent;
-  box-shadow: none;
-  color: white;
-}
-nav ul a {
-  color: white;
-  font-family: 'Raleway';
-  font-weight: 400;
-  letter-spacing: 1px;
-  font-size:13px;
-}
 
-nav ul a img {
-  padding: 4px;
-}
 
 body {
   top: 0;
   left: 0;
   height: 100%;
   background-image: url("../images/foodkitchen.jpg");
+  background-attachment: fixed;
+  background-repeat: no-repeat;
   background-size: 100%;
-  background-repeat: repeat-y;
   z-index: -1;
 }
 
@@ -321,16 +354,20 @@ th {
 }
 
 .circle {
-  margin-top: 10px;
   height: 45px;
   width: 45px;
-
+  margin: 10px 0px;
+  display: block;
 }
 
 .emptybox2 {
   width: 30px;
   height: 30px;
 }
+
+
+
+
 
 
 
@@ -503,5 +540,41 @@ th {
   }
 }
 
-@media all and (max-width: 500px) {
+
+@media all and (max-width:500px) {
+  body {
+    background-image: none;
+    background-color: black;
+  }
+  .circle {
+    height: 45px;
+    width: 45px;
+    background-position: center center;
+  }
+
+  nav {
+    background-color: transparent;
+  }
+
+  nav ul a {
+    /*background-color: rgba(56,35,19,0.6);*/
+  }
+  
+  .imageli {
+    display:flex;
+    align-items: center;
+  }
+
+  .flex-nav ul {
+    flex-wrap:wrap;
+  }
+
+  .flex-nav li {
+    flex-basis:100%;
+    text-align: center;
+    background-color: rgba(56,35,19,0.6);
+    box-shadow: 0 2px 5px 0 rgba(0,0,0,0.16),0 2px 10px 0 rgba(0,0,0,0.12);
+    /*background-color: rgba(0, 0, 0, 0.4);*/
+  }
+
 }
