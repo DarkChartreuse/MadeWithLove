@@ -286,12 +286,10 @@ body {
   height: 100vh;
   background-image: url("../images/foodkitchen.jpg");
   background-attachment: fixed;
-  background-repeat: no-repeat;
+  /*background-repeat: no-repeat;*/
   background-size: 100%;
   z-index: -1;
 }
-
-
 
 .emptybox {
   height: 150px;

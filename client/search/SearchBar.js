@@ -55,7 +55,7 @@ class SearchBar extends React.Component {
               <input placeholder="max. price" type="text" name="maxPrice" onChange={this.handleMaxPrice} />
             </div>
             <button
-              className="btn-large black-text searchbutton col s1"
+              className="btn-large black-text searchbutton col s2"
               onClick={() => { this.props.fetchOrders({
                 userID: this.props.loginUser.userID,
                 cuisine: this.state.cuisine,
