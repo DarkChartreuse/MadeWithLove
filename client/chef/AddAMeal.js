@@ -86,8 +86,6 @@ class AddAMeal extends React.Component {
         this.handleError(err);
         browserHistory.push('/signin');
       });
-
-    this.props.handleClose()
   }
 
   render() {
