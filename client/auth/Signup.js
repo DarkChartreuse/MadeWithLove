@@ -95,7 +95,6 @@ class Signup extends React.Component {
   render() {
     return (
       <div className="container center">
-        <br />
         <h3>create account</h3>
         <div className="themode signupmode">
           

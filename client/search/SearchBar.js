@@ -1,5 +1,4 @@
 import React from 'react';
-import DatePicker from 'material-ui/DatePicker';
 
 class SearchBar extends React.Component {
   constructor(props) {

@@ -12,7 +12,7 @@ class Navbar extends React.Component {
   }
   render() {
     return (
-      <div className="wrapper">
+      <div>
         <nav className="flex-nav">
           <ul>
             <li className="leftlogo">
@@ -25,8 +25,7 @@ class Navbar extends React.Component {
               }
             </li>
             <li>
-              {(!this.props.loginUser.first_name) ? null : (!this.props.loginUser.isChef)}
-              {(!this.props.loginUser.isChef) ?
+              {(!this.props.loginUser.first_name) ? null : (!this.props.loginUser.isChef) ?
                 <Link to="/orderstatus">Order Status</Link> :
                 <Link to="/chefstatus">Order Status</Link>
               }
