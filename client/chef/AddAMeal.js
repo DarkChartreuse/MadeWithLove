@@ -102,7 +102,10 @@ class AddAMeal extends React.Component {
     // axiosInstance.post('/mwl/meal', mealObj)
       .then((response) => {
         console.log('the saved response', response);
-        browserHistory.push('/chefstatus');
+        setTimeout(function() {
+          browserHistory.push('/chefstatus');
+        }, 1000);
+        Materialize.toast('uploaded new meal', 1000, 'pink lighten-2');
       })
       .catch((err) => {
         this.handleError(err);
