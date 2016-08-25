@@ -1,4 +1,6 @@
 import React from 'react';
+const Scroll  = require('react-scroll');
+const scroll = Scroll.animateScroll;
 
 class SearchBar extends React.Component {
   constructor(props) {
@@ -62,7 +64,7 @@ class SearchBar extends React.Component {
                 maxPrice: this.state.maxPrice,
                 minPrice: this.state.minPrice,
                 add_date: this.state.add_date,
-              }) }} >
+              }); scroll.scrollTo(400); }} >
               Search
             </button>
           </div>
