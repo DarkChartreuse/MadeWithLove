@@ -31,6 +31,10 @@ server/db/init.sql
 wait-for-it.sh
 wait-for-postgres.sh
 Dockerrun.aws.json
+server/db/init-db.sh
+server/db/init-SAVE.sql
+wait_to_start.sh
+server/elastic/
 
 node_modules/
 bower_components/

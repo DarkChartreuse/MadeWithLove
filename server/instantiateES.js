@@ -1,12 +1,11 @@
 var elasticsearch = require('elasticsearch');
 
-var ESDB_HOST;
-
-ESDB_HOST = process.env.NODE_ENV === 'production' ? 'elasticdb' : 'localhost';
-
-console.log('>>>>>>>>>>>>> elasticsearch: ', ESDB_HOST);
+// var ESDB_HOST = process.env.NODE_ENV === 'production' ? 'elasticdb' : 'localhost';
+// console.log('>>>>>>>>>>>>> elasticsearch: ', ESDB_HOST);
 
 module.exports = new elasticsearch.Client({
-  host: ESDB_HOST + ':9200',
+  protocol: 'https',
+  host: 'search-elasticmwl-xterfj3nmjftzwol6co6uwucoi.us-east-1.es.amazonaws.com',
+  path: '/mwl/meal/',
   log: 'info'
 });

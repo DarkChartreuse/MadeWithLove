@@ -5,10 +5,10 @@
   "main": "webpack.config.js",
   "scripts": {
     "test": "NODE_ENV=test && mocha test/serverSpec.js --timeout 20000",
-    "start": "NODE_ENV=development nodemon server/server.js",
+    "start": "nodemon server/server.js",
     "watch": "webpack --watch --progress",
     "seed": "node server/db/seed.js",
-    "start_prod": "NODE_ENV=production node server/server.js && sequelize db:migrate && sequelize db:seed:all"
+    "start_prod": "NODE_ENV=production node server/server.js"
   },
   "repository": {
     "type": "git",
@@ -92,10 +92,7 @@
     "eslint-plugin-react": "^5.2.2",
     "image-webpack-loader": "^1.8.0",
     "react-hot-loader": "^1.3.0",
-    "webpack": "^1.13.1",
-    "webpack-dev-middleware": "^1.6.1",
-    "webpack-dev-server": "^1.14.1",
-    "webpack-hot-middleware": "^2.10.0"
+    "webpack": "^1.13.1"
   },
   "directories": {
     "test": "test"

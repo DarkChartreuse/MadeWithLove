@@ -13,19 +13,17 @@ module.exports = function(sequelize, DataTypes) {
     chef: DataTypes.BOOLEAN,
     num_orders: DataTypes.INTEGER,
     avg_rating: DataTypes.FLOAT,
-    stripe_payment_token: DataTypes.STRING,
     access_token: DataTypes.STRING,
     refresh_token: DataTypes.STRING,
-    token_type: DataTypes.STRING,
     stripe_publishable_key: DataTypes.STRING,
-    stripe_user_id: DataTypes.STRING,
-    scope: DataTypes.STRING
+    stripe_user_id: DataTypes.STRING
   }, {
     classMethods: {
       associate: function(models) {
         // associations can be defined here
       }
-    }
+    },
+    underscored: true
   });
   return users;
 };

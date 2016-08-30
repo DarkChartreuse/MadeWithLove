@@ -1,6 +1,5 @@
 const Order = require('../models/index.js').orders;
 const User = require('../models/index.js').users;
-const elasticsearch = require('../../elasticSearch.js');
 
 module.exports = {
   createOrder: (req, res) => {

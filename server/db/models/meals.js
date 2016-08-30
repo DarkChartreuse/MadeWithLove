@@ -1,6 +1,6 @@
 'use strict';
 module.exports = function(sequelize, DataTypes) {
-  var meals = sequelize.define('meals', {
+  var meal = sequelize.define('meal', {
     userId: DataTypes.INTEGER,
     chefId: DataTypes.INTEGER,
     food: DataTypes.STRING,
@@ -31,5 +31,5 @@ module.exports = function(sequelize, DataTypes) {
       }
     }
   });
-  return meals;
+  return meal;
 };
