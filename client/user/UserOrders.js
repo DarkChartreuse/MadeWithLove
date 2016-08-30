@@ -4,8 +4,8 @@ import { connect } from 'react-redux';
 import { Link } from 'react-router';
 
 
-export default class UserOrders extends React.Component {
-  
+class UserOrders extends React.Component {
+
   componentDidMount() {
   	if(!this.props.loginUser.isChef) {
 	    this.props.viewUserOrders(this.props.loginUser.userID);
@@ -26,16 +26,16 @@ export default class UserOrders extends React.Component {
     console.log('the filteredOrders', filteredOrders);
   	return (
       <div>
-  	  { (!this.props.loginUser.first_name) ? 
+  	  { (!this.props.loginUser.first_name) ?
         <h4>Please <Link to='signin'>log in</Link> to view your orders</h4> :
         <div className="container center">
-          { this.props.orders.userOrders !== undefined && 
+          { this.props.orders.userOrders !== undefined &&
             <div className="themode ordermode">
               <h2>orders</h2>
               <table>
                 <thead>
                   <tr>
-                    
+
                     <th>Meal</th>
                     <th></th>
                     <th>Chef Name</th>

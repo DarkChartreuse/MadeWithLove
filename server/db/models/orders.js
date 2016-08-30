@@ -23,9 +23,10 @@ module.exports = function(sequelize, DataTypes) {
     chef_address: DataTypes.STRING,
     chef_phone: DataTypes.STRING,
     chef_email: DataTypes.STRING,
-    meal_added_date: DataTypes.DATE,
-    delivered: DataTypes.BOOLEAN
+    meal_added_date: DataTypes.DATE
   }, {
+    timestamps: true,
+    underscored: true,
     classMethods: {
       associate: function(models) {
         // associations can be defined here
