@@ -35,6 +35,12 @@ module.exports = {
       order_date: {
         type: Sequelize.DATE
       },
+      delivered: {
+        type: Sequelize.BOOLEAN
+      },
+      paid: {
+        type: Sequelize.BOOLEAN
+      },
       rating: {
         type: Sequelize.FLOAT
       },
@@ -71,14 +77,11 @@ module.exports = {
       meal_added_date: {
         type: Sequelize.DATE
       },
-      delivered: {
-        type: Sequelize.BOOLEAN
-      },
-      createdAt: {
+      created_at: {
         allowNull: false,
         type: Sequelize.DATE
       },
-      updatedAt: {
+      updated_at: {
         allowNull: false,
         type: Sequelize.DATE
       }

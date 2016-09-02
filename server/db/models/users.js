@@ -18,6 +18,8 @@ module.exports = function(sequelize, DataTypes) {
     stripe_publishable_key: DataTypes.STRING,
     stripe_user_id: DataTypes.STRING
   }, {
+    timestamps: true,
+    underscored: true,
     classMethods: {
       associate: function(models) {
         // associations can be defined here
