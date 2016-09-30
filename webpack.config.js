@@ -2,7 +2,7 @@ const path = require('path');
 const webpack = require('webpack');
 
 module.exports = {
-  // devtool: 'inline-sourcemap',
+  devtool: 'inline-sourcemap',
   externals: {
     'react/addons': true,
     'react/lib/ExecutionEnvironment': true,

@@ -98,8 +98,9 @@ class AddAMeal extends React.Component {
     // const axiosInstance = axios.create({
     //   baseURL: 'https://search-elasticmwl-xterfj3nmjftzwol6co6uwucoi.us-east-1.es.amazonaws.com',
     // });
-    axios.post('https://search-elasticmwl-xterfj3nmjftzwol6co6uwucoi.us-east-1.es.amazonaws.com/mwl/meal', mealObj)
+    // axios.post('https://search-elasticmwl-xterfj3nmjftzwol6co6uwucoi.us-east-1.es.amazonaws.com/mwl/meal', mealObj)
     // axiosInstance.post('/mwl/meal', mealObj)
+    axios.post('/api/meals/', mealObj)
       .then((response) => {
         console.log('the saved response', response);
         setTimeout(function() {
