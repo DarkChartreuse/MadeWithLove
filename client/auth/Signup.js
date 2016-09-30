@@ -132,7 +132,7 @@ class Signup extends React.Component {
             checked={this.state.chef}
           />
           <label
-            for="test5"
+            htmlFor="test5"
             onClick={() => this.setState({ chef: !this.state.chef })}
           >Are you a chef?</label>
           <p>Please check if you want to make meals</p>

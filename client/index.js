@@ -9,7 +9,7 @@ import { Provider } from 'react-redux';
 
 import { createStore, applyMiddleware } from 'redux';
 import { syncHistoryWithStore } from 'react-router-redux';
-// import createLogger from 'redux-logger';
+import createLogger from 'redux-logger';
 import thunk from 'redux-thunk';
 import rootReducer from './reducers/index';
 
@@ -24,8 +24,8 @@ import Profile from './user/Profile';
 import ChefMeals from './user/ChefMeals';
 import UserOrders from './user/UserOrders';
 
-// const logger = createLogger();
-const store = createStore(rootReducer, applyMiddleware(thunk));
+const logger = createLogger();
+const store = createStore(rootReducer, applyMiddleware(thunk, logger));
 
 const history = syncHistoryWithStore(browserHistory, store);
 

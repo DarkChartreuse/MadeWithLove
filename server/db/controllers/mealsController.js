@@ -7,7 +7,6 @@ module.exports = {
   createMeal: (req, res) => {
     console.log('Hitting createMeal for in controller>>>>>', req.body);
     elasticsearch.addMeal(req.body);
-    res.end();
   },
 
   deleteMeal: (req, res) => {

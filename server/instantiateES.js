@@ -1,7 +1,7 @@
 const elasticsearch = require('elasticsearch');
 
 const ESDB_HOST = process.env.NODE_ENV === 'production' ? 'elasticdb' : 'localhost';
-console.log('>>>>>>>>>>>>> elasticsearch: ', ESDB_HOST);
+// console.log('>>>>>>>>>>>>> elasticsearch: ', ESDB_HOST);
 
 module.exports = new elasticsearch.Client({
   host: `${ESDB_HOST}:9200`,

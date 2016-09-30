@@ -9,30 +9,19 @@ module.exports = function(sequelize, DataTypes) {
     description: DataTypes.STRING,
     quantity: DataTypes.INTEGER,
     price: DataTypes.FLOAT,
+    user_address: DataTypes.STRING,
     order_date: DataTypes.DATE,
-    delivered: DataTypes.BOOLEAN,
-    paid: DataTypes.BOOLEAN,
     rating: DataTypes.FLOAT,
     review: DataTypes.STRING,
     image: DataTypes.STRING,
-    user_name: DataTypes.STRING,
-    user_address: DataTypes.STRING,
-    user_phone: DataTypes.STRING,
-    user_email: DataTypes.STRING,
-    chef_name: DataTypes.STRING,
-    chef_address: DataTypes.STRING,
-    chef_phone: DataTypes.STRING,
-    chef_email: DataTypes.STRING,
-    meal_added_date: DataTypes.DATE
+    delivered: DataTypes.BOOLEAN,
+    paid: DataTypes.BOOLEAN
   }, {
-    timestamps: true,
-    underscored: true,
     classMethods: {
       associate: function(models) {
         // associations can be defined here
       }
-    },
-    underscored: true
+    }
   });
   return orders;
 };

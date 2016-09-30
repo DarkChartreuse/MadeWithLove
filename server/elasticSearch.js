@@ -1,4 +1,4 @@
-const generateEmail = require('./emailGenerator.js');
+// const generateEmail = require('./emailGenerator.js');
 const elasticClient = require('./instantiateES.js');
 
 // var ESDB_HOST;
@@ -68,18 +68,16 @@ module.exports.addMeal = function(meal) {
 
   console.log('CREATING elasticsearch meal>>>>>>>>>>>>', meal);
 
-  var to = meal.chef_email;
-  var chef_name = meal.chef_name;
-  var mealName = meal.typeoffood;
-  var date = 'Placeholder DATE: 12.31.16';
-  var subject = 'Your meal has been created';
-  var text = 'Your meal:' + mealName + ' has been created.';
-  var htmlBody = generateEmail.mealCreatedEmailBody(chef_name, mealName, date);
+  // var to = meal.chef_email;
+  // var chef_name = meal.chef_name;
+  // var mealName = meal.typeoffood;
+  // var date = 'Placeholder DATE: 12.31.16';
+  // var subject = 'Your meal has been created';
+  // var text = 'Your meal:' + mealName + ' has been created.';
+  // var htmlBody = generateEmail.mealCreatedEmailBody(chef_name, mealName, date);
 
-  console.log('<<<<<<<<<<<<<<<<Generating EMAIL>>>>>>>>>>>>');
-  generateEmail.sendEmail(to, subject, text, htmlBody);
-
-
+  // console.log('<<<<<<<<<<<<<<<<Generating EMAIL>>>>>>>>>>>>');
+  // generateEmail.sendEmail(to, subject, text, htmlBody);
 
   return elasticClient.index({
     index: indexName,
@@ -88,14 +86,13 @@ module.exports.addMeal = function(meal) {
       image: meal.image,
       date: meal.add_date,
       time: meal.add_time,
-      food: meal.typeoffood,
+      food: meal.food,
       cuisine: meal.cuisinetype,
-      chefId: meal.chefID,
-      chef: meal.chef_name,
+      chefId: meal.chef_id,
+      chef: meal.chef,
       chef_email: meal.chef_email,
       chef_address: meal.chef_address,
       chef_phone: meal.chef_phone,
-      isChef: meal.isChef,
       ingredients: meal.ingredients,
       description: meal.description,
       healthLabels: meal.healthLabels,

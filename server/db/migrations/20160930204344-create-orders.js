@@ -32,14 +32,11 @@ module.exports = {
       price: {
         type: Sequelize.FLOAT
       },
+      user_address: {
+        type: Sequelize.STRING
+      },
       order_date: {
         type: Sequelize.DATE
-      },
-      delivered: {
-        type: Sequelize.BOOLEAN
-      },
-      paid: {
-        type: Sequelize.BOOLEAN
       },
       rating: {
         type: Sequelize.FLOAT
@@ -50,38 +47,17 @@ module.exports = {
       image: {
         type: Sequelize.STRING
       },
-      user_name: {
-        type: Sequelize.STRING
+      delivered: {
+        type: Sequelize.BOOLEAN
       },
-      user_address: {
-        type: Sequelize.STRING
+      paid: {
+        type: Sequelize.BOOLEAN
       },
-      user_phone: {
-        type: Sequelize.STRING
-      },
-      user_email: {
-        type: Sequelize.STRING
-      },
-      chef_name: {
-        type: Sequelize.STRING
-      },
-      chef_address: {
-        type: Sequelize.STRING
-      },
-      chef_phone: {
-        type: Sequelize.STRING
-      },
-      chef_email: {
-        type: Sequelize.STRING
-      },
-      meal_added_date: {
-        type: Sequelize.DATE
-      },
-      created_at: {
+      createdAt: {
         allowNull: false,
         type: Sequelize.DATE
       },
-      updated_at: {
+      updatedAt: {
         allowNull: false,
         type: Sequelize.DATE
       }

@@ -18,10 +18,10 @@ module.exports = {
   },
   plugins: [
     new webpack.optimize.OccurrenceOrderPlugin(),
-    new webpack.optimize.UglifyJsPlugin({
-      sourceMap: false,
-      mangle: false
-    })
+    // new webpack.optimize.UglifyJsPlugin({
+    //   sourceMap: false,
+    //   mangle: false
+    // })
   ],
   module: {
     loaders: [
